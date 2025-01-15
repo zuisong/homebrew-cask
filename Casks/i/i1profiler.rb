@@ -1,6 +1,6 @@
 cask "i1profiler" do
-  version "3.7.0.17443"
-  sha256 "dff632b9aea6bd727bbbc915d47afa8bb9ac71950344f06c40a66d7aac9bba46"
+  version "3.8.4.18193"
+  sha256 "055c9aba8afc431cdbbd3ce0dec1cf768e079f9453b0b9d67143641f9135c691"
 
   url "https://downloads.xrite.com/downloads/software/i1Profiler/#{version.major_minor_patch}/Mac/i1Profiler.zip"
   name "i1Profiler"
@@ -16,14 +16,14 @@ cask "i1profiler" do
 
   pkg "i1Profiler.pkg"
 
-  uninstall pkgutil:   [
+  uninstall launchctl: [
+              "com.aladdin.aksusbd",
+              "com.aladdin.hasplmd",
+            ],
+            pkgutil:   [
               "com.xrite.hasp.installer.*",
               "com.xrite.i1profiler.*",
               "com.xrite.xritedeviceservices.*",
-            ],
-            launchctl: [
-              "com.aladdin.aksusbd",
-              "com.aladdin.hasplmd",
             ],
             delete:    [
               "/Applications/i1Profiler/i1Profiler.app",

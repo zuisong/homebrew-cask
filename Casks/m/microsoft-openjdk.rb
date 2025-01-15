@@ -1,9 +1,9 @@
 cask "microsoft-openjdk" do
   arch arm: "aarch64", intel: "x64"
 
-  version "21.0.0"
-  sha256 arm:   "9a126ef25c18b6a3d5e1968fa292c4914203bf960c389766a941be4e16537082",
-         intel: "9fd27758ab01616a0d272bf3893db9d4b74f72cc00baa198a4211518cd6eb904"
+  version "21.0.5"
+  sha256 arm:   "c267aaac9316617fac4bfb712781a319b886959b2cb978eeb7833465d8b2b412",
+         intel: "f40d643e96bb38ea6aa536774b4ca06898504c936948ac67c8e37ac2dac02ee3"
 
   url "https://aka.ms/download-jdk/microsoft-jdk-#{version}-macos-#{arch}.pkg",
       verified: "aka.ms/download-jdk/"
@@ -21,7 +21,7 @@ cask "microsoft-openjdk" do
   uninstall pkgutil: "com.microsoft.#{version.major}.jdk"
 
   zap trash: [
-    "~/Library/Saved Application State/net.java.openjdk.java.savedState",
     "~/Library/Preferences/net.java.openjdk.java.plist",
+    "~/Library/Saved Application State/net.java.openjdk.java.savedState",
   ]
 end

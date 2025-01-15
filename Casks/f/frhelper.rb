@@ -1,19 +1,13 @@
 cask "frhelper" do
-  version "4.4.9"
+  version :latest
   sha256 :no_check
 
-  url "https://static.frdic.com/pkg/fhmac.dmg",
-      verified:   "static.frdic.com/",
+  url "https://static.eudic.net/pkg/fhmac.dmg",
       user_agent: :fake
   name "Frhelper"
   name "法语助手"
   desc "French-Chinese dictionary and learning tool"
   homepage "https://www.eudic.net/v4/fr/app/frhelper"
-
-  livecheck do
-    url "https://www.eudic.net/update/frhelper_mac.xml"
-    strategy :sparkle, &:short_version
-  end
 
   depends_on macos: ">= :high_sierra"
 

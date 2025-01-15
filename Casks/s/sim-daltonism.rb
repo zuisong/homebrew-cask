@@ -4,7 +4,7 @@ cask "sim-daltonism" do
 
   url "https://littoral.michelf.ca/apps/sim-daltonism/sim-daltonism-#{version}.zip"
   name "Sim Daltonism"
-  desc "Color blindness simulator for videos and images"
+  desc "Colour blindness simulator for videos and images"
   homepage "https://michelf.ca/projects/mac/sim-daltonism/"
 
   livecheck do
@@ -18,4 +18,8 @@ cask "sim-daltonism" do
     "~/Library/Application Scripts/com.michelf.sim-daltonism",
     "~/Library/Containers/com.michelf.sim-daltonism",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -9,8 +9,10 @@ cask "awa" do
   homepage "https://awa.fm/"
 
   livecheck do
-    url "https://pd.awa.io/mac/stable/latest"
-    strategy :header_match
+    url "https://contents.awa.io/pc_update.json"
+    strategy :json do |json|
+      json["version"]&.split("-")&.first
+    end
   end
 
   auto_updates true
@@ -22,8 +24,12 @@ cask "awa" do
 
   zap trash: [
     "~/Library/Application Support/AWA",
-    "~/Library/Preferences/fm.awa.liverpool.plist",
     "~/Library/Preferences/fm.awa.liverpool.helper.plist",
+    "~/Library/Preferences/fm.awa.liverpool.plist",
     "~/Library/Saved Application State/fm.awa.liverpool.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

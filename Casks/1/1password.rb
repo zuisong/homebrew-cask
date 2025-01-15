@@ -1,9 +1,9 @@
 cask "1password" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "8.10.18"
-  sha256 arm:   "bf515922cbc5c88c7cd41391803b5904ff634d163aff4a79dfbb6b3867fc99c3",
-         intel: "c28cf29b640e2cb51fe05f8cc1d2197f037e54790d7b007e6496449153676ff7"
+  version "8.10.56"
+  sha256 arm:   "6f2bbc496fc656f2810cdd3605b973891ce8e101b4d24eedb82e416f9069aad5",
+         intel: "bb910cb7ec44bb91030ecdaf4e6fe8177145ec76ec9c1545292011f3e4e150e6"
 
   url "https://downloads.1password.com/mac/1Password-#{version}-#{arch}.zip"
   name "1Password"
@@ -17,10 +17,10 @@ cask "1password" do
 
   auto_updates true
   conflicts_with cask: [
-    "homebrew/cask-versions/1password-beta",
-    "homebrew/cask-versions/1password-nightly",
+    "1password@beta",
+    "1password@nightly",
   ]
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "1Password.app"
 
@@ -31,6 +31,7 @@ cask "1password" do
     "~/Library/Application Scripts/com.1password.browser-support",
     "~/Library/Application Support/1Password",
     "~/Library/Application Support/Arc/User Data/NativeMessagingHosts/com.1password.1password.json",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.1password.1password.sfl*",
     "~/Library/Application Support/CrashReporter/1Password*",
     "~/Library/Application Support/Google/Chrome Beta/NativeMessagingHosts/com.1password.1password.json",
     "~/Library/Application Support/Google/Chrome Canary/NativeMessagingHosts/com.1password.1password.json",
@@ -42,7 +43,6 @@ cask "1password" do
     "~/Library/Application Support/Microsoft Edge/NativeMessagingHosts/com.1password.1password.json",
     "~/Library/Application Support/Mozilla/NativeMessagingHosts/com.1password.1password.json",
     "~/Library/Application Support/Vivaldi/NativeMessagingHosts/com.1password.1password.json",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.1password.1password.sfl2",
     "~/Library/Containers/2BUA8C4S2C.com.1password.browser-helper",
     "~/Library/Containers/com.1password.1password*",
     "~/Library/Containers/com.1password.browser-support",

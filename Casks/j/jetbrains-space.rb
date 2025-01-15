@@ -1,6 +1,6 @@
 cask "jetbrains-space" do
-  version "2023.1.5"
-  sha256 "8a2ac7809f47473f4ab5470ff5ba0add5ac5f7a555a452768174db713dd4cf3d"
+  version "2023.1.7"
+  sha256 "5fe5e8c36af378ed1b7a8c6e94b4becdd01110b69f04b97ffea53d1380508bd4"
 
   url "https://download-cdn.jetbrains.com/space/jetbrains-space-#{version}.zip"
   name "JetBrains Space"
@@ -13,6 +13,7 @@ cask "jetbrains-space" do
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "JetBrains Space.app"
 

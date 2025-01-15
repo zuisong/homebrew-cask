@@ -6,7 +6,9 @@ cask "ganache" do
       verified: "github.com/trufflesuite/ganache-ui/"
   name "Ganache"
   desc "Personal blockchain for Ethereum development"
-  homepage "https://truffleframework.com/ganache/"
+  homepage "https://trufflesuite.com/ganache/"
+
+  disable! date: "2024-12-16", because: :discontinued
 
   app "Ganache.app"
 
@@ -16,4 +18,10 @@ cask "ganache" do
     "~/Library/Preferences/org.trufflesuite.ganache.plist",
     "~/Library/Saved Application State/org.trufflesuite.ganache.savedState",
   ]
+
+  caveats do
+    <<~EOS
+      See https://consensys.io/blog/consensys-announces-the-sunset-of-truffle-and-ganache-and-new-hardhat for information
+    EOS
+  end
 end

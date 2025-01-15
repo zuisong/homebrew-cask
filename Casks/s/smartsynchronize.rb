@@ -1,9 +1,9 @@
 cask "smartsynchronize" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "4.4.4"
-  sha256 arm:   "c42ab1fec6adeda1d62d9c2324d575d529ca2dc2448b34c28f6c5b6830f044ea",
-         intel: "0447321c9debe820c3dd819a9e809f7a42ecab8db9ae16c9f99d117bfd98504e"
+  version "4.6.0"
+  sha256 arm:   "a843db14ce4e003fba9e794491b89ca331de7ab636c5d4bc7165f1db31ae8f30",
+         intel: "b22271d4ac925432facdc5151af4b19ed4f4b47448664a18afb983bfc3bf87ab"
 
   url "https://www.syntevo.com/downloads/smartsynchronize/smartsynchronize-#{arch}-#{version.dots_to_underscores}.dmg"
   name "SmartSynchronize"
@@ -12,11 +12,12 @@ cask "smartsynchronize" do
 
   livecheck do
     url "https://www.syntevo.com/smartsynchronize/download/"
-    strategy :page_match do |page|
-      v = page[/smartsynchronize[._-]#{arch}[._-]v?(\d+(?:_\d+)+)\.dmg/i, 1]
-      next if v.blank?
+    regex(/smartsynchronize[._-]#{arch}[._-]v?(\d+(?:_\d+)+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
 
-      v.tr("_", ".")
+      match[1].tr("_", ".")
     end
   end
 

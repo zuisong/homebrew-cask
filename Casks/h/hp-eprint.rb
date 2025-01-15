@@ -7,6 +7,8 @@ cask "hp-eprint" do
   desc "Mobile printing solution"
   homepage "https://h20331.www2.hp.com/hpsub/us/en/eprint/overview.html"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "HP ePrint Installer.pkg"
 
   uninstall pkgutil: "com.hp.pkg.cloudprint.HP-ePrint-Mobile"
@@ -15,8 +17,4 @@ cask "hp-eprint" do
     "~/Library/Containers/com.hp.cloudprint.HP-ePrint-Mobile",
     "~/Library/PDF Services/HP ePrint",
   ]
-
-  caveats do
-    discontinued
-  end
 end

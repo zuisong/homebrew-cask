@@ -1,6 +1,6 @@
 cask "flirc" do
-  version "3.27.7"
-  sha256 "6572ea78e16af124125a14d0d68399049262cd35b1d90897b7c981e1090c3fe4"
+  version "3.27.16"
+  sha256 "a872e83010782388b8aa061a7f89b4cd69fdb5308ae14644480f4137f12294ba"
 
   url "https://flirc.com/software/flirc-usb/GUI/release/mac/Flirc-#{version}.dmg"
   name "Flirc"
@@ -19,4 +19,8 @@ cask "flirc" do
     "~/Library/HTTPStorages/com.flirc.Flirc.binarycookies",
     "~/Library/Preferences/com.flirc.Flirc.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

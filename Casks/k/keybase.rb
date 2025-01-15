@@ -2,12 +2,12 @@ cask "keybase" do
   arch arm: "arm64-"
 
   on_arm do
-    version "6.2.3,20230928152642,eba57c1814"
-    sha256 "7da56a72c82c35d0358404e578153533343157572410754eb7a1ec9b6741684b"
+    version "6.5.0,20241007140341,f10651d043"
+    sha256 "be6938cc738e5bfa38d4cfacbf202085892231880cbc98f39675ecd625e989fd"
   end
   on_intel do
-    version "6.2.3,20230928143931,eba57c1814"
-    sha256 "eee303d78dafb53f0ccba6323053f53ed3092abaac7548aa87fd2d437ea3a628"
+    version "6.5.0,20241007134954,f10651d043"
+    sha256 "3fa2755d5ab50099ce48b25dc51b3a1b45012e4b82a2e63809107c4d090753ec"
   end
 
   url "https://prerelease.keybase.io/darwin-#{arch}updates/Keybase-#{version.csv.first}-#{version.csv.second}%2B#{version.csv.third}.zip"
@@ -17,15 +17,13 @@ cask "keybase" do
 
   livecheck do
     url "https://prerelease.keybase.io/update-darwin-#{arch}prod-v2.json"
-    strategy :page_match do |page|
-      match = page.match(/Keybase[._-]v?(\d+(?:\.\d+)+)[._-](\d+)%2B([0-9a-f]+)\.zip/i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]},#{match[3]}"
+    strategy :json do |json|
+      json["version"]&.tr("-+", ",")
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Keybase.app"
 
@@ -34,11 +32,7 @@ cask "keybase" do
                    args: ["install-auto"]
   end
 
-  uninstall delete:    [
-              "/Library/Logs/keybase*",
-              "/Library/PrivilegedHelperTools/keybase.Helper",
-            ],
-            launchctl: "keybase.Helper",
+  uninstall launchctl: "keybase.Helper",
             signal:    [
               ["TERM", "keybase.Electron"],
               ["TERM", "keybase.ElectronHelper"],
@@ -48,12 +42,18 @@ cask "keybase" do
             script:    {
               executable: "#{appdir}/Keybase.app/Contents/SharedSupport/bin/keybase",
               args:       ["uninstall"],
-            }
+            },
+            delete:    [
+              "/Library/Logs/keybase*",
+              "/Library/PrivilegedHelperTools/keybase.Helper",
+            ]
 
   zap trash: [
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/keybase.*.sfl*",
         "~/Library/Application Support/Keybase",
         "~/Library/Caches/Keybase",
         "~/Library/Group Containers/keybase",
+        "~/Library/LaunchAgents/keybase.*.plist",
         "~/Library/Logs/Keybase*",
         "~/Library/Preferences/keybase*",
       ],

@@ -1,20 +1,15 @@
 cask "fabfilter-pro-g" do
-  version "1.31"
-  sha256 "2d6cb8d6a6b6a7bd96e2091b3bb15b5c1ed8638e67a52a3970bae0a4d56e06cb"
+  version "1.34"
+  sha256 "b10b168d2e98e5768567bd3e69a8b97874bf28d6cfff796d7dd9b2c013f1fb85"
 
-  url "https://download.fabfilter.com/ffprog#{version.no_dots}.dmg"
+  url "https://cdn-b.fabfilter.com/downloads/ffprog#{version.no_dots}.dmg"
   name "FabFilter Pro-G"
   desc "Gate/expander plug-in"
   homepage "https://www.fabfilter.com/products/pro-g-gate-expander-plug-in"
 
   livecheck do
     url "https://www.fabfilter.com/download"
-    strategy :page_match do |page|
-      match = page.match(/ffprog(\d)(\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}"
-    end
+    regex(/FabFilter\s+Pro-G.*?v?(\d+(?:\.\d+)+)/im)
   end
 
   depends_on macos: ">= :sierra"

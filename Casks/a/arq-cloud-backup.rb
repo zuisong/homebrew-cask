@@ -14,7 +14,19 @@ cask "arq-cloud-backup" do
 
   pkg "Install Arq Cloud Backup.pkg"
 
-  uninstall pkgutil:   "com.haystacksoftware.ArqCloudBackup",
+  uninstall launchctl: "com.haystacksoftware.arqcloudagent",
             quit:      "com.haystacksoftware.ArqCloudBackup",
-            launchctl: "com.haystacksoftware.arqcloudagent"
+            pkgutil:   "com.haystacksoftware.ArqCloudBackup"
+
+  zap trash: [
+    "~/Library/Application Support/ArqCloudBackup",
+    "~/Library/HTTPStorages/com.haystacksoftware.ArqCloudBackup",
+    "~/Library/Logs/Arq Cloud Backup",
+    "~/Library/Preferences/com.haystacksoftware.ArqCloudBackup.plist",
+    "~/Library/Saved Application State/com.haystacksoftware.ArqCloudBackup.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

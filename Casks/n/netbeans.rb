@@ -1,6 +1,6 @@
 cask "netbeans" do
-  version "19"
-  sha256 "366168ad60c7ec22357ac78405e761b2bae7e777b33a1f0d9ea9a0302cd6bacb"
+  version "24"
+  sha256 "eb94dc42917d8df1137e8eaf2bfa4a1294f0fb30a6f48c47e59893f25a9ba70d"
 
   url "https://dlcdn.apache.org/netbeans/netbeans-installers/#{version}/Apache-NetBeans-#{version}.pkg"
   name "NetBeans IDE"
@@ -10,9 +10,11 @@ cask "netbeans" do
   # Major releases sometimes only use the major version (13) instead of
   # major/minor (13.0).
   livecheck do
-    url "https://netbeans.apache.org/download/index.html"
+    url "https://netbeans.apache.org/front/main/download/"
     regex(/>\s*Apache\s*NetBeans\s*v?(\d+(?:\.\d+)*)\s*</im)
   end
+
+  depends_on macos: ">= :big_sur"
 
   pkg "Apache-NetBeans-#{version}.pkg"
 

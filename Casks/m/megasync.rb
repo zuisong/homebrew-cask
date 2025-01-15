@@ -1,7 +1,7 @@
 cask "megasync" do
   arch arm: "Arm64"
 
-  version "4.10.0"
+  version "5.7.0.0"
   sha256 :no_check
 
   url "https://mega.nz/MEGAsyncSetup#{arch}.dmg"
@@ -10,17 +10,17 @@ cask "megasync" do
   homepage "https://mega.nz/sync"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://github.com/meganz/MEGAsync"
+    regex(/^v?(\d+(?:\.\d+)+)[._-]OSX$/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :catalina"
 
   app "MEGAsync.app"
 
-  uninstall quit:       "mega.mac",
-            launchctl:  "mega.mac.megaupdater",
+  uninstall launchctl:  "mega.mac.megaupdater",
+            quit:       "mega.mac",
             login_item: "MEGAsync"
 
   zap trash: [

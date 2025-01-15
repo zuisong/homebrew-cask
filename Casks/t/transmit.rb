@@ -1,6 +1,6 @@
 cask "transmit" do
-  version "5.10.2"
-  sha256 "f29bd5206d5b6e8bbd24b288ade3d8d0f329ebbf542aac5c13980eade415be89"
+  version "5.10.6"
+  sha256 "0c686c9c636856a6739470ebf6abe4398f4985a37f6e4524edb0d8d4b79b4381"
 
   url "https://www.panic.com/transmit/d/Transmit%20#{version}.zip"
   name "Transmit"
@@ -8,17 +8,17 @@ cask "transmit" do
   homepage "https://panic.com/transmit/"
 
   livecheck do
-    url "https://library.panic.com/transmit/transmit5/release-integrity/"
+    url "https://help.panic.com/transmit/transmit#{version.major}/release-integrity/"
     regex(/href=.*?Transmit[\s._-]?v?(\d+(?:\.\d+)+)\.zip/i)
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :ventura"
 
   app "Transmit.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.panic.transmit.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.panic.transmit.sfl*",
     "~/Library/Application Support/com.panic.Transmit",
     "~/Library/Application Support/Transmit",
     "~/Library/Caches/com.panic.Transmit",

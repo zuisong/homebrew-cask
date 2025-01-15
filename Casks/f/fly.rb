@@ -1,6 +1,6 @@
 cask "fly" do
-  version "7.10.0"
-  sha256 "97f88286bff09e4cbb550983ccd8b84d37d3511862b4373adea5fa8b1d8f0b27"
+  version "7.12.0"
+  sha256 "24c2feb62b293196cda2e08950affa7f2850b42a985336035fd03a606b25b935"
 
   url "https://github.com/concourse/concourse/releases/download/v#{version}/fly-#{version}-darwin-amd64.tgz"
   name "fly"
@@ -10,4 +10,8 @@ cask "fly" do
   binary "fly"
 
   # No zap stanza required
+
+  caveats do
+    requires_rosetta
+  end
 end

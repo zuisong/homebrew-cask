@@ -5,13 +5,15 @@ cask "transocks" do
   url "https://download.chuansuo.io/transocks/download/mac/#{version}/Transocks_official_v#{version}.dmg",
       verified: "download.chuansuo.io/"
   name "Transocks"
-  desc "Tool to optimize access to various video music resources"
+  desc "Tool to optimise access to various video music resources"
   homepage "https://www.transocks.com/"
 
   livecheck do
     url "https://www.transocks.org/updateInfo/official_update.xml"
     strategy :sparkle, &:short_version
   end
+
+  depends_on macos: ">= :sierra"
 
   app "穿梭Transocks.app"
 
@@ -29,4 +31,8 @@ cask "transocks" do
     "~/Library/Preferences/group.com.transocks.mac.plist",
     "~/Library/Saved Application State/com.transocks.mac.signed.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

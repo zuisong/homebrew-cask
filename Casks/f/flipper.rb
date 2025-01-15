@@ -1,19 +1,17 @@
 cask "flipper" do
-  version "0.229.0"
-  sha256 "e7b45aacb16683f0755431715dc81048dd4385b7c056f228968f06bb62c58f7a"
+  arch arm: "aarch64", intel: "x64"
 
-  url "https://github.com/facebook/flipper/releases/download/v#{version}/Flipper-mac.dmg",
+  version "0.273.0"
+  sha256 arm:   "9b477dbae27651166b76a7ff06995c8da99ceece48ba12d0bdaf7e23e9b3eb53",
+         intel: "4fb255b22728eeb7a670bf795686f767c16c988c586c656fbc6c37b8de896b42"
+
+  url "https://github.com/facebook/flipper/releases/download/v#{version}/Flipper-server-mac-#{arch}.dmg",
       verified: "github.com/facebook/flipper/"
   name "Facebook Flipper"
   desc "Desktop debugging platform for mobile developers"
   homepage "https://fbflipper.com/"
 
-  livecheck do
-    url "https://www.facebook.com/fbflipper/public/latest.json?version=0.0.0"
-    strategy :json do |json|
-      json["version"]
-    end
-  end
+  deprecate! date: "2024-12-01", because: :discontinued
 
   app "Flipper.app"
 

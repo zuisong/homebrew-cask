@@ -1,6 +1,6 @@
 cask "cursorsense" do
-  version "2.3.3"
-  sha256 "ff41f8fa7dbbf900d45eff142f7ef50d6d46a4d04d32ecf2561bd8a97c0c1979"
+  version "2.4.1"
+  sha256 "7e48bb55ce5b486d0927b05a0596d86e026ffa57c6bd73111566c5ed28035fa3"
 
   url "https://plentycom.jp/ctrl/files_cs/CursorSense#{version}.dmg"
   name "CursorSense"
@@ -12,9 +12,14 @@ cask "cursorsense" do
     regex(%r{href=.*?/CursorSensev?(\d+(?:\.\d+)+)\.dmg}i)
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
-  prefpane "CursorSense.prefPane"
+  app "CursorSense.app"
 
-  # No zap stanza required
+  zap trash: [
+    "~/Library/Application Support/SteerMouse & CursorSense",
+    "~/Library/HTTPStorages/jp.plentycom.CursorSense.app",
+    "~/Library/LaunchAgents/jp.plentycom.CursorSense.boa.plist",
+    "~/Library/Preferences/jp.plentycom.CursorSense.app.plist",
+  ]
 end

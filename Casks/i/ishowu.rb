@@ -7,9 +7,7 @@ cask "ishowu" do
   desc "Screen recorder"
   homepage "https://www.shinywhitebox.com/ishowu"
 
-  app "iShowU.app"
+  disable! date: "2024-07-14", because: "is 32-bit only"
 
-  caveats do
-    discontinued
-  end
+  app "iShowU.app"
 end

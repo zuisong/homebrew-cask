@@ -7,9 +7,7 @@ cask "zdoom" do
   desc "Source port of Doom"
   homepage "https://zdoom.org/index"
 
-  app "ZDoom.app"
+  disable! date: "2024-09-01", because: "is 32-bit only"
 
-  caveats do
-    discontinued
-  end
+  app "ZDoom.app"
 end

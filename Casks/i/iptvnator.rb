@@ -1,6 +1,6 @@
 cask "iptvnator" do
-  version "0.14.0"
-  sha256 "84e73739c815f1082b1a0a338b91a80f678defe996e1df8fafe8aa27e00ace18"
+  version "0.16.0"
+  sha256 "ccea0edb6237fc4e94be5119d111b2479774cc459fb758ab14f7abb7031180c5"
 
   url "https://github.com/4gray/iptvnator/releases/download/v#{version}/IPTVnator-#{version}-universal.dmg"
   name "IPTVnator"
@@ -11,6 +11,8 @@ cask "iptvnator" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :catalina"
 
   app "iptvnator.app"
 

@@ -7,13 +7,11 @@ cask "paragon-vmdk-mounter" do
   desc "Mounts a virtual container by double click"
   homepage "https://www.paragon-software.com/home/vd-mounter-mac-free/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "Paragon VMDK Mounter.pkg"
 
   uninstall launchctl: "com.paragon-software.vdmounter",
             kext:      "com.paragon-software.kext.VDMounter",
             pkgutil:   "com.paragon-software.VDMounter.pkg"
-
-  caveats do
-    discontinued
-  end
 end

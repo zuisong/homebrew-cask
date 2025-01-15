@@ -1,6 +1,6 @@
 cask "artisan" do
-  version "2.8.4"
-  sha256 "9279a3b19497249ea48683ec3676081fe722ceff74122585d9f3d325031aa653"
+  version "3.1.0"
+  sha256 "b132eac7faf50b61458cd49fc5637aadb158277f58b97403c7b5e06a721782e7"
 
   url "https://github.com/artisan-roaster-scope/artisan/releases/download/v#{version}/artisan-mac-#{version}.dmg",
       verified: "github.com/artisan-roaster-scope/artisan/"
@@ -8,7 +8,12 @@ cask "artisan" do
   desc "Visual scope for coffee roasters"
   homepage "https://artisan-scope.org/"
 
-  depends_on macos: ">= :catalina"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: ">= :big_sur"
 
   app "Artisan.app"
 

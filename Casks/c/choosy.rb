@@ -49,27 +49,55 @@ cask "choosy" do
 
     pkg "Choosy.pkg"
   end
-  on_big_sur :or_newer do
+  on_big_sur do
     version "2.3.1"
     sha256 "8d6a44b78ed256d6f502872fd1f62cf1f7fea877906bedddc5bbf26f93b6ea57"
 
     livecheck do
-      url "https://www.choosyosx.com/sparkle/feed"
-      strategy :sparkle
+      skip "Legacy version"
     end
 
-    depends_on macos: ">= :big_sur"
+    pkg "Choosy.pkg"
+  end
+  on_monterey do
+    version "2.3.1"
+    sha256 "8d6a44b78ed256d6f502872fd1f62cf1f7fea877906bedddc5bbf26f93b6ea57"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "Choosy.pkg"
+  end
+  on_ventura do
+    version "2.3.1"
+    sha256 "8d6a44b78ed256d6f502872fd1f62cf1f7fea877906bedddc5bbf26f93b6ea57"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "Choosy.pkg"
+  end
+  on_sonoma :or_newer do
+    version "2.4.2"
+    sha256 "060092e497c34a1e1ea4226f54910ba283f004ea131946bd0d423e220227a2cc"
+
+    livecheck do
+      url "https://choosy.app/sparkle/feed"
+      strategy :sparkle
+    end
 
     pkg "Choosy.pkg"
   end
 
-  url "https://downloads.choosyosx.com/choosy_#{version}.zip"
+  url "https://downloads.choosy.app/choosy_#{version}.zip"
   name "Choosy"
   desc "Open links in any browser"
-  homepage "https://www.choosyosx.com/"
+  homepage "https://choosy.app/"
 
-  uninstall pkgutil: "com.choosyosx.Choosy",
-            quit:    "com.choosyosx.Choosy"
+  uninstall quit:    "com.choosyosx.Choosy",
+            pkgutil: "com.choosyosx.Choosy"
 
   zap trash: [
     "~/Library/Application Support/Choosy",

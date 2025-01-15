@@ -41,10 +41,15 @@ cask "maintenance" do
 
     url "https://www.titanium-software.fr/download/13/Maintenance.dmg"
   end
-  on_sonoma :or_newer do
-    version "3.1.0"
+  on_sonoma do
+    version "3.2.0"
 
     url "https://www.titanium-software.fr/download/14/Maintenance.dmg"
+  end
+  on_sequoia :or_newer do
+    version "3.2.7"
+
+    url "https://www.titanium-software.fr/download/15/Maintenance.dmg"
   end
 
   name "Maintenance"
@@ -66,12 +71,13 @@ cask "maintenance" do
     :monterey,
     :ventura,
     :sonoma,
+    :sequoia,
   ]
 
   app "Maintenance.app"
 
   zap trash: [
-    "~/Library/Caches/com.apple.helpd/Generated/com.titanium.Maintenance.help*3.0.1",
+    "~/Library/Caches/com.apple.helpd/Generated/com.titanium.Maintenance.help*",
     "~/Library/Preferences/com.titanium.Maintenance.plist",
     "~/Library/Saved Application State/com.titanium.Maintenance.savedState",
   ]

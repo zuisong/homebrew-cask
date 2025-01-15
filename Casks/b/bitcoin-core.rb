@@ -1,21 +1,21 @@
 cask "bitcoin-core" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "25.1"
-  sha256 arm:   "eb0a41f7f5be97cc9f82959125eadc874c42dbc9665223aa3e1d61b0d7299b96",
-         intel: "056b65dff9e09fdc4cf293c9022b2956ea43b8c4213fec62e9e63fd3b4d91d00"
+  version "28.1"
+  sha256 arm:   "6279d0f4b085e4aed1503024d48c1fdca6c4ea3d143292e64516b4c15cd30334",
+         intel: "03d65a5d31d35d4d8850f43ca2adab98c93b5a623f99d4c31d9f1ee4ff7f3b9b"
 
-  url "https://bitcoincore.org/bin/bitcoin-core-#{version}/bitcoin-#{version}-#{arch}-apple-darwin.dmg"
+  url "https://bitcoincore.org/bin/bitcoin-core-#{version}/bitcoin-#{version}-#{arch}-apple-darwin.zip"
   name "Bitcoin Core"
   desc "Bitcoin client and wallet"
   homepage "https://bitcoincore.org/"
 
   livecheck do
-    url "https://github.com/bitcoin/bitcoin"
-    strategy :github_latest
+    url "https://bitcoincore.org/bin/"
+    regex(/href=.*?bitcoin[._-]core[._-]v?(\d+(?:\.\d+)+)/i)
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   # Renamed for consistency: app name is different in the Finder and in a shell.
   app "Bitcoin-Qt.app", target: "Bitcoin Core.app"
@@ -24,5 +24,12 @@ cask "bitcoin-core" do
     set_permissions "#{staged_path}/Bitcoin-Qt.app", "0755"
   end
 
-  zap trash: "~/Library/Preferences/org.bitcoin.Bitcoin-Qt.plist"
+  # Don't trash directory "~/Library/Application Support/Bitcoin" because it can contain bitcoin wallets
+  zap trash: [
+    "~/Library/Application Support/Bitcoin/blocks",
+    "~/Library/Application Support/Bitcoin/chainstate",
+    "~/Library/Preferences/org.bitcoin.Bitcoin-Qt.plist",
+    "~/Library/Preferences/org.bitcoinfoundation.Bitcoin-Qt.plist",
+    "~/Library/Saved Application State/org.bitcoinfoundation.Bitcoin-Qt.savedState",
+  ]
 end

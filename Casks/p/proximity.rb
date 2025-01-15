@@ -7,12 +7,10 @@ cask "proximity" do
   name "Proximity"
   homepage "https://www.tokyodawn.net/proximity/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   container nested: "macOS/Proximity-VST-AU.dmg"
 
   audio_unit_plugin "Proximity.component"
   vst_plugin "Proximity.vst"
-
-  caveats do
-    discontinued
-  end
 end

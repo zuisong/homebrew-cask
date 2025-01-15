@@ -1,6 +1,6 @@
 cask "get-iplayer-automator" do
-  version "1.25.4,20230609001"
-  sha256 "aeccc377fb5e1bb2ed9384fd3947eb9294bddfa6b92865bee2b68183e558c80f"
+  version "1.26.1,20240329001"
+  sha256 "02aa183f6174c5b24f0860c849b3b846e0ba67505eecb8ab58edad81268a5704"
 
   url "https://github.com/Ascoware/get-iplayer-automator/releases/download/v#{version.csv.first}/Get.iPlayer.Automator.v#{version.csv.first}.b#{version.csv.second}.zip"
   name "Get iPlayer Automator"
@@ -19,6 +19,8 @@ cask "get-iplayer-automator" do
       end
     end
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Get iPlayer Automator.app"
 

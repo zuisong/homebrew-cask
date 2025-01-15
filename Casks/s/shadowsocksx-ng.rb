@@ -1,6 +1,6 @@
 cask "shadowsocksx-ng" do
-  version "1.10.2"
-  sha256 "e4d0388d40c86db70c8bb8c0950207845a4e33217010b811aac1d1562762502e"
+  version "1.10.3"
+  sha256 "a0bc48af636c796471b1156eae0b6ca7340fe51deffec384c409dac785f04c60"
 
   url "https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v#{version}/ShadowsocksX-NG.dmg"
   name "ShadowsocksX-NG"
@@ -12,19 +12,19 @@ cask "shadowsocksx-ng" do
 
   app "ShadowsocksX-NG.app"
 
-  uninstall delete:    "/Library/Application Support/ShadowsocksX-NG",
-            launchctl: [
+  uninstall launchctl: [
               "com.qiuyuzhou.shadowsocksX-NG.http",
               "com.qiuyuzhou.shadowsocksX-NG.kcptun",
-              "com.qiuyuzhou.shadowsocksX-NG.local",
               "com.qiuyuzhou.ShadowsocksX-NG.LaunchHelper",
+              "com.qiuyuzhou.shadowsocksX-NG.local",
             ],
             quit:      "com.qiuyuzhou.ShadowsocksX-NG",
             script:    {
               executable: "#{appdir}/ShadowsocksX-NG.app/Contents/Resources/proxy_conf_helper",
               args:       ["--mode", "off"],
               sudo:       true,
-            }
+            },
+            delete:    "/Library/Application Support/ShadowsocksX-NG"
 
   zap trash: [
     "~/.ShadowsocksX-NG",

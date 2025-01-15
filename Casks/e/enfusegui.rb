@@ -1,6 +1,6 @@
 cask "enfusegui" do
-  version "3.23.0"
-  sha256 "4314c1735730dc7b3be1ad4320e026dc2b8bd28cbaf4af37c6990ba797d81462"
+  version "3.24.1"
+  sha256 "8cb4d1abbf38f20ed0d750921237279bd3478ea3702bfe24fc2f864b2ce07896"
 
   url "https://swipeware.com/apps/enfusegui/v#{version.major}/EnfuseGUI-#{version}.dmg"
   name "EnfuseGUI"
@@ -9,11 +9,12 @@ cask "enfusegui" do
 
   livecheck do
     url :homepage
-    strategy :page_match do |page|
-      match = page[/href=.*?enfusegui[._-]?v?(\d+(?:_\d+)+)-mac/i, 1]
+    regex(/href=.*?enfusegui[._-]?v?(\d+(?:_\d+)+)-mac/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
-      match.tr("_", ".")
+      match[1].tr("_", ".")
     end
   end
 

@@ -6,9 +6,7 @@ cask "security-growler" do
   name "Security Growler"
   homepage "https://github.com/pirate/security-growler"
 
-  app "Security Growler.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "Security Growler.app"
 end

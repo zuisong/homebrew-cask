@@ -1,6 +1,6 @@
 cask "gog-galaxy" do
-  version "2.0.72.87"
-  sha256 "288fec8e21980b9030c7ff7fe51241bf2e7f86b048f3026bca0827538fcfe00d"
+  version "2.0.80.33"
+  sha256 "df7f51a5da53b65ed56f67ba1dce28f00b544d40b25655ebce0ce99abb460e86"
 
   url "https://cdn.gog.com/open/galaxy/client/#{version.chomp("a")}/galaxy_client_#{version}.pkg"
   name "GOG Galaxy"
@@ -16,12 +16,12 @@ cask "gog-galaxy" do
 
   pkg "galaxy_client_#{version}.pkg"
 
-  uninstall delete:    "/Applications/GOG Galaxy.app",
-            launchctl: [
+  uninstall launchctl: [
               "com.gog.galaxy.autoLauncher",
               "com.gog.galaxy.ClientService",
               "com.gog.galaxy.commservice",
-            ]
+            ],
+            delete:    "/Applications/GOG Galaxy.app"
 
   zap trash: [
     "/Library/LaunchDaemons/com.gog.galaxy.ClientService.plist",
@@ -32,4 +32,8 @@ cask "gog-galaxy" do
     "~/Library/Preferences/com.gog.galaxy.plist",
     "~/Library/Saved Application State/com.gog.galaxy.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

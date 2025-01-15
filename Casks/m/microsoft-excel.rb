@@ -47,9 +47,17 @@ cask "microsoft-excel" do
       skip "Legacy version"
     end
   end
-  on_monterey :or_newer do
-    version "16.78.23100802"
-    sha256 "eb98019fbb04a07dfa102cd826cc72ecd2c03b89be33b28bbc742c18a61a25b0"
+  on_monterey do
+    version "16.89.24091630"
+    sha256 "81e02698c209b0681999737d9be8f685e12e43c8ceaf7ee2c7a08ad61adc99f7"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_ventura :or_newer do
+    version "16.93.25011212"
+    sha256 "44db15d9b57ccb0a5b7fb945c2ee2cc5139414ff52d8cf1f7a4cc47ad0934b47"
 
     livecheck do
       url "https://go.microsoft.com/fwlink/p/?linkid=525135"
@@ -57,11 +65,10 @@ cask "microsoft-excel" do
     end
   end
 
-  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Excel_#{version}_Installer.pkg",
-      verified: "officecdnmac.microsoft.com/"
+  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Excel_#{version}_Installer.pkg"
   name "Microsoft Excel"
   desc "Spreadsheet software"
-  homepage "https://products.office.com/en-US/excel"
+  homepage "https://www.microsoft.com/en-US/microsoft-365/excel"
 
   auto_updates true
   conflicts_with cask: [
@@ -79,12 +86,12 @@ cask "microsoft-excel" do
         },
       ]
 
-  uninstall pkgutil:   [
+  uninstall launchctl: "com.microsoft.office.licensingV2.helper",
+            quit:      "com.microsoft.autoupdate2",
+            pkgutil:   [
               "com.microsoft.package.Microsoft_Excel.app",
               "com.microsoft.pkg.licensing",
-            ],
-            launchctl: "com.microsoft.office.licensingV2.helper",
-            quit:      "com.microsoft.autoupdate2"
+            ]
 
   zap trash: [
     "~/Library/Application Scripts/com.microsoft.Excel",

@@ -4,7 +4,10 @@ cask "emojipedia" do
 
   url "https://github.com/gingerbeardman/Emojipedia/releases/download/#{version}/Emojipedia.dictionary.zip"
   name "Emojipedia"
+  desc "Dictionary containing Emoji and their meanings"
   homepage "https://github.com/gingerbeardman/Emojipedia"
 
   dictionary "Emojipedia.dictionary"
+
+  # No zap stanza required
 end

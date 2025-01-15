@@ -7,6 +7,8 @@ cask "amorphousdiskmark" do
   desc "App to measure storage read/write performance"
   homepage "https://katsurashareware.com/amorphousdiskmark/"
 
+  disable! date: "2024-12-16", because: :moved_to_mas
+
   app "AmorphousDiskMark.app"
 
   zap trash: [
@@ -15,9 +17,6 @@ cask "amorphousdiskmark" do
   ]
 
   caveats do
-    discontinued
-    <<~EOS
-      Newer versions are only available on the Mac App Store.
-    EOS
+    requires_rosetta
   end
 end

@@ -1,10 +1,10 @@
 cask "dcp-o-matic-playlist-editor" do
-  version "2.16.66"
-  sha256 "a1c6327470f4cfad71fb898f785ed657aafc1e17c44007c36188b5d8260f1615"
+  version "2.18.4"
+  sha256 "5120618c9ecba5faeb7a2dbfcbbd168be808a683c8d60b1d09eb38b86f748490"
 
   url "https://dcpomatic.com/dl.php?id=osx-10.10-playlist&version=#{version}"
   name "DCP-o-matic Playlist Editor"
-  desc "Convert video, audio and subtitles into DCP (Digital Cinema Democratized)"
+  desc "Convert video, audio and subtitles into DCP (Digital Cinema Package)"
   homepage "https://dcpomatic.com/"
 
   livecheck do

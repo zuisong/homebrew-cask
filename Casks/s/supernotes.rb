@@ -1,14 +1,17 @@
 cask "supernotes" do
-  version "3.0.4"
-  sha256 "e06bfcde7e2dd549f7605646b31a624af5508a693554d3de01196df7462d9fe7"
+  arch arm: "-arm64"
 
-  url "https://download.supernotes.app/Supernotes-#{version}.dmg"
+  version "3.1.8"
+  sha256 arm:   "078b0a001b46dd3ca8da02079adae4503d5ec1efabfc67d1fe3594aa1f37acbb",
+         intel: "fafc64bca6f2f8b78549c731933da917e0c1bfd62b17e460ce93727de34ef151"
+
+  url "https://download.supernotes.app/Supernotes-#{version}#{arch}.dmg"
   name "Supernotes"
   desc "Collaborative note-taking app"
   homepage "https://supernotes.app/"
 
   livecheck do
-    url "https://api.supernotes.app/v1/"
+    url "https://api.supernotes.app/v1"
     strategy :json do |json|
       json["version"]
     end

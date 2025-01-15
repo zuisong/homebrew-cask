@@ -9,7 +9,15 @@ cask "logitech-camera-settings" do
 
   livecheck do
     url "https://support.logi.com/api/v2/help_center/en-us/articles.json?label_names=webcontent=productdownload,websoftware=9bf6fc93-8e0b-11e9-a62b-cb4c7fb3c2e2"
-    regex(%r{/LogiCameraSettings[._-]?(\d+(?:\.\d+)+)\.pkg}i)
+    regex(/href=.*?LogiCameraSettings[._-]v?(\d+(?:\.\d+)+)\.pkg/i)
+    strategy :json do |json, regex|
+      json["articles"]&.map do |article|
+        match = article["body"]&.match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
   end
 
   depends_on macos: ">= :high_sierra"
@@ -17,12 +25,12 @@ cask "logitech-camera-settings" do
   pkg "LogiCameraSettings_#{version}.pkg"
 
   uninstall signal:     ["TERM", "com.logitech.vc.LogiVCCoreService"],
+            login_item: "Background Replace",
             pkgutil:    [
-              "com.logitech.vc.LogiVCCoreService.launchd.pkg",
-              "com.logitech.vc.LogiVCCoreService.app.pkg",
               "com.logitech.vc.CameraSettings.pkg",
-            ],
-            login_item: "Background Replace"
+              "com.logitech.vc.LogiVCCoreService.app.pkg",
+              "com.logitech.vc.LogiVCCoreService.launchd.pkg",
+            ]
 
   zap trash: [
     "~/Library/Application Support/Logitech/com.logitech.vc.camerasettings",

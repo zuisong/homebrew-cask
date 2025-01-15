@@ -7,11 +7,9 @@ cask "quik" do
   desc "Access and edit GoPro photos and videos"
   homepage "https://community.gopro.com/t5/en/GoPro-Quik-for-desktop/ta-p/394305?profile.language=en"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "GoPro Quik.pkg"
 
   uninstall pkgutil: "com.GoPro.pkg.GoProApp"
-
-  caveats do
-    discontinued
-  end
 end

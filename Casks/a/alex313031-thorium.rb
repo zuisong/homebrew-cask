@@ -1,9 +1,15 @@
 cask "alex313031-thorium" do
-  arch arm: "ARM", intel: "X64"
+  arch arm: "ARM64", intel: "X64"
 
-  version "M116.0.5845.169"
-  sha256 arm:   "3d3e0ff5ee0f32848e327877a86bb1279a2bc28ec4a2ffc690b7b85a9fb73c07",
-         intel: "894a49d108fd9a82ddf8d6b52d223784a089279ef5bf7a701334de391e8fddb9"
+  sha256 arm:   "041aa435b43b42308c7d4f32424891a95de0f62a63728d572b147b5585568628",
+         intel: "1a6526f3259452f2d3e0f8163916b8cd2acb0cbf5d101dacc8ab6aad67b192f8"
+
+  on_arm do
+    version "M126.0.6478.231"
+  end
+  on_intel do
+    version "M124.0.6367.218"
+  end
 
   url "https://github.com/Alex313031/Thorium-MacOS/releases/download/#{version}/Thorium_MacOS_#{arch}.dmg",
       verified: "github.com/Alex313031/Thorium-MacOS/"
@@ -12,12 +18,25 @@ cask "alex313031-thorium" do
   homepage "https://thorium.rocks/"
 
   livecheck do
-    strategy :git
-    regex(/^(M\d+(?:\.\d+)+)/i)
+    url :url
+    regex(/^(M?\d+(?:\.\d+)+)$/i)
+    strategy :github_releases do |json, regex|
+      file_regex = /^Thorium[._-]macOS[._-]#{arch}\.dmg$/i
+
+      json.map do |release|
+        next if release["draft"] || release["prerelease"]
+        next unless release["assets"]&.any? { |asset| asset["name"]&.match?(file_regex) }
+
+        match = release["tag_name"]&.match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
   end
 
   conflicts_with cask: "thorium"
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Thorium.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

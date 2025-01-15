@@ -4,7 +4,7 @@ cask "syncalicious" do
 
   url "https://github.com/zenangst/Syncalicious/releases/download/#{version}/Syncalicious.zip"
   name "Syncalicious"
-  desc "Backup and synchronize preferences across multiple machines"
+  desc "Backup and synchronise preferences across multiple machines"
   homepage "https://github.com/zenangst/Syncalicious"
 
   depends_on macos: ">= :mojave"
@@ -18,4 +18,8 @@ cask "syncalicious" do
     "~/Library/Preferences/com.zenangst.Syncalicious.plist",
     "~/Library/Saved Application State/com.zenangst.Syncalicious.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

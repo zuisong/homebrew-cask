@@ -1,9 +1,9 @@
 cask "smartsvn" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "14.3.1"
-  sha256 arm:   "ad862c460d535d7259ecd7216b5707d8db8802e461c7d995c82a7b44472afc70",
-         intel: "c43ab4579b6fae09097bafb75c24a3bc3c9891d5cf2115069f8a99967fa2789e"
+  version "14.4.1"
+  sha256 arm:   "655de8c2e107db6cc93553e1143c65d8586dd3104d4b31f6a8226b44a7784b9f",
+         intel: "68333aedc81e6a8ed880762fb052fe8b783f77e12dc6c7e90f184d5eae463bac"
 
   url "https://www.smartsvn.com/downloads/smartsvn/smartsvn-#{arch}-#{version.dots_to_underscores}.dmg"
   name "SmartSVN"
@@ -12,9 +12,9 @@ cask "smartsvn" do
 
   livecheck do
     url "https://www.smartsvn.com/download/"
-    strategy :page_match do |page|
-      page.scan(/smartsvn[._-]#{arch}[._-](\d+(?:_\d+)+).dmg/i)
-          .map { |match| match&.first&.tr("_", ".") }
+    regex(/smartsvn[._-]#{arch}[._-]v?(\d+(?:[._]\d+)+)\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| match[0].tr("_", ".") }
     end
   end
 

@@ -1,20 +1,15 @@
 cask "fabfilter-pro-l" do
-  version "2.21"
-  sha256 "42939280a90240b54aacb22c98acebe32a178e43ff3eeb567b991efa58b9307a"
+  version "2.24"
+  sha256 "d27a302af21c7af265eeffe7c9b334ad9b1e742d9eb76017eafcbefe9adaf8c1"
 
-  url "https://download.fabfilter.com/ffprol#{version.no_dots}.dmg"
+  url "https://cdn-b.fabfilter.com/downloads/ffprol#{version.no_dots}.dmg"
   name "FabFilter Pro-L"
   desc "Limiter plug-in"
   homepage "https://www.fabfilter.com/products/pro-l-2-limiter-plug-in"
 
   livecheck do
     url "https://www.fabfilter.com/download"
-    strategy :page_match do |page|
-      match = page.match(/ffprol(\d)(\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}"
-    end
+    regex(/FabFilter\s+Pro-L.*?v?(\d+(?:\.\d+)+)/im)
   end
 
   depends_on macos: ">= :sierra"

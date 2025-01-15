@@ -28,11 +28,13 @@ cask "cd-to" do
 
   caveats <<~EOS
     To complete installation:
-    1. Open the the Applications folder in finder.
+    1. Open the Applications folder in finder.
     2. Drag "cd to.app" onto the Finder toolbar while holding down the
     command(⌘) and option(⌥) keys.
 
     To use, just click on the new button and instantly opens a new Terminal.app
     window.
   EOS
+
+  # No zap stanza required
 end

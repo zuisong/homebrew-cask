@@ -1,6 +1,6 @@
 cask "beatunes" do
-  version "5.2.33"
-  sha256 "a901d5d372f62f2414ceaa77322644c1c8423407d578091b85c2a171d254dac7"
+  version "5.2.35"
+  sha256 "0fda038e3987cbd2570fd7b1f85e086ea79a3dc3d3729224a384aa62da288d1a"
 
   url "https://coxy.beatunes.com/download/beaTunes-#{version.dots_to_hyphens}.dmg"
   name "beaTunes"
@@ -25,4 +25,8 @@ cask "beatunes" do
     "~/Library/Logs/beaTunes",
     "~/Library/Preferences/com.tagtraum.beatunes.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

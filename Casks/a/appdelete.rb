@@ -7,6 +7,8 @@ cask "appdelete" do
   desc "App uninstaller"
   homepage "http://www.reggieashworth.com/appdelete.html"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   auto_updates true
 
   app "AppDelete.app"
@@ -18,8 +20,4 @@ cask "appdelete" do
     "~/Library/Saved Application State/com.apps4macs.AppDelete.savedState",
     "~/Library/Services/AppDelete.workflow",
   ]
-
-  caveats do
-    discontinued
-  end
 end

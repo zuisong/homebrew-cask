@@ -1,15 +1,15 @@
 cask "pdfify" do
-  version "3.8-260"
-  sha256 "54636e971244e33776464c4bad116a4ee98f50a30d365600a62798932c94f8d6"
+  version "4.0,400"
+  sha256 "759e5b7c49108bd653a962f22757e21d17e210ea3bd4abc7934580b945cdcfcf"
 
-  url "https://pdfify.app/get/cask/download/macos/PDFify-#{version}.zip"
+  url "https://pdfify.app/get/cask/download/macos/PDFify-#{version.csv.first}-#{version.csv.second}.zip"
   name "PDFify"
   desc "Create searchable and smaller PDF"
   homepage "https://pdfify.app/"
 
   livecheck do
     url "https://pdfify.app/updater-macos"
-    regex(/PDFify[._-]v?(\d+(?:[.-]\d+)+)\.zip/i)
+    strategy :sparkle
   end
 
   depends_on macos: ">= :high_sierra"

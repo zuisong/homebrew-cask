@@ -1,6 +1,6 @@
 cask "lycheeslicer" do
-  version "5.3.2"
-  sha256 "a25d72c18a90fc1bf0e100026c0b2bc56f85299122e558e6125409790b8e44df"
+  version "7.2.0"
+  sha256 "3130d1145c150ecd8b0435cb6d07cdadf7fd3f1c582d169f4e06a3ceac90375c"
 
   url "https://mango-lychee.nyc3.cdn.digitaloceanspaces.com/LycheeSlicer-#{version}.dmg",
       verified: "mango-lychee.nyc3.cdn.digitaloceanspaces.com/"
@@ -9,9 +9,11 @@ cask "lycheeslicer" do
   homepage "https://mango3d.io/"
 
   livecheck do
-    url "https://mango3d.io/downloads/"
-    regex(/href=.*?LycheeSlicer[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    url "https://mango-lychee.nyc3.digitaloceanspaces.com/latest-mac.yml"
+    strategy :electron_builder
   end
+
+  depends_on macos: ">= :el_capitan"
 
   app "LycheeSlicer.app"
 
@@ -22,4 +24,8 @@ cask "lycheeslicer" do
     "~/Library/Preferences/com.mango3d.lychee.plist",
     "~/Library/Saved Application State/com.mango3d.lychee.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

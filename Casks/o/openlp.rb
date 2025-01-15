@@ -1,8 +1,11 @@
 cask "openlp" do
-  version "3.0.2"
-  sha256 "302b2b80c4a50fe810e206585ae2733025f167d843f46d354a510ad973118206"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://get.openlp.org/#{version}/OpenLP-#{version}.dmg"
+  version "3.1.6"
+  sha256 arm:   "42962f65bad08e4ef21877e803ed3bc200141dd83eb26ea443c3ae6bbcf7716c",
+         intel: "5d4ac7c4f068b38515faf70ae34f8023a79c2b331f6a104bab14fc734a592cfb"
+
+  url "https://get.openlp.org/#{version}/OpenLP-#{version}-#{arch}.dmg"
   name "OpenLP"
   desc "Worship presentation software"
   homepage "https://openlp.org/"
@@ -13,4 +16,12 @@ cask "openlp" do
   end
 
   app "OpenLP.app"
+
+  zap trash: [
+    "~/Library/Application Support/openlp",
+    "~/Library/Caches/com.apple.helpd/Generated/org.openlp.OpenLP.help*",
+    "~/Library/Preferences/org.openlp.OpenLP.plist",
+    "~/Library/Preferences/org.openlp.plist",
+    "~/Library/Saved Application State/org.openlp.OpenLP.savedState",
+  ]
 end

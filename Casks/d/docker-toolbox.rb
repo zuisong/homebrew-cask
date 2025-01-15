@@ -5,7 +5,10 @@ cask "docker-toolbox" do
   url "https://github.com/docker/toolbox/releases/download/v#{version}/DockerToolbox-#{version}.pkg",
       verified: "github.com/docker/toolbox/"
   name "Docker Toolbox"
+  desc "Install Docker, Docker Machine, Docker Compose, and Kitematic"
   homepage "https://www.docker.com/products/docker-toolbox"
+
+  disable! date: "2024-12-16", because: :discontinued
 
   depends_on cask: "virtualbox"
 
@@ -52,8 +55,4 @@ cask "docker-toolbox" do
   ]
 
   zap trash: "~/.docker"
-
-  caveats do
-    discontinued
-  end
 end

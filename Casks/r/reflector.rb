@@ -1,6 +1,6 @@
 cask "reflector" do
-  version "4.1.0"
-  sha256 "88c59210d290abd21393c9711590c3f5ca5c5aee38568bb8f75d30031dc90089"
+  version "4.1.2"
+  sha256 "343c74569d8e6f5a0c33c76cd2fc6b7c4eb98db568e633d40c6f177b36294ce3"
 
   url "https://download.airsquirrels.com/Reflector#{version.major}/Mac/Reflector-#{version}.dmg"
   name "Reflector"
@@ -11,6 +11,8 @@ cask "reflector" do
     url "https://updates-prod.airsquirrels.com/Reflector#{version.major}/Mac/updateCheck/"
     strategy :sparkle, &:short_version
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Reflector #{version.major}.app"
 

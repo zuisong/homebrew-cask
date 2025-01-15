@@ -11,8 +11,8 @@ cask "apple-hewlett-packard-printer-drivers" do
   livecheck do
     url :homepage
     strategy :page_match do |page|
-      version = page.match(/"strTitle":.*?v?(\d+(?:\.\d+)+)\s*Printer\s*Software\s*Update/i)
-      metaurl = page.match(%r{"metaUrl":.*?/(\d+)/macos/([\dA-F]+(?:-[\dA-F]+)*)/HewlettPackardPrinterDrivers\.dmg}i)
+      version = page.match(/title:.*?v?(\d+(?:\.\d+)+)\s*Printer\s*Software\s*Update/i)
+      metaurl = page.match(%r{href=.*/(\d+)/macos/([\dA-F]+(?:-[\dA-F]+)*)/HewlettPackardPrinterDrivers\.dmg}i)
       next if version.blank? || metaurl.blank?
 
       "#{version[1]},#{metaurl[1]},#{metaurl[2]}"
@@ -29,8 +29,8 @@ cask "apple-hewlett-packard-printer-drivers" do
               "com.hp.dm.hpdot4d",
               "com.hp.event.status.handler.generic",
               "com.hp.events.*",
-              "com.hp.HP_LaserJet_Professional_Utility",
               "com.hp.HP-Scanner",
+              "com.hp.HP_LaserJet_Professional_Utility",
               "com.hp.HPAiOScan",
               "com.hp.HPAiOTulip",
               "com.hp.hpalerts.plugin.*",

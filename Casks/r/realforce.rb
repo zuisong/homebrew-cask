@@ -1,6 +1,6 @@
 cask "realforce" do
-  version "3.2.0"
-  sha256 "a1985b8a70c644c63b2a79ccb9fcbc7abc4fc74d635d11d4d36e4833e8cd61de"
+  version "3.3.1"
+  sha256 "95f501a3d48017d436dab02e8f2581adf2e72f703e3c0e8f8321f9cd0c694ffe"
 
   url "https://www.realforce.co.jp/support/download/software/mac/files/REALFORCE%20CONNECT%20Software_#{version.dots_to_hyphens}.pkg"
   name "REALFORCE for Mac"
@@ -8,10 +8,10 @@ cask "realforce" do
   homepage "https://www.realforce.co.jp/"
 
   livecheck do
-    url "https://www.realforce.co.jp/support/download/software"
-    regex(%r{href=.*?/REALFORCE\s*?CONNECT\s*?Software[._-](\d+(?:-\d+)+)\.pkg})
+    url "https://www.realforce.co.jp/support/download/software/"
+    regex(%r{href=.*?/REALFORCE\s*?CONNECT\s*?Software[._-](\d+(?:-\d+)+)\.pkg}i)
     strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| match[0].tr("-", ".").to_s }
+      page.scan(regex).map { |match| match[0].tr("-", ".") }
     end
   end
 

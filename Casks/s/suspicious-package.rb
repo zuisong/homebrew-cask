@@ -39,17 +39,30 @@ cask "suspicious-package" do
       skip "Legacy version"
     end
   end
-  on_big_sur :or_newer do
-    version "4.3.3,1065.5"
+  on_big_sur do
+    version "4.3.3"
+    sha256 "a262c317ad2d6949e0d0f2bec9524a4a85e0e69d6aec0373cf185892acac1f69"
+
+    url "https://www.mothersruin.com/software/downloads/SuspiciousPackage-#{version}.dmg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_monterey :or_newer do
+    version "4.5,1213"
     sha256 :no_check
 
     url "https://www.mothersruin.com/software/downloads/SuspiciousPackage.dmg"
 
     livecheck do
       url "https://www.mothersruin.com/software/SuspiciousPackage/data/SuspiciousPackageVersionInfo.plist"
-      regex(/CFBundleShortVersionString.*?\n.*?(\d+(?:\.\d+)*).*?\n.*?CFBundleVersion.*?\n.*?(\d+(?:\.\d+)*)/i)
-      strategy :page_match do |page, regex|
-        page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+      strategy :xml do |xml|
+        short_version = xml.elements["//key[text()='CFBundleShortVersionString']"]&.next_element&.text
+        version = xml.elements["//key[text()='CFBundleVersion']"]&.next_element&.text
+        next if short_version.blank? || version.blank?
+
+        "#{short_version.strip},#{version.strip}"
       end
     end
   end

@@ -1,9 +1,9 @@
 cask "dbeaverlite" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "23.2.0"
-  sha256 arm:   "e174eb443fa22342be7f574bbe0197059594ed8cd2d81794091f26f6d00566b2",
-         intel: "20116aed5920e9f3ddaaa01f56bae1ab3429ae3a13d5d2d4da405859f80c8413"
+  version "24.3.0"
+  sha256 arm:   "17b48da553ff340aac32d23418440316dda9d3cb7a9e87800b385c0cc788855a",
+         intel: "6d69d662d6b59ca11056317470a9a7da1d40b763b66fdf7a271bd69479dbc7e4"
 
   url "https://dbeaver.com/downloads-lite/#{version}/dbeaver-le-#{version}-macos-#{arch}.dmg"
   name "DBeaver Lite Edition"
@@ -12,8 +12,12 @@ cask "dbeaverlite" do
 
   livecheck do
     url "https://dbeaver.com/product/dbeaver-le-version.xml"
-    regex(%r{<number[^>]*?>v?(\d+(?:\.\d+)+)</number>}i)
+    strategy :xml do |xml|
+      xml.elements["//version/number"]&.text&.strip
+    end
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "DBeaverLite.app"
 

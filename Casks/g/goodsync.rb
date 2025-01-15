@@ -1,16 +1,18 @@
 cask "goodsync" do
-  version "12.4.2"
+  version "12.7.9"
   sha256 :no_check # required as upstream package is updated in-place
 
   url "https://www.goodsync.com/download/goodsync-vsub-mac.dmg"
   name "GoodSync"
-  desc "File synchronization and backup software"
+  desc "File synchronisation and backup software"
   homepage "https://www.goodsync.com/"
 
   livecheck do
     url "https://www.goodsync.com/news-mac"
     regex(/Version\sv?\s*(\d+(?:\.\d+)+)/i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "GoodSync.app"
 

@@ -7,10 +7,12 @@ cask "eclipse-testing" do
   desc "Eclipse IDE for testing purposes"
   homepage "https://eclipse.org/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   # Renamed to avoid conflict with other Eclipse.
   app "Eclipse.app", target: "Eclipse Testing.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

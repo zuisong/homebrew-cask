@@ -5,13 +5,10 @@ cask "remote-desktop-manager-free" do
   url "https://cdn.devolutions.net/download/Mac/Devolutions.RemoteDesktopManager.Free.Mac.#{version}.dmg",
       verified: "devolutions.net/"
   name "Remote Desktop Manager Free"
-  desc "Centralizes all remote connections on a single platform"
+  desc "Centralises all remote connections on a single platform"
   homepage "https://mac.remotedesktopmanager.com/"
 
-  livecheck do
-    url "https://cdn.devolutions.net/download/Mac/RemoteDesktopManagerFree.xml"
-    strategy :sparkle
-  end
+  disable! date: "2024-12-16", because: :discontinued
 
   depends_on macos: ">= :sierra"
 
@@ -21,4 +18,14 @@ cask "remote-desktop-manager-free" do
     "~/Library/Application Support/com.devolutions.remotedesktopmanager.free",
     "~/Library/Preferences/com.devolutions.remotedesktopmanager.free",
   ]
+
+  caveats do
+    <<~EOS
+      TO install the free version run:
+
+        brew install --cask remote-desktop-manager
+
+      and when launched you can choose to use the free version.
+    EOS
+  end
 end

@@ -1,9 +1,9 @@
 cask "chia" do
   arch arm: "-arm64"
 
-  version "2.1.1"
-  sha256 arm:   "3e2c4e2a24d815de3255cdd155b849aa45d3218b46de210bf84f6632376a04eb",
-         intel: "15d99047547401da20b9d52a18ae149f15602a2da8e6486aebb73abbce91a0f5"
+  version "2.5.0"
+  sha256 arm:   "7fde5a658675b2b631a4e1b9befccc1af3dbd9f38d1d43965586982d9880e645",
+         intel: "ffb92da7134f7371a42b3b054aa0dc28d43ce3e3f15c192ba00411555389c881"
 
   url "https://github.com/Chia-Network/chia-blockchain/releases/download/#{version}/Chia-#{version}#{arch}.dmg",
       verified: "github.com/Chia-Network/chia-blockchain/"
@@ -16,14 +16,14 @@ cask "chia" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Chia.app"
 
   zap trash: [
+    "~/.chia",
     "~/Library/Application Support/Chia Blockchain",
     "~/Library/Preferences/net.chia.blockchain.plist",
     "~/Library/Saved Application State/net.chia.blockchain.savedState",
-    "~/.chia",
   ]
 end

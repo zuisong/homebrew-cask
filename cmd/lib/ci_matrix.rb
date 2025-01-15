@@ -7,24 +7,24 @@ require_relative "changed_files"
 module CiMatrix
   MAX_JOBS = 256
 
-  RUNNERS = {
-    { symbol: :big_sur,  name: "macos-11", arch: :intel } => 0.0,
-    { symbol: :monterey, name: "macos-12", arch: :intel } => 0.0,
+  # Weight for each arch must add up to 1.0.
+  INTEL_RUNNERS = {
     { symbol: :ventura,  name: "macos-13", arch: :intel } => 1.0,
   }.freeze
-
-  # This string uses regex syntax and is intended to be interpolated into
-  # `Regexp` literals, so the backslashes must be escaped to be preserved.
-  DEPENDS_ON_MACOS_ARRAY_MEMBER = '\\s*"?:([^\\s",]+)"?,?\\s*'
+  ARM_RUNNERS = {
+    { symbol: :sonoma,   name: "macos-14", arch: :arm   } => 0.0,
+    { symbol: :sequoia,   name: "macos-15", arch: :arm }  => 1.0,
+  }.freeze
+  RUNNERS = INTEL_RUNNERS.merge(ARM_RUNNERS).freeze
 
   def self.filter_runners(cask_content)
     # Retrieve arguments from `depends_on macos:`
     required_macos = case cask_content
-    when /depends_on\s+macos:\s+\[((?:#{DEPENDS_ON_MACOS_ARRAY_MEMBER})+)\]/o
-      Regexp.last_match(1).scan(/#{DEPENDS_ON_MACOS_ARRAY_MEMBER}/o).flatten.map(&:to_sym).map do |v|
+    when /depends_on\s+macos:\s+\[([^\]]+)\]/
+      Regexp.last_match(1).scan(/\s*(?:"([=<>]=)\s+)?:([^\s",]+)"?,?\s*/).map do |match|
         {
-          version:    v,
-          comparator: "==",
+          version:    match[1].to_sym,
+          comparator: match[0] || "==",
         }
       end
     when /depends_on\s+macos:\s+"?:([^\s"]+)"?/ # e.g. `depends_on macos: :big_sur`
@@ -58,34 +58,14 @@ module CiMatrix
         )
       end
     end
-    return filtered_runners unless filtered_runners.empty?
+    filtered_runners = RUNNERS.dup if filtered_runners.empty?
+
+    archs = architectures(cask_content:)
+    filtered_runners.select! do |runner, _|
+      archs.include?(runner.fetch(:arch))
+    end
 
     RUNNERS
-  end
-
-  def self.random_runner(avalible_runners = RUNNERS)
-    avalible_runners.max_by { |(_, weight)| rand ** (1.0 / weight) }
-                    .first
-  end
-
-  def self.runners(cask_content:)
-    filtered_runners = filter_runners(cask_content)
-
-    macos_version_found = cask_content.match?(/\bMacOS\s*\.version\b/m)
-    filtered_macos_found = filtered_runners.keys.any? do |runner|
-      (
-        macos_version_found &&
-        cask_content.include?(runner[:symbol].inspect)
-      ) || cask_content.include?("on_#{runner[:symbol]}")
-    end
-
-    if filtered_macos_found
-      # If the cask varies on a MacOS version, test it on every possible macOS version.
-      filtered_runners.keys
-    else
-      # Otherwise, select a runner based on weighted random sample.
-      [random_runner(filtered_runners)]
-    end
   end
 
   def self.architectures(cask_content:)
@@ -101,7 +81,36 @@ module CiMatrix
     end
   end
 
-  def self.generate(tap, labels: [])
+  def self.random_runner(available_runners = ARM_RUNNERS)
+    available_runners.max_by { |(_, weight)| rand ** (1.0 / weight) }
+                     .first
+  end
+
+  def self.runners(cask_content:)
+    filtered_runners = filter_runners(cask_content)
+
+    macos_version_found = cask_content.match?(/\bMacOS\s*\.version\b/m)
+    filtered_macos_found = filtered_runners.keys.any? do |runner|
+      (
+        macos_version_found &&
+        cask_content.include?(runner[:symbol].inspect)
+      ) || cask_content.include?("on_#{runner[:symbol]}")
+    end
+
+    if filtered_macos_found
+      # If the cask varies on a MacOS version, test it on every possible macOS version.
+      [filtered_runners.keys, true]
+    else
+      # Otherwise, select a runner from each architecture based on weighted random sample.
+      grouped_runners = filtered_runners.group_by { |runner, _| runner.fetch(:arch) }
+      selected_runners = grouped_runners.map do |_, runners|
+        random_runner(runners)
+      end
+      [selected_runners, false]
+    end
+  end
+
+  def self.generate(tap, labels: [], cask_names: [], skip_install: false, new_cask: false)
     odie "This command must be run from inside a tap directory." unless tap
 
     tap.extend(ChangedFiles)
@@ -123,23 +132,31 @@ module CiMatrix
       odie "Found Ruby files in wrong directory:\n#{ruby_files_in_wrong_directory.join("\n")}"
     end
 
-    modified_cask_files = changed_files[:modified_cask_files]
+    cask_files_to_check = if cask_names.any?
+      cask_names.map do |cask_name|
+        Cask::CaskLoader.find_cask_in_tap(cask_name, tap).relative_path_from(tap.path)
+      end
+    else
+      changed_files[:modified_cask_files]
+    end
 
-    jobs = modified_cask_files.count
+    jobs = cask_files_to_check.count
     odie "Maximum job matrix size exceeded: #{jobs}/#{MAX_JOBS}" if jobs > MAX_JOBS
 
-    modified_cask_files.flat_map do |path|
+    cask_files_to_check.flat_map do |path|
       cask_token = path.basename(".rb")
 
       audit_args = ["--online"]
-      audit_args << "--new-cask" if changed_files[:added_files].include?(path)
+      audit_args << "--new" if changed_files[:added_files].include?(path) || new_cask
 
       audit_args << "--signing"
 
       audit_exceptions = []
 
+      audit_exceptions << %w[homepage_https_availability] if labels.include?("ci-skip-homepage")
+
       if labels.include?("ci-skip-livecheck")
-        audit_exceptions << %w[hosting_with_livecheck https_availability
+        audit_exceptions << %w[hosting_with_livecheck livecheck_https_availability
                                livecheck_min_os livecheck_version]
       end
 
@@ -151,12 +168,18 @@ module CiMatrix
                                bitbucket_repository]
       end
 
+      audit_exceptions << %w[token_conflicts token_valid token_bad_words] if labels.include?("ci-skip-token")
+
       audit_args << "--except" << audit_exceptions.join(",") if audit_exceptions.any?
 
       cask_content = path.read
 
-      runners(cask_content: cask_content).product(architectures(cask_content: cask_content)).map do |runner, arch|
+      runners, multi_os = runners(cask_content:)
+      runners.product(architectures(cask_content:)).filter_map do |runner, arch|
         native_runner_arch = arch == runner.fetch(:arch)
+        # If it's just a single OS test then we can just use the two real arch runners.
+        next if !native_runner_arch && !multi_os
+
         arch_args = native_runner_arch ? [] : ["--arch=#{arch}"]
         {
           name:         "test #{cask_token} (#{runner.fetch(:name)}, #{arch})",
@@ -167,8 +190,7 @@ module CiMatrix
           },
           audit_args:   audit_args + arch_args,
           fetch_args:   arch_args,
-          skip_install: labels.include?("ci-skip-install") || !native_runner_arch,
-          skip_readall: !native_runner_arch,
+          skip_install: labels.include?("ci-skip-install") || !native_runner_arch || skip_install,
           runner:       runner.fetch(:name),
         }
       end

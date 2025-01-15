@@ -1,10 +1,23 @@
 cask "gearboy" do
-  version "3.4.0"
-  sha256 "9b7b276c2f4b01dab8a1562b9dce5c61ab61c770b74a81c4d26e1d1e69be2bfb"
+  arch arm: "arm", intel: "intel"
 
-  url "https://github.com/drhelius/Gearboy/releases/download/gearboy-#{version}/Gearboy-#{version}-macOS.zip"
+  version "3.6.1"
+  sha256 arm:   "6b46d00e4780bbbfc28c67e1f2706b42ff344fb1bac9741203d093171b7b8e9a",
+         intel: "f9e685bced1b6d978d5554d4bec9594b88f663f39fe21fc1c8c5424801eb764f"
+
+  url "https://github.com/drhelius/Gearboy/releases/download/#{version}/Gearboy-#{version}-macos-#{arch}.zip"
   name "Gearboy"
+  desc "Game Boy and Game Boy Color emulator"
   homepage "https://github.com/drhelius/Gearboy"
 
-  app "Gearboy-#{version}-macOS/Gearboy.app"
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  container nested: "Gearboy.app.zip"
+
+  app "Gearboy.app"
+
+  zap trash: "~/Library/Saved Application State/me.ignaciosanchez.Gearboy.savedState"
 end

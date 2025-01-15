@@ -1,10 +1,10 @@
 cask "codeexpander" do
-  version "4.3.1"
-  sha256 "d2288cf347f7c23f40e6f6ac92c3f077c1700d335c71509b52f935fdc0c0fb45"
+  version "4.3.8"
+  sha256 "993849b21822b62c29b96d70e7ee306e329ed963d0560ca2ecc2b5e7e23d29e1"
 
   url "https://github.com/oncework/codeexpander/releases/download/#{version.major_minor}.x/CodeExpander-#{version}.dmg"
   name "CodeExpander"
-  desc "Cloud synchronization development tool"
+  desc "Cloud synchronisation development tool"
   homepage "https://github.com/oncework/codeexpander"
 
   livecheck do
@@ -29,4 +29,8 @@ cask "codeexpander" do
     "~/Library/Preferences/com.codeexpander.plist",
     "~/Library/Saved Application State/com.codeexpander.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

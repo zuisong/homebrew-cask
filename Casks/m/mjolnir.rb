@@ -13,9 +13,13 @@ cask "mjolnir" do
   app "Mjolnir.app"
 
   zap trash: [
+    "~/.mjolnir",
     "~/Library/Caches/org.degutis.Mjolnir",
     "~/Library/Preferences/org.degutis.Mjolnir.plist",
     "~/Library/Saved Application State/org.degutis.Mjolnir.savedState",
-    "~/.mjolnir",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

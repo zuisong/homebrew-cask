@@ -8,9 +8,7 @@ cask "dbglass" do
   desc "PostgreSQL client built with Electron"
   homepage "http://dbglass.web-pal.com/"
 
-  app "DBGlass-darwin-x64/DBGlass.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "DBGlass-darwin-x64/DBGlass.app"
 end

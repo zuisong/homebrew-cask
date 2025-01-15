@@ -8,7 +8,7 @@ cask "mp4tools" do
   homepage "https://www.emmgunn.com/mp4tools-home/"
 
   livecheck do
-    url "https://www.emmgunn.com/mp4tools-home/mp4tools-downloads/"
+    url "https://emmgunn.com/mp4tools-home/mp4tools-downloads/"
     regex(%r{href=.*?/mp4tools(\d+(?:\.\d+)*)\.zip}i)
   end
 
@@ -18,4 +18,8 @@ cask "mp4tools" do
     "~/Library/Application Support/EmmGunn",
     "~/Library/Preferences/com.emmgunn.MP4tools#{version.major}.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

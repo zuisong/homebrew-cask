@@ -7,9 +7,7 @@ cask "ramme" do
   desc "Unofficial Instagram Desktop App"
   homepage "https://github.com/terkelg/ramme/"
 
-  app "Ramme.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "Ramme.app"
 end

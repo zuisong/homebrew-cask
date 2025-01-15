@@ -1,9 +1,9 @@
 cask "mps" do
   arch arm: "macos-aarch64", intel: "macos"
 
-  version "2022.3,223.8836.1185"
-  sha256 arm:   "40d8a928a1c1703544c9905a3f8e6a7d0ade3b17302782da2ed68fd1dcdafef9",
-         intel: "17cb973af11118c246d4144ba0071ce31fe3f276be7029f613cdb0fa60b752cc"
+  version "2024.1.1,241.19072.1155"
+  sha256 arm:   "381b6c527f444ca2ea652054e172afee2096c29ad445cec7fa7fe6432cb41bea",
+         intel: "85f936a8d4a610b0232f5716f364cfae6edac5322fd40714c07e9ffabb11e85a"
 
   url "https://download.jetbrains.com/mps/#{version.major_minor}/MPS-#{version.csv.first}-#{arch}.dmg"
   name "JetBrains MPS"
@@ -13,8 +13,12 @@ cask "mps" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=MPS&latest=true&type=release"
     strategy :json do |json|
-      json["MPS"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["MPS"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
@@ -22,16 +26,8 @@ cask "mps" do
   auto_updates true
   depends_on macos: ">= :high_sierra"
 
-  app "MPS #{version.major_minor}.app"
-
-  uninstall_postflight do
-    ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "mps") }.each do |path|
-      if File.readable?(path) &&
-         File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
-        File.delete(path)
-      end
-    end
-  end
+  app "MPS #{version.major_minor}.app", target: "MPS.app"
+  binary "#{appdir}/MPS.app/Contents/MacOS/mps"
 
   zap trash: [
     "~/Library/Application Support/MPS#{version.csv.first.major_minor}",

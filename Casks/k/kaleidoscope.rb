@@ -1,6 +1,6 @@
 cask "kaleidoscope" do
-  version "4.2.1,4845"
-  sha256 "3343b340ff0e15cc047faeb665d4161f0135ebc5a45618048ef2477218c9af0c"
+  version "5.3,7379"
+  sha256 "e44bbfaebc0abe2fe6defe44e21232e17c14d0eea0f94c4165caefe84d1e000e"
 
   url "https://updates.kaleidoscope.app/v#{version.major}/prod/Kaleidoscope-#{version.csv.first}-#{version.csv.second}.app.zip"
   name "Kaleidoscope"
@@ -9,19 +9,16 @@ cask "kaleidoscope" do
 
   livecheck do
     url "https://updates.kaleidoscope.app/v#{version.major}/prod/appcast"
-    regex(/Kaleidoscope[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.app\.zip/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
-    end
+    strategy :sparkle
   end
 
   auto_updates true
-  conflicts_with cask: [
-    "ksdiff",
-    "homebrew/cask-versions/kaleidoscope2",
-    "homebrew/cask-versions/ksdiff2",
+  conflicts_with cask: %w[
+    kaleidoscope@2
+    kaleidoscope@3
+    ksdiff
   ]
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :ventura"
 
   app "Kaleidoscope.app"
 

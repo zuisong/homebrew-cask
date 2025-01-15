@@ -1,6 +1,6 @@
 cask "coherence-x" do
-  version "4.4"
-  sha256 "48fcc53877061ad607846c316e0f596825ae635b4f0af84f9bf64091c12f1f05"
+  version "4.7.1"
+  sha256 "c3dae3759ff13e08e8fc6693030563057084dbf56a37df18e9ff5ee9fb108e4b"
 
   url "https://bzgdownloads.s3.amazonaws.com/Coherence/Coherence+X+#{version}.zip",
       verified: "bzgdownloads.s3.amazonaws.com/Coherence/"
@@ -13,7 +13,7 @@ cask "coherence-x" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Coherence X.app"
 

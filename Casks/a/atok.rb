@@ -1,6 +1,6 @@
 cask "atok" do
-  version "33.1"
-  sha256 "db4d4ddabe72fc56399c09ee7b06d6dde0e70b963d345579a6e466597c6e7a08"
+  version "34.1"
+  sha256 "7c5013c03d8ff8f788d158ac80d39ca4aae00d52fd520f81723ecd99fd733fee"
 
   url "https://gate.justsystems.com/download/atok/ut/mac/at#{version.dots_to_underscores}.dmg"
   name "ATOK"
@@ -17,15 +17,7 @@ cask "atok" do
 
   pkg "ATOK インストーラ.pkg"
 
-  uninstall pkgutil:   [
-              "com.justsystems.atok#{version.major}.doc.pkg",
-              "com.justsystems.atok#{version.major}.pkg",
-              "com.justsystems.atok#{version.major}.quicklook.pkg",
-              "com.justsystems.atok#{version.major}.sync.pkg",
-              "com.justsystems.JustOnlineUpdate.pkg",
-              "com.justsystems.pkg.lma",
-            ],
-            launchctl: [
+  uninstall launchctl: [
               "com.justsystems.atok#{version.major}.enabler",
               "com.justsystems.inputmethod.atok#{version.major}",
               "com.justsystems.launchd.Atok#{version.major}.AlBg",
@@ -34,5 +26,27 @@ cask "atok" do
               "com.justsystems.launchd.UpdateChecker",
               "com.justsystems.OnlineUpdate",
             ],
-            quit:      "com.justsystems.UpdateChecker"
+            quit:      "com.justsystems.UpdateChecker",
+            pkgutil:   [
+              "com.justsystems.atok#{version.major}.doc.pkg",
+              "com.justsystems.atok#{version.major}.pkg",
+              "com.justsystems.atok#{version.major}.quicklook.pkg",
+              "com.justsystems.atok#{version.major}.sync.pkg",
+              "com.justsystems.JustOnlineUpdate.pkg",
+              "com.justsystems.pkg.lma",
+            ]
+
+  zap delete: [
+        "/Library/Application Support/JustSystems",
+        "/Library/Application Support/Preferences/JustSystems",
+        "/Library/JustSystems",
+        "/Library/Preferences/com.justsystems.*.plist",
+        "/Library/Preferences/JustSystems",
+      ],
+      trash:  [
+        "~/Library/Caches/com.justsystems.OnlineUpdate",
+        "~/Library/HTTPStorages/com.justsystems.OnlineUpdate",
+        "~/Library/Preferences/com.justsystems.OnlineUpdate.plist",
+        "~/Library/Saved Application State/com.justsystems.OnlineUpdate.savedState",
+      ]
 end

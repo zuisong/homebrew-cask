@@ -1,6 +1,6 @@
 cask "keka" do
-  version "1.3.5"
-  sha256 "2c20da81a8a9ee638d6f63db4ae22ec08afd8a98e110d88a7608b2e94e18e574"
+  version "1.4.7"
+  sha256 "a9aedc5de8777ddc2afa8c2967b41b9ff94dc069ee624fa01e0d2a6dee56e2b6"
 
   url "https://github.com/aonez/Keka/releases/download/v#{version}/Keka-#{version}.dmg",
       verified: "github.com/aonez/Keka/"
@@ -9,12 +9,12 @@ cask "keka" do
   homepage "https://www.keka.io/"
 
   livecheck do
-    url "https://u.keka.io"
+    url "https://u.keka.io/keka.xml"
     strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/keka-beta"
+  conflicts_with cask: "keka@beta"
 
   app "Keka.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
@@ -29,8 +29,10 @@ cask "keka" do
   end
 
   zap trash: [
+    "~/Library/Application Scripts/*.group.com.aone.keka",
     "~/Library/Application Scripts/com.aone.keka",
     "~/Library/Application Scripts/com.aone.keka.KekaFinderIntegration",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.aone.keka.sfl*",
     "~/Library/Application Support/Keka",
     "~/Library/Caches/com.aone.keka",
     "~/Library/Containers/com.aone.keka",

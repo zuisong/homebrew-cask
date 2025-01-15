@@ -1,6 +1,6 @@
 cask "btcpayserver-vault" do
-  version "2.0.5"
-  sha256 "f88dcee1d074957ce8358459808ddca73b750405aa87b8975581a989253b74e2"
+  version "2.0.10"
+  sha256 "fff1f489b170a2481cce696c7822ad42f531856ae7d9afc74efa51a2745a9e3d"
 
   url "https://github.com/btcpayserver/BTCPayServer.Vault/releases/download/Vault%2Fv#{version}/BTCPayServerVault-osx-x64-#{version}.dmg"
   name "BTCPayServer Vault"
@@ -16,4 +16,10 @@ cask "btcpayserver-vault" do
   depends_on macos: ">= :high_sierra"
 
   app "BTCPayServer Vault.app"
+
+  zap trash: "~/Library/Saved Application State/com.btcpayserver.vault.savedState"
+
+  caveats do
+    requires_rosetta
+  end
 end

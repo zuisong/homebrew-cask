@@ -8,13 +8,11 @@ cask "dia" do
   desc "Draw structured diagrams"
   homepage "http://dia-installer.de/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   depends_on cask: "xquartz"
 
   app "Dia.app"
 
   # No zap stanza required
-
-  caveats do
-    discontinued
-  end
 end

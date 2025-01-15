@@ -7,15 +7,17 @@ cask "edex-ui" do
   desc "Sci-fi themed terminal emulator and system monitor"
   homepage "https://github.com/GitSquared/edex-ui"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "eDEX-UI.app"
 
   zap trash: [
     "~/Library/Application Support/eDEX-UI",
-    "~/Library/Saved Application State/com.edex.ui.savedState",
     "~/Library/Preferences/com.edex.ui.plist",
+    "~/Library/Saved Application State/com.edex.ui.savedState",
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

@@ -7,7 +7,7 @@ cask "arduino" do
   desc "Electronics prototyping platform"
   homepage "https://www.arduino.cc/"
 
-  conflicts_with cask: "homebrew/cask-versions/arduino-nightly"
+  disable! date: "2024-12-16", because: :discontinued
 
   app "Arduino.app"
   binary "#{appdir}/Arduino.app/Contents/Java/arduino-builder"
@@ -17,8 +17,4 @@ cask "arduino" do
     "~/Library/Preferences/cc.arduino.Arduino.plist",
     "~/Library/Saved Application State/cc.arduino.Arduino.savedState",
   ]
-
-  caveats do
-    discontinued
-  end
 end

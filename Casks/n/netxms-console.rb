@@ -1,9 +1,9 @@
 cask "netxms-console" do
   arch arm: "-aarch64"
 
-  version "4.4.2"
-  sha256 arm:   "5028a0788e67f8fd9bead08aa1302162c703e777d6582c7b90c14cc9c01a2a9a",
-         intel: "d99f8fc295ce1a4acd0b0a62be1114bc7018a6f267ab1438deefb5bd1de7a97f"
+  version "5.1.3"
+  sha256 arm:   "f8eeade56d907a82aa5c2c9b77550001e8e062e9e92921f54c5f7c3614833ea7",
+         intel: "0dcbfae58a0a715eae909e02897737ab8930a9412ce3b97553c5b557c0e412bb"
 
   url "https://netxms.org/download/releases/#{version.major_minor}/nxmc-#{version}#{arch}.dmg"
   name "NetXMS Management Console"
@@ -11,7 +11,7 @@ cask "netxms-console" do
   homepage "https://netxms.org/"
 
   livecheck do
-    url "https://netxms.org/download"
+    url "https://netxms.com/downloads/"
     regex(/href=.*?nxmc[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 

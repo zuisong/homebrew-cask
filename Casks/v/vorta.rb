@@ -1,15 +1,18 @@
 cask "vorta" do
-  version "0.8.11"
-  sha256 "4dbbc7bd927a0f73985455f13221dc391a9af5cd63f3b4fee00149c12f2079f9"
+  arch arm: "arm", intel: "intel"
 
-  url "https://github.com/borgbase/vorta/releases/download/v#{version}/vorta-#{version}.dmg"
+  version "0.10.3"
+  sha256 arm:   "78960fd229074fc0d76c4d8d22b078e6b8b6d947a00491ec9880f9abc8f17bb7",
+         intel: "b903ea4f122aa04d62c5e6185c4a1f8a414b6c6e97296843bcdeeee6274d04f0"
+
+  url "https://github.com/borgbase/vorta/releases/download/v#{version}/Vorta-v#{version}-#{arch}.dmg"
   name "Vorta"
   desc "Desktop Backup Client for Borg"
   homepage "https://github.com/borgbase/vorta"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://borgbase.github.io/vorta/appcast.xml"
+    strategy :sparkle
   end
 
   auto_updates true

@@ -1,6 +1,6 @@
 cask "kstars" do
-  version "3.6.7"
-  sha256 "20ad11d4e5234495d135a01edcc3911ae31394d3e5a969df3b7a6a8fc6cae31f"
+  version "3.7.4"
+  sha256 :no_check # required as upstream package is updated in-place
 
   url "https://www.indilib.org/jdownloads/kstars/kstars-#{version}.dmg",
       verified: "indilib.org/jdownloads/kstars/"
@@ -23,4 +23,8 @@ cask "kstars" do
     "~/Library/Preferences/kstars",
     "~/Library/Preferences/kstarsrc",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

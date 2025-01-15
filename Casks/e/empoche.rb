@@ -13,11 +13,17 @@ cask "empoche" do
     strategy :electron_builder
   end
 
+  depends_on macos: ">= :high_sierra"
+
   app "Empoche.app"
 
   zap trash: [
     "~/Library/Application Support/empoche",
-    "~/Library/Saved Application State/com.empoche.app.savedState",
     "~/Library/Preferences/com.empoche.app.plist",
+    "~/Library/Saved Application State/com.empoche.app.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

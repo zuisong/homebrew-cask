@@ -1,11 +1,11 @@
 cask "gimp" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "2.10.34-3"
-  sha256 arm:   "037779aab7924ec0faa3c941ecc194ae51bc329321f06203b38c647fde88a205",
-         intel: "03dc1d98eec58e49f0fa2c001e313822ee493efdf5b80f347ca8d0885eb38e15"
+  version "2.10.38,1"
+  sha256 arm:   "dc1aa78a40695f9f4580ce710960ff411eeef48af45b659b03b51e4cd6cdf4e8",
+         intel: "d2d3ac20c762fe12f0dd0ec8d7c6c2f1f3a43e046ecb4ed815a49afcbaa92b92"
 
-  url "https://download.gimp.org/gimp/v#{version.major_minor}/macos/gimp-#{version}-#{arch}.dmg"
+  url "https://download.gimp.org/gimp/v#{version.major_minor}/macos/gimp-#{version.csv.first}-#{arch}#{version.csv.second ? "-" + version.csv.second : ""}.dmg"
   name "GIMP"
   name "GNU Image Manipulation Program"
   desc "Free and open-source image editor"
@@ -13,10 +13,18 @@ cask "gimp" do
 
   livecheck do
     url "https://www.gimp.org/downloads/"
-    regex(%r{href=.*?/gimp[._-]v?(\d+(?:\.\d+)+(-\d)?)[._-]#{arch}\.dmg}i)
+    regex(%r{href=.*?/gimp[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}(?:-(\d+))?\.dmg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map do |match|
+        next match[0] unless match[1]
+
+        "#{match[0]},#{match[1]}"
+      end
+    end
   end
 
-  conflicts_with cask: "homebrew/cask-versions/gimp-dev"
+  conflicts_with cask: "gimp@dev"
+  depends_on macos: ">= :high_sierra"
 
   app "GIMP.app"
   shimscript = "#{staged_path}/gimp.wrapper.sh"
@@ -31,7 +39,7 @@ cask "gimp" do
 
   zap trash: [
     "~/Library/Application Support/Gimp",
-    "~/Library/Preferences/org.gimp.gimp-#{version.major_minor}:.plist",
-    "~/Library/Saved Application State/org.gimp.gimp-#{version.major_minor}:.savedState",
+    "~/Library/Preferences/org.gimp.gimp-#{version.major_minor}.plist",
+    "~/Library/Saved Application State/org.gimp.gimp-#{version.major_minor}.savedState",
   ]
 end

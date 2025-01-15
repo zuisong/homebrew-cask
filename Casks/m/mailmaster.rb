@@ -1,23 +1,21 @@
 cask "mailmaster" do
-  version "4.17.20.1334"
-  sha256 "08cc454b73e0c6da4f9af4fdd66a3e17458be72239323a143cddf3f2ea1df961"
+  version "5.2.1,1409"
+  sha256 :no_check
 
-  url "http://fm.dl.126.net/mailmaster/updatemac/mailmaster-#{version}.dmg",
-      verified: "fm.dl.126.net/mailmaster/"
+  url "https://res.126.net/dl/client/macmail/dashi/mail#{version.major}.dmg",
+      verified: "res.126.net/dl/client/macmail/dashi/"
   name "NetEase Mail Master"
   name "网易邮箱大师"
   desc "Email client"
-  homepage "https://mail.163.com/dashi/"
+  homepage "https://dashi.163.com/"
 
   livecheck do
-    url "http://fm.dl.126.net/mailmaster/updatemac/update_config.json"
-    strategy :json do |json|
-      json["targets"].map { |target| target["version"] }
-    end
+    url "https://u.163.com/macds-beta"
+    strategy :extract_plist
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :mojave"
 
   app "MailMaster.app"
 
@@ -26,7 +24,7 @@ cask "mailmaster" do
   zap trash: [
     "~/Library/Application Scripts/com.netease.macmail",
     "~/Library/Application Scripts/com.netease.macmail-launcher",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.netease.macmail-launcher.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.netease.macmail-launcher.sfl*",
     "~/Library/Containers/com.netease.macmail",
     "~/Library/Containers/com.netease.macmail-launcher",
     "~/Library/Preferences/com.netease.macmail.plist",

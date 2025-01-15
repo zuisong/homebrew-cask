@@ -1,8 +1,11 @@
 cask "p4" do
-  version "2023.1,2468153"
-  sha256 "1892bdbad11f948e8056fb64bdf0c801ab49966419ca5c2dea1d2680d70947b6"
+  # NOTE: "4" is not a version number, but an intrinsic part of the product name
+  arch arm: "12arm64", intel: "1015x86_64"
 
-  url "https://filehost.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx1015x86_64/p4"
+  version "2024.2,2697822"
+  sha256 :no_check
+
+  url "https://filehost.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx#{arch}/p4"
   name "Perforce Helix Command-Line Client (P4)"
   desc "Use it to gain instant access to operations and complete control over the system"
   homepage "https://www.perforce.com/products/helix-core-apps/command-line-client"
@@ -16,10 +19,10 @@ cask "p4" do
   end
 
   conflicts_with cask: "perforce"
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :sierra"
   container type: :naked
 
-  binary "bin.macosx1015x86_64", target: "p4"
+  binary "bin.macosx#{arch}", target: "p4"
 
   # No zap stanza required
 end

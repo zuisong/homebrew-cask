@@ -1,10 +1,10 @@
 cask "photosrevive" do
-  version "2.1.2"
-  sha256 "b392343c63f5e399743145c9d6550c2fd5c18a5c792003bb0beb2e99d8284cac"
+  version "2.1.7"
+  sha256 "0e71fc71a2bf2b5f258742b58b812593b6eae3f3f086874ebfd65f793fab2207"
 
   url "https://neededapps.com/appcasts/photosrevive/versions/#{version}"
   name "PhotosRevive"
-  desc "Colorise old black and white photos automatically"
+  desc "Colourise old black and white photos automatically"
   homepage "https://neededapps.com/photosrevive/"
 
   livecheck do
@@ -12,6 +12,7 @@ cask "photosrevive" do
     strategy :sparkle, &:short_version
   end
 
+  auto_updates true
   depends_on macos: ">= :big_sur"
 
   app "PhotosRevive.app"

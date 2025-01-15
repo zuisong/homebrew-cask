@@ -1,34 +1,32 @@
 cask "fldigi" do
-  version "4.2.00"
+  version "4.2.06"
 
   on_sierra :or_older do
-    sha256 "1d81c16cee9527d1dcec4084f6cfc8371e44c7e127c96b562f9944ba619770ed"
+    sha256 "9826dd950661e3261a4233f53e28199d439b83008de178e18f35973ce5d5d10b"
 
-    url "https://downloads.sourceforge.net/fldigi/fldigi/fldigi-#{version}_LI.dmg"
+    url "https://downloads.sourceforge.net/fldigi/fldigi/fldigi-#{version}_LI.dmg",
+        verified: "sourceforge.net/fldigi/"
   end
   on_high_sierra :or_newer do
-    sha256 "bde4665c7cae937b50ad48336ad673938ea40015073c130658c62252944e6924"
+    sha256 "eb18e4d28ca86ad0667af80dcb8b973a7b1875fdcfc9df1b64203ce12237d322"
 
-    url "https://downloads.sourceforge.net/fldigi/fldigi/fldigi-#{version}_VN.dmg"
+    url "https://downloads.sourceforge.net/fldigi/fldigi/fldigi-#{version}_VN.dmg",
+        verified: "sourceforge.net/fldigi/"
   end
 
   name "fldigi"
+  name "flarq"
   desc "Ham radio digital modem application"
-  homepage "https://sourceforge.net/projects/fldigi/files/fldigi/"
+  homepage "http://www.w1hkj.com/"
 
   livecheck do
     url "https://sourceforge.net/projects/fldigi/rss?path=/fldigi"
-    regex(/fldigi[._-]v?(\d+(?:\.\d+)+)[._-].+\.dmg/i)
-    strategy :page_match
+    regex(%r{url=.*?/fldigi[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg}i)
   end
 
-  app "fldigi.app"
-  app "flarq.app"
-
-  preflight do
-    staged_path.glob("fldigi-*.app").first.rename(staged_path/"fldigi.app")
-    staged_path.glob("flarq-*.app").first.rename(staged_path/"flarq.app")
-  end
+  # flarq has a different version number and must be updated manually
+  app "flarq-4.3.9.app"
+  app "fldigi-#{version}.app"
 
   zap trash: "~/.fldigi"
 end

@@ -8,9 +8,7 @@ cask "line-bot-designer" do
   desc "Prototype LINE bots"
   homepage "https://developers.line.biz/en/"
 
-  app "LINE Bot Designer.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "LINE Bot Designer.app"
 end

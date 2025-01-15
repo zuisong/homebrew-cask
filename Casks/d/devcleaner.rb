@@ -1,10 +1,10 @@
 cask "devcleaner" do
-  version "2.5.0-458"
-  sha256 "4bd24da76c489d744ceee2f5440f9e39bf6468c9f4b2f22f03add3bd43ba2d57"
+  version "2.7.0-488"
+  sha256 "0b27b6748769b57c1889094db6c8bfbdc4d8bf3406f7919fc8bde74f01ebf09f"
 
   url "https://github.com/vashpan/xcode-dev-cleaner/releases/download/#{version.sub(/-\d+/, "")}/DevCleaner-#{version}.zip"
   name "DevCleaner"
-  desc "Reclaim tens of gigabytes of your storage used for various Xcode caches"
+  desc "Reclaim storage used for Xcode caches"
   homepage "https://github.com/vashpan/xcode-dev-cleaner"
 
   livecheck do
@@ -19,6 +19,8 @@ cask "devcleaner" do
       end
     end
   end
+
+  depends_on macos: ">= :ventura"
 
   app "DevCleaner.app"
 

@@ -4,13 +4,10 @@ cask "stringsfile" do
 
   url "https://blog.timac.org/2014/0325-quicklook-plugin-to-preview-strings-files/StringsFile.qlgenerator.zip"
   name "StringsFile QuickLook plugin"
-  desc "QuickLook plugin to preview .strings files"
+  desc "Quick Look plugin to preview .strings files"
   homepage "https://blog.timac.org/?p=933"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-11-15", because: :unmaintained
 
   qlplugin "StringsFile.qlgenerator"
 

@@ -1,17 +1,24 @@
 cask "akiflow" do
-  version "2.36.9"
-  sha256 "f0b70f3b2dd79237a90e2ee47443cf2ab9f52a90cf9253d08368a27116b0dbc3"
+  version "2.45.23,b72f2025"
+  sha256 "3baddfe850a5ee74589472b6effd450836b03f2ef21ae5017daf27d0ebe3579e"
 
-  url "https://download.akiflow.com/builds/Akiflow-#{version}-universal.dmg"
+  url "https://download.akiflow.com/builds/Akiflow-#{version.csv.first}-#{version.csv.second}-universal.dmg"
   name "Akiflow"
-  desc "Time blocking platform to save 2 hours every day"
+  desc "Time blocking and productivity platform"
   homepage "https://akiflow.com/"
 
   livecheck do
-    skip "Constantly changes between download page and direct download"
+    url "https://akiflow.com/download/latest"
+    regex(/Akiflow[._-](\d+(?:\.\d+)+)[._-](\h+)[._-]universal\.dmg/i)
+    strategy :header_match do |headers, regex|
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
+    end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Akiflow.app"
 

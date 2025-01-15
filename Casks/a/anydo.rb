@@ -1,6 +1,6 @@
 cask "anydo" do
-  version "5.0.47"
-  sha256 "210cbf46e2a89c44d1473f2fba5f446d011b85b90a19a357da0608195c3647e0"
+  version "5.0.68"
+  sha256 "3906b4b436d23105988c22a1ba7936f7ede08be9747256a2e622338c1c846c4a"
 
   url "https://electron-app.any.do/Anydo-#{version}-universal.dmg"
   name "Any.do"

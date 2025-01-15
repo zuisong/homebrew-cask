@@ -1,6 +1,6 @@
 cask "freedom" do
-  version "2.19.2"
-  sha256 "b7d01dc06aff99ada9fa0ab5f1e94035e42f47ee04e97cb09b41e8c584f3b91e"
+  version "2.23.0"
+  sha256 "e5dd9501fda4f2f57a8e2b17044ad4ced24e52bc57d67e964ae9bd6a8a917176"
 
   url "https://cdn.freedom.to/installers/updates/mac/#{version}/Freedom.zip"
   name "Freedom"
@@ -17,8 +17,8 @@ cask "freedom" do
 
   app "Freedom.app"
 
-  uninstall quit:      "com.80pct.FreedomPlatform",
-            launchctl: "com.80pct.FreedomHelper",
+  uninstall launchctl: "com.80pct.FreedomHelper",
+            quit:      "com.80pct.FreedomPlatform",
             delete:    [
               "/Library/PrivilegedHelperTools/com.80pct.FreedomHelper",
               "/var/log/FreedomHelper.log",

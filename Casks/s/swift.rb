@@ -3,7 +3,8 @@ cask "swift" do
   sha256 "7fc8ed6911f91f0888b4b9ec3c26df41325cb4d8c2fc588fbacd35a0be7f772b"
 
   url "https://swift.im/downloads/releases/swift-#{version}/Swift-#{version}.dmg"
-  name "Swift XMPP Client"
+  name "Swift"
+  desc "XMPP client"
   homepage "https://swift.im/"
 
   livecheck do
@@ -19,4 +20,8 @@ cask "swift" do
     "~/Library/Preferences/im.swift.Swift.plist",
     "~/Library/Saved Application State/im.swift.Swift.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

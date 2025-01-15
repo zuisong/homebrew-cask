@@ -1,8 +1,8 @@
 cask "offset-explorer" do
-  version "2.3.3"
+  version "3.0.2"
   sha256 :no_check
 
-  url "https://www.kafkatool.com/download2/offsetexplorer.dmg"
+  url "https://www.kafkatool.com/download#{version.major}/offsetexplorer.dmg"
   name "Offset Explorer"
   name "Kafka Tool"
   desc "GUI for managing and using Apache Kafka clusters"

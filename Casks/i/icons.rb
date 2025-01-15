@@ -7,9 +7,11 @@ cask "icons" do
   desc "Tool to generate icons for apps"
   homepage "https://github.com/exherb/icons"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Icons.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

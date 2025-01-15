@@ -8,6 +8,8 @@ cask "bee" do
   desc "Issue tracker frontend"
   homepage "https://www.neat.io/bee/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Bee.app"
 
   zap trash: [
@@ -19,8 +21,4 @@ cask "bee" do
     "~/Library/Containers/io.neat.Bee-Mutator",
     "~/Library/Containers/io.neat.Bee-Updater",
   ]
-
-  caveats do
-    discontinued
-  end
 end

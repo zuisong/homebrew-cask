@@ -1,6 +1,6 @@
 cask "nomachine" do
-  version "8.9.1_1"
-  sha256 "0e73cef028bb8b33aad135172f490adf931e5d5ac05a3212211100bd9dbe2876"
+  version "8.14.2_4"
+  sha256 "a35e1d43a4184a84024fb018ee617b09346c54c5940462b2618cbf738339c9f5"
 
   url "https://download.nomachine.com/download/#{version.major_minor}/MacOSX/nomachine_#{version}.dmg"
   name "NoMachine"
@@ -8,7 +8,7 @@ cask "nomachine" do
   homepage "https://www.nomachine.com/"
 
   livecheck do
-    url "https://nomachine.com/support&destination=downloads&callback=L2Rvd25sb2FkLz9pZD03"
+    url "https://www.nomachine.com/support&destination=downloads&callback=L2Rvd25sb2FkLz9pZD03"
     regex(/nomachine[._-]v?(\d+(?:\.\d+)+_\d+)\.dmg/i)
   end
 
@@ -18,7 +18,17 @@ cask "nomachine" do
 
   # A launchctl job ordinarily manages uninstall once the app bundle is removed
   # To ensure it ran, verify if /Library/Application Support/NoMachine/nxuninstall.sh no longer exists
-  uninstall delete:    "/Applications/NoMachine.app",
+  uninstall launchctl: [
+              "com.nomachine.localnxserver",
+              "com.nomachine.nxlaunchconf",
+              "com.nomachine.nxnode",
+              "com.nomachine.nxplayer",
+              "com.nomachine.nxrunner",
+              "com.nomachine.nxserver",
+              "com.nomachine.server",
+              "com.nomachine.uninstall",
+              "com.nomachine.uninstallAgent",
+            ],
             pkgutil:   [
               "com.nomachine.nomachine.NoMachine-*.pkg",
               "com.nomachine.nxnode",
@@ -26,17 +36,7 @@ cask "nomachine" do
               "com.nomachine.nxrunner",
               "com.nomachine.nxserver",
             ],
-
-            launchctl: [
-              "com.nomachine.nxnode",
-              "com.nomachine.nxplayer",
-              "com.nomachine.nxrunner",
-              "com.nomachine.nxserver",
-              "com.nomachine.localnxserver",
-              "com.nomachine.uninstall",
-              "com.nomachine.server",
-              "com.nomachine.nxlaunchconf",
-            ]
+            delete:    "/Applications/NoMachine.app"
 
   zap trash: [
     "/Library/Application Support/NoMachine",

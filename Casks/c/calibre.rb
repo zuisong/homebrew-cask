@@ -23,23 +23,40 @@ cask "calibre" do
       skip "Legacy version"
     end
   end
-  on_big_sur :or_newer do
-    version "6.28.1"
-    sha256 "732fd183ccf24a295cc1c697e80129c4a790d11ad75ec5c7d07b540a7d4aeda2"
+  on_big_sur do
+    version "6.29.0"
+    sha256 "2f76428ae19617875c5725cd892751a80eb2acdda76e06cd19c2f21a63966998"
 
     livecheck do
-      url "https://github.com/kovidgoyal/calibre"
-      strategy :github_latest
+      skip "Legacy version"
+    end
+  end
+  on_monterey do
+    version "6.29.0"
+    sha256 "2f76428ae19617875c5725cd892751a80eb2acdda76e06cd19c2f21a63966998"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_ventura :or_newer do
+    version "7.24.0"
+    sha256 "af6bbd8f0a153f8759ff3bfc6b6e26599d4237ad8736dbb854748061ae636c41"
+
+    livecheck do
+      url "https://calibre-ebook.com/dist/osx"
+      strategy :header_match
     end
   end
 
+  # Do not change this URL to the GitHub repo. Releases are removed from GitHub
+  # after a new release, which breaks the cask. We have accepted that downloads
+  # from the homepage may be slow for some users.
+  # See https://github.com/Homebrew/homebrew-cask/pull/183664
   url "https://download.calibre-ebook.com/#{version}/calibre-#{version}.dmg"
   name "calibre"
   desc "E-books management software"
   homepage "https://calibre-ebook.com/"
-
-  conflicts_with cask: "homebrew/cask-versions/calibre4"
-  depends_on macos: ">= :catalina"
 
   app "calibre.app"
   binary "#{appdir}/calibre.app/Contents/MacOS/calibre"

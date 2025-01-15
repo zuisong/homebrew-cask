@@ -4,7 +4,7 @@ cask "crunch" do
 
   url "https://github.com/chrissimpkins/Crunch/releases/download/v#{version}/Crunch-Installer.dmg"
   name "Crunch"
-  desc "Insane(ly slow but wicked good) PNG image optimization"
+  desc "PNG image optimiser"
   homepage "https://github.com/chrissimpkins/Crunch"
 
   app "Crunch.app"
@@ -13,4 +13,8 @@ cask "crunch" do
     "~/Library/Preferences/com.csimpkins.Crunch.plist",
     "~/Library/Saved Application State/com.csimpkins.Crunch.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

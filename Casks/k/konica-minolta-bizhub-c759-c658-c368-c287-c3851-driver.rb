@@ -10,22 +10,26 @@ cask "konica-minolta-bizhub-c759-c658-c368-c287-c3851-driver" do
     pkg "C759_C658_C368_C287_C3851_Series_v#{version}_Letter/C759_C658_C368_C287_C3851.pkg"
   end
   on_big_sur :or_newer do
-    version "11.8.0A,7228bd01e7674417c6a223ce7a186487,130160"
-    sha256 "0c525868b8f07c257fae3c949fdcfad623edfe7b81d030a771601d2cb88c7796"
+    version "11.9.0A,eb6d403e0fae336969cf627b3e38a647,139511"
+    sha256 "1e21d40a62e37222b350299f95496898e7934fef71421a4990f7e78f0bf91fe2"
 
     livecheck do
       url "https://dl.konicaminolta.eu/en?tx_kmdownloadcenter_dlajaxservice[action]=getDocuments&tx_kmdownloadcenter_dlajaxservice[controller]=AjaxService&tx_kmdownloadcenter_dlajaxservice[productId]=102314&tx_kmdownloadcenter_dlajaxservice[system]=KonicaMinolta&cHash=dd72618a38434b6cb3edfc20595d58c5&type=1527583889"
       strategy :json do |json|
-        items = json.select do |i|
-          i["TypeOfApplicationName_textS"]&.match?(/driver/i) &&
-            i["OperatingSystemsNames_textM"]&.grep(/macOS.*?#{Regexp.escape(MacOS.version.to_s)}/i)&.any?
+        json.map do |item|
+          next if item["TypeOfApplicationId_textS"] != "1"
+          next unless item["OperatingSystemsNames_textM"]&.any? { |os| os =~ /macOS/i }
+
+          version = item["Version_textS"]
+          document_id = item["AnacondaId_textS"]
+          next if version.blank? || document_id.blank?
+
+          files = item["DownloadFiles_textS"]&.split("\n")&.map { |file| file.split("|") }
+          dmg_file = files.find { |file| file.first.end_with?(".dmg") } if files
+          next if dmg_file.blank?
+
+          "#{version},#{Digest::MD5.hexdigest(dmg_file[2])},#{document_id}"
         end
-
-        item = items.max_by { |i| i["ReleaseDate_textS"] }
-        files = item["DownloadFiles_textS"].split("\n").map { |file| file.split("|") }
-        dmg = files.find { |f| f.first.end_with?(".dmg") }
-
-        "#{item["Version_textS"]},#{Digest::MD5.hexdigest(dmg[2])},#{item["AnacondaId_textS"]}"
       end
     end
 

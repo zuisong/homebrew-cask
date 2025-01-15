@@ -8,9 +8,7 @@ cask "pg-commander" do
   desc "PostgreSQL client"
   homepage "https://eggerapps.at/pgcommander/"
 
-  app "PG Commander.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "PG Commander.app"
 end

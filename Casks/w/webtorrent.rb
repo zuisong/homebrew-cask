@@ -17,10 +17,16 @@ cask "webtorrent" do
     "~/Library/Caches/io.webtorrent.webtorrent.ShipIt",
     "~/Library/Caches/WebTorrent",
     "~/Library/Cookies/io.webtorrent.webtorrent.binarycookies",
+    "~/Library/HTTPStorages/io.webtorrent.webtorrent",
+    "~/Library/Logs/WebTorrent",
     "~/Library/Preferences/ByHost/io.webtorrent.webtorrent.ShipIt.*.plist",
     "~/Library/Preferences/io.webtorrent.webtorrent-helper.plist",
     "~/Library/Preferences/io.webtorrent.webtorrent.plist",
     "~/Library/Saved Application State/io.webtorrent.webtorrent.savedState",
     "~/Library/WebKit/io.webtorrent.webtorrent",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,10 +1,10 @@
 cask "colorwell" do
-  version "7.3.9"
+  version "7.5.3"
   sha256 :no_check
 
   url "https://sweetpproductions.com/products/colorwell/ColorWell.dmg"
   name "ColorWell"
-  desc "Color picker and color palette generator"
+  desc "Colour picker and colour palette generator"
   homepage "https://colorwell.sweetpproductions.com/"
 
   livecheck do
@@ -13,7 +13,7 @@ cask "colorwell" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :big_sur"
 
   app "ColorWell.app"
 

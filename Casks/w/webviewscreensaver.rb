@@ -1,6 +1,6 @@
 cask "webviewscreensaver" do
-  version "2.2.1"
-  sha256 "c2ad54d7dbe1a08d36d867ff21eb853bc083459d1b80ec78589ada5c8db86939"
+  version "2.4"
+  sha256 "08467e5723b167c3f0ad93db9757048ccb3e9d5ef34f00fcfb9435360191c5b1"
 
   url "https://github.com/liquidx/webviewscreensaver/releases/download/v#{version}/WebViewScreenSaver-#{version}.zip"
   name "WebViewScreenSaver"
@@ -13,4 +13,10 @@ cask "webviewscreensaver" do
   end
 
   screen_saver "WebViewScreenSaver.saver"
+
+  zap trash: [
+    "~/Library/Containers/com.apple.ScreenSaver.Engine.legacyScreenSaver/Data/Library/Preferences/ByHost/WebViewScreenSaver.*",
+    "~/Library/Preferences/ByHost/WebViewScreenSaver.*",
+    "~/Library/Screen Savers/WebViewScreenSaver.saver",
+  ]
 end

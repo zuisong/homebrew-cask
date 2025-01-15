@@ -1,9 +1,9 @@
 cask "utools" do
   arch arm: "-arm64"
 
-  version "4.2.0"
-  sha256 arm:   "2d205211309d47cd1eb00e663ceab0fe95208c0ed0d737d88ed6cd1ada9a3f21",
-         intel: "994b44aacd08d4202b0a0e36aa56144df7ed21f48277ca5eeabc47e3a70d294e"
+  version "6.0.1"
+  sha256 arm:   "7591fc765b047d3b683612882d3693a244454aa998d0f50013ed60df02a77b32",
+         intel: "f04084df21a04aa7c3f4978515294c673ad1fc6670b6cc16c288b22b76610f2a"
 
   url "https://publish.u-tools.cn/version2/uTools-#{version}#{arch}.dmg",
       verified: "publish.u-tools.cn/"
@@ -12,9 +12,11 @@ cask "utools" do
   homepage "https://u.tools/index.html"
 
   livecheck do
-    url :homepage
-    regex(/uTools[._-]v?(\d+(?:\.\d+)*)\.dmg/i)
+    url "https://u.tools/download/"
+    regex(/uTools[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "uTools.app"
 

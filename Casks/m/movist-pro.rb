@@ -1,6 +1,6 @@
 cask "movist-pro" do
-  version "2.10.6"
-  sha256 "247a92b69d221bb245095fe57fbb7ace27a775be4df1053953faaccac57f6e78"
+  version "2.11.5"
+  sha256 "3fc6665c611936983d6e78a03d8daa25d831f8416becdcb779cdda15a17918dd"
 
   url "https://s3.ap-northeast-2.amazonaws.com/update.cocoable.com/MovistPro_#{version}.dmg",
       verified: "s3.ap-northeast-2.amazonaws.com/update.cocoable.com/"
@@ -20,7 +20,7 @@ cask "movist-pro" do
 
   zap trash: [
     "~/Library/Application Scripts/com.movist.MovistPro.MovistSafariExtension",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.movist.movistpro.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.movist.movistpro.sfl*",
     "~/Library/Application Support/Movist Pro",
     "~/Library/Caches/com.movist.MovistPro",
     "~/Library/Containers/com.movist.MovistPro.MovistSafariExtension",

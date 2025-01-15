@@ -1,12 +1,11 @@
 cask "microsoft-office" do
-  version "16.78.23100802"
-  sha256 "1a3eecfc030557b1228697e932cc7f7f05b5cde5cec9368a7e9ebde361caee0f"
+  version "16.93.25011212"
+  sha256 "b84fd4c556725657b48f02f95993b472cce9d88d3f8105d6b4f65bf73e330dc8"
 
-  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_#{version}_Installer.pkg",
-      verified: "officecdnmac.microsoft.com/"
+  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_365_and_Office_#{version}_Installer.pkg"
   name "Microsoft Office"
   desc "Office suite"
-  homepage "https://products.office.com/mac/microsoft-office-for-mac/"
+  homepage "https://www.microsoft.com/en-us/microsoft-365/mac/microsoft-365-for-mac/"
 
   livecheck do
     url "https://go.microsoft.com/fwlink/p/?linkid=525133"
@@ -25,7 +24,7 @@ cask "microsoft-office" do
     onedrive
   ]
   depends_on cask: "microsoft-auto-update"
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :ventura"
 
   pkg "Microsoft_365_and_Office_#{version}_Installer.pkg",
       choices: [
@@ -36,7 +35,16 @@ cask "microsoft-office" do
         },
       ]
 
-  uninstall pkgutil:   [
+  uninstall launchctl: [
+              "com.microsoft.office.licensing.helper",
+              "com.microsoft.office.licensingV2.helper",
+              "com.microsoft.OneDriveStandaloneUpdater",
+              "com.microsoft.OneDriveStandaloneUpdaterDaemon",
+              "com.microsoft.OneDriveUpdaterDaemon",
+              "com.microsoft.SyncReporter",
+            ],
+            quit:      "com.microsoft.autoupdate2",
+            pkgutil:   [
               "com.microsoft.OneDrive",
               "com.microsoft.package.DFonts",
               "com.microsoft.package.Frameworks",
@@ -48,33 +56,27 @@ cask "microsoft-office" do
               "com.microsoft.package.Microsoft_Word.app",
               "com.microsoft.package.Proofing_Tools",
               "com.microsoft.pkg.licensing",
+              "com.microsoft.wdav",
+              "com.microsoft.wdav.shim",
             ],
-            # Frameworks, DFonts and ProofingTools remain in each application after pkg uninstall, delete them
             delete:    [
+              "/Applications/Microsoft Defender Shim.app",
+              "/Applications/Microsoft Defender.app",
               "/Applications/Microsoft Excel.app",
               "/Applications/Microsoft OneNote.app",
               "/Applications/Microsoft Outlook.app",
               "/Applications/Microsoft PowerPoint.app",
               "/Applications/Microsoft Word.app",
               "/Applications/OneDrive.app",
-            ],
-            launchctl: [
-              "com.microsoft.office.licensing.helper",
-              "com.microsoft.office.licensingV2.helper",
-              "com.microsoft.OneDriveStandaloneUpdater",
-              "com.microsoft.OneDriveStandaloneUpdaterDaemon",
-              "com.microsoft.OneDriveUpdaterDaemon",
-              "com.microsoft.SyncReporter",
-            ],
-            quit:      "com.microsoft.autoupdate2"
+            ]
 
   zap trash: [
     "~/Library/Application Scripts/com.microsoft.errorreporting",
     "~/Library/Application Scripts/com.microsoft.Excel",
+    "~/Library/Application Scripts/com.microsoft.Office365ServiceV2",
     "~/Library/Application Scripts/com.microsoft.OneDrive.FileProvider",
     "~/Library/Application Scripts/com.microsoft.OneDrive.FinderSync",
     "~/Library/Application Scripts/com.microsoft.OneDriveLauncher",
-    "~/Library/Application Scripts/com.microsoft.Office365ServiceV2",
     "~/Library/Application Scripts/com.microsoft.onenote.mac",
     "~/Library/Application Scripts/com.microsoft.onenote.mac.shareextension",
     "~/Library/Application Scripts/com.microsoft.openxml.excel.app",

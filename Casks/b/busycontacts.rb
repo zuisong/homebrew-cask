@@ -1,30 +1,32 @@
 cask "busycontacts" do
-  version "2023.3.1,2023-10-09-20-25"
-  sha256 "04e074c1bcd4b1293d1fa7941d2c207cc0124bd692b6968434bea1f8158cf7d4"
+  version "2024.4.1"
+  # The `bct-2024.3.1.zip` URL redirects to a file with a date at the end
+  # (e.g. `bct-2024.3.1-2024-09-19-12-11.zip`) and this changes over time.
+  # Upstream appears to delete the previous file when switching to a file with
+  # a newer date, so we can't use the full URL with the date (the file may
+  # eventually disappear and break cask installation) but we also can't use a
+  # `sha256` with the redirecting version-only URL because the checksum will
+  # change when the redirected date/file changes.
+  sha256 :no_check
 
-  url "https://7e968b6ce8a839f034d9-23cfb9eddcb7b94cb43ba95f95a76900.ssl.cf1.rackcdn.com/bct-#{version.csv.first}-#{version.csv.second}.zip",
-      verified: "7e968b6ce8a839f034d9-23cfb9eddcb7b94cb43ba95f95a76900.ssl.cf1.rackcdn.com/"
+  url "https://www.busymac.com/download/bct-#{version}.zip"
   name "BusyContacts"
   desc "Contact manager focusing on efficiency"
   homepage "https://www.busymac.com/busycontacts/index.html"
 
   livecheck do
     url "https://www.busymac.com/download/BusyContacts.zip"
-    strategy :header_match do |headers|
-      match = headers["location"].match(/bct-(\d+(?:\.\d+)+)-(.*?)\.zip/)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
-    end
+    regex(/bct[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :header_match
   end
 
   auto_updates true
 
   pkg "BusyContacts Installer.pkg"
 
-  uninstall pkgutil: "com.busymac.busycontacts.pkg",
-            quit:    "com.busymac.busycontacts",
-            signal:  ["KILL", "com.busymac.busycontacts"]
+  uninstall quit:    "com.busymac.busycontacts",
+            signal:  ["KILL", "com.busymac.busycontacts"],
+            pkgutil: "com.busymac.busycontacts.pkg"
 
   zap trash: [
     "~/Library/Application Scripts/com.busymac.busycontacts",

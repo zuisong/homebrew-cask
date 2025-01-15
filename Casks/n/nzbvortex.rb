@@ -4,13 +4,14 @@ cask "nzbvortex" do
 
   url "https://www.nzbvortex.com/downloads/NZBVortex-#{version}.zip"
   name "NZBVortex"
-  desc "NZB client, optimized for performance and ease of use"
+  desc "NZB client, optimised for performance and ease of use"
   homepage "https://www.nzbvortex.com/landing/"
 
-  livecheck do
-    url "https://www.nzbvortex.com/update/appcast_v#{version.major}.xml"
-    strategy :sparkle
-  end
+  deprecate! date: "2024-11-04", because: :unmaintained
 
   app "NZBVortex #{version.major}.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -11,7 +11,11 @@ cask "table-tool" do
 
   zap trash: [
     "~/Library/Application Scripts/at.eggerapps.tabletool",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/at.eggerapps.tabletool.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/at.eggerapps.tabletool.sfl*",
     "~/Library/Containers/at.eggerapps.tabletool",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

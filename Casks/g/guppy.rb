@@ -7,11 +7,9 @@ cask "guppy" do
   desc "Friendly application manager and task runner for React.js"
   homepage "https://github.com/joshwcomeau/guppy"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Guppy.app"
 
   zap trash: "~/Library/Application Support/Guppy"
-
-  caveats do
-    discontinued
-  end
 end

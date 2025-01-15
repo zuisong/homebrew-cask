@@ -1,9 +1,9 @@
 cask "pomatez" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.3.0"
-  sha256 arm:   "ef9ba130f8c098930bd8451a673049a39782ef3db78036e59e170cd81fe97cc5",
-         intel: "f79dd27ba6131bc77c8a7c5dc9787a97e24cb5fe9bf9cba7541f58035494fa7f"
+  version "1.7.2"
+  sha256 arm:   "bd8b4b3324c1b5b72468c0b23c782789c116cbac4a36cc59f04965b35b3f06b4",
+         intel: "e97d5f67339c1188b8aa7350ca923c6b0b99dd42d3dea00dfdbcad3efca9b3ea"
 
   url "https://github.com/zidoro/pomatez/releases/download/v#{version}/Pomatez-v#{version}-mac-#{arch}.dmg",
       verified: "github.com/zidoro/pomatez/"
@@ -21,8 +21,8 @@ cask "pomatez" do
   uninstall signal: ["KILL", "application.com.roldanjr.pomatez"]
 
   zap trash: [
-    "~/Library/Application Support/pomatez",
     "~/Library/Application Support/CrashReporter/Pomatez_*.plist",
+    "~/Library/Application Support/pomatez",
     "~/Library/Logs/pomatez",
     "~/Library/Preferences/com.roldanjr.pomatez.plist",
     "~/Library/Saved Application State/com.roldanjr.pomatez.savedState",

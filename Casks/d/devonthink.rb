@@ -1,25 +1,37 @@
 cask "devonthink" do
-  version "3.9.4"
-  sha256 "15038b2f63b4b3a890710d60f6d6e9c5c8686f532452af68a2cf72dd28cd2a7f"
+  on_catalina :or_older do
+    version "3.9.6"
+    sha256 "e272af94a61619adaf729de336e1ef24465a5e6ff27ed6ae8cb11d28ca35638a"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_big_sur :or_newer do
+    version "3.9.8"
+    sha256 "c56169fa98b72c2f043f6c2ca55c996a8fddc539e0df2b351ea45714e2427c1e"
+
+    livecheck do
+      url "https://api.devontechnologies.com/1/apps/sparkle/sparkle.php?id=300900000"
+      strategy :sparkle do |items|
+        items.map(&:version)
+      end
+    end
+  end
 
   url "https://download.devontechnologies.com/download/devonthink/#{version}/DEVONthink_#{version.major}.app.zip"
   name "DEVONthink"
-  desc "Collect, organize, edit and annotate documents"
-  homepage "https://www.devontechnologies.com/apps/devonthink/"
-
-  livecheck do
-    url "https://api.devontechnologies.com/1/apps/sparkle/sparkle.php?id=300900000"
-    strategy :sparkle
-  end
+  desc "Collect, organise, edit and annotate documents"
+  homepage "https://www.devontechnologies.com/apps/devonthink"
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :mojave"
 
   app "DEVONthink #{version.major}.app"
 
   zap trash: [
     "~/Library/Application Scripts/com.devon-technologies.*",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.devon-technologies.think*.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.devon-technologies.think*.sfl*",
     "~/Library/Application Support/DEVONthink*",
     "~/Library/Caches/com.apple.helpd/Generated/com.devontechnologies.devonthink.help*",
     "~/Library/Caches/com.devon-technologies.think*",

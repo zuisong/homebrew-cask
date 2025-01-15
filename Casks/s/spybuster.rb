@@ -1,5 +1,5 @@
 cask "spybuster" do
-  version "2.9.53"
+  version "3.0.1"
   sha256 :no_check
 
   url "https://dl.devmate.com/com.macpaw-labs.snitch/SpyBuster.zip",
@@ -13,7 +13,7 @@ cask "spybuster" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "SpyBuster.app"
 

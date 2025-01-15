@@ -1,6 +1,6 @@
 cask "dyalog" do
-  version "18.2.45505"
-  sha256 "fd298265a4809c7b285bfc00474b706de2ec770be2fa864cb7450d2d45024e07"
+  version "19.0.50027"
+  sha256 "3f033230380f15cff1d2d6bff2e9d6c74057320c81da1435d41ba2a88b2a1b03"
 
   url "https://www.dyalog.com/uploads/php/download.dyalog.com/download.php?file=#{version.major_minor}/mac_64_#{version}_unicode.pkg"
   name "Dyalog APL"

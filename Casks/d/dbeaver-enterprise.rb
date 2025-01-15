@@ -1,9 +1,9 @@
 cask "dbeaver-enterprise" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "23.2.0"
-  sha256 arm:   "776e223a5a7ce4248a97cbdb861e661017b13383b3934c29cb3c7748b3b49b13",
-         intel: "5f426bb0cb134b1eb69f830c4cc7a54ad3b34e4efd59ce21101c8993aba35e35"
+  version "24.3.0"
+  sha256 arm:   "400f62ff9a5ba0b797bc93500a3b97c679c290638b6e8673e973d34299909a80",
+         intel: "932b1d85cbe634cad79aa9ceb055b144814c5542df37966420dae39f3e6ea8ca"
 
   url "https://dbeaver.com/files/#{version}/dbeaver-ee-#{version}-macos-#{arch}.dmg"
   name "DBeaver Enterprise Edition"
@@ -11,8 +11,10 @@ cask "dbeaver-enterprise" do
   homepage "https://dbeaver.com/"
 
   livecheck do
-    url "https://dbeaver.com/product/version.xml"
-    regex(%r{<number[^>]*?>v?(\d+(?:\.\d+)+)</number>}i)
+    url "https://dbeaver.com/product/dbeaver-ee-version.xml"
+    strategy :xml do |xml|
+      xml.elements["//version/number"]&.text&.strip
+    end
   end
 
   app "DBeaverEE.app"

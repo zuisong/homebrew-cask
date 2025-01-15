@@ -1,6 +1,6 @@
 cask "ubersicht" do
-  version "1.6.72"
-  sha256 "060464069fe9d744d0f36b11950f9c918aab1a01232a53977380ae3beb4c0b8e"
+  version "1.6.82"
+  sha256 "39db5e0abf03f6390992511c946c19b97a89f84ebe2ac87219ebf921fffb972b"
 
   url "https://tracesof.net/uebersicht/releases/Uebersicht-#{version}.app.zip"
   name "Übersicht"
@@ -8,21 +8,21 @@ cask "ubersicht" do
   homepage "https://tracesof.net/uebersicht/"
 
   livecheck do
-    url :homepage
-    regex(%r{href=.*?/Uebersicht[._-]v?(\d+(?:\.\d+)+)\.app\.zip}i)
+    url "https://raw.githubusercontent.com/felixhageloh/uebersicht/gh-pages/updates.xml.rss"
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :monterey"
 
   app "Übersicht.app"
 
-  uninstall login_item: "Übersicht",
-            quit:       "tracesOf.Uebersicht"
+  uninstall quit:       "tracesOf.Uebersicht",
+            login_item: "Übersicht"
 
   zap trash: [
-    "~/Library/Application Support/Übersicht",
     "~/Library/Application Support/tracesOf.Uebersicht",
+    "~/Library/Application Support/Übersicht",
     "~/Library/Caches/tracesOf.Uebersicht",
     "~/Library/Preferences/tracesOf.Uebersicht.plist",
     "~/Library/WebKit/tracesOf.Uebersicht",

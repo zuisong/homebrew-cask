@@ -8,12 +8,10 @@ cask "rowanj-gitx" do
   desc "Native graphical client for the git version control system"
   homepage "https://rowanj.github.io/gitx/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   conflicts_with cask: "gitx"
 
   app "GitX.app"
   binary "#{appdir}/GitX.app/Contents/Resources/gitx"
-
-  caveats do
-    discontinued
-  end
 end

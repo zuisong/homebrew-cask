@@ -1,8 +1,8 @@
 cask "focusrite-control" do
-  version "3.15.0"
-  sha256 "196e456068783003139f8c7d633356d2e7f7fa0a16069dc5eebf8c009c183f35"
+  version "3.18"
+  sha256 "75e946eb0e1700df42a4220ac2477db5522bdacb739a6ab85669baa98248b4f2"
 
-  url "https://fael-downloads-prod.focusrite.com/customer/prod/downloads/focusrite_control_#{version}.dmg"
+  url "https://fael-downloads-prod.focusrite.com/customer/prod/downloads/focusrite-control-#{version}.dmg"
   name "Focusrite Control"
   desc "Focusrite interface controller"
   homepage "https://focusrite.com/en"
@@ -14,18 +14,18 @@ cask "focusrite-control" do
 
   pkg "Focusrite Control.pkg"
 
-  uninstall pkgutil:   "com.focusrite.FocusriteControl",
-            launchctl: "com.focusrite.ControlServer"
+  uninstall launchctl: "com.focusrite.ControlServer",
+            pkgutil:   "com.focusrite.FocusriteControl"
 
-  zap trash:  [
+  zap delete: [
+        "/Library/Application Support/Focusrite",
+        "/Library/LaunchDaemons/com.focusrite.ControlServer.plist",
+        "/Library/Logs/Focusrite Control",
+      ],
+      trash:  [
         "~/Library/Application Support/Focusrite",
         "~/Library/Caches/com.juce.locks",
         "~/Library/Logs/Focusrite Control",
         "~/Library/Saved Application State/com.focusrite.FocusriteControl.savedState",
-      ],
-      delete: [
-        "/Library/Application Support/Focusrite",
-        "/Library/LaunchDaemons/com.focusrite.ControlServer.plist",
-        "/Library/Logs/Focusrite Control",
       ]
 end

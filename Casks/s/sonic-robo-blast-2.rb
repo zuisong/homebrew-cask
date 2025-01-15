@@ -10,11 +10,15 @@ cask "sonic-robo-blast-2" do
   homepage "https://www.srb2.org/"
 
   livecheck do
-    url "https://github.com/STJr/SRB2/releases"
+    url :url
     strategy :github_latest
   end
 
   app "Sonic Robo Blast 2.app"
 
   zap trash: "~/srb2"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,23 +1,18 @@
 cask "recents" do
-  version "2.2.1,6244"
+  version "2.3.2"
   sha256 :no_check
 
-  url "https://recentsapp.com/releases/Recents_latest.zip"
+  url "https://recentsapp.com/releases/Recents_latest.dmg"
   name "Recents"
   desc "File launcher"
   homepage "https://recentsapp.com/"
 
   livecheck do
     url "https://api.appcenter.ms/v0.1/public/sparkle/apps/74f5ee9e-bf2d-4be3-b92a-3e8766433b8b"
-    strategy :page_match do |page|
-      match = page.match(/Version\s(\d+(?:\.\d+)+)\s\((\d*)\)/i)
-      next if match.blank?
-
-      "#{match[1]},#{match[2]}"
-    end
+    strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :monterey"
 
   app "Recents.app"
 

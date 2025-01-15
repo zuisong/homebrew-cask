@@ -1,5 +1,5 @@
 cask "chrome-remote-desktop-host" do
-  version "118.0.5993.9"
+  version "132.0.6834.11"
   sha256 :no_check
 
   url "https://dl.google.com/chrome-remote-desktop/chromeremotedesktop.dmg"
@@ -14,12 +14,15 @@ cask "chrome-remote-desktop-host" do
 
   pkg "Chrome Remote Desktop Host.pkg"
 
-  uninstall script:    {
+  uninstall launchctl: [
+              "com.google.GoogleUpdater.wake.system",
+              "org.chromium.chromoting",
+            ],
+            script:    {
               executable: "/Applications/Chrome Remote Desktop Host Uninstaller.app/Contents/MacOS/remoting_host_uninstaller",
               args:       ["--no-ui"],
               sudo:       true,
             },
-            launchctl: "org.chromium.chromoting",
             pkgutil:   [
               "com.google.pkg.ChromeRemoteDesktopHost",
               "com.google.pkg.ChromeRemoteDesktopHostService",

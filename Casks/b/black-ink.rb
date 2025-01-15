@@ -1,6 +1,6 @@
 cask "black-ink" do
-  version "2.2.8"
-  sha256 "45c971e5675841332b2ce7a01a7b7937dc5a6e8a79ab4cf1dfe27a2124186538"
+  version "2.3.3"
+  sha256 "7b39e0a0e05fa1291454b0dfebe6a995165d4ee8ca3ac23a0e8df71ae62e0018"
 
   url "https://redsweater.com/blackink/BlackInk#{version}.zip"
   name "Black Ink"
@@ -12,13 +12,13 @@ cask "black-ink" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :catalina"
 
   app "Black Ink.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.red-sweater.blackink#{version.major}.sfl*",
     "~/Library/Application Scripts/com.red-sweater.blackink#{version.major}",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.red-sweater.blackink#{version.major}.sfl*",
     "~/Library/Containers/com.red-sweater.blackink#{version.major}",
   ]
 end

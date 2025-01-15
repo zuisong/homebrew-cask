@@ -8,6 +8,9 @@ cask "lighttable" do
   desc "IDE"
   homepage "http://lighttable.com/"
 
+  deprecate! date: "2024-01-06", because: :discontinued
+  disable! date: "2025-01-07", because: :discontinued
+
   app "lighttable-#{version}-mac/LightTable.app"
   binary "lighttable-#{version}-mac/light"
 

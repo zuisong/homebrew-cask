@@ -1,20 +1,19 @@
 cask "canva" do
-  version "1.75.0"
-  sha256 "3838e1dfd91727d821d77d523e86c408905a7874d3c52b1e51babd066f01f289"
+  version "1.101.0"
+  sha256 "966ad43a6b60e8d2e02021b126e9fbf1e0ca7229e6c28d1cefa3f6350b798d02"
 
-  url "https://desktop-release.canva-deploy.com/Canva-#{version}-universal.dmg",
-      verified: "desktop-release.canva-deploy.com/"
+  url "https://desktop-release.canva.com/Canva-#{version}-universal.dmg"
   name "Canva"
   desc "Design tool"
   homepage "https://www.canva.com/"
 
   livecheck do
-    url "https://desktop-release.canva-deploy.com/latest-mac.yml"
+    url "https://desktop-release.canva.com/latest-mac.yml"
     strategy :electron_builder
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Canva.app"
 
@@ -22,6 +21,7 @@ cask "canva" do
     "~/Library/Application Support/Canva",
     "~/Library/Caches/com.canva.CanvaDesktop",
     "~/Library/Caches/com.canva.CanvaDesktop.ShipIt",
+    "~/Library/LaunchAgents/com.canva.availability-check-agent.plist",
     "~/Library/Logs/Canva",
     "~/Library/Preferences/com.canva.CanvaDesktop.plist",
     "~/Library/Saved Application State/com.canva.CanvaDesktop.savedState",

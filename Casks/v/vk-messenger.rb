@@ -9,15 +9,25 @@ cask "vk-messenger" do
   homepage "https://vk.com/messenger"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://desktop.userapi.com/mac/master/latest.json"
+    strategy :json do |json|
+      version = json["version"]
+      build = json["build"]
+      next if version.blank? || build.blank?
+
+      "#{version},#{build}"
+    end
   end
 
   app "VK Messenger.app"
 
   zap trash: [
-    "~/Library/Preferences/com.vk.messages.plist",
     "~/Library/Preferences/com.vk.messages.helper.plist",
+    "~/Library/Preferences/com.vk.messages.plist",
     "~/Library/Saved Application State/com.vk.messages.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

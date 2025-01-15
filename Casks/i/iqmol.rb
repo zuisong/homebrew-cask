@@ -1,6 +1,6 @@
 cask "iqmol" do
-  version "3.1.2"
-  sha256 "cd7bfd76033c14ca00fdc413d1043bb09d932797175c079fdc2ad2413763542f"
+  version "3.1.5"
+  sha256 "0747e25fc21b2134eb63e744be58c2f2faeac3650edf5ff9760b79dfe1318350"
 
   url "http://iqmol.org/downloads/IQmol-#{version}.dmg"
   name "IQmol"
@@ -19,4 +19,8 @@ cask "iqmol" do
     "~/Library/Preferences/org.iqmol.plist",
     "~/Library/Saved Application State/org.iqmol.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "retrobatch" do
-  version "1.5"
-  sha256 "786ea08770b80ff859f93c622980d352296ac3d2a0068d160823e1ad0082f11d"
+  version "2.2.1"
+  sha256 "9d9f11d72c2f17e87778837f89dabcdd61a6132e83b2f0302619554e91f3aed6"
 
   url "https://flyingmeat.com/download/Retrobatch-#{version}.zip"
   name "Retrobatch"
@@ -13,7 +13,15 @@ cask "retrobatch" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :monterey"
 
   app "Retrobatch.app"
+
+  zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.flyingmeat.retrobatch.sfl*",
+    "~/Library/Application Support/Retrobatch",
+    "~/Library/HTTPStorages/com.flyingmeat.Retrobatch",
+    "~/Library/Preferences/com.flyingmeat.Retrobatch.plist",
+    "~/Library/Saved Application State/com.flyingmeat.Retrobatch.savedState",
+  ]
 end

@@ -1,6 +1,6 @@
 cask "parallels" do
-  version "19.1.0-54729"
-  sha256 "428ffa12e20bbb98b786387179c7f7a9fa0c144247259558d7db432170c989a8"
+  version "20.2.0-55872"
+  sha256 "a0e8a56c5e4ccd9c595cd550600a7f271c8c55d334a25b46f2919fcf3b10d646"
 
   url "https://download.parallels.com/desktop/v#{version.major}/#{version}/ParallelsDesktop-#{version}.dmg"
   name "Parallels Desktop"
@@ -8,22 +8,27 @@ cask "parallels" do
   homepage "https://www.parallels.com/products/desktop/"
 
   livecheck do
-    url "https://kb.parallels.com/129860"
-    regex(/<h2[^>]*?>[^<]*?(\d+(?:\.\d+)+)(?:\s*|&nbsp;)\((\d+)\)/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]}-#{match[1]}" }
+    url "https://update.parallels.com/desktop/v#{version.major}/parallels/parallels_updates.xml"
+    regex(/ParallelsDesktop[._-]v?(\d+(?:[.-]\d+)+)\.dmg/i)
+    strategy :xml do |xml, regex|
+      url = xml.elements["//FilePath"]&.text&.strip
+      match = url.match(regex) if url
+      next if match.blank?
+
+      match[1]
     end
   end
 
   auto_updates true
   conflicts_with cask: [
-    "homebrew/cask-versions/parallels12",
-    "homebrew/cask-versions/parallels13",
-    "homebrew/cask-versions/parallels14",
-    "homebrew/cask-versions/parallels15",
-    "homebrew/cask-versions/parallels16",
-    "homebrew/cask-versions/parallels17",
-    "homebrew/cask-versions/parallels18",
+    "parallels@12",
+    "parallels@13",
+    "parallels@14",
+    "parallels@15",
+    "parallels@16",
+    "parallels@17",
+    "parallels@18",
+    "parallels@19",
   ]
   depends_on macos: ">= :monterey"
 
@@ -46,7 +51,9 @@ cask "parallels" do
     set_ownership "#{appdir}/Parallels Desktop.app"
   end
 
-  uninstall delete: [
+  uninstall signal: ["TERM", "com.parallels.desktop.console"],
+            delete: [
+              "/Library/Preferences/Parallels",
               "/usr/local/bin/prl_convert",
               "/usr/local/bin/prl_disk_tool",
               "/usr/local/bin/prl_perf_ctl",
@@ -54,9 +61,7 @@ cask "parallels" do
               "/usr/local/bin/prlctl",
               "/usr/local/bin/prlexec",
               "/usr/local/bin/prlsrvctl",
-              "/Library/Preferences/Parallels",
-            ],
-            signal: ["TERM", "com.parallels.desktop.console"]
+            ]
 
   zap trash: [
         "~/.parallels_settings",
@@ -71,6 +76,7 @@ cask "parallels" do
         "~/Library/Group Containers/*.com.parallels.Desktop",
         "~/Library/Logs/parallels.log",
         "~/Library/Parallels/Applications Menus",
+        "~/Library/Parallels/Downloads",
         "~/Library/Parallels/Parallels Desktop",
         "~/Library/Preferences/com.parallels.desktop.console.LSSharedFileList.plist",
         "~/Library/Preferences/com.parallels.desktop.console.plist",

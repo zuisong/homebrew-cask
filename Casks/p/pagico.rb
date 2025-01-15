@@ -1,6 +1,6 @@
 cask "pagico" do
-  version "10,20231018"
-  sha256 "b73c418395f7ceed818c54ea2ef7b13bf2f6e68b7badfb61ca7c968f774ca69a"
+  version "10,20241230"
+  sha256 "5c21dbdd14b8dbef617d54bcfe53cf8a53b7dec69d2b3026fa6b9fd95c70ebc1"
 
   url "https://www.pagico.com/downloads/Pagico_macOS_r#{version.csv.second}.dmg"
   name "Pagico"
@@ -12,7 +12,7 @@ cask "pagico" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :high_sierra"
 
   app "Pagico.app"
 

@@ -6,10 +6,10 @@ cask "coinomi-wallet" do
       user_agent: :fake
   name "Coinomi Wallet"
   desc "Securely store, manage and exchange many blockchain assets"
-  homepage "https://coinomi.com/"
+  homepage "https://www.coinomi.com/en/"
 
   livecheck do
-    url "https://coinomi.com/downloads"
+    url "https://www.coinomi.com/downloads/"
     regex(/href=.*?coinomi[._-]wallet[._-]v?(\d+(?:\.\d+)+)[._-]macos\.dmg/i)
   end
 
@@ -24,4 +24,8 @@ cask "coinomi-wallet" do
     "~/Library/Caches/Coinomi",
     "~/Library/Saved Application State/com.coinomi.desktop.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

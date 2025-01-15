@@ -4,7 +4,7 @@ cask "workspaces" do
 
   url "https://www.apptorium.com/public/products/workspaces/releases/Workspaces-#{version}.zip"
   name "Workspaces"
-  desc "Workspace organizing app"
+  desc "Workspace organising app"
   homepage "https://www.apptorium.com/workspaces"
 
   livecheck do
@@ -17,9 +17,9 @@ cask "workspaces" do
   app "Workspaces.app"
 
   zap trash: [
-    "~/Application Support/Workspaces",
-    "~/Library/Application Support/com.apptorium.Workspaces*",
     "~/Library/Application Scripts/com.apptorium.Workspaces*",
+    "~/Library/Application Support/com.apptorium.Workspaces*",
+    "~/Library/Application Support/Workspaces",
     "~/Library/Caches/com.apptorium.Workspaces*",
     "~/Library/Containers/com.apptorium.Workspaces-Helper",
     "~/Library/Cookies/com.apptorium.Workspaces*.binarycookies",

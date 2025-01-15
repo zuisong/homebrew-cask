@@ -7,9 +7,11 @@ cask "360safe" do
   desc "Protection and antivirus security"
   homepage "https://www.360totalsecurity.com/features/360-total-security-mac/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "360Safe.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

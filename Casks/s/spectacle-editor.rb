@@ -7,11 +7,13 @@ cask "spectacle-editor" do
   desc "Drag and drop Spectacle editor"
   homepage "https://github.com/plotly/spectacle-editor"
 
+  disable! date: "2024-06-03", because: :no_longer_available
+
   app "Spectacle Editor.app"
 
   zap trash: [
-    "~/Library/Application Support/Spectacle Editor",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.formidable.spectacle-editor.sfl*",
+    "~/Library/Application Support/Spectacle Editor",
     "~/Library/Preferences/com.formidable.spectacle-editor.plist",
   ]
 end

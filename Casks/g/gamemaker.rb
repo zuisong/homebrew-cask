@@ -1,6 +1,6 @@
 cask "gamemaker" do
-  version "2023.8.2.108"
-  sha256 "84d61b0ad2c11189d1b9a7579045efa781b0a58c269379aa9748091721357544"
+  version "2024.11.0.179"
+  sha256 "cf8472edf2ef5d2a2743363101bfded8bbba13e8fc0c103a5b8e9f997876fe81"
 
   url "https://gms.yoyogames.com/GameMaker-#{version}.pkg",
       verified: "gms.yoyogames.com/"
@@ -9,8 +9,8 @@ cask "gamemaker" do
   homepage "https://gamemaker.io/"
 
   livecheck do
-    url "https://gamemaker.io/en/download"
-    regex(%r{href=.*?/GameMaker-(\d+(?:\.\d+)*)\.pkg.+is-primary}i)
+    url "https://gamemaker.io/en/download/mac/monthly/GameMaker.pkg"
+    strategy :header_match
   end
 
   pkg "GameMaker-#{version}.pkg"
@@ -23,15 +23,14 @@ cask "gamemaker" do
     ohai "The GameMaker package postinstall script launches the GameMaker app" if retries >= 3
     ohai "Attempting to close com.yoyogames.gms2 to avoid unwanted user intervention" if retries >= 3
     return unless system_command "/usr/bin/pkill", args: ["-f", "/Applications/GameMaker.app"]
-
   rescue RuntimeError
     sleep 1
     retry unless (retries -= 1).zero?
     opoo "Unable to forcibly close GameMaker.app"
   end
 
-  uninstall delete:  "/Applications/GameMaker.app",
-            pkgutil: "com.yoyogames.gms2"
+  uninstall pkgutil: "com.yoyogames.gms2",
+            delete:  "/Applications/GameMaker.app"
 
   zap trash: "/Users/Shared/GameMakerStudio2"
 end

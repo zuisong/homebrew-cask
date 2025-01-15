@@ -1,6 +1,6 @@
 cask "opensesame" do
-  version "4.0.5"
-  sha256 "6cdc494d68ccc158213c6789ecfa5884cee14e5341bbde195df9846e5faaa1df"
+  version "4.0.24"
+  sha256 "8b55cbba3350afe254c978127c98b7ac2562221b36531065bb21b4ce42037e1b"
 
   url "https://github.com/open-cogsci/OpenSesame/releases/download/release%2F#{version}/opensesame_#{version}-py311-macos-x64-1.dmg",
       verified: "github.com/open-cogsci/OpenSesame/"
@@ -10,7 +10,19 @@ cask "opensesame" do
 
   livecheck do
     url :url
-    strategy :github_latest
+    regex(/opensesame[._-]v?(\d+(?:\.\d+)+)[._-].*\.dmg/i)
+    strategy :github_releases do |json, regex|
+      json.map do |release|
+        next if release["draft"] || release["prerelease"]
+
+        release["assets"]&.map do |asset|
+          match = asset["name"]&.match(regex)
+          next if match.blank?
+
+          match[1]
+        end
+      end.flatten
+    end
   end
 
   app "OpenSesame.app"
@@ -19,4 +31,8 @@ cask "opensesame" do
     "~/.opensesame",
     "~/Library/Preferences/com.cogscinl.default.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

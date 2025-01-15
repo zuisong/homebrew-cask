@@ -1,8 +1,11 @@
 cask "cloudash" do
-  version "1.21.0"
-  sha256 "b18a9ca643030586ece2ae12d485de3c8e43c6d1f572ce6b977a9b1b6aec7f86"
+  arch arm: "-arm64"
 
-  url "https://github.com/cloudashdev/cloudash/releases/download/#{version}/Cloudash-#{version}.dmg",
+  version "1.22.1"
+  sha256 arm:   "94ce30488721f5511433994ed4fbc045fe6b4ec54b06e37f23cb343b19b33556",
+         intel: "73451741b9ddf1d26eecd2ae21d92602e2c2eae414eab6329243fa75cd18428c"
+
+  url "https://github.com/cloudashdev/cloudash/releases/download/#{version}/Cloudash-#{version}#{arch}.dmg",
       verified: "github.com/cloudashdev/cloudash/"
   name "cloudash"
   desc "Monitoring and troubleshooting for serverless architectures"

@@ -7,11 +7,9 @@ cask "macdropany" do
   desc "Syncs any local folder with the cloud"
   homepage "https://github.com/sebthedev/MacDropAny"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "MacDropAny.app"
 
   zap trash: "~/Library/Services/Sync via MacDropAny.workflow"
-
-  caveats do
-    discontinued
-  end
 end

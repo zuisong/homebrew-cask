@@ -1,8 +1,8 @@
 cask "sdm" do
-  version "21.31.0,DF6B94C3EB93A7AF186CF79B686329045AD405C0"
-  sha256 "8e62320332e0247673abfec776a333a64a62e450c0694a1a5269f443770a5983"
+  version "21.96.0,44DEC916629D8F925150034594D299E2D58EE773"
+  sha256 "951f7adcec0d20bf4bbd78e0384f1def4919cb23ff18341706517e42c1ecc18e"
 
-  url "https://downloads.strongdm.com/builds/desktop/#{version.csv.first}/darwin/universal/#{version.csv.second}/SDM-#{version.csv.first}.universal.zip"
+  url "https://downloads.strongdm.com/builds/desktop/#{version.csv.first}/darwin-universal/#{version.csv.second}/SDM-#{version.csv.first}.universal.zip"
   name "sdm"
   desc "StrongDM client"
   homepage "https://www.strongdm.com/"
@@ -15,13 +15,16 @@ cask "sdm" do
     end
   end
 
+  depends_on macos: ">= :big_sur"
+
   app "SDM.app"
+  binary "#{appdir}/SDM.app/Contents/Resources/sdm.darwin", target: "sdm"
 
   uninstall delete: "#{appdir}/SDM.app/Contents/Resources/sdm-socket"
 
   zap trash: [
-    "~/.sdm",
     "/usr/local/bin/sdm",
+    "~/.sdm",
     "~/Library/Application Support/SDM",
     "~/Library/Caches/com.electron.sdm*",
     "~/Library/Preferences/com.electron.sdm.plist",

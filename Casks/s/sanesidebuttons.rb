@@ -7,9 +7,18 @@ cask "sanesidebuttons" do
   desc "Menu bar app that enables system-wide navigation using side mouse buttons"
   homepage "https://github.com/thealpa/SaneSideButtons"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   depends_on macos: ">= :ventura"
 
   app "SaneSideButtons.app"
 
-  zap trash: "~/Library/Preferences/com.janhuelsmann.sanesidebuttons.plist"
+  zap trash: [
+    "~/Library/Application Scripts/com.janhuelsmann.SaneSideButtons",
+    "~/Library/Containers/com.janhuelsmann.SaneSideButtons",
+    "~/Library/Preferences/com.janhuelsmann.sanesidebuttons.plist",
+  ]
 end

@@ -7,10 +7,11 @@ cask "youtrack-workflow" do
   desc "Create and edit workflows for YouTrack"
   homepage "https://www.jetbrains.com/youtrack/download/get_youtrack.html#materials=workflow-editor"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "youtrack-workflow.app"
 
   caveats do
-    discontinued
     depends_on_java
   end
 end

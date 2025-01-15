@@ -1,6 +1,6 @@
 cask "cleaneronepro" do
-  version "6.7.1,5205"
-  sha256 "d05a9d788a95dbcaf77e843687e20578ab6ec1adfb3e802d15497bcc72d4eb02"
+  version "6.7.7,5499"
+  sha256 "d3d341b79753b03e9c6c1fda075b28e08b30c1db9da460be7fdf41936e04b94f"
 
   url "https://files.trendmicro.com/products/CleanerOnePro/COPG0001/#{version.csv.second}/CleanerOnePro_#{version.csv.first.dots_to_underscores}.zip"
   name "CleanerOnePro"
@@ -17,12 +17,12 @@ cask "cleaneronepro" do
 
   app "CleanerOnePro.app"
 
-  uninstall delete:    [
+  uninstall launchctl: "com.trendmicro.TrendCleanerPro.HelperTool",
+            quit:      "com.trendmicro.TrendCleanerPro",
+            delete:    [
               "/Library/LaunchDaemons/com.trendmicro.TrendCleanerPro.HelperTool.plist",
               "/Library/PrivilegedHelperTools/com.trendmicro.TrendCleanerPro.HelperTool",
-            ],
-            launchctl: "com.trendmicro.TrendCleanerPro.HelperTool",
-            quit:      "com.trendmicro.TrendCleanerPro"
+            ]
 
   zap trash: [
     "~/Library/Application Support/com.trendmicro.TrendCleanerPro",

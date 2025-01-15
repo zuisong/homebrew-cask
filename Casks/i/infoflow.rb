@@ -11,18 +11,15 @@ cask "infoflow" do
   desc "AI office platform"
   homepage "https://infoflow.baidu.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  disable! date: "2025-01-04", because: :no_longer_meets_criteria
 
   app "如流.app"
 
   zap trash: [
     "~/Library/Caches/com.baidu.hi.mac",
-    "~/Library/WebKit/com.baidu.hi.mac",
     "~/Library/HTTPStorages/com.baidu.hi.mac",
     "~/Library/Preferences/com.baidu.hi.mac.plist",
     "~/Library/Saved Application State/com.baidu.hi.mac.savedState",
+    "~/Library/WebKit/com.baidu.hi.mac",
   ]
 end

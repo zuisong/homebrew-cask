@@ -1,14 +1,14 @@
 cask "ddnet" do
-  version "17.3"
-  sha256 "933a16f9defdd3260510a5ebb17f5bf7bc44bda8816fbd145e541e0de98a7173"
+  version "18.9"
+  sha256 "1211cde454d9857367ad27a71347b05c36e799d86cb0d51eb23fff36a7d52cd0"
 
-  url "https://ddnet.tw/downloads/DDNet-#{version}-macos.dmg"
+  url "https://ddnet.org/downloads/DDNet-#{version}-macos.dmg"
   name "DDNet"
   desc "Cooperative online platform game based on Teeworlds"
-  homepage "https://ddnet.tw/"
+  homepage "https://ddnet.org/"
 
   livecheck do
-    url "https://ddnet.tw/downloads/"
+    url "https://ddnet.org/downloads/"
     regex(/href=.*?DDNet[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg/i)
   end
 

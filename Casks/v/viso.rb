@@ -1,5 +1,5 @@
 cask "viso" do
-  version "8.9.1"
+  version "8.9.4"
   sha256 :no_check
 
   url "https://getviso.app/files/Viso.dmg"
@@ -13,11 +13,12 @@ cask "viso" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Viso.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.ephod.viso.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.ephod.viso.sfl*",
     "~/Library/Caches/com.ephod.Viso",
     "~/Library/HTTPStorages/com.ephod.Viso",
     "~/Library/HTTPStorages/com.ephod.Viso.binarycookies",

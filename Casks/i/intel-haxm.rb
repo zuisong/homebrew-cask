@@ -7,6 +7,8 @@ cask "intel-haxm" do
   desc "Hardware-assisted virtualization engine (hypervisor)"
   homepage "https://github.com/intel/haxm"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   depends_on macos: ">= :sierra"
   depends_on arch: :x86_64
 
@@ -15,13 +17,13 @@ cask "intel-haxm" do
     sudo:       true,
   }
 
-  uninstall pkgutil: "com.intel.kext.haxm.*",
-            script:  {
+  uninstall script:  {
               sudo:         true,
               must_succeed: true,
               executable:   "silent_install.sh",
               args:         ["-u"],
-            }
+            },
+            pkgutil: "com.intel.kext.haxm.*"
 
   caveats do
     kext

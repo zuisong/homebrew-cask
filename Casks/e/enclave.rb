@@ -1,6 +1,6 @@
 cask "enclave" do
-  version "2023.8.22"
-  sha256 "6b1796d64043ba64757187b47acf08d58f21fc4f8607d226c9fa3fb8f1d94f4f"
+  version "2024.7.13"
+  sha256 "70a5c1143d99beb494b54ec75c1502bd35427c00b91522b3630a2cade52e8b74"
 
   url "https://release.enclave.io/enclave_osx-installer-x64-stable-#{version}.pkg"
   name "Enclave"
@@ -22,4 +22,8 @@ cask "enclave" do
     "/etc/enclave",
     "/var/log/enclave",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

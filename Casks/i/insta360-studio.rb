@@ -1,34 +1,48 @@
 cask "insta360-studio" do
-  version "4.8.10,86ff43a243f55a2d736730fcda68f484,2023_20230913_210457"
-  sha256 "b2365adfda316d41e05a4e7c053ed3c1dfe2caba3a04d1e0d5ff7c59ce6b2a87"
+  version "5.4.8,8a643f7d253f1e9022a9caeaa4dfff6f,release_insta360,RC_build30,_20241230_125120_signed_1735534363956"
+  sha256 "3057e16a8d5ae239030d621f39bb1ff057de7dac988f20548670a2cfc5c1d10b"
 
-  url "https://file.insta360.com/static/#{version.csv.second}/Insta360%20Studio%20#{version.csv.third}_signed.pkg"
+  url "https://file.insta360.com/static/#{version.csv.second}/Insta360Studio_#{version.csv.first}_#{version.csv.third}(#{version.csv.fourth})#{version.csv.fifth}.pkg"
   name "Insta360 Studio"
   desc "Video and photo editor"
   homepage "https://www.insta360.com/"
 
+  # The filename format can fluctuate between versions, so we have to include
+  # any text that may vary in the cask `version`. However, some filenames
+  # include parentheses and we can't include those characters in the cask
+  # `version`, so we have to chunk the text to work around this limitation.
+  # NOTE: We simply follow what upstream presents as the newest version and
+  # that may be beta, RC, etc.
   livecheck do
     url "https://openapi.insta360.com/app/appDownload/getGroupApp?group=insta360-go2&X-Language=en-us"
-    regex(%r{/([[:xdigit:]]+)/Insta360(?:[._-]|%20)Studio(?:[._-]|%20)(\d+(?:[._-]\d+)*)[._-]signed\.pkg}i)
-    strategy :page_match do |page, regex|
-      newest_release = JSON.parse(page)["data"]["apps"]
-                           .find { |app| app["id"] == 38 }["items"]
-                           .select { |item| item["platform"] == "mac" }
-                           .max_by { |item| Version.new(item["version"]) }
+    regex(%r{/(\h+)/Insta360(?:%20)?Studio(?:[._-]|%20)v?(?:\d+(?:\.\d+)+)[._-](.+)\.pkg}i)
+
+    strategy :json do |json, regex|
+      # Find the Insta360 Studio app
+      app = json.dig("data", "apps")&.find { |item| item["app_id"] == 38 }
+      next if app.blank?
+
+      # Find the newest macOS version
+      newest_release = app["items"]&.select { |item| item["platform"] == "mac" }
+                                   &.max_by { |item| Version.new(item["version"]) }
       next if newest_release.blank?
 
+      # Find the channel item (there's likely only one object in the array)
+      channel = newest_release["channels"]&.find { |item| item["channel"] == "official" }
+      next if channel.blank?
+
+      # Collect the version parts
       version = newest_release["version"]
-      match = newest_release["channels"][0]["download_url"].match(regex)
+      match = channel["download_url"]&.match(regex)
       next if version.blank? || match.blank?
 
-      "#{version},#{match[1]},#{match[2]}"
+      "#{version},#{match[1]},#{match[2].tr("()", ",")}"
     end
   end
 
-  pkg "Insta360 Studio #{version.csv.third}_signed.pkg"
+  pkg "Insta360Studio_#{version.csv.first}_#{version.csv.third}(#{version.csv.fourth})#{version.csv.fifth}.pkg"
 
   uninstall quit:    "com.insta360.studio",
-            delete:  "#{appdir}/Insta360 Studio #{version.csv.third.split("_")[0]}.app",
             pkgutil: [
               "com.insta360.insta360Studio",
               "com.insta360.PremierePlugin",

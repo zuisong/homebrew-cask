@@ -1,18 +1,24 @@
 cask "sonarr" do
-  version "3.0.10.1567"
-  sha256 "16566295630a50ba483b480a0dbe308f4fdfe55ad90487f5729d05860c1fcd7c"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://download.sonarr.tv/v#{version.major}/main/#{version}/Sonarr.main.#{version}.macos.zip"
+  version "4.0.12.2823"
+  sha256 arm:   "2366c7809b1c8ccf3e71b5bd9d2b27310db85811376a3c80701618cc07dfdeb5",
+         intel: "483a9f33d6627f9943aa1dff21f92b5df2cc268c1990b454682b0797d7ccad7e"
+
+  url "https://github.com/Sonarr/Sonarr/releases/download/v#{version}/Sonarr.main.#{version}.osx-#{arch}-app.zip",
+      verified: "github.com/Sonarr/Sonarr/"
   name "Sonarr"
   desc "PVR for Usenet and BitTorrent users"
   homepage "https://sonarr.tv/"
 
   livecheck do
-    url "https://download.sonarr.tv/v3/main/"
-    regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
+    url :url
+    strategy :github_latest
   end
 
-  depends_on cask: "mono-mdk"
+  auto_updates true
+  conflicts_with cask: "sonarr@beta"
+  depends_on macos: ">= :catalina"
 
   app "Sonarr.app"
 

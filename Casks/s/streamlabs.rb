@@ -1,9 +1,9 @@
 cask "streamlabs" do
   arch arm: "-arm64"
 
-  version "1.13.3"
-  sha256 arm:   "b803063d672e6a45e6b4ab9b493355ca4c160ad8aada6d2c7a791cfec728c93e",
-         intel: "da44d2ff5888bf1aa07123a3f740658fddea56b5dda629ef1207f6a9af3a259e"
+  version "1.17.2"
+  sha256 arm:   "542cbe5d8b9ff3820aec158773d1b6cbc5aba80bd63033ea6d741c146eba00f5",
+         intel: "ada212dc006e668f39c5d167c201b5547dfe5f9bbb50b0566f2a6c93a9384573"
 
   url "https://slobs-cdn.streamlabs.com/Streamlabs+Desktop-#{version}#{arch}.dmg"
   name "Streamlabs Desktop"

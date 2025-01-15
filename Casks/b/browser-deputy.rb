@@ -1,11 +1,11 @@
 cask "browser-deputy" do
-  version "1.6.1"
+  version "1.7.1"
   sha256 :no_check
 
   url "https://anybox.ltd/browser-deputy/download/browserdeputy-latest.zip"
   name "Browser Deputy"
   desc "Command palette in any application"
-  homepage "https://anybox.ltd/en/browser-deputy"
+  homepage "https://anybox.ltd/browser-deputy"
 
   livecheck do
     url "https://anybox.ltd/browser-deputy/download/appcast.xml"
@@ -19,8 +19,8 @@ cask "browser-deputy" do
 
   zap trash: [
     "~/Library/Application Support/Browser Deputy",
-    "~/Library/Caches/ltd.anybox.BrowserDeputy",
     "~/Library/Caches/Browser Deputy",
+    "~/Library/Caches/ltd.anybox.BrowserDeputy",
     "~/Library/HTTPStorages/ltd.anybox.BrowserDeputy",
     "~/Library/HTTPStorages/ltd.anybox.BrowserDeputy.binarycookies",
     "~/Library/Preferences/ltd.anybox.BrowserDeputy.plist",

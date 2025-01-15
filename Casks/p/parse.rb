@@ -7,11 +7,9 @@ cask "parse" do
   name "Parse"
   homepage "https://parseplatform.org/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   container type: :naked
 
   binary "parse"
-
-  caveats do
-    discontinued
-  end
 end

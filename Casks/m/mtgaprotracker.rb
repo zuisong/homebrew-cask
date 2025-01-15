@@ -8,11 +8,7 @@ cask "mtgaprotracker" do
   desc "Advanced Magic: The Gathering Arena tracking tool"
   homepage "https://mtgarena.pro/mtga-pro-tracker/"
 
-  livecheck do
-    url "https://github.com/Razviar/mtgap/"
-    regex(/Mac\sversion.*?(\d+(?:\.\d+)+)/i)
-    strategy :page_match
-  end
+  deprecate! date: "2024-07-27", because: :discontinued
 
   app "mtgaprotracker.app"
 
@@ -23,4 +19,8 @@ cask "mtgaprotracker" do
     "~/Library/Logs/MTGAproTracker",
     "~/Library/Preferences/com.mtgarenapro.mtgaprotracker.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

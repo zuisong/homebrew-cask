@@ -1,6 +1,6 @@
 cask "litecoin" do
-  version "0.21.2.2"
-  sha256 "c13c0e436e123d6593b55ded38feafffb3c23e94d7cbcfef03d65192e620d973"
+  version "0.21.4"
+  sha256 "1ae347f6e77c10f857d98a18b778ec4fc2449b7bb51c425bad726b02cb9ef876"
 
   url "https://download.litecoin.org/litecoin-#{version}/osx/litecoin-#{version}-osx.dmg"
   name "Litecoin"
@@ -8,9 +8,11 @@ cask "litecoin" do
   homepage "https://litecoin.org/"
 
   livecheck do
-    url "https://github.com/litecoin-project/litecoin"
-    strategy :github_latest
+    url :homepage
+    regex(/href=.*?litecoin[._-]v?(\d+(?:\.\d+)+)[^"' >]*?\.dmg/i)
   end
+
+  depends_on macos: ">= :mojave"
 
   app "Litecoin-Qt.app"
 
@@ -31,4 +33,8 @@ cask "litecoin" do
     "~/Library/Preferences/org.litecoin.Litecoin-Qt.plist",
     "~/Library/Saved Application State/org.litecoin.Litecoin-Qt.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

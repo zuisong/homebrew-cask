@@ -8,7 +8,7 @@ cask "avitools" do
   homepage "https://www.emmgunn.com/avitools-home/"
 
   livecheck do
-    url "https://www.emmgunn.com/avitools-home/avitools-downloads/"
+    url "https://emmgunn.com/avitools-home/avitools-downloads/"
     regex(%r{href=.*?/avitools(\d+(?:\.\d+)+)\.zip}i)
   end
 
@@ -18,4 +18,8 @@ cask "avitools" do
     "~/Library/Application Support/EmmGunn",
     "~/Library/Preferences/com.emmgunn.AVItools#{version.major}.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

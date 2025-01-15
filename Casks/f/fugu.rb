@@ -7,9 +7,7 @@ cask "fugu" do
   desc "Frontend for OpenSSH's sftp/scp tools"
   homepage "https://sourceforge.net/projects/fugussh/"
 
-  app "Fugu.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "Fugu.app"
 end

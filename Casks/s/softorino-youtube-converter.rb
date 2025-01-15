@@ -8,7 +8,7 @@ cask "softorino-youtube-converter" do
   homepage "https://softorino.com/youtube-converter/"
 
   livecheck do
-    url "https://api.softorino.com/live/app-manager/v3/syc2/mac/updates"
+    url "https://ushining.softorino.com/appcast.php?abbr=syc2m"
     strategy :sparkle
   end
 
@@ -24,4 +24,8 @@ cask "softorino-youtube-converter" do
     "~/Library/Preferences/com.softorino.syc2.plist",
     "~/Library/Saved Application State/com.softorino.syc2.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

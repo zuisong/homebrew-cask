@@ -1,13 +1,13 @@
 cask "nuage" do
-  version "0.0.7"
-  sha256 "d3dfe6670b46cd78522dbba33e40e4ee37ee0f056844d6b69b523d953a27bd3d"
+  version "0.0.8"
+  sha256 "6456f7969414e6dd1350d494e05ea92152ccc6d4c28faf5a2a6df6ba92ab6301"
 
   url "https://github.com/lbrndnr/nuage-macos/releases/download/v#{version}/Nuage.app.zip"
   name "Nuage"
   desc "Free and open-source SoundCloud client"
   homepage "https://github.com/lbrndnr/nuage-macos"
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :ventura"
 
   app "Nuage.app"
 
@@ -16,6 +16,6 @@ cask "nuage" do
     "~/Library/Caches/ch.laurinbrandner.nuage",
     "~/Library/Containers/ch.laurinbrandner.nuage",
     "~/Library/Logs/DiagnosticReports/Nuage*.crash",
-    "~/Preferences/ch.laurinbrandner.nuage.plist",
+    "~/Library/Preferences/ch.laurinbrandner.nuage.plist",
   ]
 end

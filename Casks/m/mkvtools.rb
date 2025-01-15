@@ -8,7 +8,7 @@ cask "mkvtools" do
   homepage "https://www.emmgunn.com/mkvtools-home/"
 
   livecheck do
-    url "https://www.emmgunn.com/mkvtools-home/mkvtools-downloads/"
+    url "https://emmgunn.com/mkvtools-home/mkvtools-downloads/"
     regex(%r{href=.*?/mkvtools(\d+(?:\.\d+)*)\.zip}i)
   end
 
@@ -18,4 +18,8 @@ cask "mkvtools" do
     "~/Library/Application Support/EmmGunn",
     "~/Library/Preferences/com.emmgunn.MKVtools#{version.major}.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,5 +1,5 @@
 cask "cctalk" do
-  version "7.10.10-1357"
+  version "7.10.15-1390"
   sha256 :no_check
 
   url "https://www.cctalk.com/webapi/basic/v1.1/version/down?apptype=1&terminalType=8&versionType=103"
@@ -13,7 +13,7 @@ cask "cctalk" do
     strategy :header_match
   end
 
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :high_sierra"
 
   app "CCtalk.app"
 
@@ -24,4 +24,8 @@ cask "cctalk" do
     "~/Library/HTTPStorages/com.hujiang.mac.cctalk",
     "~/Library/Preferences/com.hujiang.mac.cctalk.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

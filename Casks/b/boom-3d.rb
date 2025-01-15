@@ -1,17 +1,21 @@
 cask "boom-3d" do
-  version "2.0.2,102.0.2009"
+  version "2.2"
   sha256 :no_check
 
   url "https://dfvk972795zr9.cloudfront.net/Boom3Dmac/webstore/Boom3D.dmg",
       verified: "dfvk972795zr9.cloudfront.net/"
   name "Boom 3D"
-  desc "Volume booster and equalizer software"
+  desc "Volume booster and equaliser software"
   homepage "https://www.globaldelight.com/boom/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://cms.globaldelight.net/api/whats-news?populate=versions&filters[product][productID][$eq]=boom3d_mac"
+    strategy :json do |json|
+      json.dig("data", 0, "attributes", "versions")&.map { |version| version["version"] }
+    end
   end
+
+  depends_on macos: ">= :mojave"
 
   app "Boom 3D.app"
 

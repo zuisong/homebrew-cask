@@ -7,6 +7,8 @@ cask "caret" do
   name "Caret"
   homepage "https://caret.io/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Caret.app"
 
   zap trash: [
@@ -18,8 +20,4 @@ cask "caret" do
     "~/Library/Preferences/io.caret.plist",
     "~/Library/Saved Application State/io.caret.savedState",
   ]
-
-  caveats do
-    discontinued
-  end
 end

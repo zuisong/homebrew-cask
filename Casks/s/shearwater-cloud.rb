@@ -1,18 +1,24 @@
 cask "shearwater-cloud" do
-  version "2.10.0"
-  sha256 "7792746e8fa8e740ba59e7eef3bf59e634e67492654076fe8146adec1d9dc1b3"
+  version "2.12.2"
+  sha256 "080060a50a4344259bef1c3323018d0511755463570af184b5b355575eaa62f5"
 
-  url "https://www.shearwater.com/wp-content/downloads/ShearwaterCloudInstaller_#{version}.dmg"
+  url "https://downloads.shearwater.com/livedownloads/ShearwaterCloudInstaller_#{version}.dmg"
   name "Shearwater Cloud"
   desc "Review, edit and share dive log data"
-  homepage "https://www.shearwater.com/"
+  homepage "https://shearwater.com/"
 
   livecheck do
-    url "https://www.shearwater.com/cloud/"
+    url "https://shearwater.com/pages/shearwater-cloud"
     regex(/href=.*?ShearwaterCloudInstaller[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Shearwater Cloud.app"
 
   zap trash: "~/Library/Containers/unity.Shearwater-Research.Shearwater"
+
+  caveats do
+    requires_rosetta
+  end
 end

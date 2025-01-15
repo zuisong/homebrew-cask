@@ -8,7 +8,7 @@ cask "iconscout" do
   homepage "https://iconscout.com/"
 
   livecheck do
-    url "https://iconscout.com/download"
+    url "https://iconscout.com/desktop-app/for-mac"
     regex(/Iconscout[._-]v?(\d+(?:\.\d+)+)/i)
   end
 
@@ -21,4 +21,8 @@ cask "iconscout" do
     "~/Library/Preferences/com.electron.iconscout.plist",
     "~/Library/Saved Application State/com.electron.iconscout.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

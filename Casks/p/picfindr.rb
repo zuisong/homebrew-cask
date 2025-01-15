@@ -1,6 +1,6 @@
 cask "picfindr" do
-  version "1.4.1"
-  sha256 "fba6bf9b1bc20b21a39794aeea0b624d8b0d9383f50355aebf7446599f8f7246"
+  version "1.6.10"
+  sha256 "99df21332869539dc965fd3ca34b58d10f99e38dc963547689c1a353046bcee4"
 
   url "https://ushining.softorino.com/shine_uploads/picfindr_#{version}.dmg"
   name "picfindr"
@@ -8,9 +8,11 @@ cask "picfindr" do
   homepage "https://softorino.com/picfindr/"
 
   livecheck do
-    url "https://api.softorino.com/live/app-manager/v3/pfm/mac/updates"
+    url "https://ushining.softorino.com/appcast.php?abbr=pfm"
     strategy :sparkle
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "PicFindr.app"
 

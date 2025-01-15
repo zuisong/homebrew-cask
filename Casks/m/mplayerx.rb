@@ -8,10 +8,7 @@ cask "mplayerx" do
   desc "Media player"
   homepage "http://mplayerx.org/"
 
-  livecheck do
-    url "https://raw.githubusercontent.com/niltsh/MPlayerX-Deploy/master/appcast.xml"
-    strategy :sparkle
-  end
+  deprecate! date: "2024-07-27", because: :unmaintained
 
   auto_updates true
 
@@ -20,8 +17,12 @@ cask "mplayerx" do
   zap trash: [
     "~/.mplayer",
     "~/Library/Application Support/MPlayerX",
+    "~/Library/Caches/org.niltsh.MPlayerX",
     "~/Library/Preferences/org.niltsh.MPlayerX.LSSharedFileList.plist",
     "~/Library/Preferences/org.niltsh.MPlayerX.plist",
-    "~/Library/Caches/org.niltsh.MPlayerX",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

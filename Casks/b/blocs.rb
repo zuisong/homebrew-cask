@@ -1,8 +1,8 @@
 cask "blocs" do
-  version "5.1.3"
-  sha256 :no_check
+  version "5.2.8"
+  sha256 "43ba87292d9c2cc7373dbae262de554cc9496cf4c36ba67097f119ddd99ada71"
 
-  url "https://blocsapp.com/download/Blocs.zip"
+  url "https://blocsapp.com/download/archives/blocs-#{version.major}/Blocs#{version}.zip"
   name "Blocs"
   desc "Visual web design software"
   homepage "https://blocsapp.com/"
@@ -19,8 +19,8 @@ cask "blocs" do
   app "Blocs.app"
 
   zap trash: [
-    "~/Library/Application Support/Blocs",
     "~/Library/Application Support/Blocs *",
+    "~/Library/Application Support/Blocs",
     "~/Library/Caches/com.cazoobi.Blocs-*",
     "~/Library/HTTPStorages/com.cazoobi.Blocs-*",
     "~/Library/HTTPStorages/com.cazoobi.Blocs-*.binarycookies",

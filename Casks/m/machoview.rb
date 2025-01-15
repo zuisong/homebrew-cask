@@ -10,7 +10,11 @@ cask "machoview" do
   app "MachOView.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/machoview.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/machoview.sfl*",
     "~/Library/Preferences/MachOView.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

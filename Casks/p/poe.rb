@@ -1,9 +1,9 @@
 cask "poe" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.1.2"
-  sha256 arm:   "7627a824501b97494ec3318223e624f4557e438e41b8c356da56eccd703cbe39",
-         intel: "c55396820209f69f7d1c0ac019bce5677902247f3d592534c391f818229f4ae0"
+  version "1.1.23"
+  sha256 arm:   "4dfe55596cf32fd78f81a2faf11075e569eeb73f372aa345316e57d4a4bedcb0",
+         intel: "feb0de5cceadbe7842d9269b0b2d4e9e5a54ad617122bb170ac620c109038947"
 
   url "https://desktop-app.poecdn.net/updates/darwin_#{arch}/#{version}.zip",
       verified: "desktop-app.poecdn.net/updates/"
@@ -12,14 +12,23 @@ cask "poe" do
   homepage "https://poe.com/"
 
   livecheck do
-    skip "No version information available"
+    url "https://updater.poe.com/darwin_#{arch}/0.0.0"
+    regex(/v?(\d+(?:\.\d+)+)\.zip/i)
+    strategy :json do |json|
+      match = json["url"]&.match(regex)
+      next if match.blank?
+
+      match[1]
+    end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Poe.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.quora.poe.electron.sfl*",
+    "~/Library/Application Support/Poe",
     "~/Library/Application Support/poe-electron",
     "~/Library/Caches/com.quora.poe.electron",
     "~/Library/Caches/com.quora.poe.electron.ShipIt",

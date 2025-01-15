@@ -1,6 +1,6 @@
 cask "pacifist" do
-  version "4.0.5"
-  sha256 "d1fa1218fecea844419238303d67f834477c9897f93801fe092b54eae4644872"
+  version "4.1.3"
+  sha256 "4b299bbb4724fe541a5597f30932463101409b0218641b72a5194ee5d5885a41"
 
   url "https://www.charlessoft.com/pacifist_download/Pacifist_#{version}.dmg"
   name "Pacifist"
@@ -13,11 +13,13 @@ cask "pacifist" do
   end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "Pacifist.app"
+  binary "#{appdir}/Pacifist.app/Contents/Resources/usr/bin/pacifist"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.charlessoft.pacifist.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.charlessoft.pacifist.sfl*",
     "~/Library/Preferences/com.charlessoft.pacifist.plist",
     "~/Library/Saved Application State/com.charlessoft.pacifist.savedState",
   ]

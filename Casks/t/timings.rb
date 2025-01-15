@@ -7,6 +7,8 @@ cask "timings" do
   desc "Time tracking"
   homepage "https://www.mediaatelier.com/Timings3/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Timings.app"
 
   zap trash: [
@@ -14,8 +16,4 @@ cask "timings" do
     "~/Library/Caches/com.mediaatelier.Timings",
     "~/Library/Preferences/com.mediaatelier.Timings.plist",
   ]
-
-  caveats do
-    discontinued
-  end
 end

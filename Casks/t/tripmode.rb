@@ -11,18 +11,25 @@ cask "tripmode" do
     end
   end
   on_big_sur :or_newer do
-    version "3.2.2,1378"
-    sha256 "4fcbb4f02f88eac8b2197a447442e36d808e02f85fed5ebc6fee6a792fc2d2b3"
+    version "3.2.3,1384,1834"
+    sha256 "a5a50fdfe81e78033b16974456fc53434e4c1237ad40f5b881c368e32c6aacdd"
 
-    url "https://tripmode-updates.ch/app/TripMode-#{version.csv.first}-#{version.csv.second}.zip",
+    url "https://tripmode-updates.ch/app/TripMode-#{version.csv.first}-#{version.csv.third || version.csv.second}.zip",
         verified: "tripmode-updates.ch/app/"
 
     livecheck do
       url "https://tripmode-updates.ch/app/appcast-v#{version.major}.xml"
-      strategy :sparkle
+      regex(%r{/TripMode[._-]v?(\d+(?:\.\d+)+)[._-](\d+)\.zip}i)
+      strategy :sparkle do |item, regex|
+        item.url.scan(regex).map do |match|
+          if match[1] == item.version
+            item.nice_version
+          else
+            "#{item.nice_version},#{match[1]}"
+          end
+        end
+      end
     end
-
-    depends_on macos: ">= :big_sur"
   end
 
   name "TripMode"
@@ -33,11 +40,11 @@ cask "tripmode" do
 
   app "TripMode.app"
 
-  uninstall signal:    ["TERM", "ch.tripmode.TripMode"],
-            launchctl: [
+  uninstall launchctl: [
               "ch.tripmode.nke.TripMode",
               "ch.tripmode.TripMode.HelperTool",
             ],
+            signal:    ["TERM", "ch.tripmode.TripMode"],
             delete:    "/Library/PrivilegedHelperTools/ch.tripmode.TripMode.HelperTool"
 
   zap trash: [
@@ -46,7 +53,7 @@ cask "tripmode" do
     "~/Library/Application Scripts/P39EL2R8C4.com.alix-sarl.TripMode",
     "~/Library/Application Support/Tripmode",
     "~/Library/Caches/ch.tripmode.TripMode",
-    "~/Library/Caches/com.apple.helpd/Generated/ch.tripmode.TripMode.help*#{version.csv.first}",
+    "~/Library/Caches/com.apple.helpd/Generated/ch.tripmode.TripMode.help*",
     "~/Library/Group Containers/P39EL2R8C4.com.alix-sarl.TripMode",
     "~/Library/Preferences/ch.tripmode.TripMode.plist",
   ]

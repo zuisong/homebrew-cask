@@ -7,9 +7,7 @@ cask "amm" do
   desc "Aria2 Menubar Monitor"
   homepage "https://github.com/15cm/AMM"
 
-  app "AMM.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "AMM.app"
 end

@@ -9,7 +9,7 @@ cask "adium" do
   homepage "https://www.adium.im/"
 
   livecheck do
-    url "https://www.adium.im/sparkle/appcast-release.xml"
+    url "https://sparkle.adium.im/appcast-release.xml"
     strategy :sparkle
   end
 
@@ -25,4 +25,8 @@ cask "adium" do
     "~/Library/Preferences/com.adiumX.adiumX.plist",
     "~/Library/Saved Application State/com.adiumX.adiumX.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

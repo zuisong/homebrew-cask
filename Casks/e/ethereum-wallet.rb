@@ -8,15 +8,17 @@ cask "ethereum-wallet" do
   desc "Browser for Ðapps on the Ethereum network"
   homepage "https://github.com/ethereum/mist"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Ethereum Wallet.app"
 
   zap trash: [
     "~/Library/Application Support/Ethereum Wallet",
-    "~/Library/Preferences/com.ethereum.wallet.plist",
     "~/Library/Preferences/com.ethereum.wallet.helper.plist",
+    "~/Library/Preferences/com.ethereum.wallet.plist",
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

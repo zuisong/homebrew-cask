@@ -1,21 +1,18 @@
 cask "reqable" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "1.6.2"
-  sha256 arm:   "0347bf936dc9ac0e1d3df57960d6bdba27728b017dceb79b6b6835ee41ac7811",
-         intel: "06324a5b3341e68c5b34067a74acf9975d948162f58a0131848989c743b1ffee"
+  version "2.31.1"
+  sha256 arm:   "ba2449d72f93f6064564fe58d74d26398952b5d6f94718f800356548eeec4045",
+         intel: "6866196835b1d177ae9971d0f1da70c9bb66953089fc22ff0024701e774c1cf2"
 
-  url "https://api.reqable.com/download?platform=macos&arch=#{arch}"
+  url "https://github.com/reqable/reqable-app/releases/download/#{version}/reqable-app-macos-#{arch}.dmg",
+      verified: "github.com/reqable/reqable-app/"
   name "Reqable"
   desc "Advanced API Debugging Proxy"
   homepage "https://reqable.com/"
 
-  livecheck do
-    url "https://api.reqable.com/version/appcast?platform=macos&arch=#{arch}&locale=en-US"
-    strategy :sparkle, &:short_version
-  end
-
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Reqable.app"
 

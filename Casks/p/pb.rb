@@ -22,11 +22,11 @@ cask "pb" do
             ]
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/de.sidneys.pb-for-desktop.sfl*",
+    "~/Library/Application Support/de.sidneys.pb-for-desktop.ShipIt",
     "~/Library/Application Support/PB for Desktop",
     "~/Library/Application Support/ShipIt_stderr.log",
     "~/Library/Application Support/ShipIt_stdout.log",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/de.sidneys.pb-for-desktop.sfl*",
-    "~/Library/Application Support/de.sidneys.pb-for-desktop.ShipIt",
     "~/Library/Caches/de.sidneys.pb-for-desktop",
     "~/Library/Caches/de.sidneys.pb-for-desktop.ShipIt",
     "~/Library/Logs/PB for Desktop",
@@ -36,4 +36,8 @@ cask "pb" do
     "~/Library/Saved Application State/de.sidneys.pb-for-desktop.savedState",
     "~/Library/WebKit/de.sidneys.pb-for-desktop",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

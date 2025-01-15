@@ -8,14 +8,20 @@ cask "notable" do
   desc "Markdown-based note-taking app that doesn't suck"
   homepage "https://notable.app/"
 
+  deprecate! date: "2024-07-27", because: :unmaintained
+
   auto_updates true
 
   app "Notable.app"
 
   zap trash: [
-    "~/Library/Saved Application State/com.fabiospampinato.notable.savedState",
-    "~/Library/Preferences/com.fabiospampinato.notable.plist",
-    "~/Library/Application Support/Notable",
     "~/.notable.json",
+    "~/Library/Application Support/Notable",
+    "~/Library/Preferences/com.fabiospampinato.notable.plist",
+    "~/Library/Saved Application State/com.fabiospampinato.notable.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

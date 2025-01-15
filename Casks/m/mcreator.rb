@@ -1,17 +1,22 @@
 cask "mcreator" do
-  version "2023.3.36712"
-  sha256 "e0cbb76b9d73fbf5b54df5381832b8071b94a75d23cc31d3db4438247c660691"
+  arch arm: "aarch64", intel: "64bit"
 
-  url "https://github.com/MCreator/MCreator/releases/download/#{version}/MCreator.#{version.major_minor}.Mac.64bit.dmg",
+  version "2024.4.52410"
+  sha256 arm:   "852491c53dd8bf3eb0163610f74496945e74ab7a776f807a25f8d9a22961231e",
+         intel: "70fdb05425586d89418ab5a9aa79722e2d40ffd455d55e8c5c2354bf95a5930a"
+
+  url "https://github.com/MCreator/MCreator/releases/download/#{version}/MCreator.#{version.major_minor}.Mac.#{arch}.dmg",
       verified: "github.com/MCreator/MCreator/"
   name "MCreator"
   desc "Software used to make Minecraft Java Edition mods"
   homepage "https://mcreator.net/"
 
   livecheck do
-    url "https://mcreator.net/changelog/"
-    regex(/>v?(\d+(?:\.\d+)+)</i)
+    url :url
+    strategy :github_latest
   end
+
+  depends_on macos: ">= :big_sur"
 
   app "MCreator.app"
 

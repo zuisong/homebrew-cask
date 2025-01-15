@@ -1,6 +1,6 @@
 cask "pastebot" do
-  version "2.4.4"
-  sha256 "1199b722eb2bd88b7d53a5b1305abcdeeede93d5f2ef3c99c68df00bede47c6d"
+  version "2.4.6"
+  sha256 "822de3c00786e6a92f4a50104bae47ef189e19bb3db9f2932ebbea7251288535"
 
   url "https://tapbots.net/pastebot#{version.major}/Pastebot.dmg",
       verified: "tapbots.net/"
@@ -10,7 +10,9 @@ cask "pastebot" do
 
   livecheck do
     url "https://tapbots.net/pastebot#{version.major}/update.plist"
-    regex(%r{<key>shortVersion</key>.*\n.*<string>(\d+(?:\.\d+)+)</string>}i)
+    strategy :xml do |xml|
+      xml.get_elements("//key[text()='shortVersion']").map { |item| item.next_element&.text&.strip }
+    end
   end
 
   depends_on macos: ">= :mojave"

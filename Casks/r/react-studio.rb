@@ -10,16 +10,16 @@ cask "react-studio" do
 
   livecheck do
     url "https://c1.neonto.com/studio/verinfo_reactstudio"
-    strategy :page_match do |page|
-      json_data = JSON.parse(page)
-      next if json_data.blank?
-
-      version = json_data["latestVersionDescription"]
-      build = json_data["latestVersion"].to_i
+    strategy :json do |json|
+      version = json["latestVersionDescription"]
+      build = json["latestVersion"]&.to_i
+      next if version.blank? || build.blank?
 
       "#{version},#{build}"
     end
   end
+
+  depends_on macos: ">= :sierra"
 
   app "React Studio.app"
 
@@ -31,4 +31,8 @@ cask "react-studio" do
     "~/Library/Preferences/com.neonto.ReactStudio.plist*",
     "~/Library/Saved Application State/com.neonto.ReactStudio.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

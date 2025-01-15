@@ -1,8 +1,8 @@
 cask "whatroute" do
-  version "2.6.6"
-  sha256 "59294d6b4a039f7ad4d81fa0a4904a0822bc67b9ac1ffe249aaef5132560dc3a"
+  version "2.7.0"
+  sha256 "cb88381e599e9582cdd6e65a0d97205a815fa2b0b270e24e97efd473d849f4a4"
 
-  url "https://downloads.whatroute.net/software/whatroute-#{version}.zip"
+  url "https://www.whatroute.net/software/whatroute-#{version}.zip"
   name "WhatRoute"
   desc "Network diagnostic utility"
   homepage "https://www.whatroute.net/"
@@ -16,12 +16,12 @@ cask "whatroute" do
 
   app "WhatRoute.app"
 
-  uninstall delete:    "/Library/PrivilegedHelperTools/net.whatroute.whatroute#{version.major}helper",
-            launchctl: [
+  uninstall launchctl: [
               "net.whatroute.LaunchHelper",
               "net.whatroute.whatroute#{version.major}helper",
             ],
-            quit:      "net.whatroute.whatroute#{version.major}"
+            quit:      "net.whatroute.whatroute#{version.major}",
+            delete:    "/Library/PrivilegedHelperTools/net.whatroute.whatroute#{version.major}helper"
 
   zap trash: [
     "~/Library/Caches/net.whatroute.whatroute#{version.major}",

@@ -5,7 +5,7 @@ cask "grads" do
   url "ftp://cola.gmu.edu/grads/#{version.major_minor}/grads-#{version}-bin-darwin17.5.tar.gz"
   name "Grid Analysis and Display System"
   name "GrADS"
-  desc "Access, manipulate, and visualize earth science data"
+  desc "Access, manipulate, and visualise earth science data"
   homepage "http://cola.gmu.edu/grads/grads.php"
 
   livecheck do
@@ -20,13 +20,18 @@ cask "grads" do
   binary "grads-#{version}/bin/gribscan"
   binary "grads-#{version}/bin/stnmap"
 
-  caveats <<~EOS
-    In order to use the GrADS tools, you will need
-    the GrADS fonts and maps data sets, and may need
-    to set some environmental variables.
+  # No zap stanza required
 
-    See the documentation at:
+  caveats do
+    requires_rosetta
+    <<~EOS
+      In order to use the GrADS tools, you will need
+      the GrADS fonts and maps data sets, and may need
+      to set some environmental variables.
+
+      See the documentation at:
 
       #{staged_path}/grads-#{version}/bin/INSTALL
-  EOS
+    EOS
+  end
 end

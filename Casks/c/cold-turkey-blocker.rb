@@ -1,5 +1,5 @@
 cask "cold-turkey-blocker" do
-  version "4.3"
+  version "4.5"
   sha256 :no_check
 
   url "https://getcoldturkey.com/files/Cold_Turkey_Mac_Installer.pkg"
@@ -8,8 +8,8 @@ cask "cold-turkey-blocker" do
   homepage "https://getcoldturkey.com/"
 
   livecheck do
-    url "https://getcoldturkey.com/download/mac/"
-    regex(/Cold[._-]Turkey[._-]Mac[._-]Installer\.pkg\?v=(\d+(?:\.\d+)+)/i)
+    url "https://getcoldturkey.com/news/"
+    regex(/Blocker\s*v?(\d+(?:\.\d+)+)/i)
   end
 
   pkg "Cold_Turkey_Mac_Installer.pkg"
@@ -19,9 +19,22 @@ cask "cold-turkey-blocker" do
               "launchkeep.cold-turkey-all-users",
             ],
             pkgutil:   [
-              "com.getcoldturkey.coldturkeyblocker",
               "com.getcoldturkey.blocker-chrome-ext",
               "com.getcoldturkey.blocker-edge-ext",
               "com.getcoldturkey.blocker-firefox-ext",
+              "com.getcoldturkey.coldturkeyblocker",
             ]
+
+  zap trash: [
+    "~/Library/Application Scripts/com.getcoldturkey.blocker-shared-data",
+    "~/Library/Caches/com.getcoldturkey.blocker",
+    "~/Library/Group Containers/com.getcoldturkey.blocker-shared-data",
+    "~/Library/HTTPStorages/com.getcoldturkey.blocker",
+    "~/Library/Preferences/com.getcoldturkey.blocker.plist",
+    "~/Library/WebKit/com.getcoldturkey.blocker",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

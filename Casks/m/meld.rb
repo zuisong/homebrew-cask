@@ -8,6 +8,9 @@ cask "meld" do
   desc "Visual diff and merge tool"
   homepage "https://yousseb.github.io/meld/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
+  conflicts_with cask: "dehesselle-meld"
   depends_on macos: ">= :high_sierra"
 
   app "Meld.app"
@@ -29,6 +32,6 @@ cask "meld" do
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

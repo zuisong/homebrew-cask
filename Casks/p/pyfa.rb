@@ -1,6 +1,6 @@
 cask "pyfa" do
-  version "2.54.1"
-  sha256 "9bf34f2bbc5d2a0b4d7380756eaa7bbd1a9390a9aa6e068b09139b88e0e466a9"
+  version "2.61.3"
+  sha256 "b1d6a63ea445a182bf4b50ac97c9f7f1d54186c24544b36721b39d610dfd8a51"
 
   url "https://github.com/pyfa-org/Pyfa/releases/download/v#{version}/pyfa-v#{version}-mac.zip"
   name "pyfa"
@@ -19,4 +19,8 @@ cask "pyfa" do
     "~/Library/Preferences/org.pyfaorg.pyfa.plist",
     "~/Library/Saved Application State/org.pyfaorg.pyfa.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

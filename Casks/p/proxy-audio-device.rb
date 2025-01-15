@@ -1,6 +1,6 @@
 cask "proxy-audio-device" do
-  version "1.0.6"
-  sha256 "1cbdcec6141b21fd4ad72d7675820e6c30a72aad8a48db2a7ce1be72165d8cbb"
+  version "1.0.7"
+  sha256 "6bdfca3e8a61f6931770de3f6813fa787891dfa8cad674f1af1f7011909c323c"
 
   url "https://github.com/briankendall/proxy-audio-device/releases/download/v#{version}/ProxyAudioDevice_v#{version}.zip"
   name "Proxy Audio Device"
@@ -8,6 +8,25 @@ cask "proxy-audio-device" do
   homepage "https://github.com/briankendall/proxy-audio-device"
 
   app "Proxy Audio Device Settings.app"
+  artifact "ProxyAudioDevice.driver", target: "/Library/Audio/Plug-Ins/HAL/ProxyAudioDevice.driver"
 
-  # No zap stanza required
+  postflight do
+    set_ownership "/Library/Audio/Plug-Ins/HAL/ProxyAudioDevice.driver",
+                  user:  "root",
+                  group: "wheel"
+
+    system_command "/usr/bin/killall",
+                   args:         ["coreaudiod"],
+                   sudo:         true,
+                   must_succeed: true
+  end
+
+  uninstall_postflight do
+    system_command "/usr/bin/killall",
+                   args:         ["coreaudiod"],
+                   sudo:         true,
+                   must_succeed: true
+  end
+
+  zap trash: "~/Library/Saved Application State/net.briankendall.Proxy-Audio-Device-Settings.savedState"
 end

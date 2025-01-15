@@ -6,11 +6,9 @@ cask "gulp" do
   name "gulp-app"
   homepage "https://github.com/sindresorhus/gulp-app"
 
+  disable! date: "2024-07-11", because: "is 32-bit only"
+
   app "gulp.app"
 
   # No zap stanza required
-
-  caveats do
-    discontinued
-  end
 end

@@ -1,16 +1,16 @@
 cask "android-platform-tools" do
-  version "34.0.5"
-  sha256 "b2c9757744a9d01fcc616b893ac6236233caf1bdf2ef384d73371ab68bfc4a43"
+  version "35.0.2"
+  sha256 "1820078db90bf21628d257ff052528af1c61bb48f754b3555648f5652fa35d78"
 
   url "https://dl.google.com/android/repository/platform-tools_r#{version}-darwin.zip",
       verified: "google.com/android/repository/"
   name "Android SDK Platform-Tools"
   desc "Android SDK component"
-  homepage "https://developer.android.com/studio/releases/platform-tools"
+  homepage "https://developer.android.com/tools/releases/platform-tools"
 
   livecheck do
-    url "https://dl.google.com/android/repository/platform-tools-latest-darwin.zip"
-    strategy :header_match
+    url :homepage
+    regex(/data-text=["']?[^"' >]*?v?(\d+(?:\.\d+)+)["'> (]/i)
   end
 
   binary "#{staged_path}/platform-tools/adb"

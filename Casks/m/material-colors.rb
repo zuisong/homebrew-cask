@@ -9,10 +9,14 @@ cask "material-colors" do
   app "Material Colors.app"
 
   zap trash: [
-    "~/Library/Application Support/net.nurik.roman.materialcolors.ShipIt",
     "~/Library/Application Support/Material Colors",
+    "~/Library/Application Support/net.nurik.roman.materialcolors.ShipIt",
     "~/Library/Caches/Material Colors",
     "~/Library/Caches/net.nurik.roman.materialcolors",
     "~/Library/Preferences/net.nurik.roman.materialcolors.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

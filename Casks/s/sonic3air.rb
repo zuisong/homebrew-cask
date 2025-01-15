@@ -1,6 +1,6 @@
 cask "sonic3air" do
-  version "22.09.10.0"
-  sha256 "c76b7e305ef0e73e588a40c5970dd3168e527aaf87d1fb636be7fb0c61070c0f"
+  version "24.02.02.1"
+  sha256 "5e2e73180318e6323aa1b436e5aad30006f40f97c315be84dd0b6af54d9bf151"
 
   url "https://projects.sappharad.com/s3air_mac/sonic3air_mac_#{version.major_minor_patch.no_dots}.dmg",
       verified: "projects.sappharad.com/s3air_mac/"
@@ -12,6 +12,8 @@ cask "sonic3air" do
     url "https://projects.sappharad.com/s3air_mac/changelog_mac.txt"
     regex(/v(\d+(?:\.\d+)*)/i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Sonic 3 AIR.app"
   artifact "Manual.pdf", target: "~/Library/Application Support/sonic3air/Manual.pdf"

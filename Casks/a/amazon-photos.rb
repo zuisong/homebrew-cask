@@ -1,8 +1,8 @@
 cask "amazon-photos" do
-  version "1.9,302"
+  version "10.7.1,434"
   sha256 :no_check
 
-  url "https://d29x207vrinatv.cloudfront.net/mac/AmazonPhotosInstaller.dmg",
+  url "https://d29x207vrinatv.cloudfront.net/mac/AmazonPhotosApp.zip",
       verified: "d29x207vrinatv.cloudfront.net/"
   name "Amazon Drive"
   name "Amazon Photos"
@@ -14,24 +14,26 @@ cask "amazon-photos" do
     strategy :extract_plist
   end
 
-  installer script: {
-    executable: "Amazon Photos Installer.app/Contents/MacOS/Amazon Photos Installer",
-    args:       ["--quiet"],
-  }
+  depends_on macos: ">= :sierra"
 
-  uninstall quit:      "com.amazon.clouddrive.mac",
-            delete:    "/Applications/Amazon Photos.app",
-            launchctl: "com.amazon.clouddrive"
+  app "Amazon Photos.app"
+
+  uninstall launchctl: "com.amazon.clouddrive",
+            quit:      "com.amazon.clouddrive.mac"
 
   zap trash: [
     "~/Library/Application Scripts/Amazon Cloud Drive",
     "~/Library/Application Support/Amazon Cloud Drive",
     "~/Library/Application Support/Amazon Drive",
-    "~/Library/Caches/com.amazon.clouddrive.mac.installer",
     "~/Library/Caches/com.amazon.clouddrive.mac",
+    "~/Library/Caches/com.amazon.clouddrive.mac.installer",
     "~/Library/Cookies/com.amazon.clouddrive.mac.binarycookies",
     "~/Library/Logs/Amazon Cloud Drive",
     "~/Library/Logs/Amazon Drive",
     "~/Library/Preferences/com.amazon.clouddrive.mac.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

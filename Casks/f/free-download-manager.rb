@@ -1,10 +1,10 @@
 cask "free-download-manager" do
-  version "6.19.1"
+  version "6.25"
   sha256 :no_check # required as upstream package is updated in-place
 
-  url "https://dn3.freedownloadmanager.org/#{version.major}/latest/fdm.dmg"
+  url "https://files2.freedownloadmanager.org/#{version.major}/latest/fdm.dmg"
   name "Free Download Manager"
-  desc "Download accelerator and organizer"
+  desc "Download accelerator and organiser"
   homepage "https://www.freedownloadmanager.org/"
 
   livecheck do
@@ -31,12 +31,16 @@ cask "free-download-manager" do
         "~/Library/Application Support/Softdeluxe/Free Download Manager",
         "~/Library/Caches/org.freedownloadmanager.fdm#{version.major}",
         "~/Library/Caches/Softdeluxe/Free Download Manager",
-        "~/Library/Preferences/org.freedownloadmanager.fdm#{version.major}.plist",
         "~/Library/Preferences/com.softdeluxe.Free Download Manager.plist",
+        "~/Library/Preferences/org.freedownloadmanager.fdm#{version.major}.plist",
         "~/Library/Saved Application State/org.freedownloadmanager.fdm#{version.major}.savedState",
       ],
       rmdir: [
         "~/Library/Application Support/Softdeluxe",
         "~/Library/Caches/Softdeluxe/",
       ]
+
+  caveats do
+    requires_rosetta
+  end
 end

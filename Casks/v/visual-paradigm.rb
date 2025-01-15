@@ -1,20 +1,23 @@
 cask "visual-paradigm" do
   arch arm: "AArch64", intel: "WithJRE"
 
-  version "17.1,20231021"
-  sha256 arm:   "71db0ce62e6029928be77536b55d8d5ce25c784cac26fa50778830025d61bf9e",
-         intel: "0de28698873ffbec3ea073acb8c6a32fb0847ff82e19735812857853d99bf7c1"
+  version "17.2,20250101"
+  sha256 arm:   "5ba42cf88d0f15ca0d680579aa54e489fb1204479868f3c3a5b9406453455713",
+         intel: "6dc462fcd1048ea84dc13711d95b70937e370aa335b4906ee92f5b73c9c39db2"
 
   url "https://www.visual-paradigm.com/downloads/vp#{version.csv.first}/#{version.csv.second}/Visual_Paradigm_#{version.csv.first.dots_to_underscores}_#{version.csv.second}_OSX_#{arch}.dmg"
   name "Visual Paradigm"
-  desc "UML CASE Tool supporting UML 2, SysML and Business Process Modeling Notation"
+  desc "UML, SysML, BPMN modelling platform"
   homepage "https://www.visual-paradigm.com/"
 
   livecheck do
     url "https://www.visual-paradigm.com/downloads/vp/checksum.html"
     regex(%r{/vp(\d+(?:\.\d+)+)/(\d+)/checksum\.html}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
     end
   end
 

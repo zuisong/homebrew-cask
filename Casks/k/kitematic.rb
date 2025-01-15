@@ -8,6 +8,8 @@ cask "kitematic" do
   desc "Visual user interface for Docker Container management"
   homepage "https://kitematic.com/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Kitematic.app"
 
   zap trash: [
@@ -15,12 +17,8 @@ cask "kitematic" do
     "~/Library/Application Support/Kitematic",
     "~/Library/Caches/Kitematic",
     "~/Library/Logs/Kitematic",
-    "~/Library/Preferences/com.electron.kitematic.plist",
     "~/Library/Preferences/com.electron.kitematic.helper.plist",
+    "~/Library/Preferences/com.electron.kitematic.plist",
     "~/Library/Saved Application State/com.electron.kitematic.savedState",
   ]
-
-  caveats do
-    discontinued
-  end
 end

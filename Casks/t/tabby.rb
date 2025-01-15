@@ -1,9 +1,9 @@
 cask "tabby" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "1.0.201"
-  sha256 arm:   "4dd2fb0686d0722a10814100708df73cabef1bdfad2d0feaa7b6608dec089233",
-         intel: "47c56bb76d7690f1fb66581c8a97a05014abfdcca3770d26d0309e81e54cb100"
+  version "1.0.219"
+  sha256 arm:   "82f49b90631790a3b25adebe60d8f1db42d4767f65f9ce91cb2a5fcd0d04526f",
+         intel: "a3dbed1f3ab9523fc54310e13ace59939fad65f11b17c2090512b350ddb6b633"
 
   url "https://github.com/Eugeny/tabby/releases/download/v#{version}/tabby-#{version}-macos-#{arch}.zip",
       verified: "github.com/Eugeny/tabby/"
@@ -18,6 +18,7 @@ cask "tabby" do
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Tabby.app"
 

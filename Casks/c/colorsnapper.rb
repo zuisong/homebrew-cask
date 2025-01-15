@@ -5,15 +5,17 @@ cask "colorsnapper" do
   url "https://cs2-binaries.s3.amazonaws.com/ColorSnapper2-#{version.dots_to_underscores}.zip",
       verified: "cs2-binaries.s3.amazonaws.com/"
   name "ColorSnapper 2"
-  desc "Color picking application"
+  desc "Colour picker"
   homepage "https://colorsnapper.com/"
 
-  # The Sparkle feed has incorrect pubDates for newer items, which causes the
-  # `:sparkle` strategy to choose an older version as latest. As a workaround,
-  # we find the latest version using the value of `sparkle:version`.
+  # The appcast has incorrect `pubDate` values for newer items, which causes
+  # the `Sparkle` strategy to choose an older version as latest. Until the
+  # dates are fixed, it's necessary to work with all the items in the feed.
   livecheck do
     url "https://cs2-appcast.s3.amazonaws.com/appcast.xml"
-    regex(/sparkle:version=["']?(\d+(?:\.\d+)+)["' >]/i)
+    strategy :sparkle do |items|
+      items.map(&:version)
+    end
   end
 
   depends_on macos: ">= :sierra"
@@ -29,4 +31,8 @@ cask "colorsnapper" do
     "~/Library/Cookies/com.koolesache.ColorSnapper2.binarycookies",
     "~/Library/Preferences/com.koolesache.ColorSnapper2.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,16 +1,13 @@
 cask "archipelago" do
-  arch arm: "-arm64"
+  version "6.0.8"
+  sha256 "58e394886db7e5a32feeb48d7b78951ee230689bf79279e67f79c881df42bb1f"
 
-  version "5.1.0"
-  sha256 arm:   "05cc3c36708d7f1094ec1688f3546a9603da9f1509db7fc3e8b5f36283a1c49b",
-         intel: "57f24ee903337773ee96725ebb9709c3015d60fcc878b0ac871a8551a3fbe471"
-
-  url "https://github.com/npezza93/archipelago/releases/download/v#{version}/Archipelago-#{version}#{arch}-mac.zip"
+  url "https://github.com/npezza93/archipelago/releases/download/v#{version}/Archipelago.zip"
   name "Archipelago"
   desc "Terminal emulator built on web technology"
   homepage "https://github.com/npezza93/archipelago"
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :sequoia"
 
   app "Archipelago.app"
 
@@ -21,5 +18,6 @@ cask "archipelago" do
     "~/Library/HTTPStorages/dev.archipelago",
     "~/Library/Preferences/dev.archipelago.plist",
     "~/Library/Saved Application State/dev.archipelago.savedState",
+    "~/Library/WebKit/dev.archipelago",
   ]
 end

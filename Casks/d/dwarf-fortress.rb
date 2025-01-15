@@ -7,18 +7,10 @@ cask "dwarf-fortress" do
   desc "Single-player fantasy game"
   homepage "https://www.bay12games.com/dwarves/"
 
-  livecheck do
-    url "https://www.bay12games.com/dwarves/older_versions.html"
-    strategy :page_match do |page|
-      match = page.match(/href="df[._-]v?(\d+(?:_\d+)+)[._-]osx\.t/i)
-      next if match.blank?
-
-      "0.#{match[1].tr("_", ".")}"
-    end
-  end
-
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
   shimscript = "#{staged_path}/df_osx/df.wrapper.sh"
+  disable! date: "2024-12-16", because: :discontinued
+
   binary shimscript, target: "dwarf-fortress"
 
   preflight do
@@ -34,7 +26,10 @@ cask "dwarf-fortress" do
     end
   end
 
-  caveats <<~EOS
-    During uninstall, your save data will be copied to /tmp/dwarf-fortress-save
-  EOS
+  caveats do
+    requires_rosetta
+    <<~EOS
+      During uninstall, your save data will be copied to /tmp/dwarf-fortress-save
+    EOS
+  end
 end

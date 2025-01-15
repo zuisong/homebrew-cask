@@ -8,10 +8,8 @@ cask "moderndeck" do
   desc "Modified version of TweetDeck with a material inspired theme"
   homepage "https://moderndeck.app/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  deprecate! date: "2024-01-09", because: :discontinued
+  disable! date: "2025-01-11", because: :discontinued
 
   auto_updates true
   depends_on macos: ">= :el_capitan"

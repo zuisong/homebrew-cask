@@ -1,5 +1,5 @@
 cask "opencore-configurator" do
-  version "2.74.1.0"
+  version "2.77.1.0"
   sha256 :no_check
 
   url "https://mackie100projects.altervista.org/apps/opencoreconf/download-new-build.php?version=last",
@@ -9,8 +9,8 @@ cask "opencore-configurator" do
   homepage "https://mackie100projects.altervista.org/opencore-configurator/"
 
   livecheck do
-    url "https://mackie100projects.altervista.org/download-opencore-configurator/"
-    regex(/OpenCore\s+Configurator\s+v?(\d+(?:\.\d+)+)/i)
+    url "https://mackie100projects.altervista.org/apps/opencoreconf/OCC/update-data-builds.xml"
+    strategy :sparkle
   end
 
   auto_updates true
@@ -18,10 +18,14 @@ cask "opencore-configurator" do
   app "OpenCore Configurator.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.altervista.mackie100projects.opencore-configurator.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/org.altervista.mackie100projects.opencore-configurator.sfl*",
     "~/Library/Application Support/org.altervista.mackie100projects.OpenCore-Configurator",
     "~/Library/Caches/org.altervista.mackie100projects.OpenCore-Configurator",
     "~/Library/HTTPStorages/org.altervista.mackie100projects.OpenCore-Configurator",
     "~/Library/Preferences/org.altervista.mackie100projects.OpenCore-Configurator.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

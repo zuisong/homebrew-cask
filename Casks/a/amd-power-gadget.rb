@@ -1,6 +1,6 @@
 cask "amd-power-gadget" do
-  version "0.7.1"
-  sha256 "0a7512ae5859848499f19518a2c6a2228cbd095c912a9dd43fb2b087953c303f"
+  version "0.7.2f1"
+  sha256 "bb7779aa295ab00c8609f438c80028c5f0ca9c63e13ab768bae21876793b0674"
 
   url "https://github.com/trulyspinach/SMCAMDProcessor/releases/download/#{version}/AMD.Power.Gadget.app.zip"
   name "AMD Power Gadget"
@@ -8,6 +8,7 @@ cask "amd-power-gadget" do
   homepage "https://github.com/trulyspinach/SMCAMDProcessor"
 
   depends_on macos: ">= :high_sierra"
+  depends_on arch: :x86_64
 
   app "AMD Power Gadget.app"
 end

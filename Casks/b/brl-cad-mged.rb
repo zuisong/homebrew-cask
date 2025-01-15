@@ -5,16 +5,16 @@ cask "brl-cad-mged" do
   url "https://downloads.sourceforge.net/brlcad/BRL-CAD%20for%20Mac%20OS%20X/#{version}/BRL-CAD%20#{version}.dmg",
       verified: "downloads.sourceforge.net/brlcad/"
   name "BRL-CAD"
-  desc "Solid modeling system"
+  desc "Solid modelling system"
   homepage "https://brlcad.org/"
 
-  livecheck do
-    url "https://sourceforge.net/projects/brlcad/rss?path=/BRL-CAD%20for%20Mac%20OS%20X"
-    regex(%r{url=.*?/BRL-CAD(?:[._-]|%20)v?(\d+(?:\.\d+)+)\.dmg}i)
-    strategy :page_match
-  end
+  disable! date: "2024-07-09", because: :discontinued
 
   depends_on cask: "xquartz"
 
   app "BRL-CAD : MGED #{version}.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

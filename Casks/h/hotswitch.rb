@@ -7,9 +7,7 @@ cask "hotswitch" do
   desc "Fast window switcher using a 2-stroke hotkey"
   homepage "https://oniatsu.github.io/HotSwitch/"
 
-  livecheck do
-    url "https://github.com/oniatsu/HotSwitch"
-  end
+  disable! date: "2024-12-16", because: :discontinued
 
   app "HotSwitch.app"
 

@@ -1,29 +1,26 @@
 cask "idafree" do
   arch arm: "arm_"
 
-  version "8.3"
-  sha256 arm:   "52fd0726640f3f5697e657d074f363c147a97b46781955339fb63fef547c8992",
-         intel: "e1c679dbf6518c4b25d86d84572aa215c998281d4f61b99affa65a9583c0ee11"
+  version "8.4.240527"
+  sha256 arm:   "dec15875d871a398088a05320ac45e1971940de279abb8e2cd57054833da18f6",
+         intel: "c4cf8b35d02b217351cad738c8aadaf0bb17aacc3e7421e6b420c5fe2451e6f5"
 
-  url "https://out7.hex-rays.com/files/#{arch}idafree#{version.no_dots}_mac.app.zip"
+  url "https://out7.hex-rays.com/files/#{arch}idafree#{version.major_minor.no_dots}_mac.app.zip"
   name "IDA Free"
   desc "Binary code analysis tool"
   homepage "https://hex-rays.com/ida-free/"
 
-  livecheck do
-    url :homepage
-    regex(/>.*?IDA\s*v?(\d+(?:\.\d+)+).*?</i)
-  end
+  disable! date: "2024-09-30", because: "requires authentication to download"
 
   depends_on macos: ">= :catalina"
 
   installer script: {
-    executable: "#{arch}idafree#{version.no_dots}_mac.app/Contents/MacOS/installbuilder.sh",
+    executable: "#{arch}idafree#{version.major_minor.no_dots}_mac.app/Contents/MacOS/installbuilder.sh",
     args:       ["--mode", "unattended", "--installpassword", ""],
   }
 
   uninstall script: {
-    executable: "/Applications/IDA Freeware #{version}/uninstall.app/Contents/MacOS/installbuilder.sh",
+    executable: "/Applications/IDA Freeware #{version.major_minor}/uninstall.app/Contents/MacOS/installbuilder.sh",
     args:       ["--mode", "unattended"],
     sudo:       true,
   }

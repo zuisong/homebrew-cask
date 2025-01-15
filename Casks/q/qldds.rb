@@ -4,17 +4,17 @@ cask "qldds" do
 
   url "https://github.com/Marginal/QLdds/releases/download/rel-#{version.no_dots}/QLdds_#{version.no_dots}.pkg"
   name "QuickLook DDS"
-  desc "QuickLook plugin for DirectDraw Surface (DDS) texture files"
+  desc "Quick Look plugin for DirectDraw Surface (DDS) texture files"
   homepage "https://github.com/Marginal/QLdds"
 
-  livecheck do
-    url :url
-    regex(/Release\s+(\d+(?:\.\d+)*)/i)
-    strategy :github_latest
-  end
+  deprecate! date: "2024-11-17", because: :unmaintained
 
   pkg "QLdds_#{version.no_dots}.pkg"
 
-  uninstall pkgutil:   "uk.org.marginal.qldds",
-            launchctl: "uk.org.marginal.qldds.mdimporter"
+  uninstall launchctl: "uk.org.marginal.qldds.mdimporter",
+            pkgutil:   "uk.org.marginal.qldds"
+
+  caveats do
+    requires_rosetta
+  end
 end

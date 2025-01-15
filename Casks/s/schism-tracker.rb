@@ -1,6 +1,6 @@
 cask "schism-tracker" do
-  version "20230906"
-  sha256 "db138eb058f82a970735a174b0fb65b1840426512ac805af121dc40118ec622f"
+  version "20241226"
+  sha256 "7fabed1f3a3deda18f16440f3ebc539484bcf2ecbff4c7b60d9beca092e8c281"
 
   url "https://github.com/schismtracker/schismtracker/releases/download/#{version}/schismtracker-#{version}-macos.zip"
   name "Schism Tracker"
@@ -8,4 +8,9 @@ cask "schism-tracker" do
   homepage "https://github.com/schismtracker/schismtracker"
 
   app "Schism Tracker.app"
+
+  zap trash: [
+    "~/Library/Application Support/Schism Tracker",
+    "~/Library/Saved Application State/org.schismtracker.SchismTracker.savedState",
+  ]
 end

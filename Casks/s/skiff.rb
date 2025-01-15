@@ -8,11 +8,7 @@ cask "skiff" do
   desc "End-to-end encrypted email, calendar, documents, and files support"
   homepage "https://skiff.com/"
 
-  livecheck do
-    url "https://github.com/skiff-org/skiff-org.github.io/tree/main/macos"
-    regex(/Skiff[\s._-]Desktop[\s._-]v?(\d+(?:\.\d+)+)\.dmg/i)
-    strategy :page_match
-  end
+  disable! date: "2024-12-16", because: :moved_to_mas
 
   auto_updates true
   depends_on macos: ">= :catalina"

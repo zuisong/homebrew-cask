@@ -1,6 +1,6 @@
 cask "vitalsource-bookshelf" do
-  version "10.3.2.2230"
-  sha256 "0e9c4dfdba71a56c8f737e64c74c90e7ff23a8346d70121f03c24dbd011423a7"
+  version "10.5.3.2801"
+  sha256 "628ca7b181932414a529680f9e0e009f0661e724de376ddc188b67c3bb9f8405"
 
   url "https://downloads.vitalbook.com/vsti/bookshelf/#{version.major_minor_patch}/mac/bookshelf/VitalSource-Bookshelf_#{version}.dmg",
       verified: "downloads.vitalbook.com/vsti/bookshelf/"
@@ -9,10 +9,11 @@ cask "vitalsource-bookshelf" do
   homepage "https://www.vitalsource.com/bookshelf-features"
 
   livecheck do
-    skip "No version information available"
+    url "https://support.vitalsource.com/api/v2/help_center/en-us/articles/360014107913"
+    regex(/href=.*?VitalSource[._-]Bookshelf[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
   app "VitalSource Bookshelf.app"
 

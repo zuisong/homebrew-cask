@@ -1,18 +1,25 @@
 cask "adobe-creative-cloud" do
   arch arm: "macarm64", intel: "osx10"
 
-  version "6.0.0.571"
-  sha256 arm:   "d1adc332344ab07ff85ecf85a94cd56977bcef937434636d63a8a805f2b7061c",
-         intel: "0f2eda378bdc30c18cff65e78d17797952695754f645fd3b72b3c43984402eed"
+  version "6.4.0.361"
+  sha256 arm:   "356cc46fb85e40405701a06acc42364395eb536dca3f49d7a6af1233f41ed4e5",
+         intel: "9fba05132eb535897fc36ad7e8612c5d9d178c7bbe0832fe7d2916567bfb88ce"
 
-  url "https://ccmdl.adobe.com/AdobeProducts/KCCC/CCD/#{version.major_minor.dots_to_underscores}/#{arch}/ACCCx#{version.dots_to_underscores}.dmg"
+  # If url breaks you can find the latest static urls - https://helpx.adobe.com/download-install/kb/creative-cloud-desktop-app-download.html
+  url "https://ccmdls.adobe.com/AdobeProducts/StandaloneBuilds/ACCC/ESD/#{version.major_minor_patch}/#{version.split(".").fourth}/#{arch}/ACCCx#{version.dots_to_underscores}.dmg"
   name "Adobe Creative Cloud"
   desc "Collection of apps and services for photography, design, video, web, and UX"
   homepage "https://www.adobe.com/creativecloud.html"
 
   livecheck do
     url "https://ffc-static-cdn.oobesaas.adobe.com/features/v3/#{arch}/ccdConfig.xml"
-    regex(/ccd\.fw\.update\.greenline\.latest.*?"version".*?"(\d+(?:\.\d+)+)"/i)
+    strategy :xml do |xml|
+      item = xml.elements["//feature-entry[@id='ccd.fw.update.greenline.latest']/data"]&.text&.strip
+      next if item.blank?
+
+      json = Homebrew::Livecheck::Strategy::Json.parse_json(item)
+      json["version"]
+    end
   end
 
   auto_updates true
@@ -44,9 +51,9 @@ cask "adobe-creative-cloud" do
             },
             launchctl:    [
               "Adobe_Genuine_Software_Integrity_Service",
-              "com.adobe.AdobeCreativeCloud",
               "com.adobe.acc.installer",
               "com.adobe.acc.installer.v2",
+              "com.adobe.AdobeCreativeCloud",
               "com.adobe.ccxprocess",
             ],
             quit:         "com.adobe.acc.AdobeCreativeCloud",
@@ -78,15 +85,14 @@ cask "adobe-creative-cloud" do
             ]
 
   zap trash: [
-        "/Users/Shared/Adobe/Installer",
-        "/Users/Shared/Adobe/OOBE",
         "/Library/*/com.adobe.acc*",
-        "/Library/Application Support/Adobe/*[Ii]nstall*",
         "/Library/Application Support/Adobe/ADCRefs",
         "/Library/Application Support/Adobe/Adobe Desktop Common",
+        "/Library/Application Support/Adobe/*[Ii]nstall*",
         "/Library/Application Support/Adobe/Adobe PCD",
         "/Library/Application Support/Adobe/AdobeApplicationManager",
         "/Library/Application Support/Adobe/AdobeGC*",
+        "/Library/Application Support/Adobe/caps",
         "/Library/Application Support/Adobe/CEP/extensions/CC_*",
         "/Library/Application Support/Adobe/CEP/extensions/com.adobe.ccx.*",
         "/Library/Application Support/Adobe/Creative Cloud Libraries",
@@ -95,10 +101,11 @@ cask "adobe-creative-cloud" do
         "/Library/Application Support/Adobe/PCF",
         "/Library/Application Support/Adobe/SL*",
         "/Library/Application Support/Adobe/Vulcan",
-        "/Library/Application Support/Adobe/caps",
         "/Library/Application Support/regid.*.com.adobe",
         "/Library/Logs/CreativeCloud",
         "/Library/Preferences/com.adobe.headlights*.plist",
+        "/Users/Shared/Adobe/Installer",
+        "/Users/Shared/Adobe/OOBE",
         "~/Creative Cloud Files",
         "~/Creative Cloud Files/Icon?",
         "~/Library/*/Adobe/CoreSync",
@@ -121,7 +128,6 @@ cask "adobe-creative-cloud" do
         "~/Library/Logs/PDApp*.log",
         "~/Library/Preferences/Adobe/.[A-Z0-9]???????????",
         "~/Library/Preferences/com.adobe.crashreporter.plist",
-
       ],
       rmdir: [
         "/Users/Shared/Adobe",
@@ -130,8 +136,4 @@ cask "adobe-creative-cloud" do
         "~/Library/Application Support/Adobe",
         "~/Library/Logs/Adobe",
       ]
-
-  caveats do
-    requires_rosetta
-  end
 end

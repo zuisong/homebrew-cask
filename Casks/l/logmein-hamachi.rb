@@ -5,14 +5,10 @@ cask "logmein-hamachi" do
   url "https://secure.logmein.com/LogMeInHamachi.zip",
       verified: "logmein.com/"
   name "LogMeIn Hamachi"
+  desc "Hosted VPN service that lets you securely extend LAN-like networks"
   homepage "https://vpn.net/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist do |items|
-      items["com.logmein.hamachiinstaller"].short_version
-    end
-  end
+  deprecate! date: "2024-07-07", because: :unmaintained
 
   installer manual: "LogMeInHamachiInstaller.app"
 

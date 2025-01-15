@@ -8,9 +8,9 @@ cask "darwindumper" do
   homepage "https://bitbucket.org/blackosx/darwindumper"
 
   livecheck do
-    url "https://bitbucket.org/blackosx/darwindumper/wiki/DD_AppCast.xml"
+    url "https://bytebucket.org/blackosx/darwindumper/wiki/DD_AppCast.xml"
     strategy :sparkle do |item|
-      item.short_version.delete_prefix("r").to_s
+      item.short_version.delete_prefix("r")
     end
   end
 
@@ -22,4 +22,8 @@ cask "darwindumper" do
     "~/Library/Preferences/org.tom.DarwinDumper.plist",
     "~/Library/Saved Application State/com.DarwinDumper.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

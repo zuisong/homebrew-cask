@@ -1,6 +1,6 @@
 cask "nozbe" do
-  version "2023.33"
-  sha256 "7a2b444d9f8ac25983832d4b78e2b157168c1c3bd9faa6a21afea9cc3c53f407"
+  version "2025.01"
+  sha256 "d4151f8c37d1159b709f3e207f8aa6bea6c71902f11394a731311eaa402812cb"
 
   url "https://builds.nozbe.com/mac/#{version}/Nozbe.app.zip"
   name "Nozbe"
@@ -8,8 +8,10 @@ cask "nozbe" do
   homepage "https://nozbe.com/"
 
   livecheck do
-    url "https://nozbe.help/general/release-notes"
-    regex(/id=["']newest["'][^>]*?>\s*version\s*(\d+(?:\.\d+)+)/i)
+    url "https://builds.nozbe.com/updates.mac.json"
+    strategy :json do |json|
+      json["currentRelease"]
+    end
   end
 
   depends_on macos: ">= :big_sur"

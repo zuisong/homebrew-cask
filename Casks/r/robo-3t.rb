@@ -8,6 +8,8 @@ cask "robo-3t" do
   desc "MongoDB management tool"
   homepage "https://robomongo.org/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Robo 3T.app"
 
   uninstall quit: "Robo 3T"
@@ -22,6 +24,6 @@ cask "robo-3t" do
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

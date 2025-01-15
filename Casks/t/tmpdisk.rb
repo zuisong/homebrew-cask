@@ -1,11 +1,13 @@
 cask "tmpdisk" do
-  version "2.0.6"
-  sha256 "11f279ac2d142be90f4042a92f4f7da4b437bed80ac6963ecf68fc83524dd0b5"
+  version "2.1.0"
+  sha256 "509ad4ecd945dbf438ec29a2f1685a4974ade31f0786147cec424ee2d71e14de"
 
   url "https://github.com/imothee/tmpdisk/releases/download/v#{version}/TmpDisk.dmg"
   name "TmpDisk"
   desc "Ram disk management"
   homepage "https://github.com/imothee/tmpdisk"
+
+  depends_on macos: ">= :big_sur"
 
   app "TmpDisk.app"
 

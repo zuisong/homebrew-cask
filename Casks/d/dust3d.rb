@@ -5,7 +5,7 @@ cask "dust3d" do
   url "https://github.com/huxingyi/dust3d/releases/download/#{version}/dust3d-#{version}.dmg",
       verified: "github.com/huxingyi/dust3d/"
   name "Dust3D"
-  desc "Open-source 3D modeling software"
+  desc "Open-source 3D modelling software"
   homepage "https://dust3d.org/"
 
   # TODO: Update this regex to only match stable versions once 1.0.0 stabilizes:
@@ -15,7 +15,13 @@ cask "dust3d" do
     regex(/^v?(\d+(?:\.\d+)+(?:-rc\.?\d*)?)$/i)
   end
 
+  depends_on macos: ">= :high_sierra"
+
   app "dust3d-#{version}.app"
 
   zap trash: "~/Library/Saved Application State/com.yourcompany.dust3d.savedState"
+
+  caveats do
+    requires_rosetta
+  end
 end

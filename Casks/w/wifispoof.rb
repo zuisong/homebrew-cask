@@ -1,8 +1,8 @@
 cask "wifispoof" do
-  version "3.9.2"
-  sha256 "a29ec5485bd424ce34d14571947ae5314a59da47aee00656ea4e1aa0ce781b43"
+  version "4.0.10"
+  sha256 "921bde5b666679afecc4a36435909c6f1e3f56c50b486ef8f96a0a1c8b21641b"
 
-  url "https://sweetpproductions.com/products/wifispoof#{version.major}/WiFiSpoof#{version.major}.dmg",
+  url "https://sweetpproductions.com/products/wifispoof#{version.major}/WiFiSpoof.dmg",
       verified: "sweetpproductions.com/products/"
   name "WiFiSpoof"
   desc "Change your computer's MAC address"
@@ -14,7 +14,7 @@ cask "wifispoof" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :big_sur"
 
   app "WiFiSpoof.app"
 

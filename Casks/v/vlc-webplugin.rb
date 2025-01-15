@@ -7,9 +7,7 @@ cask "vlc-webplugin" do
   desc "Web browser plugin"
   homepage "https://www.videolan.org/vlc/download-macosx.html"
 
-  internet_plugin "VLC Plugin.plugin"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  internet_plugin "VLC Plugin.plugin"
 end

@@ -12,7 +12,7 @@ cask "lightproxy" do
 
   uninstall_postflight do
     stdout, * = system_command "/usr/bin/security",
-                               args: ["find-certificate", "-a", "-c", "LigthProxy", "-Z"],
+                               args: ["find-certificate", "-a", "-c", "LightProxy", "-Z"],
                                sudo: true
     hashes = stdout.lines.grep(/^SHA-256 hash:/) { |l| l.split(":").second.strip }
     hashes.each do |h|
@@ -20,5 +20,9 @@ cask "lightproxy" do
                      args: ["delete-certificate", "-Z", h],
                      sudo: true
     end
+  end
+
+  caveats do
+    requires_rosetta
   end
 end

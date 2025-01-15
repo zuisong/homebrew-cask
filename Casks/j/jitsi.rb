@@ -5,14 +5,27 @@ cask "jitsi" do
   url "https://github.com/jitsi/jitsi/releases/download/Jitsi-#{version.major_minor}/jitsi-#{version}.dmg",
       verified: "github.com/jitsi/jitsi/"
   name "Jitsi"
-  homepage "https://jitsi.org/"
+  desc "Open-source video calls and chat"
+  homepage "https://desktop.jitsi.org/"
 
   livecheck do
     url "https://download.jitsi.org/jitsi/macosx/sparkle/updates.xml"
-    strategy :sparkle do |item|
-      item.url[/-(\d+(?:\.\d+)*)\.dmg/i, 1]
+    regex(/-(\d+(?:\.\d+)*)\.dmg/i)
+    strategy :sparkle do |item, regex|
+      item.url[regex, 1]
     end
   end
 
   app "Jitsi.app"
+
+  zap trash: [
+    "~/Library/Application Support/Jitsi",
+    "~/Library/Caches/Jitsi",
+    "~/Library/Logs/Jitsi",
+    "~/Library/Preferences/org.jitsi.jitsi.plist",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

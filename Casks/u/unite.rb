@@ -1,6 +1,6 @@
 cask "unite" do
-  version "4.6"
-  sha256 "e8f81d7d88a9903b19023e1bb473caba3c7e28b7d2639b77bf8771a2602f2bad"
+  version "5.3.0.1"
+  sha256 "702ebb71368472f05562e738edc8e0192c7847bc17be1327cd44b728c79995fe"
 
   url "https://bzgdownloads.s3.amazonaws.com/Unite/Unite+#{version}.zip",
       verified: "bzgdownloads.s3.amazonaws.com/Unite/"
@@ -14,14 +14,20 @@ cask "unite" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :monterey"
 
   app "Unite.app"
 
   zap trash: [
-        "~/Library/Application Support/Unite",
+        "~/Library/Application Scripts/group.BZG.unite.sharedData",
         "~/Library/Application Support/com.BZG.unite.*",
+        "~/Library/Application Support/Unite",
+        "~/Library/Caches/com.BZG.unite",
+        "~/Library/Cookies/com.BZG.unite.3.binarycookies",
+        "~/Library/Group Containers/group.BZG.unite.sharedData",
+        "~/Library/HTTPStorages/com.BZG.unite*",
         "~/Library/Preferences/com.BZG.unite.*",
+        "~/Library/Saved Application State/com.BZG.unite*.savedState",
       ],
       rmdir: "/Users/Shared/Unite"
 end

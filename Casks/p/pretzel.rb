@@ -1,6 +1,6 @@
 cask "pretzel" do
-  version "2.12.5"
-  sha256 "af086a4be02da8600366a8f330f822bc7c9231dbd89d882e75fa3025d90e3bcf"
+  version "2.12.6"
+  sha256 "eb43584c57a050bdecbf12ae61c28e2714b19f713ff309726eab02ff9b6e4bb5"
 
   url "https://download.pretzel.rocks/Pretzel-#{version}-universal-mac.zip"
   name "Pretzel"
@@ -11,6 +11,8 @@ cask "pretzel" do
     url "https://download.pretzel.rocks/latest-mac.yml"
     strategy :electron_builder
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Pretzel.app"
 

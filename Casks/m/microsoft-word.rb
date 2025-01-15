@@ -47,9 +47,17 @@ cask "microsoft-word" do
       skip "Legacy version"
     end
   end
-  on_monterey :or_newer do
-    version "16.78.23100802"
-    sha256 "c390b3261fd0a76b0d24f3a1adb6f49e0508753d9a58a3bd11ad80a29e02e232"
+  on_monterey do
+    version "16.89.24091630"
+    sha256 "e064013cf26dc3742f07436fae1bb1a37fdd21fc4fb09640c0de0fc977f4ffd3"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_ventura :or_newer do
+    version "16.93.25011212"
+    sha256 "ce2ff52c6d82bf6955051ec9a5fcdb6fbbcd85a55dde7da8dc7fcc9f271d598a"
 
     livecheck do
       url "https://go.microsoft.com/fwlink/p/?linkid=525134"
@@ -57,11 +65,10 @@ cask "microsoft-word" do
     end
   end
 
-  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Word_#{version}_Installer.pkg",
-      verified: "officecdnmac.microsoft.com/"
+  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Word_#{version}_Installer.pkg"
   name "Microsoft Word"
   desc "Word processor"
-  homepage "https://products.office.com/en-US/word"
+  homepage "https://www.microsoft.com/en-US/microsoft-365/word"
 
   auto_updates true
   conflicts_with cask: [
@@ -79,12 +86,12 @@ cask "microsoft-word" do
         },
       ]
 
-  uninstall pkgutil:   [
+  uninstall launchctl: "com.microsoft.office.licensingV2.helper",
+            quit:      "com.microsoft.autoupdate2",
+            pkgutil:   [
               "com.microsoft.package.Microsoft_Word.app",
               "com.microsoft.pkg.licensing",
-            ],
-            launchctl: "com.microsoft.office.licensingV2.helper",
-            quit:      "com.microsoft.autoupdate2"
+            ]
 
   zap trash: [
     "~/Library/Application Scripts/com.microsoft.Word",

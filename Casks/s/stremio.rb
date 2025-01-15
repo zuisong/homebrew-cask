@@ -1,6 +1,6 @@
 cask "stremio" do
-  version "4.4.164"
-  sha256 "6c29c672e7d1f3181de3275f7c73898e203c121ccb85c8e229955bc80c905671"
+  version "4.4.168"
+  sha256 "4f140302a2c283a15a4740bfa4d983b6cc373e9375336dd69de274ae4b18c1ce"
 
   url "https://dl.strem.io/shell-osx/v#{version}/Stremio+#{version}.dmg"
   name "Stremio"
@@ -22,4 +22,8 @@ cask "stremio" do
     "~/Library/Preferences/com.stremio.Stremio.plist",
     "~/Library/Saved Application State/com.smartcodeltd.stremio.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

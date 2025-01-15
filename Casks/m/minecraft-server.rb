@@ -1,6 +1,6 @@
 cask "minecraft-server" do
-  version "1.20.2,5b868151bd02b41319f54c8d4061b8cae84e665c"
-  sha256 "1daee4838569ad46e41f0a6f459684c500c7f2685356a40cfb7e838d6e78eae8"
+  version "1.21.4,4707d00eb834b446575d89a61a11b5d548d8c001"
+  sha256 "1066970b09e9c671844572291c4a871cc1ac2b85838bf7004fa0e778e10f1358"
 
   url "https://launcher.mojang.com/v#{version.major}/objects/#{version.csv.second}/server.jar",
       verified: "launcher.mojang.com/"
@@ -9,10 +9,10 @@ cask "minecraft-server" do
   homepage "https://www.minecraft.net/en-us/"
 
   livecheck do
-    url "https://www.minecraft.net/en-us/download/server/"
-    strategy :page_match do |page|
-      page.scan(%r{href=.*?/objects/(\h+)/server\.jar[^>]*>minecraft[_-]server[._-]v?(\d+(?:\.\d+)*)\.jar}i)
-          .map { |match| "#{match[1]},#{match[0]}" }
+    url "https://www.minecraft.net/en-us/download/server"
+    regex(%r{href=.*?/objects/(\h+)/server\.jar[^>]*>minecraft[_-]server[._-]v?(\d+(?:\.\d+)*)\.jar}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
     end
   end
 
@@ -42,7 +42,7 @@ cask "minecraft-server" do
   end
 
   uninstall_preflight do
-    FileUtils.rm_f eula_file
+    FileUtils.rm(eula_file) if eula_file.exist?
   end
 
   zap trash: config_dir

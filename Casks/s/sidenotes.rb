@@ -1,6 +1,6 @@
 cask "sidenotes" do
-  version "1.4.12"
-  sha256 "70b044ae078f0aee7a5d57c940433fda658b49deffa2a5d4a75752169a6d6d58"
+  version "1.4.16"
+  sha256 "1d87191540e9e0a59f09bed59eaebd15f2201462ac2640138d1c31d77ee8d644"
 
   url "https://www.apptorium.com/public/products/sidenotes/releases/SideNotes-#{version}.zip"
   name "SideNotes"

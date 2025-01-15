@@ -4,13 +4,15 @@ cask "unexpectedly" do
 
   url "http://s.sudre.free.fr/Software/files/Unexpectedly.dmg"
   name "Unexpectedly"
-  desc "Browse and visualize the reports from crashes"
+  desc "Browse and visualise the reports from crashes"
   homepage "http://s.sudre.free.fr/Software/Unexpectedly/about.html"
 
   livecheck do
     url :homepage
     regex(%r{Version</b>:</td><td>(\d+(?:\.\d+)*\w)}i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Unexpectedly.app"
 

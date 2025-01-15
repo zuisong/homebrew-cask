@@ -7,10 +7,7 @@ cask "skitch" do
   desc "Screen capture tool with mark up and sharing features"
   homepage "https://evernote.com/products/skitch"
 
-  livecheck do
-    url "https://evernote.s3.amazonaws.com/skitch/mac/release/skitch-appcast.xml"
-    strategy :sparkle, &:short_version
-  end
+  disable! date: "2024-06-25", because: :no_longer_available
 
   auto_updates true
 

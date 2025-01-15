@@ -47,9 +47,17 @@ cask "microsoft-powerpoint" do
       skip "Legacy version"
     end
   end
-  on_monterey :or_newer do
-    version "16.78.23100802"
-    sha256 "e980f4d90fe29df26646bff88ba179b1ea1e6fddb5ee93a07bf35abb5226aef2"
+  on_monterey do
+    version "16.89.24091630"
+    sha256 "44801ae2e12318f6f8982da6fabb1c7c1d79fb38cc464fecfd60189aa36e9555"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_ventura :or_newer do
+    version "16.93.25011212"
+    sha256 "45d0e5394ee4f60b3d4ceada287e3195e2a0eaa96a25aa99b6d4df95caa12f7d"
 
     livecheck do
       url "https://go.microsoft.com/fwlink/p/?linkid=525136"
@@ -57,11 +65,10 @@ cask "microsoft-powerpoint" do
     end
   end
 
-  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_PowerPoint_#{version}_Installer.pkg",
-      verified: "officecdnmac.microsoft.com/"
+  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_PowerPoint_#{version}_Installer.pkg"
   name "Microsoft PowerPoint"
   desc "Presentation software"
-  homepage "https://products.office.com/en-US/powerpoint"
+  homepage "https://www.microsoft.com/en-US/microsoft-365/powerpoint"
 
   auto_updates true
   conflicts_with cask: [
@@ -79,18 +86,18 @@ cask "microsoft-powerpoint" do
         },
       ]
 
-  uninstall pkgutil:   [
+  uninstall launchctl: "com.microsoft.office.licensingV2.helper",
+            quit:      "com.microsoft.autoupdate2",
+            pkgutil:   [
               "com.microsoft.package.Microsoft_PowerPoint.app",
               "com.microsoft.pkg.licensing",
             ],
-            delete:    "/Applications/Microsoft PowerPoint.app",
-            launchctl: "com.microsoft.office.licensingV2.helper",
-            quit:      "com.microsoft.autoupdate2"
+            delete:    "/Applications/Microsoft PowerPoint.app"
 
   zap trash: [
-    "~/Library/Application Scripts/com.microsoft.Powerpoint",
+    "~/Library/Application Scripts/com.microsoft.Powerpoint*",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.powerpoint.sfl*",
-    "~/Library/Containers/com.microsoft.Powerpoint",
+    "~/Library/Containers/com.microsoft.Powerpoint*",
     "~/Library/Preferences/com.microsoft.Powerpoint.plist",
     "~/Library/Saved Application State/com.microsoft.Powerpoint.savedState",
   ]

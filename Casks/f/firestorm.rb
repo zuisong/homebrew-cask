@@ -1,19 +1,17 @@
 cask "firestorm" do
-  version "6.6.14.69596"
-  sha256 "b514a953364651c3aa9162d9c51127a64bfc163bde6d88b9f1dbd7f17132d1fe"
+  version "7.1.11.76496"
+  sha256 "73ca55288db2fbb28b91167a58044b61938473c11091f6e877c9a9358c42672e"
 
-  url "https://downloads.firestormviewer.org/mac/Phoenix-Firestorm-Releasex64-#{version.dots_to_hyphens}.dmg"
+  url "https://downloads.firestormviewer.org/release/mac/Phoenix-Firestorm-Releasex64_AVX2-#{version.dots_to_hyphens}.dmg"
   name "Phoenix Firestorm viewer for Second Life"
   desc "Viewer for accessing Virtual Worlds"
   homepage "https://www.firestormviewer.org/"
 
   livecheck do
-    url "https://www.firestormviewer.org/mac/"
-    strategy :page_match do |page|
-      v = page[%r{href=.*?/Phoenix-Firestorm-Releasex64-(\d+(?:-\d+)*)\.dmg}i, 1]
-      v.tr("-", ".")
-    end
+    skip "No version information available"
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Firestorm-Releasex64.app"
 
@@ -24,13 +22,7 @@ cask "firestorm" do
     "~/Library/Preferences/Firestorm.plist",
   ]
 
-  caveats <<~EOS
-    This version does not contain the Havok engine (does not matter if
-    you are not a content creator).
-
-    Most problems that crop up during updates can be resolved or fixed by
-    performing a clean install. For instructions, see:
-
-      https://wiki.phoenixviewer.com/doku.php?id=fs_clean_reinstall
-  EOS
+  caveats do
+    requires_rosetta
+  end
 end

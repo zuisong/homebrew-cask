@@ -1,6 +1,6 @@
 cask "private-internet-access" do
-  version "3.5.1-07760"
-  sha256 "f7138e0dcec927297e1252419f509f07d436211a25db9dcd68e55b026ab0b48b"
+  version "3.6.1-08339"
+  sha256 "cd7cd8aff76bd6100088a1ca9b2318d41f88aeecaa2df0c20e1794f473e3bfd1"
 
   url "https://installers.privateinternetaccess.com/download/pia-macos-#{version}.zip"
   name "Private Internet Access"
@@ -20,14 +20,14 @@ cask "private-internet-access" do
     sudo:       true,
   }
 
-  uninstall quit:      "com.privateinternetaccess.vpn",
+  uninstall launchctl: [
+              "com.privateinternetaccess.vpn.daemon",
+              "com.privateinternetaccess.vpn.installhelper",
+            ],
+            quit:      "com.privateinternetaccess.vpn",
             delete:    [
               "/Applications/Private Internet Access.app",
               "/usr/local/bin/piactl",
-            ],
-            launchctl: [
-              "com.privateinternetaccess.vpn.installhelper",
-              "com.privateinternetaccess.vpn.daemon",
             ]
 
   # The uninstall script should only be used with --zap because it removes all preference files

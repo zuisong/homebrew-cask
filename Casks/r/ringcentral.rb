@@ -1,7 +1,7 @@
 cask "ringcentral" do
-  arch arm: "-arm"
+  arch arm: "-arm64"
 
-  version "23.3.31"
+  version "25.1.10"
   sha256 :no_check
 
   url "https://app.ringcentral.com/download/RingCentral#{arch}.pkg"
@@ -10,20 +10,23 @@ cask "ringcentral" do
   homepage "https://www.ringcentral.com/download.html"
 
   livecheck do
-    url "https://app.ringcentral.com/download/latest-mac.yml"
-    strategy :electron_builder
+    url "https://support.ringcentral.com/release-notes/ringex/desktop-webapp.html"
+    regex(/Version[\s\u00A0]+v?(\d+(?:\.\d+)+)/i)
   end
+
+  auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   pkg "RingCentral#{arch}.pkg"
 
-  uninstall delete:  "/Applications/RingCentral.app",
-            quit:    "RingCentral",
+  uninstall quit:    "RingCentral",
             pkgutil: "com.ringcentral.glip"
 
   zap trash: [
-    "~/Library/Application Support/RingCentral",
-    "~/Library/Logs/RingCentral",
-    "~/Library/Preferences/com.ringcentral.glip.plist",
-    "~/Library/Saved Application State/com.ringcentral.glip.savedState",
-  ]
+        "~/Library/Application Support/RingCentral",
+        "~/Library/Logs/RingCentral",
+        "~/Library/Preferences/com.ringcentral.glip.plist",
+        "~/Library/Saved Application State/com.ringcentral.glip.savedState",
+      ],
+      rmdir: "~/Documents/RingCentral"
 end

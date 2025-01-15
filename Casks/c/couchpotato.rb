@@ -8,11 +8,13 @@ cask "couchpotato" do
   desc "Automatic Movie Downloading via NZBs & Torrents"
   homepage "https://couchpota.to/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "CouchPotato.app"
 
   zap trash: "~/Library/Application Support/CouchPotato"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

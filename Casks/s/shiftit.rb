@@ -7,6 +7,8 @@ cask "shiftit" do
   desc "Tool to manage the size and position of windows"
   homepage "https://github.com/fikovnik/ShiftIt/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   auto_updates true
 
   app "ShiftIt.app"
@@ -18,6 +20,6 @@ cask "shiftit" do
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

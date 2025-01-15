@@ -6,10 +6,10 @@ cask "mds" do
       verified: "twocanoes-software-updates.s3.amazonaws.com/"
   name "MDS"
   desc "Deploy Intel and Apple Silicon Macs in Seconds"
-  homepage "https://twocanoes.com/products/mac/mac-deploy-stick/"
+  homepage "https://twocanoes.com/products/mac/mds/"
 
   livecheck do
-    url "https://twocanoes.com/products/mac/mac-deploy-stick/history/"
+    url "https://twocanoes.com/products/mac/mds/history/"
     regex(%r{/MDS_Build-(\d+)_Version-(\d+(?:[._-]\d+)*)\.dmg}i)
     strategy :page_match do |page, regex|
       match = page.match(regex)
@@ -21,16 +21,16 @@ cask "mds" do
 
   pkg "MDS.pkg"
 
-  uninstall pkgutil:   "com.twocanoes.pkg.MDS",
-            launchctl: "com.mds-micromdm"
+  uninstall launchctl: "com.mds-micromdm",
+            pkgutil:   "com.twocanoes.pkg.MDS"
 
   zap trash: [
-    "/usr/local/mds-micromdm",
-    "~/Library/Application Support/MDS",
-    "~/Library/Application Support/com.twocanoes.mds.sync",
-    "~/Library/Logs/com.twocanoes.mds.log",
-    "~/Library/Preferences/com.apple.imdsmsrecordstore.plist",
     "/Library/LaunchDaemons/com.twocanoes.mdshelpertool.plist",
     "/Library/PrivilegedHelperTools/com.twocanoes.mdshelpertool",
+    "/usr/local/mds-micromdm",
+    "~/Library/Application Support/com.twocanoes.mds.sync",
+    "~/Library/Application Support/MDS",
+    "~/Library/Logs/com.twocanoes.mds.log",
+    "~/Library/Preferences/com.apple.imdsmsrecordstore.plist",
   ]
 end

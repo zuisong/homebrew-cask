@@ -1,6 +1,6 @@
 cask "linphone" do
-  version "5.1.2"
-  sha256 "83880a91eb06d7270482136ba2b1c36cb07a53698724260ccaf3a01f4e3ca09a"
+  version "5.2.6"
+  sha256 "52bae07b0daf8f0e8cd8bba4ce7a2e38a9dc41d1ff8069e727fc4afd221dfc1f"
 
   url "https://download.linphone.org/releases/macosx/app/Linphone-#{version}-mac.dmg"
   name "Linphone"
@@ -12,6 +12,8 @@ cask "linphone" do
     regex(/Linphone[._-]v?(\d+(?:\.\d+)+)[._-]mac\.dmg/i)
   end
 
+  depends_on macos: ">= :mojave"
+
   app "Linphone.app"
 
   zap trash: [
@@ -22,4 +24,8 @@ cask "linphone" do
     "~/Library/Preferences/linphone",
     "~/Library/Saved Application State/com.belledonnecommunications.linphone.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

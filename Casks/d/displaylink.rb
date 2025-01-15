@@ -5,6 +5,10 @@ cask "displaylink" do
 
     url "https://www.synaptics.com/sites/default/files/exe_files/#{version.csv.second}/DisplayLink%20USB%20Graphics%20Software%20for%20Mac%20OS%20X%20and%20macOS#{version.csv.first}-EXE.dmg"
 
+    livecheck do
+      skip "Legacy version"
+    end
+
     pkg "DisplayLink Software Installer.pkg"
   end
   on_high_sierra do
@@ -12,6 +16,10 @@ cask "displaylink" do
     sha256 "1ac9093f8113af8c35d6f3ff5b1ae3f119a5aff0d5309d75c7a1742f159184b5"
 
     url "https://www.synaptics.com/sites/default/files/exe_files/#{version.csv.second}/DisplayLink%20USB%20Graphics%20Software%20for%20macOS#{version.csv.first}-EXE.dmg"
+
+    livecheck do
+      skip "Legacy version"
+    end
 
     pkg "DisplayLink Software Installer.pkg"
   end
@@ -21,6 +29,10 @@ cask "displaylink" do
 
     url "https://www.synaptics.com/sites/default/files/exe_files/#{version.csv.second}/DisplayLink%20USB%20Graphics%20Software%20for%20macOS#{version.csv.first}-EXE.dmg"
 
+    livecheck do
+      skip "Legacy version"
+    end
+
     pkg "DisplayLink Software Installer.pkg"
   end
   on_catalina do
@@ -29,13 +41,37 @@ cask "displaylink" do
 
     url "https://www.synaptics.com/sites/default/files/exe_files/#{version.csv.second}/DisplayLink%20Manager%20Graphics%20Connectivity#{version.csv.first}-EXE.pkg"
 
+    livecheck do
+      skip "Legacy version"
+    end
+
     pkg "DisplayLink Manager Graphics Connectivity#{version.csv.first}-EXE.pkg"
   end
-  on_big_sur :or_newer do
+  on_big_sur do
     version "1.9,2023-07"
     sha256 "cd7f7c7c313b0699bfa187f7112a45e5c5441264447b381569839318676208aa"
 
     url "https://www.synaptics.com/sites/default/files/exe_files/#{version.csv.second}/DisplayLink%20Manager%20Graphics%20Connectivity#{version.csv.first}-EXE.pkg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+
+    pkg "DisplayLink Manager Graphics Connectivity#{version.csv.first}-EXE.pkg"
+  end
+  on_monterey :or_newer do
+    version "1.11,2024-10"
+    sha256 "e154588f340aefe887d10e3566703ac381592eefc0175b7f1a53569fcc315a3f"
+
+    url "https://www.synaptics.com/sites/default/files/exe_files/#{version.csv.second}/DisplayLink%20Manager%20Graphics%20Connectivity#{version.csv.first}-EXE.pkg"
+
+    livecheck do
+      url "https://www.synaptics.com/products/displaylink-graphics/downloads/macos"
+      regex(%r{href=.*?/(\d+(?:[.-]\d+)+)/DisplayLink%20Manager%20Graphics%20Connectivityv?(\d+(?:\.\d+)+).*?\.txt}i)
+      strategy :page_match do |page, regex|
+        page.scan(regex).map { |match| "#{match[1]},#{match[0]}" }
+      end
+    end
 
     pkg "DisplayLink Manager Graphics Connectivity#{version.csv.first}-EXE.pkg"
   end
@@ -44,23 +80,14 @@ cask "displaylink" do
   desc "Drivers for DisplayLink docks, adapters and monitors"
   homepage "https://www.synaptics.com/products/displaylink-graphics"
 
-  livecheck do
-    skip "No version information available"
-  end
-
-  uninstall pkgutil:   "com.displaylink.*",
-            # 'kextunload -b com.displaylink.driver.DisplayLinkDriver' causes kernel panic
-            # kext:      [
-            #              'com.displaylink.dlusbncm'
-            #              'com.displaylink.driver.DisplayLinkDriver',
-            #            ],
-            launchctl: [
+  uninstall launchctl: [
               "73YQY62QM3.com.displaylink.DisplayLinkAPServer",
               "com.displaylink.displaylinkmanager",
-              "com.displaylink.useragent-prelogin",
               "com.displaylink.useragent",
+              "com.displaylink.useragent-prelogin",
             ],
             quit:      "DisplayLinkUserAgent",
+            pkgutil:   "com.displaylink.*",
             delete:    [
               "/Applications/DisplayLink",
               "/Library/LaunchAgents/com.displaylink.useragent-prelogin.plist",

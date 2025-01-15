@@ -7,10 +7,12 @@ cask "tomatobar" do
   desc "Menu bar pomodoro timer"
   homepage "https://github.com/ivoronin/TomatoBar"
 
+  depends_on macos: ">= :big_sur"
+
   app "TomatoBar.app"
 
   zap trash: [
-    "~/Library/Containers/com.github.ivoronin.TomatoBar",
     "~/Library/Application Scripts/com.github.ivoronin.TomatoBar",
+    "~/Library/Containers/com.github.ivoronin.TomatoBar",
   ]
 end

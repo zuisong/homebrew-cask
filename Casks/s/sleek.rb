@@ -1,8 +1,11 @@
 cask "sleek" do
-  version "1.3.1"
-  sha256 "38bfccfbeb13b42d7b4831aed175158fcc046a66b834ba0b0949700251c46487"
+  arch arm: "arm64", intel: "x64"
 
-  url "https://github.com/ransome1/sleek/releases/download/v#{version}/sleek-#{version}-mac.dmg"
+  version "2.0.15"
+  sha256  arm:   "fcc407071edba351969e0e493c46bccf231d588a6540a4107dff1dfeebe5d97d",
+          intel: "e1ad5322a608915125cfb27fc9716a390e7d09a41bb766f48233e30190ac85d6"
+
+  url "https://github.com/ransome1/sleek/releases/download/v#{version}/sleek-#{version}-mac-#{arch}.dmg"
   name "sleek"
   desc "Todo manager based on the todo.txt syntax"
   homepage "https://github.com/ransome1/sleek"
@@ -16,7 +19,7 @@ cask "sleek" do
 
   zap trash: [
     "~/Library/Application Support/sleek",
-    "~/Library/Preferences/RobinAhle.sleektodomanager.plist",
-    "~/Library/Saved Application State/RobinAhle.sleektodomanager.savedState",
+    "~/Library/Preferences/com.todotxt.sleek.plist",
+    "~/Library/Saved Application State/com.todotxt.sleek.savedState",
   ]
 end

@@ -1,6 +1,6 @@
 cask "dropdmg" do
-  version "3.6.6"
-  sha256 "efedd81e5dba0538647234a8eeda8d9fef223a7991cc0e5a93f076dd2ea520fd"
+  version "3.6.8"
+  sha256 "55751ac3f98e30c51fc769221483bcf7ae1022dc46f4726fb86458482598f4d0"
 
   url "https://c-command.com/downloads/DropDMG-#{version}.dmg"
   name "DropDMG"
@@ -11,6 +11,8 @@ cask "dropdmg" do
     url :homepage
     regex(%r{href=.*?/DropDMG[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "DropDMG.app"
 

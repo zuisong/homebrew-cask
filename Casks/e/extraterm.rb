@@ -1,6 +1,6 @@
 cask "extraterm" do
-  version "0.73.0"
-  sha256 "9333c0ced5a9b1950e5cb204d380deae00e7b562a2527af8bdb0d47fc8c975f2"
+  version "0.80.0"
+  sha256 "0648226fd4bbd358d2d0cb189b8ea3c4e37cac05bef1bccb78ce730b3ead3783"
 
   url "https://github.com/sedwards2009/extraterm/releases/download/v#{version}/ExtratermQt_#{version}.dmg",
       verified: "github.com/sedwards2009/extraterm/"
@@ -8,20 +8,21 @@ cask "extraterm" do
   desc "Swiss army chainsaw of terminal emulators"
   homepage "https://extraterm.org/"
 
-  # As of writing, upstream marks all releases on GitHub as "pre-release".
-  # This should be updated to use the `GithubLatest` strategy if/when stable
-  # versions become available.
   livecheck do
-    url "https://github.com/sedwards2009/extraterm/releases"
-    regex(%r{href=["']?[^"' >]*?/tag/v?(\d+(?:\.\d+)+)["' >]}i)
-    strategy :page_match
+    url :url
+    strategy :github_latest
   end
+
+  depends_on macos: ">= :catalina"
 
   app "ExtratermQt.app"
 
   zap trash: [
     "~/Library/Application Support/extraterm",
-    "~/Library/Preferences/com.electron.extraterm.helper.plist",
-    "~/Library/Preferences/com.electron.extraterm.plist",
+    "~/Library/Preferences/com.electron.extraterm*.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

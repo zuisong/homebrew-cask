@@ -1,5 +1,5 @@
 cask "mbed-studio" do
-  version "1.4.5"
+  version "1.4.6"
   sha256 :no_check
 
   url "https://studio.mbed.com/installers/latest/mac/MbedStudio.pkg"
@@ -21,9 +21,9 @@ cask "mbed-studio" do
   uninstall pkgutil: "com.arm.mbed.studio"
 
   zap trash: [
-    "~/Library/Application Support/Mbed Studio",
     "~/.mbed-library-cache",
     "~/.mbed-library-pipeline",
     "~/.mbed-studio",
+    "~/Library/Application Support/Mbed Studio",
   ]
 end

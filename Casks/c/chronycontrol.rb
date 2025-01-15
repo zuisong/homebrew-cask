@@ -1,6 +1,6 @@
 cask "chronycontrol" do
-  version "1.4.11"
-  sha256 "7a19c43001b6a2653f8d947625ef4816fd54b66e78d08454bbfd75fa090c2532"
+  version "1.5.1"
+  sha256 "fd2d34e53fa8eadcef0eeaac6bfbaccc08ca1ea5ce0c2c52efd63b55f7229f3c"
 
   url "https://www.whatroute.net/software/chronycontrol-#{version}.zip"
   name "ChronyControl"
@@ -13,7 +13,7 @@ cask "chronycontrol" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "ChronyControl.app"
 

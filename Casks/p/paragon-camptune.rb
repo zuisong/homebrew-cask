@@ -1,8 +1,8 @@
 cask "paragon-camptune" do
-  version "10.19.501"
+  version "12.0.37"
   sha256 :no_check
 
-  url "https://dl.paragon-software.com/demo/camptune_demo_u.dmg"
+  url "https://dl.paragon-software.com/demo/camptune_demo_#{version.major}.dmg"
   name "Paragon CampTune"
   desc "Manage disk space on Macs with Boot Camp"
   homepage "https://www.paragon-software.com/home/camptune/"
@@ -10,11 +10,12 @@ cask "paragon-camptune" do
   livecheck do
     url :url
     strategy :extract_plist do |versions|
-      versions.values.map(&:short_version).compact.first
+      versions.values.filter_map(&:short_version).first
     end
   end
 
   depends_on macos: ">= :sierra"
+  depends_on arch: :x86_64
 
   app "Paragon CampTune.app"
 
@@ -31,4 +32,8 @@ cask "paragon-camptune" do
     "~/Library/Preferences/com.paragon-software.camptunex.plist",
     "~/Library/Saved Application State/com.paragon-software.camptunex.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

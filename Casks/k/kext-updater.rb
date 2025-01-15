@@ -1,16 +1,18 @@
 cask "kext-updater" do
-  version "4.0.7"
+  version "5.0.3"
   sha256 :no_check
 
   url "https://update.kextupdater.de/kextupdater/kextupdaterng.zip"
   name "Kext Updater"
-  desc "Automatic updater for kernel extensions required by 'Hackintoshes'"
+  desc "Automatic updater for kernel extensions required by Hackintoshes"
   homepage "https://kextupdater.de/"
 
   livecheck do
     url "https://update.kextupdater.de/kextupdater/appcastng.xml"
     strategy :sparkle, &:short_version
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Kext Updater.app"
 

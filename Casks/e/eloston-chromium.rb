@@ -1,35 +1,60 @@
 cask "eloston-chromium" do
   arch arm: "arm64", intel: "x86-64"
 
+  sha256 arm:   "9d6eb10dd60ce80df0f705cb15fc8b6a46480a0815294c8b5cd7b7ab60fa395b",
+         intel: "08a6d509a51c6056a5775e9ed9d4ba2233378d8fa532bcc917a6371dae017e5c"
+
   on_arm do
-    version "117.0.5938.62-1.1,1695024143"
-    sha256 "0d171c1fa5920397e4a49557c0d041715d5fda112dd4dbc97f75b137abe1888e"
-  end
-  on_intel do
-    version "117.0.5938.62-1.1,1694986322"
-    sha256 "d0e4fc0fa50ff5c91d460317e1959f8053d2884dc676e9dbca971204d16c5090"
-  end
+    version "131.0.6778.264-1.1"
 
-  url "https://github.com/ungoogled-software/ungoogled-chromium-macos/releases/download/#{version.csv.first}_#{arch}__#{version.csv.second}/ungoogled-chromium_#{version.csv.first}_#{arch}-macos.dmg",
-      verified: "github.com/ungoogled-software/ungoogled-chromium-macos/"
-  name "Ungoogled Chromium"
-  desc "Google Chromium, sans integration with Google"
-  homepage "https://ungoogled-software.github.io/ungoogled-chromium-binaries/"
+    livecheck do
+      url :url
+      regex(/^v?(\d+(?:[.-]\d+)+)(?:[._-]#{arch})?(?:[._-]+?(\d+(?:\.\d+)*))?$/i)
+      strategy :github_latest do |json, regex|
+        match = json["tag_name"]&.match(regex)
+        next if match.blank?
 
-  livecheck do
-    url "https://github.com/ungoogled-software/ungoogled-chromium-macos/releases?q=prerelease%3Afalse"
-    regex(%r{href=["']?[^"' >]*?/tree/v?(\d+(?:[.-]\d+)+)(?:[._-]#{arch})?(?:[._-]+?(\d+(?:\.\d+)*))?["' >]}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map do |match|
-        (match.length > 1) ? "#{match[0]},#{match[1]}" : match[0]
+        match[1]
       end
     end
   end
+  on_intel do
+    version "130.0.6723.116-1.1"
+
+    # Upstream isn't able to provide Intel builds for the time being, so we
+    # have to use the `GithubReleases` strategy to check recent releases and
+    # identify the latest version with an Intel release asset.
+    # TODO: Switch back to one `GithubLatest` `livecheck` block when upstream
+    # reliably publishes Intel builds again.
+    livecheck do
+      url :url
+      regex(/ungoogled[._-]chromium[._-]v?(\d+(?:[.-]\d+)+)[._-]#{arch}[._-]macos\.dmg/i)
+      strategy :github_releases do |json, regex|
+        json.map do |release|
+          next if release["draft"] || release["prerelease"]
+
+          release["assets"]&.map do |asset|
+            match = asset["name"]&.match(regex)
+            next if match.blank?
+
+            match[1]
+          end
+        end.flatten
+      end
+    end
+  end
+
+  url "https://github.com/ungoogled-software/ungoogled-chromium-macos/releases/download/#{version}/ungoogled-chromium_#{version}_#{arch}-macos.dmg",
+      verified: "github.com/ungoogled-software/ungoogled-chromium-macos/"
+  name "Ungoogled Chromium"
+  desc "Google Chromium, sans integration with Google"
+  homepage "https://ungoogled-software.github.io/"
 
   conflicts_with cask: [
     "chromium",
     "freesmug-chromium",
   ]
+  depends_on macos: ">= :big_sur"
 
   app "Chromium.app"
 

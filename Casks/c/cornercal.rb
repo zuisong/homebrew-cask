@@ -4,9 +4,16 @@ cask "cornercal" do
 
   url "https://github.com/ekreutz/CornerCal/blob/v#{version}/builds/CornerCal.zip?raw=true"
   name "CornerCal"
+  desc "Clock app"
   homepage "https://github.com/ekreutz/CornerCal"
+
+  deprecate! date: "2024-11-01", because: :unmaintained
 
   depends_on macos: ">= :sierra"
 
   app "CornerCal.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

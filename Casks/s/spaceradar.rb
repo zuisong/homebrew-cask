@@ -4,7 +4,7 @@ cask "spaceradar" do
 
   url "https://github.com/zz85/space-radar/releases/download/v#{version}/SpaceRadar-darwin-x64.zip"
   name "SpaceRadar"
-  desc "Disk And Memory Space Visualization App built with Electron & d3.js"
+  desc "Disk space and memory visualiser"
   homepage "https://github.com/zz85/space-radar"
 
   livecheck do
@@ -22,4 +22,8 @@ cask "spaceradar" do
     "~/Library/Preferences/com.electron.spaceradar.plist",
     "~/Library/Saved Application State/com.electron.spaceradar.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

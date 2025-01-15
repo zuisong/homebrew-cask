@@ -1,8 +1,8 @@
 cask "camo-studio" do
-  version "2.0.5,10158"
-  sha256 "e311707abbeb9039ef3bfd233a6946a34be1a95b4b3bf1beae670531d2803e7c"
+  version "2.1.8,13590"
+  sha256 "6b84203dcc14ba6db094a45f07fcf53d9f256f4d5721cb42a0a67b07a40100d1"
 
-  url "https://reincubate.com/res/labs/camo/CamoStudioMac-#{version.csv.first}-#{version.csv.second}-Release.app.zip"
+  url "https://releases.reincubate.com/camo/camo-macos-#{version.csv.first}.#{version.csv.second}.zip"
   name "Camo Studio"
   desc "Use your phone as a high-quality webcam with image tuning controls"
   homepage "https://reincubate.com/camo/"
@@ -13,7 +13,7 @@ cask "camo-studio" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Camo Studio.app"
 
@@ -29,8 +29,8 @@ cask "camo-studio" do
   zap trash: [
         "~/Library/Application Support/CrashReporter/Camo Studio",
         "~/Library/Application Support/Reincubate/Camo",
-        "~/Library/Caches/SentryCrash/Camo Studio",
         "~/Library/Caches/com.reincubate.macos.cam",
+        "~/Library/Caches/SentryCrash/Camo Studio",
         "~/Library/HTTPStorages/com.reincubate.macos.cam",
         "~/Library/Preferences/com.reincubate.macos.cam.plist",
         "~/Library/WebKit/com.reincubate.macos.cam",

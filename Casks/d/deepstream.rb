@@ -1,6 +1,6 @@
 cask "deepstream" do
-  version "7.0.7"
-  sha256 "1ca15f94f062a2b7b076d47d9854e0530e43034a098e1a7f9244ed147e9e4fbc"
+  version "7.0.10"
+  sha256 "3e82240b08ef33eae93a6f94d19af959a4664dac5d2589f057fb1f7b9a5d3e72"
 
   url "https://github.com/deepstreamIO/deepstream.io/releases/download/v#{version}/deepstream.io-mac-#{version}.pkg",
       verified: "github.com/deepstreamIO/deepstream.io/"
@@ -11,6 +11,8 @@ cask "deepstream" do
   pkg "deepstream.io-mac-#{version}.pkg"
 
   uninstall pkgutil: "deepstream.io"
+
+  # No zap stanza required
 
   caveats do
     files_in_usr_local

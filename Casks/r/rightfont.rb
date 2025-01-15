@@ -1,5 +1,5 @@
 cask "rightfont" do
-  version "8.3"
+  version "9.4"
   sha256 :no_check
 
   url "https://rightfontapp.com/update/rightfont.zip"
@@ -13,12 +13,12 @@ cask "rightfont" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "RightFont.app"
 
   zap trash: [
-        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.rightfontapp.rightfont*.sfl2",
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.rightfontapp.rightfont*.sfl*",
         "~/Library/Application Support/com.rightfontapp.RightFont*",
         "~/Library/Application Support/RightFont",
         "~/Library/Caches/com.rightfontapp.RightFont*",

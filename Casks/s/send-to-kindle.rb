@@ -1,5 +1,5 @@
 cask "send-to-kindle" do
-  version "1.1.1.255"
+  version "1.1.1.258"
   sha256 :no_check
 
   url "https://sendtokindle.s3.amazonaws.com/SendToKindleForMac-installer.pkg",
@@ -16,12 +16,16 @@ cask "send-to-kindle" do
   pkg "SendToKindleForMac-installer.pkg"
 
   uninstall launchctl: "com.amazon.sendtokindle.launcher",
-            pkgutil:   "com.amazon.SendToKindleMacInstaller.pkg",
-            quit:      "com.amazon.SendToKindle"
+            quit:      "com.amazon.SendToKindle",
+            pkgutil:   "com.amazon.SendToKindleMacInstaller.pkg"
 
   zap trash: [
     "~/Library/Application Support/Amazon/SendToKindle",
-    "~/Library/Preferences/com.amazon.SendToKindle.plist",
     "~/Library/Logs/SendToKindleInstall.log",
+    "~/Library/Preferences/com.amazon.SendToKindle.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

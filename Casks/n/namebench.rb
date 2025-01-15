@@ -8,9 +8,7 @@ cask "namebench" do
   desc "DNS server finder"
   homepage "https://code.google.com/archive/p/namebench/"
 
-  app "namebench.app"
+  disable! date: "2024-07-16", because: "is 32-bit only"
 
-  caveats do
-    discontinued
-  end
+  app "namebench.app"
 end

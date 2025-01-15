@@ -1,17 +1,20 @@
 cask "edrawmind" do
-  version "10.7.2,5378"
-  sha256 "a5a612d9c8daa86b05c65cc03ed45c867c1cec019a19a712c5b363a421d784d1"
+  version "12.0.4,5378"
+  sha256 "dd7b44931d20360226a775c6c74614ce35f6a8b68246ba666a87312a9687920a"
 
-  url "https://download.edrawsoft.com/edrawmind_full#{version.csv.second}.dmg"
+  url "https://download.edrawsoft.com/cbs_down/edrawmind_#{version.csv.first}_full#{version.csv.second}.zip"
   name "EdrawMind"
   desc "Mind mapping software"
   homepage "https://www.edrawsoft.com/edrawmind/"
 
   livecheck do
     url "https://www.edrawsoft.com/download-edrawmind.html"
-    strategy :page_match do |page|
-      match = page.match(/for\s+Mac.*?(\d+(?:\.\d+)+).*?edrawmind[._-]full(\d+)\./m)
-      "#{match[1]},#{match[2]}" if match
+    regex(/for\s+Mac.*?v?(\d+(?:\.\d+)+).*?edrawmind[._-]full(\d+)\./im)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
     end
   end
 
@@ -21,4 +24,8 @@ cask "edrawmind" do
     "~/Library/Preferences/com.edrawsoft.mindmaster.plist",
     "~/Library/Saved Application State/com.edrawsoft.mindmaster.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

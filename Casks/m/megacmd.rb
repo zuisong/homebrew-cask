@@ -1,5 +1,5 @@
 cask "megacmd" do
-  version "1.6.3"
+  version "1.7.0"
   sha256 :no_check
 
   url "https://mega.nz/MEGAcmdSetup.dmg"
@@ -7,10 +7,15 @@ cask "megacmd" do
   desc "Command-line access to MEGA services"
   homepage "https://mega.nz/cmd"
 
+  # The upstream website doesn't appear to provide version information. We check
+  # GitHub tags as a best guess of when a new version is released (upstream
+  # doesn't use GitHub releases).
   livecheck do
     url "https://github.com/meganz/MEGAcmd"
-    regex(/(\d+(?:\.\d+)+)[._-]macOS/i)
+    regex(/^v?(\d+(?:\.\d+)+)[._-]macOS$/i)
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "MEGAcmd.app"
   binary "#{appdir}/MEGAcmd.app/Contents/MacOS/MEGAcmdShell", target: "megacmd"

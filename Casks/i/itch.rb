@@ -1,15 +1,15 @@
 cask "itch" do
-  version "25.6.2"
+  version "26.1.9"
   sha256 :no_check
 
-  url "https://broth.itch.ovh/install-itch/darwin-amd64/LATEST/archive/default",
-      verified: "broth.itch.ovh/"
+  url "https://broth.itch.zone/install-itch/darwin-amd64/LATEST/archive/default",
+      verified: "broth.itch.zone/"
   name "itch"
   desc "Game client for itch.io"
   homepage "https://itch.io/app"
 
   livecheck do
-    url "https://broth.itch.ovh/itch/darwin-amd64"
+    url "https://broth.itch.zone/itch/darwin-amd64"
     regex(%r{href=.*?/v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 
@@ -17,11 +17,11 @@ cask "itch" do
 
   installer script: "Install itch.app/Contents/MacOS/itch-setup"
 
-  uninstall delete: [
+  uninstall quit:   "io.itch.mac",
+            delete: [
               "~/Applications/itch.app",
               "~/Library/Application Support/itch-setup/",
-            ],
-            quit:   "io.itch.mac"
+            ]
 
   zap trash: [
     "~/Library/Application Support/itch/",

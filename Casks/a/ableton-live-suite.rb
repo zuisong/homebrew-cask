@@ -1,6 +1,6 @@
 cask "ableton-live-suite" do
-  version "11.3.12"
-  sha256 "8b875b8dc68721ad4dff72ee237827e7137fdd21dd63a8c9c993a4abf588d858"
+  version "12.1.5"
+  sha256 "a880fa9676e82a0e3ecc8bd17408a42872328fb77756578a846514d346fa450b"
 
   url "https://cdn-downloads.ableton.com/channels/#{version}/ableton_live_suite_#{version}_universal.dmg"
   name "Ableton Live Suite"
@@ -13,7 +13,7 @@ cask "ableton-live-suite" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Ableton Live #{version.major} Suite.app"
 
@@ -21,10 +21,10 @@ cask "ableton-live-suite" do
 
   zap trash: [
     "/Library/Logs/DiagnosticReports/Max_*.*_resource.diag",
+    "~/Library/Application Support/Ableton",
     "~/Library/Application Support/CrashReporter/Ableton *_*.plist",
     "~/Library/Application Support/CrashReporter/Live_*.plist",
     "~/Library/Application Support/CrashReporter/Max_*.plist",
-    "~/Library/Application Support/Ableton",
     "~/Library/Application Support/Cycling '74",
     "~/Library/Caches/Ableton",
     "~/Library/Preferences/Ableton",

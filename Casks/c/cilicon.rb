@@ -1,6 +1,6 @@
 cask "cilicon" do
-  version "2.1.0"
-  sha256 "af39cff356afb5c22f006349a72f0bf1db02ad55bb2401eeb6bd360308fd9c01"
+  version "2.2.2"
+  sha256 "4978b91aa189b0ed43c020495894a61a15d039b6106c6559796afb2f99c04723"
 
   url "https://github.com/traderepublic/Cilicon/releases/download/v#{version}/Cilicon.zip"
   name "Cilicon"
@@ -13,7 +13,7 @@ cask "cilicon" do
   app "Cilicon.app"
 
   zap trash: [
-    "~/cilicon.yml",
     "~/.cilicon.yml",
+    "~/cilicon.yml",
   ]
 end

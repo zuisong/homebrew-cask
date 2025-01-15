@@ -8,6 +8,8 @@ cask "appium" do
   desc "Graphical frontend to Appium automation server"
   homepage "https://appium.io/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Appium Server GUI.app"
 
   zap trash: [
@@ -18,6 +20,6 @@ cask "appium" do
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

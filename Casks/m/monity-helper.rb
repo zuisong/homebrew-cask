@@ -2,19 +2,17 @@ cask "monity-helper" do
   version "1.2.5"
   sha256 :no_check
 
-  url "https://www.monityapp.com/download/MonityHelper.pkg"
+  url "https://monityapp.com/download/MonityHelper.pkg"
   name "Monity Helper"
-  homepage "https://www.monityapp.com/"
+  desc "Helper app for Monity to provide system stats"
+  homepage "https://monityapp.com/helper/"
 
-  livecheck do
-    url :homepage
-    regex(/Version:\s+(\d+(?:\.\d+)+)/i)
-  end
+  disable! date: "2025-01-04", because: :no_longer_available
 
   pkg "MonityHelper.pkg"
 
-  uninstall quit:      "com.Monity.Helper",
-            launchctl: "com.Monity.Helper",
+  uninstall launchctl: "com.Monity.Helper",
+            quit:      "com.Monity.Helper",
             pkgutil:   [
               "com.Monity.Helper.monityHelper.com.Monity.Helper.pkg",
               "com.Monity.Helper.monityHelper.MonityHelper.pkg",

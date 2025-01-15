@@ -7,11 +7,9 @@ cask "epichrome" do
   desc "Tool to create web-based applications that work like standalone apps"
   homepage "https://github.com/dmarmor/epichrome"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "epichrome-#{version}.pkg"
 
   uninstall pkgutil: "org.epichrome.Epichrome"
-
-  caveats do
-    discontinued
-  end
 end

@@ -1,15 +1,30 @@
 cask "headlamp" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.20.1"
-  sha256 arm:   "e69b15eec19f90cae985872a91876c218a9d20b6c21f2f7be2d6e0fcd7385e39",
-         intel: "94864e109443dc392aa7260f2cc8972a4b12b09d194cf3db4e947ec6cde56428"
+  version "0.27.0"
+  sha256 arm:   "d4ed9d1fe4313053ac5be577e12fdddbdc8495bef415147b518e81cdd3644249",
+         intel: "a5e8b2821890012e2c5ef0695863a5d83bbbc66d64bc6a057a036fac6f2ad9c0"
 
-  url "https://github.com/kinvolk/headlamp/releases/download/v#{version}/Headlamp-#{version}-mac-#{arch}.dmg",
-      verified: "github.com/kinvolk/headlamp/"
+  url "https://github.com/headlamp-k8s/headlamp/releases/download/v#{version.sub(/-\d+/, "")}/Headlamp-#{version}-mac-#{arch}.dmg",
+      verified: "github.com/headlamp-k8s/headlamp/"
   name "Headlamp"
   desc "UI for Kubernetes"
-  homepage "https://kinvolk.github.io/headlamp"
+  homepage "https://headlamp.dev/"
+
+  livecheck do
+    url :url
+    regex(/Headlamp[._-]v?(\d+(?:[.-]\d+)+)-mac-#{arch}/i)
+    strategy :github_latest do |json, regex|
+      json["assets"]&.map do |asset|
+        match = asset["name"]&.match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
+  end
+
+  depends_on macos: ">= :catalina"
 
   app "Headlamp.app"
 

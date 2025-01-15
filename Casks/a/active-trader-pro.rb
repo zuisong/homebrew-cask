@@ -1,6 +1,6 @@
 cask "active-trader-pro" do
-  version "1.0.51"
-  sha256 "b2594dc0078f149cbed1f4cc8cddc4ab7137541f2e855d2cc825bf8d11204231"
+  version "1.0.55"
+  sha256 "394689bce9630cd949a40ae9914533acaf028f8d08019833dbb7a49f3416866e"
 
   url "https://www.fidelity.com/webcontent/Codeweaver/activetrader-#{version}.zip"
   name "Active Trader Pro"
@@ -25,4 +25,8 @@ cask "active-trader-pro" do
     "~/Library/Preferences/com.fmr.activetrader.plist",
     "~/Library/Saved Application State/com.fmr.activetrader.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

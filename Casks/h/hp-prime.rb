@@ -5,12 +5,18 @@ cask "hp-prime" do
   url "https://ftp.hp.com/pub/calculators/Prime/HP_Prime_Virtual_Calculator_#{version.hyphens_to_underscores}.dmg"
   name "HP Prime"
   desc "Graphing calculator emulator"
-  homepage "https://www.hp.com/us-en/campaigns/prime-graphing-calculator/overview.html"
+  homepage "https://www.hp.com/us-en/calculators.html"
 
   livecheck do
     url "https://www.hpcalc.org/details/7799"
     regex(/<title>.*?\((\d+(?:-\d+)+)\)/i)
   end
 
+  depends_on macos: ">= :sierra"
+
   app "HP Prime.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -4,15 +4,14 @@ cask "podolski" do
 
   url "https://dl.u-he.com/releases/Podolski_#{version.csv.first.no_dots}_#{version.csv.second}_Mac.zip"
   name "Podolski"
-  desc "Virtual analogue synthesizer"
+  desc "Virtual analogue synthesiser"
   homepage "https://u-he.com/products/podolski/"
 
   livecheck do
     url "https://u-he.com/products/podolski/releasenotes.html"
-    strategy :page_match do |page|
-      page.scan(/Podolski\s*v?(\d+(?:\.\d+)+)\s*\(revision\s*(\d+)\)/i).map do |match|
-        "#{match[0]},#{match[1]}"
-      end
+    regex(/Podolski\s*v?(\d+(?:\.\d+)+)\s*\(revision\s*(\d+)\)/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
     end
   end
 
@@ -31,9 +30,9 @@ cask "podolski" do
   ]
 
   zap trash: [
-    "~/Library/Application Support/u-he/Podolski",
     "~/Library/Application Support/u-he/com.u-he.Podolski.midiassign.txt",
     "~/Library/Application Support/u-he/com.u-he.Podolski.Preferences.txt",
+    "~/Library/Application Support/u-he/Podolski",
   ]
 
   caveats do

@@ -1,5 +1,5 @@
 cask "kmeet" do
-  version "1.1.40"
+  version "2.0.1"
   sha256 :no_check
 
   url "https://download.storage.infomaniak.com/meet/kMeet.dmg"
@@ -22,4 +22,8 @@ cask "kmeet" do
     "~/Library/Logs/kMeet",
     "~/Library/Preferences/com.infomaniak.meet.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

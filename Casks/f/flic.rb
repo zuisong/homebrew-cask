@@ -6,12 +6,19 @@ cask "flic" do
       verified: "misc-scl-cdn.s3.amazonaws.com/"
   name "Flic"
   desc "Driver for the Flic bluetooth button"
-  homepage "https://flic.io/mac-app"
+  homepage "https://flic.io/applications/mac-app"
 
   livecheck do
     url :homepage
     regex(/Flic\.(\d+(?:\.\d+)+)\.zip/i)
   end
 
+  depends_on macos: ">= :sierra"
+
   app "Flic.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/com.shortcutlabs.FlicMac",
+    "~/Library/Containers/com.shortcutlabs.FlicMac",
+  ]
 end

@@ -1,6 +1,6 @@
 cask "syncplay" do
-  version "1.7.0"
-  sha256 "7b5955ed604966cc67e44e5f91b27b9d07cf3c373a459844bfd9a289f805eb65"
+  version "1.7.3"
+  sha256 "a656a60c11fcc0f840a461ed38708310a1138e28eb385d0f7167da18996df1b9"
 
   url "https://github.com/Syncplay/syncplay/releases/download/v#{version}/Syncplay_#{version}.dmg",
       verified: "github.com/Syncplay/syncplay/"
@@ -9,7 +9,7 @@ cask "syncplay" do
   homepage "https://syncplay.pl/"
 
   livecheck do
-    url :stable
+    url :url
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
@@ -19,11 +19,11 @@ cask "syncplay" do
 
   zap trash: [
     "~/.syncplay",
-    "~/Library/Saved Application State/pl.syncplay.Syncplay.savedState",
-    "~/Library/Preferences/com.syncplay.MoreSettings.plist",
     "~/Library/Preferences/com.syncplay.Interface.plist",
     "~/Library/Preferences/com.syncplay.MainWindow.plist",
-    "~/Library/Preferences/pl.syncplay.Syncplay.plist",
+    "~/Library/Preferences/com.syncplay.MoreSettings.plist",
     "~/Library/Preferences/com.syncplay.PlayerList.plist",
+    "~/Library/Preferences/pl.syncplay.Syncplay.plist",
+    "~/Library/Saved Application State/pl.syncplay.Syncplay.savedState",
   ]
 end

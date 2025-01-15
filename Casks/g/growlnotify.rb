@@ -8,11 +8,9 @@ cask "growlnotify" do
   desc "Notification system"
   homepage "https://growl.github.io/growl/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "GrowlNotify.pkg"
 
   uninstall pkgutil: "info.growl.growlnotify.*pkg"
-
-  caveats do
-    discontinued
-  end
 end

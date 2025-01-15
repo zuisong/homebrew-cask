@@ -6,9 +6,11 @@ cask "socket-io-tester" do
   name "socket-io-tester.app"
   homepage "https://github.com/AppSaloon/socket.io-tester"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "socket-io-tester-darwin-x64/socket-io-tester.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

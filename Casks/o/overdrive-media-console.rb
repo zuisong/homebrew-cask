@@ -8,13 +8,7 @@ cask "overdrive-media-console" do
   desc "Get eBooks, audiobooks, and videos from your local library"
   homepage "https://www.overdrive.com/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist do |items|
-      item = items["com.overdrive.overdrivemediaconsole"]
-      item.short_version[/(\d+(?:\.\d+)+)/]
-    end
-  end
+  deprecate! date: "2024-07-04", because: :discontinued
 
   pkg "OverDrive-Mac-Installer.pkg"
 
@@ -25,7 +19,7 @@ cask "overdrive-media-console" do
   uninstall pkgutil: "com.overdrive.overdriveMediaConsole.*"
 
   zap trash: [
-    "~/Library/Preferences/com.overdrive.overdrivemediaconsole.plist",
     "~/Library/Caches/com.overdrive.overdrivemediaconsole",
+    "~/Library/Preferences/com.overdrive.overdrivemediaconsole.plist",
   ]
 end

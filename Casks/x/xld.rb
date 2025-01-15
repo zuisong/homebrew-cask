@@ -1,6 +1,6 @@
 cask "xld" do
-  version "20230627"
-  sha256 "ad9d3d6bbc491a368f9ef843cd2d2e59e87db193354b4b4e5cfec0120a903cc4"
+  version "20240511"
+  sha256 "f317e301682d49d6c3f201a5906cd3f10473ede8087f83c4feb16c1440d7d3e7"
 
   url "https://downloads.sourceforge.net/xld/xld-#{version}.dmg",
       verified: "sourceforge.net/xld/"
@@ -20,8 +20,10 @@ cask "xld" do
   binary "CLI/xld"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/jp.tmkk.xld.sfl*",
     "~/Library/Application Support/XLD",
     "~/Library/Caches/jp.tmkk.XLD",
+    "~/Library/HTTPStorages/jp.tmkk.XLD",
     "~/Library/Preferences/jp.tmkk.XLD.plist",
     "~/Library/Saved Application State/jp.tmkk.XLD.savedState",
   ]

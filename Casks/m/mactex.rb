@@ -1,6 +1,6 @@
 cask "mactex" do
-  version "2023.0314"
-  sha256 "57304ece58618f0dfc6a41be39d1d6e8f688d81247c84a89eb1cc788b280050b"
+  version "2024.0312"
+  sha256 "c1793a3ceca2c4317ca22536c887e18b3c17be0f4baaa199735e9d6a692e57dc"
 
   url "https://mirror.ctan.org/systems/mac/mactex/mactex-#{version.no_dots}.pkg",
       verified: "mirror.ctan.org/systems/mac/mactex/"
@@ -10,8 +10,9 @@ cask "mactex" do
 
   livecheck do
     url "https://ctan.org/texarchive/systems/mac/mactex/"
-    strategy :page_match do |page|
-      match = page.match(/href=.*?mactex-(\d{4})(\d{2})(\d{2})\.pkg/)
+    regex(/href=.*?mactex[._-](\d{4})(\d{2})(\d{2})\.pkg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[1]}.#{match[2]}#{match[3]}"
@@ -29,13 +30,19 @@ cask "mactex" do
       choices: [
         {
           # Ghostscript
-          "choiceIdentifier" => "org.tug.mactex.ghostscript10.00",
+          "choiceIdentifier" => "org.tug.mactex.ghostscript10.03.0",
           "choiceAttribute"  => "selected",
           "attributeSetting" => 0,
         },
         {
           # Ghostscript Dynamic Library
-          "choiceIdentifier" => "org.tug.mactex.ghostscript10.00-libgs",
+          "choiceIdentifier" => "org.tug.mactex.ghostscript10.03.0-libgs",
+          "choiceAttribute"  => "selected",
+          "attributeSetting" => 0,
+        },
+        {
+          # Ghostscript Mutool
+          "choiceIdentifier" => "org.tug.mactex.ghostscript10.03.0-mutool",
           "choiceAttribute"  => "selected",
           "attributeSetting" => 0,
         },
@@ -46,7 +53,7 @@ cask "mactex" do
           "attributeSetting" => 1,
         },
         {
-          # TeXLive
+          # TeX Live
           "choiceIdentifier" => "org.tug.mactex.texlive#{version.major}",
           "choiceAttribute"  => "selected",
           "attributeSetting" => 1,
@@ -58,35 +65,42 @@ cask "mactex" do
               "org.tug.mactex.texlive#{version.major}",
             ],
             delete:  [
-              "/usr/local/texlive/#{version.major}",
               "/Applications/TeX",
-              "/Library/TeX",
-              "/etc/paths.d/TeX",
               "/etc/manpaths.d/TeX",
+              "/etc/paths.d/TeX",
+              "/Library/TeX",
+              "/usr/local/texlive/#{version.major}",
             ]
 
   zap trash: [
         "/usr/local/texlive/texmf-local",
-        # TexShop:
-        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texshop.sfl*",
-        "~/Library/Application Support/TeXShop",
-        "~/Library/Caches/com.apple.helpd/Generated/TeXShop Help*",
-        "~/Library/Caches/TeXShop",
-        "~/Library/Preferences/TeXShop.plist",
-        "~/Library/TeXShop",
-        # BibDesk:
+        "~/Library/Application Scripts/*.fr.chachatelier.pierre.LaTeXiT",
+        "~/Library/Application Scripts/fr.chachatelier.pierre.LaTeXiT.appex",
         "~/Library/Application Support/BibDesk",
-        "~/Library/Caches/com.apple.helpd/Generated/edu.ucsd.cs.mmccrack.bibdesk.help*",
-        "~/Library/Caches/edu.ucsd.cs.mmccrack.bibdesk",
-        "~/Library/Cookies/edu.ucsd.cs.mmccrack.bibdesk.binarycookies",
-        "~/Library/Preferences/edu.ucsd.cs.mmccrack.bibdesk.plist",
-        # LaTeXiT:
-        "~/Library/Caches/fr.chachatelier.pierre.LaTeXiT",
-        "~/Library/Cookies/fr.chachatelier.pierre.LaTeXiT.binarycookies",
-        "~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist",
-        # TeX Live Utility:
+        "~/Library/Application Support/com.apple.sharedfilelist/*/fr.chachatelier.pierre.latexit.sfl*",
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/texshop.sfl*",
+        "~/Library/Application Support/LaTeXiT",
         "~/Library/Application Support/TeX Live Utility",
+        "~/Library/Application Support/TeXShop",
+        "~/Library/Caches/com.apple.helpd/Generated/edu.ucsd.cs.mmccrack.bibdesk.help*",
         "~/Library/Caches/com.apple.helpd/Generated/TeX Live Utility Help*",
+        "~/Library/Caches/com.apple.helpd/Generated/TeXShop Help*",
+        "~/Library/Caches/edu.ucsd.cs.mmccrack.bibdesk",
+        "~/Library/Caches/fr.chachatelier.pierre.LaTeXiT",
+        "~/Library/Caches/TeXShop",
+        "~/Library/Containers/fr.chachatelier.pierre.LaTeXiT.appex",
+        "~/Library/Cookies/edu.ucsd.cs.mmccrack.bibdesk.binarycookies",
+        "~/Library/Cookies/fr.chachatelier.pierre.LaTeXiT.binarycookies",
+        "~/Library/Group Containers/*.fr.chachatelier.pierre.LaTeXiT",
+        "~/Library/HTTPStorages/fr.chachatelier.pierre.LaTeXiT",
+        "~/Library/HTTPStorages/TeXShop",
+        "~/Library/Preferences/edu.ucsd.cs.mmccrack.bibdesk.plist",
+        "~/Library/Preferences/fr.chachatelier.pierre.LaTeXiT.plist",
+        "~/Library/Preferences/TeXShop.plist",
+        "~/Library/texlive",
+        "~/Library/TeXShop",
+        "~/Library/WebKit/fr.chachatelier.pierre.LaTeXiT",
+        "~/Library/WebKit/TeXShop",
       ],
       rmdir: "/usr/local/texlive"
 

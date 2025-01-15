@@ -13,6 +13,8 @@ cask "ipartition" do
   desc "Disk partitioning tool"
   homepage "https://coriolis-systems.com/iPartition/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   depends_on macos: "<= :high_sierra"
 
   app "iPartition.app"
@@ -20,7 +22,6 @@ cask "ipartition" do
   zap trash: "~/Library/Preferences/com.coriolis-systems.iPartition.plist"
 
   caveats do
-    discontinued
-    free_license "https://coriolis-systems.com/downloads/iPartition.png"
+    requires_rosetta
   end
 end

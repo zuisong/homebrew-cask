@@ -1,13 +1,13 @@
 cask "geomap" do
   arch arm: "Silicon", intel: "Intel"
 
-  version "3.7.1"
-  sha256 arm:   "9b76e98cd954779658b5d41b9486e30315a6106ee9d44e429d38d1dd1c35b3e8",
-         intel: "07c69b0282bc6828e769a73e00fd6b87a4ec82669e80727fc5a35fd2b61b462f"
+  version "3.7.4"
+  sha256 arm:   "bd7f714e59eeb492230635bb5a817909edc953f2afc46c12d5d776bab8ccaac1",
+         intel: "ebf59d4abc8dbd593c316a00199b9c8a63a0cfe301e985c0abe614631f786bd4"
 
   url "https://app.geomapapp.org/MapApp/GeoMapApp-#{version}-#{arch}.dmg"
   name "GeoMapApp"
-  desc "Browse, visualize and analyze geoscience data sets"
+  desc "Browse, visualise and analyze geoscience data sets"
   homepage "https://www.geomapapp.org/"
 
   livecheck do

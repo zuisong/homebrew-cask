@@ -1,9 +1,9 @@
 cask "goland" do
   arch arm: "-aarch64"
 
-  version "2023.2.3,232.10072.27"
-  sha256 arm:   "3ad91c136fd840dbc596f2873ccc4c2df14f7ec2a435f8a61acfdc3a97660e32",
-         intel: "5e78a73a69481fd63ad53d99371b3e7e534731c6116ee6d7fee127c533bc644a"
+  version "2024.3.1,243.22562.186"
+  sha256 arm:   "4805e527a7d0cb66c278fcdba70468e14854defc3619edad439763d355303eba",
+         intel: "ec442f7a42cd95a7956d0ff4eb039f856e99451685a537dda9d67fbcd5b729e6"
 
   url "https://download.jetbrains.com/go/goland-#{version.csv.first}#{arch}.dmg"
   name "Goland"
@@ -13,8 +13,12 @@ cask "goland" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=GO&latest=true&type=release"
     strategy :json do |json|
-      json["GO"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["GO"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
@@ -23,15 +27,7 @@ cask "goland" do
   depends_on macos: ">= :high_sierra"
 
   app "GoLand.app"
-
-  uninstall_postflight do
-    ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "goland") }.each do |path|
-      if File.readable?(path) &&
-         File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
-        File.delete(path)
-      end
-    end
-  end
+  binary "#{appdir}/GoLand.app/Contents/MacOS/goland"
 
   zap trash: [
     "~/Library/Application Support/JetBrains/GoLand",

@@ -8,6 +8,8 @@ cask "spectacle" do
   desc "Move and resize windows with ease"
   homepage "https://www.spectacleapp.com/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   auto_updates true
 
   app "Spectacle.app"
@@ -21,8 +23,4 @@ cask "spectacle" do
     "~/Library/Cookies/com.divisiblebyzero.Spectacle.binarycookies",
     "~/Library/Preferences/com.divisiblebyzero.Spectacle.plist",
   ]
-
-  caveats do
-    discontinued
-  end
 end

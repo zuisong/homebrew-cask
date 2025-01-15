@@ -1,9 +1,9 @@
 cask "nova" do
-  version "11.6"
-  sha256 "da983d94ff4140213767e2b23d42bb25008135a4c9387da5985537cf773d9143"
+  version "12.2"
+  sha256 "717c14b728357070cbf8ea6dedd01b4eeccbc7fc9f3f735022d0e42e5223f097"
 
-  url "https://download-keycdn.panic.com/nova/Nova%20#{version}.zip",
-      verified: "download-keycdn.panic.com/nova/"
+  url "https://download-cdn.panic.com/nova/Nova%20#{version}.zip",
+      verified: "download-cdn.panic.com/nova/"
   name "Panic Nova"
   desc "Native code editor"
   homepage "https://nova.app/"
@@ -14,7 +14,7 @@ cask "nova" do
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :ventura"
 
   app "Nova.app"
 

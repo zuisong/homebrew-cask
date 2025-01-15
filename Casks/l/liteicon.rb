@@ -17,25 +17,26 @@ cask "liteicon" do
   desc "Tool to change system icons"
   homepage "https://freemacsoft.net/liteicon/"
 
-  livecheck do
-    url "https://freemacsoft.net/liteicon/updates.xml"
-    strategy :sparkle, &:short_version
-  end
+  deprecate! date: "2024-06-11", because: :discontinued
 
   auto_updates true
 
   app "LiteIcon.app"
 
-  uninstall quit:      "net.freemacsoft.LiteIcon",
+  uninstall launchctl: "net.freemacsoft.LiteIcon.LIHelperTool",
+            quit:      "net.freemacsoft.LiteIcon",
             delete:    [
               "/Library/PrivilegedHelperTools/net.freemacsoft.LiteIcon.LIHelperTool",
               "~/Library/Application Support/LiteIcon",
-            ],
-            launchctl: "net.freemacsoft.LiteIcon.LIHelperTool"
+            ]
 
   zap trash: [
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/net.freemacsoft.liteicon.sfl*",
     "~/Library/Application Support/CrashReporter/LiteIcon_*.plist",
     "~/Library/Preferences/net.freemacsoft.LiteIcon.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

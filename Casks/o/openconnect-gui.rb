@@ -8,14 +8,12 @@ cask "openconnect-gui" do
   desc "GitLab mirror - Graphical OpenConnect client (beta phase)"
   homepage "https://openconnect.github.io/openconnect-gui/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "openconnect-gui/#{version}/OpenConnect-GUI.app"
 
   zap delete: [
     "~/Library/Application Support/OpenConnect-GUI Team",
     "~/Library/Preferences/io.github.openconnect.openconnect-gui.plist",
   ]
-
-  caveats do
-    discontinued
-  end
 end

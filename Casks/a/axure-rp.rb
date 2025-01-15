@@ -1,6 +1,6 @@
 cask "axure-rp" do
-  version "10.0.0.3905"
-  sha256 "efdeac5043e54150545cf5aa87afe5d3f393cae2e9113c32e96b53c14df096a8"
+  version "11.0.0.4122"
+  sha256 "6ae89112baaa91043a435b87d1603172c5637986f53e24a39969d743f81698b6"
 
   url "https://axure.cachefly.net/versions/#{version.csv.first.major_minor.dots_to_hyphens}/AxureRP-Setup-#{version.split(".")[3]}.dmg",
       verified: "axure.cachefly.net/"
@@ -22,4 +22,8 @@ cask "axure-rp" do
     "~/Library/Preferences/com.axure.AxureRP#*.plist",
     "~/Library/Saved Application State/com.axure.AxureRP#*.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

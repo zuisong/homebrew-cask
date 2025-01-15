@@ -1,6 +1,6 @@
 cask "3dgenceslicer" do
-  version "3.3.0,4.0"
-  sha256 "b1b34d7582950a288e6ce4d216d7383cea4b4d71962817d632d8be6d1253871a"
+  version "3.5.1,4.0"
+  sha256 "8b1e89b1883e00119b319698e1fc302e749e08217aa6831a1ba38516aa83ac40"
 
   url "https://cloud.3dgence.com/downloads/slicer/3DGenceSlicer-#{version.csv.second}-(v#{version.csv.first}).dmg"
   name "3DGence Slicer"
@@ -9,9 +9,7 @@ cask "3dgenceslicer" do
 
   livecheck do
     url "https://support.3dgence.com/software.html"
-    regex(
-      %r{href=.*?/3DGence(?:[._-]|%20)?Slicer(?:[._-]|%20)(\d+(?:\.\d+)+)(?:[._-]|%20)\(v?\.?(\d+(?:\.\d+)+)\)\.dmg}i,
-    )
+    regex(/3DGence\s+SLICER\s+v?(\d+(?:\.\d+)+)\s+\((?:version\s+|v)?(\d+(?:\.\d+)+)\)\s+-\s+system\s+MacOS/im)
     strategy :page_match do |page, regex|
       page.scan(regex).map do |match|
         "#{match[1]},#{match[0]}"
@@ -20,4 +18,15 @@ cask "3dgenceslicer" do
   end
 
   app "3DGence Slicer #{version.csv.second}.app"
+
+  zap trash: [
+        "~/Library/Caches/3DGence Slicer",
+        "~/Library/Preferences/com.3dgence.slicer.3DGence Slicer.plist",
+        "~/Library/Saved Application State/com.3dgence.slicer.savedState",
+      ],
+      rmdir: "~/Documents/3DGence Slicer"
+
+  caveats do
+    requires_rosetta
+  end
 end

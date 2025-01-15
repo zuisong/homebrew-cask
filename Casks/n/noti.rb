@@ -8,6 +8,9 @@ cask "noti" do
   desc "Utility to show notifications from an Android device"
   homepage "https://noti.center/"
 
+  deprecate! date: "2024-01-13", because: :discontinued
+  disable! date: "2025-01-14", because: :discontinued
+
   auto_updates true
 
   app "Noti.app"

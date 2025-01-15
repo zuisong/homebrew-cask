@@ -1,17 +1,19 @@
 cask "krisp" do
   arch arm: "arm64", intel: "x64"
+  livecheck_arch = on_arch_conditional arm: "arm", intel: "64"
 
-  version "2.25.3"
-  sha256 arm:   "f58ddd141da893676533e5fc029066a4a6dc5456effd224d7521eedb3eff0d61",
-         intel: "7b564f8824a8c91bceec9d2819dbbcbcadb6becfafd38540676b0f63e461a0df"
+  version "2.51.3"
+  sha256 arm:   "a47e636cc922bd33e8de2e7f78d4897c09ece0fe679977d78e5808436ea6784d",
+         intel: "f44fa6d4edab6d4f4c6ce1c58ea9171c6c1f1fbe0ae750824af0e4770de74819"
 
-  url "https://cdn.krisp.ai/mp/#{version}/mac/krisp_#{version}_#{arch}.pkg"
+  url "https://cdn.krisp.ai/mp/mn/#{version.major_minor}/mac/Krisp_#{version}_#{arch}.pkg"
   name "Krisp"
   desc "Noise cancelling application"
   homepage "https://krisp.ai/"
 
   livecheck do
-    url "https://api.krisp.ai/v2/download/mac"
+    url "https://api.krisp.ai/v2/download/mac?package=package_#{livecheck_arch}"
+    regex(%r{/Krisp[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.pkg}i)
     strategy :header_match
   end
 
@@ -20,11 +22,11 @@ cask "krisp" do
 
   pkg "krisp_#{version}_#{arch}.pkg"
 
-  uninstall quit:      "ai.krisp.krispMac",
-            launchctl: [
+  uninstall launchctl: [
               "ai.krisp.krispMac*",
               "krisp",
             ],
+            quit:      "ai.krisp.krispMac",
             pkgutil:   "ai.krisp.krispMac*",
             delete:    "/Applications/krisp.app"
 

@@ -7,9 +7,7 @@ cask "cronnix" do
   name "CronniX"
   homepage "https://code.google.com/archive/p/cronnix/"
 
-  app "CronniX.app"
+  disable! date: "2024-07-09", because: "is 32-bit only"
 
-  caveats do
-    discontinued
-  end
+  app "CronniX.app"
 end

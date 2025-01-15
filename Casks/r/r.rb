@@ -55,14 +55,14 @@ cask "r" do
     pkg "R-#{version}#{arch_legacy}.pkg"
   end
   on_big_sur :or_newer do
-    version "4.3.1"
-    sha256 arm:   "6e048f45437a64c35961817aafe09bfb0a5956a85ff182469a0d5aa446bf0c64",
-           intel: "b3665509b53208d7fac31d4d271955c2930e4670847aeda25ebd35c73e637265"
+    version "4.4.2"
+    sha256 arm:   "0c2c6cc57b1976746cf3f0937a1764120648fd4cac0be53cc9bf99d215a5f213",
+           intel: "d7704eaab96f00612af6eb588911bc1e536d93b8d47ac44b519d7520fd58d573"
 
     url "https://cloud.r-project.org/bin/macosx/big-sur-#{arch}/base/R-#{version}-#{arch}.pkg"
 
     livecheck do
-      url "https://cloud.r-project.org/bin/macosx"
+      url "https://cloud.r-project.org/bin/macosx/"
       regex(/href=.*?R[._-]v?(\d+(?:\.\d+)*)([._-]#{arch})?\.pkg/i)
     end
 
@@ -84,16 +84,16 @@ cask "r" do
               "/usr/bin/Rscript",
             ]
 
-  zap trash:  [
+  zap delete: "/Library/Frameworks/R.Framework",
+      trash:  [
         "~/.R",
         "~/.Rapp.history",
         "~/.RData",
         "~/.Rhistory",
         "~/.Rprofile",
-        "~/Library/R",
         "~/Library/Caches/org.R-project.R",
-      ],
-      delete: "/Library/Frameworks/R.Framework"
+        "~/Library/R",
+      ]
 
   caveats do
     files_in_usr_local

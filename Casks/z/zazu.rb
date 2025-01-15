@@ -8,6 +8,8 @@ cask "zazu" do
   desc "Extensible and open-source launcher for hackers, creators and dabblers"
   homepage "https://zazuapp.org/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Zazu.app"
 
   zap trash: [
@@ -16,8 +18,4 @@ cask "zazu" do
     "~/Library/Preferences/com.tinytacoteam.zazu.helper.plist",
     "~/Library/Preferences/com.tinytacoteam.zazu.plist",
   ]
-
-  caveats do
-    discontinued
-  end
 end

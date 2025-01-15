@@ -1,19 +1,19 @@
 cask "scribus" do
-  version "1.5.8"
-  sha256 "d5ebc6f104bb57457c68ce651864053040af38f218bad1eef17491db7e6282ef"
+  arch arm: "-arm64"
 
-  url "https://downloads.sourceforge.net/scribus/scribus-devel/#{version}/scribus-#{version}.dmg",
+  version "1.6.3"
+  sha256 arm:   "68929bc13c65c4462e04ae6dd785ce9d9be38c459bac7fe0ef4b6b71bf48d981",
+         intel: "7fc542f8d36b8f8e4ffc345f32e1b34be510fba1cda5d34cddf8876f1b6d7489"
+
+  url "https://downloads.sourceforge.net/scribus/scribus/#{version}/scribus-#{version}#{arch}.dmg",
       verified: "sourceforge.net/scribus/"
   name "Scribus"
   desc "Free and open-source page layout program"
   homepage "https://www.scribus.net/"
 
-  # The stable branch is outdated and supported on deprecated versions of MacOS.
-  # Use the devel branch until the stable branch is updated
-  # https://github.com/Homebrew/homebrew-cask/pull/120289
   livecheck do
-    url "https://www.scribus.net/downloads/"
-    regex(%r{href=.*?scribus[._-]devel/v?(\d+(?:\.\d+)+)}i)
+    url "https://sourceforge.net/projects/scribus/rss?path=/scribus"
+    regex(%r{url=.*?/scribus[._-]v?(\d+(?:\.\d+)+)(?:#{arch})?\.(?:dmg|pkg)}i)
   end
 
   app "Scribus.app"

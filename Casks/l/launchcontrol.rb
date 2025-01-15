@@ -8,20 +8,18 @@ cask "launchcontrol" do
     end
   end
   on_big_sur :or_newer do
-    version "2.5"
-    sha256 "3d52fb1b3754925129e06c094fb2e1ed517c9a0c061c16b1852ec1c4f5b96942"
+    version "2.7"
+    sha256 "b193c7920aafff3cde547d18fb24ebb86068fedac7b334b313db0e5d82d19d70"
 
     livecheck do
       url "https://www.soma-zone.com/LaunchControl/a/appcast-update-#{version.major}.xml"
       strategy :sparkle, &:short_version
     end
-
-    depends_on macos: ">= :big_sur"
   end
 
   url "https://www.soma-zone.com/download/files/LaunchControl-#{version}.tar.xz"
   name "LaunchControl"
-  desc "Create, manage and debug system- and user services"
+  desc "Create, manage and debug system and user services"
   homepage "https://www.soma-zone.com/LaunchControl/"
 
   auto_updates true
@@ -29,14 +27,14 @@ cask "launchcontrol" do
   app "LaunchControl.app"
   binary "#{appdir}/LaunchControl.app/Contents/MacOS/fdautil"
 
-  uninstall delete:    "/Library/PrivilegedHelperTools/com.soma-zone.LaunchControl.Helper",
-            launchctl: "com.soma-zone.LaunchControl.Helper",
+  uninstall launchctl: "com.soma-zone.LaunchControl.Helper",
             quit:      [
               "com.soma-zone.JobWatch",
               "com.soma-zone.LaunchControl",
               "com.soma-zone.LicenseWindow",
               "com.soma-zone.QuickLaunch",
-            ]
+            ],
+            delete:    "/Library/PrivilegedHelperTools/com.soma-zone.LaunchControl.Helper"
 
   zap trash: [
     "~/Library/Application Support/LaunchControl",

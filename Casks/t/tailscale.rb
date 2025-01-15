@@ -1,10 +1,10 @@
 cask "tailscale" do
-  version "1.50.1"
-  sha256 "9b5426a0cb33b31ce79a1d99d829e648382bd52a0ad8c86a4817f2df62748ca0"
+  version "1.78.1"
+  sha256 "2afeea0263c4e38e4899a3c20540e6e7736c9005075bbddb8a33c4a49d987483"
 
-  url "https://pkgs.tailscale.com/stable/Tailscale-#{version}-macos.zip"
+  url "https://pkgs.tailscale.com/stable/Tailscale-#{version}-macos.pkg"
   name "Tailscale"
-  desc "Mesh VPN based on Wireguard"
+  desc "Mesh VPN based on WireGuard"
   homepage "https://tailscale.com/"
 
   livecheck do
@@ -14,9 +14,9 @@ cask "tailscale" do
 
   auto_updates true
   conflicts_with formula: "tailscale"
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
-  app "Tailscale.app"
+  pkg "Tailscale-#{version}-macos.pkg"
   # shim script (https://github.com/caskroom/homebrew-cask/issues/18809)
   shimscript = "#{staged_path}/tailscale.wrapper.sh"
   binary shimscript, target: "tailscale"
@@ -28,18 +28,30 @@ cask "tailscale" do
     EOS
   end
 
-  uninstall login_item: "Tailscale",
-            quit:       "io.tailscale.ipn.macsys"
+  uninstall quit:       "io.tailscale.ipn.macsys",
+            login_item: "Tailscale",
+            pkgutil:    "com.tailscale.ipn.macsys"
 
   zap trash: [
-    "Library/Tailscale",
     "~/Library/Application Scripts/*.io.tailscale.ipn.macsys",
-    "~/Library/Application Scripts/io.tailscale.ipn.macsys.share-extension",
     "~/Library/Application Scripts/io.tailscale.ipn.macsys",
+    "~/Library/Application Scripts/io.tailscale.ipn.macsys.login-item-helper",
+    "~/Library/Application Scripts/io.tailscale.ipn.macsys.share-extension",
+    "~/Library/Caches/io.tailscale.ipn.macsys",
     "~/Library/Containers/io.tailscale.ipn.macos.network-extension",
-    "~/Library/Containers/io.tailscale.ipn.macsys.share-extension",
     "~/Library/Containers/io.tailscale.ipn.macsys",
+    "~/Library/Containers/io.tailscale.ipn.macsys.login-item-helper",
+    "~/Library/Containers/io.tailscale.ipn.macsys.share-extension",
     "~/Library/Containers/Tailscale",
     "~/Library/Group Containers/*.io.tailscale.ipn.macsys",
+    "~/Library/HTTPStorages/io.tailscale.ipn.macsys",
+    "~/Library/HTTPStorages/io.tailscale.ipn.macsys.binarycookies",
+    "~/Library/Preferences/io.tailscale.ipn.macsys.plist",
+    "~/Library/Tailscale",
   ]
+
+  caveats do
+    kext
+    license "https://tailscale.com/terms"
+  end
 end

@@ -1,8 +1,8 @@
 cask "ripx" do
-  version "6.4.1"
-  sha256 "95a670b4066d9341362dad18ad009b8c7361f921406e28084006a1230b5e1516"
+  version "7.5.1"
+  sha256 "d50916d2a066cffcbfb640fa1e6e9e7e4a364ec1f5fcaa9bad400f580ded7442"
 
-  url "https://s3.us-east-2.amazonaws.com/downloads.hitnmix.com/RipX_#{version.no_dots}.dmg",
+  url "https://s3.us-east-2.amazonaws.com/downloads.hitnmix.com/RipXDAW_#{version.no_dots}.dmg",
       verified: "s3.us-east-2.amazonaws.com/downloads.hitnmix.com/"
   name "RipX"
   desc "Music stem separation and repair utility"
@@ -10,12 +10,21 @@ cask "ripx" do
 
   livecheck do
     url "https://hitnmix.com/changes/"
-    regex(/v?(\d+(?:\.\d+)+)\s*changes/i)
+    regex(/^\s*v?(\d+(?:\.\d+)+)\s+changes(?:\s+\([^)]+?\))?(?:\s*(?:&[^;]+?;|.)?\s*mac(?:OS)?\s+Only)?\s*$/i)
+    strategy :page_match do |page, regex|
+      page.scan(%r{<h3[^>]*?>.+?</h3>}i).map do |match|
+        # Remove HTML tags from text to simplify matching
+        match = match.gsub(/<[^>]+?>/, "").match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
   end
 
   depends_on macos: ">= :sierra"
 
-  pkg "RipX.pkg"
+  pkg "RipX DAW.pkg"
 
   uninstall pkgutil: [
               "com.hitnmix.HitnMix.pkg",

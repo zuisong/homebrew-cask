@@ -19,17 +19,30 @@ cask "apparency" do
       skip "Legacy version"
     end
   end
-  on_big_sur :or_newer do
-    version "1.6,294"
+  on_big_sur do
+    version "1.6.1"
+    sha256 "cadd8894ec15b664fd60a141f82136cbe139af0b13000851497d880235abe8b2"
+
+    url "https://www.mothersruin.com/software/downloads/Apparency-#{version}.dmg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_monterey :or_newer do
+    version "2.2,483"
     sha256 :no_check
 
     url "https://mothersruin.com/software/downloads/Apparency.dmg"
 
     livecheck do
       url "https://www.mothersruin.com/software/Apparency/data/ApparencyVersionInfo.plist"
-      regex(/CFBundleShortVersionString.*?\n.*?(\d+(?:\.\d+)+).*?\n.*?CFBundleVersion.*?\n.*?(\d+(?:\.\d+)*)/i)
-      strategy :page_match do |page, regex|
-        page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+      strategy :xml do |xml|
+        short_version = xml.elements["//key[text()='CFBundleShortVersionString']"]&.next_element&.text
+        version = xml.elements["//key[text()='CFBundleVersion']"]&.next_element&.text
+        next if short_version.blank? || version.blank?
+
+        "#{short_version.strip},#{version.strip}"
       end
     end
   end
@@ -44,10 +57,12 @@ cask "apparency" do
   binary "#{appdir}/Apparency.app/Contents/MacOS/appy"
 
   zap trash: [
+    "~/Library/Application Scripts/*.com.mothersruin.Apparency.SharedPrefs",
     "~/Library/Application Scripts/com.mothersruin.Apparency",
     "~/Library/Application Scripts/com.mothersruin.Apparency.QLPreviewExtension",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.mothersruin.apparency.sfl*",
     "~/Library/Containers/com.mothersruin.Apparency",
     "~/Library/Containers/com.mothersruin.Apparency.QLPreviewExtension",
+    "~/Library/Group Containers/*.com.mothersruin.Apparency.SharedPrefs",
   ]
 end

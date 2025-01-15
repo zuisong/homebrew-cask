@@ -1,9 +1,9 @@
 cask "hey" do
   arch arm: "-arm64"
 
-  version "1.2.13"
-  sha256 arm:   "7cbad39de3d591f67cdf754b00fdb3adb971482e3d4081c0d197cc71282902ea",
-         intel: "04e66b402baea4bc7e4c0e826030f915f9d8e28b2f9996f315f87ab27b7ae1c2"
+  version "1.2.15"
+  sha256 arm:   "0724b10ebdd0d16b61f20876a4e524cc0d34a4bc257da92a75b685c0f75e5ef2",
+         intel: "5bbf4cc4503bb42f1b6c1290c6e300385f8033cc978fa53d06436a852a3e8e37"
 
   url "https://hey-desktop.s3.amazonaws.com/HEY-#{version}#{arch}-mac.zip",
       verified: "hey-desktop.s3.amazonaws.com/"
@@ -17,6 +17,7 @@ cask "hey" do
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "HEY.app"
 

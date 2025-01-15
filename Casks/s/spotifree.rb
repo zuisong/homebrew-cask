@@ -7,9 +7,7 @@ cask "spotifree" do
   desc "Automatically mutes ads on Spotify (not supported)"
   homepage "https://github.com/ArtemGordinsky/Spotifree/"
 
-  app "Spotifree.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "Spotifree.app"
 end

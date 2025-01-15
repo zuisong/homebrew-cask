@@ -3,26 +3,37 @@ cask "lightkey" do
     version "4.4.5"
     sha256 "457df4bb2d2f21a52eec9b9b05830eb082014ce66fd79f91544a0838d54a3241"
 
+    # This check should only return legacy versions and the conditions may need
+    # to be updated as the minimum system version of releases changes. If/when
+    # upstream stops publishing new legacy versions, this should be updated to
+    # use `skip` instead.
     livecheck do
-      skip "Legacy version"
-    end
+      url "https://lightkeyapp.com/en/update"
+      strategy :sparkle do |items|
+        items.map do |item|
+          next unless item.minimum_system_version
+          next if item.minimum_system_version < :big_sur ||
+                  item.minimum_system_version >= :ventura
 
-    depends_on macos: ">= :big_sur"
+          item.version
+        end
+      end
+    end
   end
   on_ventura :or_newer do
-    version "4.5.1"
-    sha256 "40dd3cff27680c5f0202d81c0b61d49ef24c5033e96618c7f29008d6937bd365"
+    version "5.2.1"
+    sha256 "7e5050a28798e04dd028d7ac476c22def9bdb7dd4a4f4fd40badb1c6311045f3"
 
-    # Updates for legacy versions are included so sorting by release date
-    # return false positives, pass all version numbers to livecheck instead
+    # Upstream also publishes legacy versions (with a lower minor version) in
+    # the appcast, so the first `item` after sorting by `pubDate`/`version` may
+    # not be the highest version. This `strategy` block collects the `version`
+    # from all `items`, ignoring the `Sparkle` strategy's `pubDate` sorting.
     livecheck do
       url "https://lightkeyapp.com/en/update"
       strategy :sparkle do |items|
         items.map(&:version)
       end
     end
-
-    depends_on macos: ">= :ventura"
   end
 
   url "https://lightkeyapp.com/download/Lightkey-#{version.dots_to_hyphens}/LightkeyInstaller.zip"
@@ -31,15 +42,16 @@ cask "lightkey" do
   homepage "https://lightkeyapp.com/"
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   pkg "LightkeyInstaller.pkg"
 
-  uninstall delete:  "/Applications/Lightkey.app",
-            pkgutil: [
+  uninstall pkgutil: [
               "de.monospc.lightkey.pkg.App",
               "de.monospc.lightkey.pkg.documentation",
               "de.monospc.lightkey.pkg.OLA",
-            ]
+            ],
+            delete:  "/Applications/Lightkey.app"
 
   zap trash: [
     "~/Library/Application Support/Lightkey",

@@ -18,11 +18,13 @@ cask "openrgb" do
     end
   end
 
+  depends_on macos: ">= :catalina"
+
   app "OpenRGB.app"
 
   zap trash: [
+    "~/.config/OpenRGB",
     "~/Library/Preferences/com.yourcompany.OpenRGB.plist",
     "~/Library/Saved Application State/com.yourcompany.OpenRGB.savedState",
-    "~/.config/OpenRGB",
   ]
 end

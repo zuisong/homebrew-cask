@@ -9,7 +9,7 @@ cask "psi" do
   homepage "https://psi-im.org/"
 
   livecheck do
-    url "https://psi-im.org/download/"
+    url "https://psi-im.org/downloads/"
     regex(/psi[._-]?(\d+(?:\.\d+)*)[._-]?mac\.dmg/i)
   end
 
@@ -18,8 +18,12 @@ cask "psi" do
   uninstall quit: "org.psi-im"
 
   zap trash: [
-    "~/Library/Saved Application State/org.psi-im.savedState",
-    "~/Library/Caches/Psi",
     "~/Library/Application Support/Psi",
+    "~/Library/Caches/Psi",
+    "~/Library/Saved Application State/org.psi-im.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "maxon" do
-  version "3.1"
-  sha256 "7e7ba5ef683d84dac6645eea1fa32e7d737f1225865adaec27da11bf17cf96a2"
+  version "2025.2.1"
+  sha256 "1d8aaff402c8e49b9cd669ce2fc3112a02131c64206c4a00a3a2d39f2ed90dc4"
 
   url "https://mx-app-blob-prod.maxon.net/mx-package-production/installer/macos/maxon/maxonapp/releases/#{version}/Maxon_App_#{version}_Mac.zip"
   name "Maxon App"
@@ -9,35 +9,40 @@ cask "maxon" do
 
   livecheck do
     url "https://packages.maxon.net/manifests?platform=macos&org=maxon&type=products&family=fuse"
-    regex(/"filename".+"Maxon_App[._-]v?(\d+(?:\.\d+)+)_Mac\.zip"/i)
+    strategy :json do |json|
+      json.map do |item|
+        item["version"]
+      end
+    end
   end
 
   installer script: {
-    executable: "#{staged_path}/Maxon App Installer.app/Contents/Scripts/install.sh",
+    executable: "#{staged_path}/Maxon_App_#{version}_Mac.app/Contents/MacOS/installbuilder.sh",
     sudo:       true,
   }
 
-  uninstall delete:    [
+  uninstall launchctl: [
+              "com.maxon.mxnotify.agent",
+              "com.maxon.mxredirect.agent",
+              "com.redgiant.service",
+            ],
+            quit:      "net.maxon.app-manager",
+            delete:    [
               "/Applications/Maxon.app",
               "/Library/Application Support/Maxon",
               "/Library/Application Support/Red Giant",
               "/Library/Logs/Maxon",
               "/Library/Logs/Red Giant",
-            ],
-            launchctl: [
-              "com.maxon.mxnotify.agent",
-              "com.maxon.mxredirect.agent",
-              "com.redgiant.service",
             ]
 
   zap trash: [
+    "/Users/Shared/Maxon",
+    "/Users/Shared/Red Giant",
     "~/Library/Application Support/Maxon",
     "~/Library/Application Support/Red Giant",
     "~/Library/Caches/net.maxon.app-manager",
     "~/Library/Preferences/Maxon",
     "~/Library/Preferences/net.maxon.app-manager.plist",
     "~/Library/Saved Application State/net.maxon.app-manager.savedState",
-    "/Users/Shared/Maxon",
-    "/Users/Shared/Red Giant",
   ]
 end

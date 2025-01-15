@@ -7,9 +7,11 @@ cask "komodo-ide" do
   desc "One IDE for all your languages"
   homepage "https://www.activestate.com/komodo-ide/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Komodo IDE #{version.major}.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

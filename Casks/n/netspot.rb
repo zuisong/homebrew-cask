@@ -1,5 +1,5 @@
 cask "netspot" do
-  version "3.0.3168"
+  version "4.0.4502"
   sha256 :no_check
 
   url "https://cdn.netspotapp.com/download/NetSpot.dmg"
@@ -8,12 +8,12 @@ cask "netspot" do
   homepage "https://www.netspotapp.com/"
 
   livecheck do
-    url "https://www.netspotapp.com/updates/netspot#{version.major}-appcast.xml"
+    url "https://cdn.netspotapp.com/download/Mac/netspot#{version.major}-appcast.xml"
     strategy :sparkle
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :big_sur"
 
   app "NetSpot.app"
 

@@ -1,11 +1,11 @@
 cask "eclipse-platform" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "4.29,202309031000"
-  sha256 arm:   "558a73cf699408d1c81810543929878766c9ac722b11036d7ca99f693a838df9",
-         intel: "8d78e825332bd99a1a5ff88c2f595949d0a62e33f7e6485c0e475ab07121d611"
+  version "4.34,202411201800"
+  sha256 arm:   "5781e51d9ae311a93522e7bb413227d83e594ea6c42c516a7b8b2a3b3f2e0368",
+         intel: "f65a3b048cbc4f46dd07230b157bf9dc0c8665f513c4989348d75e081cc45ab4"
 
-  url "https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops#{version.major}/R-#{version.csv.first}-#{version.csv.second}/eclipse-SDK-#{version.csv.first}-macosx-cocoa-#{arch}.dmg&r=1"
+  url "https://www.eclipse.org/downloads/download.php?file=/eclipse/downloads/drops#{version.major}/R-#{version.csv.first}-#{version.csv.second}/eclipse-SDK-#{version.csv.first}-macosx-cocoa-#{arch}.dmg&mirror_id=1"
   name "Eclipse SDK"
   desc "SDK for the Eclipse IDE"
   homepage "https://eclipse.org/"
@@ -23,7 +23,7 @@ cask "eclipse-platform" do
 
   zap trash: [
     "~/.eclipse",
-    "~/Library/Preferences/org.eclipse.sdk.ide.plist",
     "~/eclipse-workspace",
+    "~/Library/Preferences/org.eclipse.sdk.ide.plist",
   ]
 end

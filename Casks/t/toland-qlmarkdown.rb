@@ -4,14 +4,12 @@ cask "toland-qlmarkdown" do
 
   url "https://github.com/toland/qlmarkdown/releases/download/v#{version}/QLMarkdown.qlgenerator.zip"
   name "QLMarkdown"
-  desc "QuickLook generator for Markdown files"
+  desc "Quick Look generator for Markdown files"
   homepage "https://github.com/toland/qlmarkdown"
+
+  disable! date: "2024-12-16", because: :discontinued
 
   qlplugin "QLMarkdown.qlgenerator"
 
   # No zap stanza required
-
-  caveats do
-    discontinued
-  end
 end

@@ -1,6 +1,6 @@
 cask "medis" do
-  version "2.13.0"
-  sha256 "35d570f72cdf055a781f5ee1f8482c037412034914e98f561f7a9fe71679f70a"
+  version "2.15.1"
+  sha256 "70e0cab62c3306aa097c5d5000a0d14e555019f17dc2f1743c0a158f035ba7e9"
 
   url "https://api.getmedis.com/medis-#{version}.zip"
   name "Medis"
@@ -12,7 +12,7 @@ cask "medis" do
     strategy :sparkle, &:short_version
   end
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "Medis.app"
 

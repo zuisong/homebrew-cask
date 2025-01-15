@@ -7,6 +7,8 @@ cask "plex-media-player" do
   desc "Home media player"
   homepage "https://www.plex.tv/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   auto_updates true
 
   app "Plex Media Player.app"
@@ -15,13 +17,12 @@ cask "plex-media-player" do
     "~/Library/Application Support/Plex Media Player",
     "~/Library/Caches/Plex Media Player",
     "~/Library/Logs/Plex Media Player",
-    "~/Library/Saved Application State/tv.plex.Plex Media Player.savedState",
     "~/Library/Preferences/tv.plex.Plex Media Player.plist",
+    "~/Library/Saved Application State/tv.plex.Plex Media Player.savedState",
   ]
 
   caveats do
-    discontinued
-
+    requires_rosetta
     <<~EOS
       #{token} has been deprecated in favor of Plex for Desktop and Plex HTPC.
 

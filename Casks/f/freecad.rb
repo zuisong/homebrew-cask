@@ -1,19 +1,22 @@
 cask "freecad" do
-  arch arm: "arm64", intel: "intel_x86"
+  arch arm: "arm64", intel: "x86_64"
 
-  version "0.21.1"
-  sha256 arm:   "b6959ca9e0e2f7cddda2cf1e97a26f3e2e65205f2e8e53b3c5dccd062f0be14f",
-         intel: "633dd754e7732c531a019fe74068e43883f8f329c25fe85bfcc91fa26186451f"
+  version "1.0.0"
+  sha256 arm:   "ec287b388cb94876214678b8f9f586166261883e2591df274a52b19b73d48183",
+         intel: "48a38173a7181bd24f647d162488284a94e5cbf8678b15de8bbe41d5dbad4bd4"
 
-  url "https://github.com/FreeCAD/FreeCAD/releases/download/#{version}/FreeCAD-#{version}-mac-#{arch}.dmg",
+  url "https://github.com/FreeCAD/FreeCAD/releases/download/#{version}/FreeCAD_#{version}-conda-macOS-#{arch}-py311.dmg",
       verified: "github.com/FreeCAD/FreeCAD/"
   name "FreeCAD"
-  desc "3D parametric modeler"
+  desc "3D parametric modeller"
   homepage "https://www.freecad.org/"
 
+  # Upstream uses GitHub releases to indicate that a version is released
+  # (there's also sometimes a notable gap between the release being created
+  # and the homepage being updated), so the `GithubLatest` strategy is necessary.
   livecheck do
-    url "https://www.freecad.org/downloads.php"
-    regex(/FreeCAD[._-]v?(\d+(?:\.\d+)+)[._-]mac[._-]#{arch}\.dmg/i)
+    url :url
+    strategy :github_latest
   end
 
   depends_on macos: ">= :sierra"
@@ -23,7 +26,7 @@ cask "freecad" do
   zap trash: [
     "~/Library/Application Support/FreeCAD",
     "~/Library/Caches/FreeCAD",
-    "~/Library/Preferences/FreeCAD",
     "~/Library/Preferences/com.freecad.FreeCAD.plist",
+    "~/Library/Preferences/FreeCAD",
   ]
 end

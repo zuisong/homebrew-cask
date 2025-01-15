@@ -1,6 +1,6 @@
 cask "ukelele" do
-  version "3.5.7"
-  sha256 "631994a31763c7dc383d429969a7b3d98975ad98dcf30dc51b1421fc93fc05e7"
+  version "3.5.12"
+  sha256 "27fa6376ca4439d61b8bfeba5d8edea2a51c752953f220c16995d56aa8a560ba"
 
   url "https://software.sil.org/downloads/r/ukelele/Ukelele_#{version}.dmg"
   name "Ukelele"
@@ -13,6 +13,7 @@ cask "ukelele" do
   end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "Ukelele.app"
 

@@ -1,15 +1,20 @@
 cask "firefly-shimmer" do
-  version "2.1.8"
-  sha256 "ab9c68a1ac3bfad8bb58469dc4bd76ff26ac6033523aff571cf4fbec1be1df09"
+  version "2.1.16"
+  sha256 "24a87c8e2c06c9540704426159491636cb3df73eb2a8610d9b4eba1d0b3a3922"
 
-  url "https://github.com/iotaledger/firefly/releases/download/desktop-#{version}/firefly-desktop-#{version}.dmg",
+  url "https://github.com/iotaledger/firefly/releases/download/desktop-shimmer-#{version}/firefly-shimmer-desktop-#{version}.dmg",
       verified: "github.com/iotaledger/firefly/"
   name "Firefly Shimmer"
   desc "Official wallet for IOTA"
   homepage "https://firefly.iota.org/"
 
+  livecheck do
+    url "https://dl.firefly.iota.org/shimmer-mac.yml"
+    strategy :electron_builder
+  end
+
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Firefly Shimmer.app"
 
@@ -22,4 +27,8 @@ cask "firefly-shimmer" do
     "~/Library/Preferences/org.iota.firefly.plist",
     "~/Library/Saved Application State/org.iota.firefly.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

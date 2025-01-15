@@ -1,6 +1,6 @@
 cask "forklift" do
-  version "4.0.2"
-  sha256 "8950d4682b38e49fe987de9d6ed2cdc7046ee52b84c498896a2849aa5c32867a"
+  version "4.2.1"
+  sha256 "1f8f6a4bed02f3ea06bb0b3a1b95334a9fb4314451f00f2f146ac00e097dbd45"
 
   url "https://download.binarynights.com/ForkLift/ForkLift#{version}.zip"
   name "ForkLift"
@@ -13,19 +13,19 @@ cask "forklift" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :monterey"
 
   app "ForkLift.app"
 
-  uninstall delete:    "/Library/PrivilegedHelperTools/com.binarynights.ForkLiftHelper",
-            launchctl: [
+  uninstall launchctl: [
               "com.binarynights.ForkLiftHelper",
               "com.binarynights.ForkLiftMini",
             ],
             quit:      [
               "com.binarynights.ForkLift-#{version.major}",
               "com.binarynights.ForkLiftMini",
-            ]
+            ],
+            delete:    "/Library/PrivilegedHelperTools/com.binarynights.ForkLiftHelper"
 
   zap trash: [
     "~/Library/Application Support/ForkLift",

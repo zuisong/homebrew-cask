@@ -1,6 +1,6 @@
 cask "xscope" do
-  version "4.6,115"
-  sha256 "8d77b01b7959e797aad3e31852e4f39973b5197bec506b14ddb738f0ec0bb861"
+  version "4.7.1,141"
+  sha256 "45fc050375ca39e747f5603fc37d9b22b8769a29d31491de557ed1f79c271397"
 
   url "https://downloads.iconfactory.com/xscope/xScope-#{version.csv.first}+#{version.csv.second}.zip",
       verified: "downloads.iconfactory.com/"
@@ -12,6 +12,9 @@ cask "xscope" do
     url "https://iconfactory.com/appcasts/xScope/appcast.xml"
     strategy :sparkle
   end
+
+  auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "xScope.app"
 

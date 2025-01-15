@@ -1,6 +1,6 @@
 cask "one-switch" do
-  version "1.31,392"
-  sha256 "ba090841303e008c499b4d2ec91854d42f01245becb6e4a1bbec23be7d353c1f"
+  version "1.34.2,413"
+  sha256 "05d7d7d866613462e4dad2c836ae5b4109058e8a4b0b7b44284a657aa4fa64a3"
 
   url "https://fireball.studio/media/uploads/files/OneSwitchOfficial-#{version.csv.second}.dmg"
   name "One Switch"
@@ -8,15 +8,16 @@ cask "one-switch" do
   homepage "https://fireball.studio/oneswitch"
 
   livecheck do
-    url "https://fireball.studio/api/release_manager/studio.fireball.OneSwitch.xml"
+    url "https://fireball.studio/api/release_manager/studio.fireball.OneSwitchOfficial.xml"
     strategy :sparkle
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "One Switch.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/studio.fireball.oneswitch.sfl*",
     "~/Library/Application Support/One Switch",
     "~/Library/Application Support/studio.fireball.OneSwitch",
     "~/Library/Caches/studio.fireball.OneSwitch",

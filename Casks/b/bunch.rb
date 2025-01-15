@@ -1,6 +1,6 @@
 cask "bunch" do
-  version "1.4.13,173"
-  sha256 "3e29b3161a8be58c9f89fa92927d492a0919090dfa6e468ea1e15c517ccc8b04"
+  version "1.4.17,180"
+  sha256 "8889757631a7a2fdfc9c81b0acf39459926fa1ce31a89822cb4ca788ca7370db"
 
   url "https://brettterpstra.com/updates/bunch/Bunch#{version.csv.first}#{version.csv.second}.dmg",
       verified: "brettterpstra.com/updates/bunch/"
@@ -14,7 +14,7 @@ cask "bunch" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Bunch.app"
 

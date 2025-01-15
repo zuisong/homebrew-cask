@@ -1,30 +1,24 @@
 cask "workspace-one-intelligent-hub" do
-  version "23.09.0.11"
+  version "24.07.3"
   sha256 :no_check
 
-  url "https://packages.vmware.com/wsone/VMwareWorkspaceONEIntelligentHub.pkg",
-      verified: "packages.vmware.com/wsone/"
+  url "https://packages.omnissa.com/wsone/WorkspaceONEIntelligentHub.pkg",
+      verified: "packages.omnissa.com/wsone/"
   name "Workspace ONE Intelligent Hub"
   desc "VMware workspace"
   homepage "https://www.getwsone.com/"
 
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://docs-be.omnissa.com/api/bundle/workspace-one-intelligent-hub-for-macos-release-notesVSaaS/page/WorkspaceONEIntelligenHubmacOS-ReleaseNotes.html"
+    regex(/Intelligent\s+Hub\s+v?(\d+(?:\.\d+)+)/i)
   end
 
   auto_updates true
   depends_on macos: ">= :catalina"
 
-  pkg "VMwareWorkspaceONEIntelligentHub.pkg"
+  pkg "WorkspaceONEIntelligentHub.pkg"
 
-  uninstall pkgutil:   [
-              "com.air-watch.pkg.OSXAgent",
-              "com.airwatch.munki.admin",
-              "com.airwatch.munki.core",
-              "com.airwatch.munki.python",
-            ],
-            launchctl: [
+  uninstall launchctl: [
               "com.airwatch.awcmd",
               "com.airwatch.mac.agent",
               "com.vmware.hub.flagd",
@@ -33,6 +27,12 @@ cask "workspace-one-intelligent-hub" do
               "com.vmware.hubupdateagent",
               "com.vmware.uem.hubd",
               "com.vmware.uem.hublogd",
+            ],
+            pkgutil:   [
+              "com.air-watch.pkg.OSXAgent",
+              "com.airwatch.munki.admin",
+              "com.airwatch.munki.core",
+              "com.airwatch.munki.python",
             ]
 
   zap trash: [

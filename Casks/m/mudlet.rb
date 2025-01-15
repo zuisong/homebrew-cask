@@ -1,6 +1,6 @@
 cask "mudlet" do
-  version "4.17.2"
-  sha256 "3aedd1803d8c3daa978eb39276885c15c30dccd3ee9969f8625ffe74222e3dfa"
+  version "4.18.5"
+  sha256 "ccdabebadf309e5e7b1a87aa07734a9a374d8b431b1be55b61863ece3ac70eaa"
 
   url "https://www.mudlet.org/wp-content/files/Mudlet-#{version}.dmg"
   name "Mudlet"
@@ -8,7 +8,8 @@ cask "mudlet" do
   homepage "https://www.mudlet.org/"
 
   livecheck do
-    url "https://github.com/Mudlet/Mudlet"
+    url "https://www.mudlet.org/wp-content/files/"
+    regex(/href=.*?Mudlet[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
   end
 
   depends_on macos: ">= :high_sierra"
@@ -20,4 +21,8 @@ cask "mudlet" do
     "~/Library/Saved Application State/org.mudlet.mudlet.savedState",
     "~/mudlet-data",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

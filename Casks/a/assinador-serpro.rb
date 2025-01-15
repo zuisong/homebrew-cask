@@ -1,8 +1,8 @@
 cask "assinador-serpro" do
-  version "4.2.0"
-  sha256 "b7cada9314d6224793010599ae859d7ea26c6ea64aa100b0db848f0a7397e2ab"
+  version "4.2.2"
+  sha256 "8be514e7088e83e1de4f1ba02b40f273f61205e5396bcc60b09b4305e815742b"
 
-  url "https://www.serpro.gov.br/links-fixos-superiores/assinador-digital/assinador-serpro/arquivos/assinadorserpro-#{version.dots_to_hyphens}-mpkg.zip"
+  url "https://assinadorserpro.estaleiro.serpro.gov.br/downloads/#{version}/AssinadorSerpro-#{version}.mpkg.zip"
   name "Assinador Serpro"
   desc "Validate and sign documents using digital certificates"
   homepage "https://www.serpro.gov.br/links-fixos-superiores/assinador-digital/assinador-serpro"

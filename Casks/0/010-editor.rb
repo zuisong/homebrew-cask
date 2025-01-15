@@ -1,6 +1,6 @@
 cask "010-editor" do
-  version "14.0"
-  sha256 "6082484998b8797f1ad3e903719189ce681f0fa9368449a7c7c961c41dbe08b3"
+  version "15.0.1"
+  sha256 "8690e1717d714b836bcb61ce22b170a982b8e493a6cbaea53eae9d26bf699108"
 
   url "https://download.sweetscape.com/010EditorMac64Installer#{version}.dmg"
   name "010 Editor"
@@ -20,4 +20,8 @@ cask "010-editor" do
         "~/Library/Saved Application State/com.SweetScape.010Editor.savedState",
       ],
       rmdir: "~/Documents/SweetScape"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -7,11 +7,9 @@ cask "cantata" do
   desc "Qt5 Graphical MPD Client"
   homepage "https://github.com/cdrummond/cantata"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   depends_on macos: ">= :sierra"
 
   app "Cantata.app"
-
-  caveats do
-    discontinued
-  end
 end

@@ -8,20 +8,18 @@ cask "dat" do
   desc "Peer to peer data sharing app built for humans"
   homepage "https://dat-ecosystem.org/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Dat Desktop.app"
 
   zap trash: [
+    "~/.dat",
+    "~/.dat-desktop",
     "~/Library/Application Support/Dat",
     "~/Library/Caches/com.datproject.dat",
     "~/Library/Caches/com.datproject.dat.ShipIt",
     "~/Library/Preferences/com.datproject.dat.helper.plist",
     "~/Library/Preferences/com.datproject.dat.plist",
     "~/Library/Saved Application State/com.datproject.dat.savedState",
-    "~/.dat",
-    "~/.dat-desktop",
   ]
-
-  caveats do
-    discontinued
-  end
 end

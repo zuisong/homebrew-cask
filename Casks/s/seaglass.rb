@@ -7,12 +7,10 @@ cask "seaglass" do
   desc "Matrix client"
   homepage "https://github.com/neilalexander/seaglass/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   auto_updates true
   depends_on macos: ">= :high_sierra"
 
   app "Seaglass.app"
-
-  caveats do
-    discontinued
-  end
 end

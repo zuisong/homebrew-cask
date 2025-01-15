@@ -1,20 +1,15 @@
 cask "fabfilter-pro-q" do
-  version "3.23"
-  sha256 "35975571e0ee3e72a3c14d4c02d58999ead5c9ce1a5dc248f9874442b994bc67"
+  version "4.01"
+  sha256 "8e936e5c5aec7ab1b48378b7736fdd953284ce160f840812591a8ca018458e83"
 
-  url "https://download.fabfilter.com/ffproq#{version.no_dots}.dmg"
+  url "https://cdn-b.fabfilter.com/downloads/ffproq#{version.no_dots}.dmg"
   name "FabFilter Pro-Q"
-  desc "Equalizer plug-in"
+  desc "Equaliser plug-in"
   homepage "https://www.fabfilter.com/products/pro-q-3-equalizer-plug-in"
 
   livecheck do
     url "https://www.fabfilter.com/download"
-    strategy :page_match do |page|
-      match = page.match(/ffproq(\d)(\d+)\.dmg/i)
-      next if match.blank?
-
-      "#{match[1]}.#{match[2]}"
-    end
+    regex(/FabFilter\s+Pro-Q.*?v?(\d+(?:\.\d+)+)/im)
   end
 
   depends_on macos: ">= :sierra"

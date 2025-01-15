@@ -33,8 +33,8 @@ cask "sourcetree" do
     end
   end
   on_catalina :or_newer do
-    version "4.2.5,259"
-    sha256 "593a1656a1cf507380d0a42e613e7a95f3b6dd1fe8769852bb668cafb530b2aa"
+    version "4.2.10,269"
+    sha256 "4a3ec25616930a8932d9c3abf8be34c99362dbb3e5d72dcbf9dcf6ab332c6126"
 
     url "https://product-downloads.atlassian.com/software/sourcetree/ga/Sourcetree_#{version.csv.first}_#{version.csv.second}.zip",
         verified: "product-downloads.atlassian.com/software/sourcetree/ga/"
@@ -50,7 +50,6 @@ cask "sourcetree" do
   homepage "https://www.sourcetreeapp.com/"
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
 
   app "Sourcetree.app"
   binary "#{appdir}/Sourcetree.app/Contents/Resources/stree"
@@ -59,7 +58,7 @@ cask "sourcetree" do
             quit:      "com.torusknot.SourceTreeNotMAS"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.torusknot.sourcetreenotmas.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.torusknot.sourcetreenotmas.sfl*",
     "~/Library/Application Support/SourceTree",
     "~/Library/Caches/com.torusknot.SourceTreeNotMAS",
     "~/Library/Logs/Sourcetree",

@@ -1,6 +1,6 @@
 cask "macvim" do
-  version "178"
-  sha256 "9efe173a7906f0e83e93a4c71eb768a2bbf58d4af1e881cf55b4b6c9e280ee0f"
+  version "180"
+  sha256 "cbb56be27e48975135bc7f83d62480097469e8a4fdf93e7e2ae165e71cbec117"
 
   url "https://github.com/macvim-dev/macvim/releases/download/release-#{version}/MacVim.dmg"
   name "MacVim"
@@ -14,6 +14,7 @@ cask "macvim" do
 
   auto_updates true
   conflicts_with formula: "macvim"
+  depends_on macos: ">= :high_sierra"
 
   app "MacVim.app"
 

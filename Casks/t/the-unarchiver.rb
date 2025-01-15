@@ -1,6 +1,6 @@
 cask "the-unarchiver" do
-  version "4.3.5,139,1652457131"
-  sha256 "4602bf08296747614fdcabfa68f420836dec9c8ebe9286a93b4c509a1e567c62"
+  version "4.3.8,146,1715865652"
+  sha256 "55c80d4fbcfb2ad740671c9af034b82ae937db700087732fff62fb2e9512d8d5"
 
   url "https://dl.devmate.com/com.macpaw.site.theunarchiver/#{version.csv.second}/#{version.csv.third}/TheUnarchiver-#{version.csv.second}.zip",
       verified: "devmate.com/com.macpaw.site.theunarchiver/"
@@ -20,6 +20,7 @@ cask "the-unarchiver" do
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "The Unarchiver.app"
 

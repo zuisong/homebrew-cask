@@ -4,7 +4,7 @@ cask "scratch" do
 
   url "https://downloads.scratch.mit.edu/desktop/Scratch%20#{version}.dmg"
   name "Scratch"
-  desc "Programs interactive stories, games, and animations"
+  desc "Programmes interactive stories, games, and animations"
   homepage "https://scratch.mit.edu/download"
 
   livecheck do
@@ -20,4 +20,8 @@ cask "scratch" do
     "~/Library/Application Support/Scratch",
     "~/Library/Preferences/edu.mit.scratch.scratch-desktop.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

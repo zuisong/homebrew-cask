@@ -1,5 +1,5 @@
 cask "jabra-direct" do
-  version "6.11.28601"
+  version "6.20.34801"
   sha256 :no_check
 
   url "https://jabraxpressonlineprdstor.blob.core.windows.net/jdo/JabraDirectSetup.dmg",
@@ -10,10 +10,13 @@ cask "jabra-direct" do
 
   livecheck do
     url "https://jabraexpressonlinejdo.jabra.com/jdo/jdo.json"
-    regex(/"MacVersion"\s*:\s*"(\d+(?:\.\d+)+)"/i)
+    strategy :json do |json|
+      json["MacVersion"]
+    end
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   pkg "JabraDirectSetup.pkg"
 
@@ -25,17 +28,17 @@ cask "jabra-direct" do
               "com.jabra.softphoneService",
               "nl.superalloy.oss.terminal-notifier",
             ],
-            delete:     "/Applications/Jabra Direct.app",
             login_item: "Jabra Direct",
             pkgutil:    [
               "com.jabra.directonline",
               "com.jabra.JabraFirmwareUpdate",
               "com.jabra.kext",
-            ]
+            ],
+            delete:     "/Applications/Jabra Direct.app"
 
   zap trash: [
-    "~/Library/Application Support/Jabra",
     "~/Library/Application Support/Jabra Direct",
+    "~/Library/Application Support/Jabra",
     "~/Library/Application Support/JabraSDK",
     "~/Library/Logs/Jabra Direct",
     "~/Library/Preferences/com.jabra.directonline.helper.plist",
@@ -43,4 +46,8 @@ cask "jabra-direct" do
     "~/Library/Preferences/com.jabra.prefsettings.plist",
     "~/Library/Saved Application State/com.jabra.directonline.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

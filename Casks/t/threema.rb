@@ -1,5 +1,5 @@
 cask "threema" do
-  version "1.2.37"
+  version "1.2.47"
   sha256 :no_check
 
   url "https://releases.threema.ch/web-electron/v1/release/Threema-Latest.dmg"
@@ -8,9 +8,11 @@ cask "threema" do
   homepage "https://threema.ch/"
 
   livecheck do
-    url "https://threema.ch/en/whats-new"
-    regex(/Threema\s*for\s*Desktop\s*(\d+(?:\.\d+)+)/i)
+    url "https://threema.ch/en/whats-new/desktop"
+    regex(/Threema\s*(\d+(?:\.\d+)+)\s*for\s*Desktop/i)
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Threema.app"
 

@@ -7,9 +7,7 @@ cask "fastclicker" do
   desc "Auto clicker and mouse automation utility"
   homepage "http://www.advanced-mouse-auto-clicker.com/mac-auto-clicker.html"
 
-  app "FastClicker.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "FastClicker.app"
 end

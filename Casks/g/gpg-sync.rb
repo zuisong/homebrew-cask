@@ -6,8 +6,10 @@ cask "gpg-sync" do
   name "GPG Sync"
   homepage "https://github.com/firstlookmedia/gpgsync/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "GPGSync-#{version}.pkg"
 
-  uninstall pkgutil:   "org.firstlook.gpgsync",
-            launchctl: "org.firstlook.gpgsync"
+  uninstall launchctl: "org.firstlook.gpgsync",
+            pkgutil:   "org.firstlook.gpgsync"
 end

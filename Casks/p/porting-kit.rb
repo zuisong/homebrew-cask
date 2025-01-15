@@ -1,6 +1,6 @@
 cask "porting-kit" do
-  version "5.14.9"
-  sha256 "5f9524b755276dc4537df961be0a74d6aaaea2f28d82c1a519ae06b22a12aa48"
+  version "6.3.2"
+  sha256 "0fea1bbd36bea3c115bc8a94a0ae9afe982a44d824c09cb0d940603f2e0e1a04"
 
   url "https://github.com/vitor251093/porting-kit-releases/releases/download/v#{version}/Porting-Kit-#{version}.dmg",
       verified: "github.com/vitor251093/porting-kit-releases/"
@@ -14,7 +14,13 @@ cask "porting-kit" do
   app "Porting Kit.app"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.paulthetall.portingkit.sfl*",
+    "~/Library/Application Support/portingkit",
     "~/Library/Preferences/com.paulthetall.portingkit.plist",
     "~/Library/Saved Application State/com.paulthetall.portingkit.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

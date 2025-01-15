@@ -1,9 +1,9 @@
 cask "anaconda" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "2023.09-0"
-  sha256 arm:   "34121775d9e30a6ea12af0a462e1881670b0c175b426e06fd7b1581625ebd69b",
-         intel: "0c64a2c634fe31335079d97340c277c81b3f0c9dfe862a06599570640ac897a4"
+  version "2024.10-1"
+  sha256 arm:   "f64ed797ce23ae1d07ead949bfb6ff630b9fa8269ca8aef8ea2efa82172ece47",
+         intel: "ad3eea1cc969e9dfd4d571fc266aae06ec119f651d7cb19c0dc187b73e2bfab1"
 
   url "https://repo.anaconda.com/archive/Anaconda3-#{version}-MacOSX-#{arch}.sh"
   name "Anaconda Distribution"
@@ -34,11 +34,11 @@ cask "anaconda" do
   ]
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.continuum.io.sfl*",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.continuum.python.sfl*",
     "~/.anaconda",
     "~/.conda",
     "~/.condarc",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.continuum.io.sfl*",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.continuum.python.sfl*",
   ]
 
   caveats do

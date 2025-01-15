@@ -8,12 +8,7 @@ cask "twitch-studio" do
   desc "Free streaming software designed for new streamers"
   homepage "https://www.twitch.tv/broadcast/studio/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist do |versions|
-      versions.values.map(&:short_version).compact.first
-    end
-  end
+  deprecate! date: "2024-03-31", because: :discontinued
 
   auto_updates true
 

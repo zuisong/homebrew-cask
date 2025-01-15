@@ -13,15 +13,15 @@ cask "monodraw" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "Monodraw.app"
   binary "#{appdir}/Monodraw.app/Contents/Resources/monodraw"
 
   zap trash: [
     "~/Library/Application Support/com.helftone.monodraw",
-    "~/Library/Caches/com.helftone.monodraw",
     "~/Library/Caches/com.apple.helpd/SDMHelpData/Other/English/HelpSDMIndexFile/com.helftone.monodraw.help*",
+    "~/Library/Caches/com.helftone.monodraw",
     "~/Library/Preferences/com.helftone.monodraw.plist",
   ]
 end

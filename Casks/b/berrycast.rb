@@ -1,6 +1,6 @@
 cask "berrycast" do
-  version "0.38.0"
-  sha256 "a6d6de79a17acf5c5160838ac8623622fc418bf32eaf1ad6a5a0d2e7bae65a2c"
+  version "0.38.3"
+  sha256 "631e718985546b2f4afb2c5cb61c2b8b5d4e657cabb6b7ec3da35e3d767ea057"
 
   url "https://media.berrycast.app/desktop-installer/Berrycast-#{version}-latest.dmg",
       verified: "media.berrycast.app/"
@@ -11,20 +11,28 @@ cask "berrycast" do
   livecheck do
     url "https://media.berrycast.app/desktop-installer/v2/latest-mac.yml"
     regex(/Berrycast[._-]?v?(\d+(?:\.\d+)+)[._-]latest\.dmg/i)
+    strategy :electron_builder do |yaml, regex|
+      yaml["files"]&.map do |item|
+        match = item["url"]&.match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
   end
 
   depends_on macos: ">= :high_sierra"
 
   app "Berrycast.app"
 
-  uninstall login_item: "Berrycast",
-            quit:       [
+  uninstall quit:       [
               "com.openmindt.berrycast",
               "com.openmindt.berrycast.helper",
               "com.openmindt.berrycast.helper.GPU",
               "com.openmindt.berrycast.helper.Plugin",
               "com.openmindt.berrycast.helper.Renderer",
-            ]
+            ],
+            login_item: "Berrycast"
 
   zap trash: [
     "~/Library/Application Support/berrycast-desktop",

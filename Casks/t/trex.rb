@@ -1,6 +1,6 @@
 cask "trex" do
-  version "1.6.0"
-  sha256 "c34d77dbdd6561a4f3eb7650166be625831c2526823ee430e120402909dec023"
+  version "1.8.1"
+  sha256 "a7031d1c3cfe0af18afe21c9d69cd9dc5e60a864d25e36de3a8acb1b2fd4836f"
 
   url "https://github.com/amebalabs/TRex/releases/download/v#{version}/TRex.zip",
       verified: "github.com/amebalabs/TRex/"
@@ -13,7 +13,7 @@ cask "trex" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :ventura"
 
   app "TRex.app"
 

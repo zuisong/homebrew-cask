@@ -1,9 +1,8 @@
 cask "musicbrainz-picard" do
-  version "2.10"
-  sha256 "183d145dd37ae042c2c76b962ed5887846c70d2981fe1cb89149bf9988554ab0"
+  version "2.12.3"
+  sha256 "3d4fcd3c65f00b4952bef04fbf30c0013ac0640f0770bdddeffd20b2cf2094d5"
 
-  url "https://musicbrainz.osuosl.org/pub/musicbrainz/picard/MusicBrainz-Picard-#{version}-macOS-10.14.dmg",
-      verified: "musicbrainz.osuosl.org/pub/"
+  url "https://data.musicbrainz.org/pub/musicbrainz/picard/MusicBrainz-Picard-#{version}-macOS-10.14.dmg"
   name "MusicBrainz Picard"
   desc "Music tagger"
   homepage "https://picard.musicbrainz.org/"
@@ -23,4 +22,8 @@ cask "musicbrainz-picard" do
     "~/Library/Preferences/org.musicbrainz.picard.plist",
     "~/Library/Saved Application State/org.musicbrainz.picard.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

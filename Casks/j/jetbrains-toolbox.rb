@@ -1,9 +1,9 @@
 cask "jetbrains-toolbox" do
   arch arm: "-arm64"
 
-  version "2.0.4,2.0.4.17212"
-  sha256 arm:   "36d5144c97b52b05c3d331fe0936d9101b9ebfaa1adaa3316c23094c63f747d4",
-         intel: "b3dcb90216c2355ca5300b7d25849f15b4b3a7c978344c533793c309858396f8"
+  version "2.5.2,2.5.2.35332"
+  sha256 arm:   "60be7786a2cf75a6026f0ed07fa6a798bd9abe4379d9d03cf1853dde8e16441a",
+         intel: "ffd68627e87521c9362e1eae4816bcb6d38b0b4daacd672410a034276f511cce"
 
   url "https://download.jetbrains.com/toolbox/jetbrains-toolbox-#{version.csv.second}#{arch}.dmg"
   name "JetBrains Toolbox"
@@ -13,8 +13,12 @@ cask "jetbrains-toolbox" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release"
     strategy :json do |json|
-      json["TBA"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["TBA"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
@@ -24,8 +28,8 @@ cask "jetbrains-toolbox" do
 
   app "JetBrains Toolbox.app"
 
-  uninstall signal:    ["TERM", "com.jetbrains.toolbox"],
-            launchctl: "com.jetbrains.toolbox"
+  uninstall launchctl: "com.jetbrains.toolbox",
+            signal:    ["TERM", "com.jetbrains.toolbox"]
 
   zap trash: [
         "~/Library/Application Support/JetBrains/Toolbox",

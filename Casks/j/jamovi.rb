@@ -1,6 +1,6 @@
 cask "jamovi" do
-  version "2.4.8.0"
-  sha256 "3c7549b513e193573f7181ec9deab86600cc8f415ddd3c26c7d3401706f7a36c"
+  version "2.3.28.0"
+  sha256 "4beeca531e3d816fa38bcb363a92967beba316f5ffbd4f1867da87b4edc79161"
 
   url "https://www.jamovi.org/downloads/jamovi-#{version}-macos.dmg"
   name "jamovi"
@@ -13,6 +13,7 @@ cask "jamovi" do
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "jamovi.app"
 

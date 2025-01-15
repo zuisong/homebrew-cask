@@ -1,12 +1,12 @@
 cask "mutesync" do
   arch arm: "-arm64"
 
-  version "5.5.3"
-  sha256 arm:   "4a8400be871aca690ae67556f21472e0d83811ad661f189a4b1c89ea824f46c8",
-         intel: "1ea532eb269785be71b89a91475da143673fd99a784a751fbacb846f1341d287"
+  version "6.0.0"
+  sha256 arm:   "394c58101574ebac12a2fd65f7436b050f8b3503167e15bf96f421cf94e10d24",
+         intel: "09af65f0bd1796f2a1ba5e3eec5fccbb7f6c51b4dd77e1f0d204ef802ba9ccdd"
 
-  url "https://mutesync.s3.us-west-2.amazonaws.com/mutesync-#{version}#{arch}.dmg",
-      verified: "mutesync.s3.us-west-2.amazonaws.com/"
+  url "https://mutesync.s3.amazonaws.com/mutesync-#{version}#{arch}.dmg",
+      verified: "mutesync.s3.amazonaws.com/"
   name "mütesync"
   desc "Companion app to the mütesync physical button"
   homepage "https://mutesync.com/"
@@ -15,6 +15,8 @@ cask "mutesync" do
     url "https://mutesync.s3.amazonaws.com/latest-mac.yml"
     strategy :electron_builder
   end
+
+  auto_updates true
 
   app "mutesync.app"
 

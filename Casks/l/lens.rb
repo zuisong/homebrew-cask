@@ -1,9 +1,9 @@
 cask "lens" do
   arch arm: "-arm64"
 
-  version "2023.10.181418"
-  sha256 arm:   "81e038527c800ed5fca82635f72152afd8b1ded561e420b3318804ee855743e7",
-         intel: "ab7af80ceae7dca18ffff54c2908ffa1215361977cf94014fa83e7c2aa8448db"
+  version "2024.11.261604"
+  sha256 arm:   "69a90908b9d00409d476bae789371a852faadff90fd3d9a568f4d5f055b969f2",
+         intel: "31041119309ef8b1075c98bace39e910d6ed95634ff97547f6b59744c93edbac"
 
   url "https://api.k8slens.dev/binaries/Lens-#{version}-latest#{arch}.dmg"
   name "Lens"
@@ -12,13 +12,13 @@ cask "lens" do
 
   livecheck do
     url "https://api.k8slens.dev/binaries/latest-mac.json/"
-    regex(/(\d+(?:\.\d+)+)/i)
     strategy :json do |json|
-      json["version"].sub("-latest", "")
+      json["version"]&.sub("-latest", "")
     end
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Lens.app"
 

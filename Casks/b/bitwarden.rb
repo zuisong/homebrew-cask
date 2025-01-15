@@ -1,6 +1,6 @@
 cask "bitwarden" do
-  version "2023.9.3"
-  sha256 "8c3fd4de0ca11dc30a74eab9da699f843697a2f42a9b96ff7f894705d94f413a"
+  version "2025.1.0"
+  sha256 "9b7f7b3060ab674bb6ae0ad1ca02aa91ffdd5b59624e8b7f07892b6dd8ca558f"
 
   url "https://github.com/bitwarden/clients/releases/download/desktop-v#{version}/Bitwarden-#{version}-universal.dmg",
       verified: "github.com/bitwarden/clients/"
@@ -14,7 +14,7 @@ cask "bitwarden" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Bitwarden.app"
 

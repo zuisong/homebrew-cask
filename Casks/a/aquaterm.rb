@@ -7,6 +7,10 @@ cask "aquaterm" do
   desc "Graphics renderer"
   homepage "https://sourceforge.net/projects/aquaterm/"
 
+  # No releases since 2013
+  deprecate! date: "2024-01-04", because: :unmaintained
+  disable! date: "2025-01-06", because: :unmaintained
+
   depends_on macos: ">= :high_sierra"
 
   pkg "AquaTermInstaller.pkg"

@@ -8,17 +8,21 @@ cask "waltr" do
   homepage "https://softorino.com/w#{version.major}/"
 
   livecheck do
-    url "https://api.softorino.com/v1/app-manager/waltr#{version.major}/mac/updates"
+    url "https://shining.softorino.com/appcast.php?abbr=w#{version.major}m"
     strategy :sparkle
   end
 
   app "Waltr #{version.major}.app"
 
   zap trash: [
-    "/Users/Shared/Waltr",
     "/Users/Shared/Waltr #{version.major}",
-    "~/Library/Application Support/Waltr",
+    "/Users/Shared/Waltr",
     "~/Library/Application Support/Waltr #{version.major}",
+    "~/Library/Application Support/Waltr",
     "~/Library/Preferences/com.softorino.waltr2.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

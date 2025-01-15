@@ -17,11 +17,15 @@ cask "noto" do
   app "Noto.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.brunophilipe.noto.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.brunophilipe.noto.sfl*",
     "~/Library/Application Support/Noto",
     "~/Library/Caches/com.apple.helpd/Generated/com.brunophilipe.Noto.help*",
     "~/Library/Caches/com.brunophilipe.Noto",
     "~/Library/Preferences/com.brunophilipe.Noto.plist",
     "~/Library/Saved Application State/com.brunophilipe.Noto.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

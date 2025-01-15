@@ -1,18 +1,13 @@
 cask "fig" do
-  version "2.17.0"
-  sha256 "72e2675378fe93e9116bff5fe278160a4115bb123e8b067ca4ddf78dcae8fbd4"
+  version "2.19.0"
+  sha256 "6f0caf57e1251ca06c315c23957734b5c9246fa5af8f1424d5836054ebdd6514"
 
   url "https://repo.fig.io/generic/stable/asset/#{version}/universal/fig.dmg"
   name "fig"
   desc "Reimagine your terminal"
   homepage "https://fig.io/"
 
-  livecheck do
-    url "https://repo.fig.io/generic/stable/index.json"
-    strategy :json do |json|
-      json["hints"]["livecheck"]
-    end
-  end
+  deprecate! date: "2024-08-03", because: :discontinued
 
   auto_updates true
   depends_on macos: ">= :high_sierra"
@@ -20,19 +15,19 @@ cask "fig" do
   app "Fig.app"
   binary "#{appdir}/Fig.app/Contents/MacOS/fig-darwin-universal", target: "fig"
 
-  uninstall script:    {
-              executable: "#{appdir}/Fig.app/Contents/MacOS/fig-darwin-universal",
-              args:       ["_", "brew-uninstall"],
-            },
-            launchctl: [
+  uninstall launchctl: [
+              "io.fig.dotfiles-daemon",
               "io.fig.launcher",
               "io.fig.uninstall",
-              "io.fig.dotfiles-daemon",
             ],
             quit:      [
               "com.mschrage.fig",
               "io.fig.cursor",
-            ]
+            ],
+            script:    {
+              executable: "#{appdir}/Fig.app/Contents/MacOS/fig-darwin-universal",
+              args:       ["_", "brew-uninstall"],
+            }
 
   zap trash: [
     "~/.fig",

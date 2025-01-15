@@ -1,22 +1,13 @@
 cask "puzzles" do
-  version "20230918"
+  version "20241108"
   sha256 :no_check
 
   url "https://www.chiark.greenend.org.uk/~sgtatham/puzzles/Puzzles.dmg"
   name "Simon Tatham's Portable Puzzle Collection"
-  desc "Collection of small computer programs which implement one-player puzzle games"
+  desc "Collection of small computer programmes which implement one-player puzzle games"
   homepage "https://www.chiark.greenend.org.uk/~sgtatham/puzzles/"
 
-  livecheck do
-    url "https://www.chiark.greenend.org.uk/~sgtatham/puzzles/devel/"
-    regex(/collection,\s+version\s+(\d+)\.\w+/i)
-    strategy :page_match do |page, regex|
-      # Throttle updates to one every 2 days.
-      next version if Date.parse(version) + 2 > Date.today
-
-      page[regex, 1]
-    end
-  end
+  deprecate! date: "2024-11-18", because: :discontinued
 
   app "Puzzles.app"
 
@@ -24,4 +15,12 @@ cask "puzzles" do
     "~/Library/Caches/com.apple.helpd/Generated/Puzzles Help*",
     "~/Library/Saved Application State/uk.org.greenend.chiark.sgtatham.puzzles.savedState",
   ]
+
+  caveats do
+    <<~EOS
+      This cask has been deprecated in favor of the core tap formula.
+
+        brew install #{token}
+    EOS
+  end
 end

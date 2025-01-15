@@ -7,6 +7,8 @@ cask "chrome-devtools" do
   desc "Standalone Chrome development tools"
   homepage "https://github.com/auchenberg/chrome-devtools-app"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Chrome DevTools App.app"
 
   zap trash: [
@@ -17,6 +19,6 @@ cask "chrome-devtools" do
   ]
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

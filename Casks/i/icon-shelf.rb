@@ -1,9 +1,9 @@
 cask "icon-shelf" do
   arch arm: "-arm64"
 
-  version "0.1.18"
-  sha256 arm:   "e7155f9c07e163d07bbde05d6147fa58f9dcd415c05eb0e7253c2e25c42929aa",
-         intel: "a95316ca7866a0d8fdca2c344c94fb153865065804e049f2b10aaa4b09db9774"
+  version "0.1.28"
+  sha256 arm:   "f1d730568828de64d564ef2e103abbb4e88599ddd52b971edcbbd84da7d08a25",
+         intel: "10ae5e9ea61a9cf852dd7371a13fc1d255b86422c16b9c30aa26d6d1de999f36"
 
   url "https://github.com/Icon-Shelf/icon-shelf/releases/download/v#{version}/Icon-Shelf-#{version}#{arch}.dmg",
       verified: "github.com/Icon-Shelf/icon-shelf/"
@@ -12,6 +12,7 @@ cask "icon-shelf" do
   homepage "https://icon-shelf.github.io/"
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Icon Shelf.app"
 

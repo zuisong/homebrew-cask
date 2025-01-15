@@ -7,17 +7,14 @@ cask "quiterss" do
   desc "Free news feeds reader"
   homepage "https://quiterss.org/"
 
-  livecheck do
-    url "https://quiterss.org/download"
-    regex(/href=.*?QuiteRSS[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
-  end
+  disable! date: "2024-05-28", because: :no_longer_available
 
   app "quiterss.app"
 
   zap delete: [
     "~/.config/QuiteRss",
-    "~/Library/Caches/QuiteRss",
     "~/Library/Application Support/QuiteRss",
+    "~/Library/Caches/QuiteRss",
     "~/Library/Preferences/org.quiterss.QuiteRSS.plist",
   ]
 end

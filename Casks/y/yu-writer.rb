@@ -8,6 +8,8 @@ cask "yu-writer" do
   desc "Markdown editor"
   homepage "https://ivarptr.github.io/yu-writer.site/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Yu Writer.app"
 
   zap trash: [
@@ -16,8 +18,4 @@ cask "yu-writer" do
     "~/Library/Preferences/com.github.yu-writer.helper.plist",
     "~/Library/Preferences/com.github.yu-writer.plist",
   ]
-
-  caveats do
-    discontinued
-  end
 end

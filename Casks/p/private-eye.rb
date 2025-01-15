@@ -4,12 +4,10 @@ cask "private-eye" do
 
   url "https://radiosilenceapp.com/downloads/Private_Eye_for_OS_X_10.9_and_later.pkg"
   name "Private Eye"
+  desc "Network monitor"
   homepage "https://radiosilenceapp.com/private-eye"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-06", because: :unmaintained
 
   pkg "Private_Eye_for_OS_X_10.9_and_later.pkg"
 
@@ -20,8 +18,8 @@ cask "private-eye" do
               args:         ["-b", "com.radiosilenceapp.nke.PrivateEye"],
               must_succeed: false,
             },
+            launchctl:    "com.radiosilenceapp.nke.PrivateEye",
             quit:         "com.radiosilenceapp.PrivateEye",
             kext:         "com.radiosilenceapp.nke.PrivateEye",
-            pkgutil:      "com.radiosilenceapp.privateEye.*",
-            launchctl:    "com.radiosilenceapp.nke.PrivateEye"
+            pkgutil:      "com.radiosilenceapp.privateEye.*"
 end

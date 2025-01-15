@@ -1,8 +1,11 @@
 cask "bluebubbles" do
-  version "1.8.0"
-  sha256 "c5b6f482d8e7836d2239d6e8188d57da53869b115e843b344b2adac2a30f2340"
+  arch arm: "-arm64"
 
-  url "https://github.com/BlueBubblesApp/bluebubbles-server/releases/download/v#{version}/BlueBubbles-#{version}.dmg",
+  version "1.9.8"
+  sha256 arm:   "b2f997d9f09e5a0502cc605af798ba3af38c744d2050d1c53f534f99d3060bde",
+         intel: "0a014c5ca614b492eec09d1da9756632fdd4d6c8a90bdbda6442401f0d967122"
+
+  url "https://github.com/BlueBubblesApp/bluebubbles-server/releases/download/v#{version}/BlueBubbles-#{version}#{arch}.dmg",
       verified: "github.com/BlueBubblesApp/bluebubbles-server/"
   name "BlueBubbles"
   desc "Server for forwarding iMessages"
@@ -18,7 +21,6 @@ cask "bluebubbles" do
   app "BlueBubbles.app"
 
   uninstall launchctl:  "com.BlueBubbles.BlueBubbles-Server.ShipIt",
-            login_item: "BlueBubbles",
             quit:       [
               "com.BlueBubbles.BlueBubbles-Server",
               "com.BlueBubbles.BlueBubbles-Server.helper",
@@ -26,7 +28,8 @@ cask "bluebubbles" do
               "com.BlueBubbles.BlueBubbles-Server.helper.Plugin",
               "com.BlueBubbles.BlueBubbles-Server.helper.Renderer",
               "com.bluebubbles.messaging",
-            ]
+            ],
+            login_item: "BlueBubbles"
 
   zap trash: [
     "~/Library/Application Support/@bluebubbles",

@@ -6,9 +6,7 @@ cask "handbrakebatch" do
   name "HandBrakeBatch"
   homepage "https://osomac.com/apps/osx/handbrake-batch/"
 
-  app "HandBrakeBatch.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "HandBrakeBatch.app"
 end

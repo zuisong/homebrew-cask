@@ -1,10 +1,10 @@
 cask "osp-tracker" do
-  version "6.1.5"
-  sha256 "0111d928b289cfd9c569144f5c243fe19e0348ded2b1df5ff6214c039f2ce31a"
+  version "6.2.0"
+  sha256 "04a3041b0a628b8241aaa8f3a40d3545927c017f835a955827397c0352bf6ceb"
 
   url "https://physlets.org/tracker/installers/download.php?file=Tracker-#{version}-osx-installer.dmg"
   name "Tracker"
-  desc "Video analysis and modeling tool for physics education"
+  desc "Video analysis and modelling tool for physics education"
   homepage "https://physlets.org/tracker/"
 
   livecheck do

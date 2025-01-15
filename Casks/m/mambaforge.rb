@@ -1,20 +1,17 @@
 cask "mambaforge" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "23.3.1-1"
-  sha256 arm:   "1b07c1a231a18f21da6aac1abe87dd173ce141ce7612f06eab962eb9f8353a27",
-         intel: "ee707e117c4eb54b7a02a0ba1b2fc2b60325ce6f767e76274e45dbe7743efa7d"
+  version "24.3.0-0"
+  sha256 arm:   "de7c7f229d05104de802f1f729a595736b08139c4ae59ba8ba0049050d63c98f",
+         intel: "5455900cf1298f21333b7c0d1ec159952e1ef5426563cc97eb7e42053d608afc"
 
   url "https://github.com/conda-forge/miniforge/releases/download/#{version}/Mambaforge-#{version}-MacOSX-#{arch}.sh"
   name "mambaforge"
   desc "Minimal installer for conda with preinstalled support for Mamba"
   homepage "https://github.com/conda-forge/miniforge"
 
-  livecheck do
-    url :url
-    regex(/v?(\d+(?:[._-]\d+)+)/i)
-    strategy :github_latest
-  end
+  deprecate! date: "2024-07-30", because: :discontinued
+  disable! date: "2025-01-06", because: :discontinued
 
   auto_updates true
   conflicts_with cask: [
@@ -33,8 +30,8 @@ cask "mambaforge" do
   uninstall delete: "#{caskroom_path}/base"
 
   zap trash: [
-    "~/.condarc",
     "~/.conda",
+    "~/.condarc",
   ]
 
   caveats <<~EOS

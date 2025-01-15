@@ -4,7 +4,7 @@ cask "rocket" do
 
   url "https://macrelease.matthewpalmer.net/distribution/appcasts/Rocket-#{version.csv.second}.dmg"
   name "Rocket"
-  desc "Emoji picker optimized for blind people"
+  desc "Emoji picker optimised for blind people"
   homepage "https://matthewpalmer.net/rocket/"
 
   livecheck do
@@ -13,6 +13,7 @@ cask "rocket" do
   end
 
   auto_updates true
+  depends_on macos: ">= :sierra"
 
   app "Rocket.app"
 

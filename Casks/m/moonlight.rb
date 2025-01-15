@@ -1,6 +1,6 @@
 cask "moonlight" do
-  version "5.0.0"
-  sha256 "943e727905cea0c3f6c986f7b1582df1e6fc2506cc18a4a0e824de6b2e507b3d"
+  version "6.1.0"
+  sha256 "d494740eead8ad4e620cdc8feedb56083bc29cabbbeef34cb82585fd87725fa2"
 
   url "https://github.com/moonlight-stream/moonlight-qt/releases/download/v#{version}/Moonlight-#{version}.dmg",
       verified: "github.com/moonlight-stream/moonlight-qt/"
@@ -8,7 +8,7 @@ cask "moonlight" do
   desc "GameStream client"
   homepage "https://moonlight-stream.org/"
 
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :big_sur"
 
   app "Moonlight.app"
 

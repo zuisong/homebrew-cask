@@ -7,9 +7,11 @@ cask "a-slower-speed-of-light" do
   desc "First-person game"
   homepage "https://gamelab.mit.edu/games/a-slower-speed-of-light/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "A Slower Speed of Light.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

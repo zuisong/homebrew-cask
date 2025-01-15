@@ -1,28 +1,22 @@
 cask "rewind" do
-  version "14805.1,33d6822,20231017"
-  sha256  "cfa016c25cfc253421da5f3f46c67f8626a761014b20d6b31f2777a440bc2deb"
+  version "1.5310,15310.1"
+  sha256  :no_check
 
-  url "https://updates.rewind.ai/builds/main/b#{version.csv.first}-main-#{version.csv.second}.zip"
+  url "https://download.rewind.ai/Rewind.dmg"
   name "Rewind"
   desc "Record and search your screen and audio"
   homepage "https://www.rewind.ai/"
 
-  livecheck do
-    url "https://updates.rewind.ai/appcasts/main.xml"
-    strategy :sparkle do |item|
-      # Throttle updates to one every 3 days.
-      next version if DateTime.parse(version.csv.third) + 3 > Date.today
-
-      "#{item.version},#{item.url.match(/[._-](\w+)\.zip/i)[1]},#{item.pub_date.strftime("%Y%m%d")}"
-    end
-  end
+  deprecate! date: "2024-12-31", because: :unmaintained
 
   auto_updates true
   depends_on macos: ">= :monterey"
 
   app "Rewind.app"
 
-  uninstall quit: "com.memoryvault.MemoryVault"
+  uninstall launchctl:  "com.rewind.Rewind",
+            quit:       "com.memoryvault.MemoryVault",
+            login_item: "Rewind"
 
   zap trash: [
     "~/Documents/rewind_logs_*.zip",

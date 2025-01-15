@@ -4,30 +4,24 @@ cask "synology-cloud-station-backup" do
 
   url "https://global.download.synology.com/download/Tools/CloudStationBackup/#{version.csv.first}-#{version.csv.second}/Mac/Installer/synology-cloud-station-backup-#{version.csv.second}.dmg"
   name "Synology Cloud Station Backup"
-  desc "Back up files to a centralized Synology NAS"
+  desc "Back up files to a centralised Synology NAS"
   homepage "https://www.synology.com/"
 
-  livecheck do
-    url "https://www.synology.com/en-us/releaseNote/CloudStationBackup"
-    regex(/Version:\s*(\d+(?:\.\d+)+)-(\d+)/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
-    end
-  end
+  deprecate! date: "2024-10-08", because: :discontinued
 
   auto_updates true
 
   pkg "Install Cloud Station Backup.pkg"
 
-  uninstall quit:      [
+  uninstall launchctl: "com.synology.Synology Cloud Station Backup",
+            quit:      [
               "com.synology.CloudStationBackup",
               "com.synology.CloudStationBackupUI",
             ],
             pkgutil:   [
               "com.synology.CloudStationBackup",
               "com.synology.CloudStationBackupUI",
-            ],
-            launchctl: "com.synology.Synology Cloud Station Backup"
+            ]
 
   zap trash: "~/Library/Preferences/com.synology.CloudStationBackupUI.plist"
 end

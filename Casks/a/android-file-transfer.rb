@@ -10,17 +10,20 @@ cask "android-file-transfer" do
 
   livecheck do
     url "https://dl.google.com/dl/androidjumper/mtp/current/androidfiletransfer.dmg"
-    strategy :header_match do |headers|
-      headers["location"][%r{/(\d+)/androidfiletransfer\.dmg}i, 1]
-    end
+    regex(%r{/(\d+)/androidfiletransfer\.dmg}i)
+    strategy :header_match
   end
 
   app "Android File Transfer.app"
 
   zap trash: [
-        "~/Library/Application Support/Google/Android File Transfer",
         "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.google.android.mtpviewer.sfl*",
+        "~/Library/Application Support/Google/Android File Transfer",
         "~/Library/Preferences/com.google.android.mtpviewer.plist",
       ],
       rmdir: "~/Library/Application Support/Google"
+
+  caveats do
+    requires_rosetta
+  end
 end

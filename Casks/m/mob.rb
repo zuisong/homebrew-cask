@@ -6,11 +6,9 @@ cask "mob" do
   name "Mob"
   homepage "https://github.com/zenghongtu/Mob"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Mob.app"
 
   zap trash: "~/Library/Application Support/mob"
-
-  caveats do
-    discontinued
-  end
 end

@@ -7,9 +7,7 @@ cask "spechtlite" do
   desc "Rule-based proxy"
   homepage "https://github.com/zhuhaow/SpechtLite"
 
-  app "SpechtLite.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "SpechtLite.app"
 end

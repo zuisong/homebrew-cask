@@ -1,9 +1,9 @@
 cask "keepassxc" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "2.7.6"
-  sha256 arm:   "432350131e9b0e47cba6d2f9d3233224a06af941ff5e7a7345c25e6325b21d2f",
-         intel: "ca4961311340df48f4c7413c63b8757c2219b94450e9779a6e3fabfe1ee4b06f"
+  version "2.7.9"
+  sha256 arm:   "66259a7c020c60a6e842ed8a263b1aea0c5b43c894497d03576266fda9c1f577",
+         intel: "a10c5bf17a8107dcae9d19a36a06f5ef7b1cf4ee88046a16cc1073dc84c7f45e"
 
   url "https://github.com/keepassxreboot/keepassxc/releases/download/#{version}/KeePassXC-#{version}-#{arch}.dmg",
       verified: "github.com/keepassxreboot/keepassxc/"
@@ -16,7 +16,7 @@ cask "keepassxc" do
     strategy :github_latest
   end
 
-  conflicts_with cask: "homebrew/cask-versions/keepassxc-beta"
+  conflicts_with cask: "keepassxc@beta"
   depends_on macos: ">= :high_sierra"
 
   app "KeePassXC.app"
@@ -30,6 +30,7 @@ cask "keepassxc" do
     "~/Library/Application Support/keepassxc",
     "~/Library/Caches/org.keepassx.keepassxc",
     "~/Library/Logs/DiagnosticReports/KeePassXC_*.crash",
+    "~/Library/Preferences/keepassxc.keepassxc.plist",
     "~/Library/Preferences/org.keepassx.keepassxc.plist",
     "~/Library/Saved Application State/org.keepassx.keepassxc.savedState",
   ]

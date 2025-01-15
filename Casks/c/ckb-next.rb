@@ -7,17 +7,15 @@ cask "ckb-next" do
   desc "RGB driver"
   homepage "https://github.com/ckb-next/ckb-next"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   depends_on macos: ">= :sierra"
 
   pkg "ckb-next.mpkg"
 
-  uninstall pkgutil:   [
+  uninstall launchctl: "org.ckb-next.daemon",
+            pkgutil:   [
               "org.ckb-next.ckb",
               "org.ckb-next.daemon",
-            ],
-            launchctl: "org.ckb-next.daemon"
-
-  caveats do
-    discontinued
-  end
+            ]
 end

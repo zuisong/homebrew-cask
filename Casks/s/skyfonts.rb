@@ -14,10 +14,22 @@ cask "skyfonts" do
 
   installer manual: "Install SkyFonts.app"
 
-  uninstall quit:      [
+  uninstall launchctl: "com.mti.Monotype-SkyFontsHelper",
+            quit:      [
               "com.mti.Monotype-SkyFonts",
               "com.mti.Monotype-SkyFontsHelper",
             ],
-            launchctl: "com.mti.Monotype-SkyFontsHelper",
-            delete:    "/Applications/Skyfonts"
+            delete:    [
+              "/Applications/Skyfonts",
+              "~/Library/Fonts/skyfonts-google",
+            ]
+
+  zap trash: [
+    "~/Library/Application Support/com.mti.Monotype-SkyFonts",
+    "~/Library/Application Support/sf",
+    "~/Library/Caches/com.mti.Monotype-SkyFonts",
+    "~/Library/HTTPStorages/com.mti.Monotype-SkyFonts.binarycookies",
+    "~/Library/HTTPStorages/com.mti.Monotype-SkyFonts.plist",
+    "~/Library/Preferences/com.mti.Monotype-SkyFonts.plist",
+  ]
 end

@@ -4,10 +4,12 @@ cask "brightness-sync" do
 
   url "https://github.com/OCJvanDijk/Brightness-Sync/releases/download/v#{version}/Brightness.Sync.app.zip"
   name "Brightness Sync"
-  desc "Utility to synchronize the brightness of LG UltraFine display(s)"
+  desc "Utility to synchronise the brightness of LG UltraFine display(s)"
   homepage "https://github.com/OCJvanDijk/Brightness-Sync"
 
   depends_on macos: ">= :catalina"
 
   app "Brightness Sync.app"
+
+  # No zap stanza required
 end

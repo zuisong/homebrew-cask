@@ -1,6 +1,6 @@
 cask "hubstaff" do
-  version "1.6.16,6283"
-  sha256 "bd975d9fdc86923990868cb1e5a23cf34e691f56e91410fd2b2339b2e88366f4"
+  version "1.6.29,8791"
+  sha256 "812cf4921ac0799e9e42ca2eab6d5c41fa0d47007eedf8eb453d932864252779"
 
   url "https://app.hubstaff.com/download/#{version.csv.second}-standard-mac-os-x-#{version.csv.first.dots_to_hyphens}-release"
   name "Hubstaff"
@@ -9,8 +9,12 @@ cask "hubstaff" do
 
   livecheck do
     url "https://app.hubstaff.com/appcast.xml"
-    strategy :sparkle do |item|
-      "#{item.short_version.split("-").first},#{item.url[%r{/(\d+)(?:-standard)?-mac.*?-release}i, 1]}"
+    regex(%r{/(\d+)(?:-standard)?-mac.*?-release}i)
+    strategy :sparkle do |item, regex|
+      match = item.url.match(regex)
+      next if match.blank?
+
+      "#{item.short_version.split("-").first},#{match[1]}"
     end
   end
 
@@ -20,4 +24,8 @@ cask "hubstaff" do
     "~/Library/Application Support/Hubstaff",
     "~/Library/Preferences/com.netsoft.Hubstaff.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,6 +1,6 @@
 cask "smlnj" do
-  version "110.99.4"
-  sha256 "2bf858017b8ba43a70b30527290ed9fbbc81d9eaac1abeba62469d95392019a3"
+  version "110.99.7"
+  sha256 "bfc26ca54fbf59fb13af871390e1965d3ff95de4ee74d61f4488ba72bb4cdd4b"
 
   url "http://smlnj.cs.uchicago.edu/dist/working/#{version}/smlnj-amd64-#{version}.pkg",
       verified: "smlnj.cs.uchicago.edu/"

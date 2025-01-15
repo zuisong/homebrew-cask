@@ -1,11 +1,11 @@
 cask "tableflip" do
-  version "1.4.1"
-  sha256 "aa9e26c15dbaf840f9bdb75b47e59e22276a7ec3143491f6988f09cb82a6a716"
+  version "1.7.0"
+  sha256 "63ddd81524d22477176936492a34175d65bfb18ef00d2aa069badd0afddf639c"
 
   url "https://update.christiantietze.de/tableflip/v#{version.major}/TableFlip-v#{version}.zip",
       verified: "update.christiantietze.de/tableflip/"
   name "TableFlip"
-  desc "App to edit markdown files in place"
+  desc "Edit plain text tables in place: Markdown, CSV, JSON. LaTeX and HTML export"
   homepage "https://tableflipapp.com/"
 
   livecheck do
@@ -14,7 +14,13 @@ cask "tableflip" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "TableFlip.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/de.christiantietze.TableFlip",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/de.christiantietze.tableflip.*",
+    "~/Library/Containers/de.christiantietze.TableFlip",
+  ]
 end

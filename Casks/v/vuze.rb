@@ -8,7 +8,8 @@ cask "vuze" do
   homepage "https://www.vuze.com/"
 
   livecheck do
-    skip "version is contained in the mounted DMG volume name"
+    url :url
+    strategy :extract_plist
   end
 
   installer script: {
@@ -17,11 +18,11 @@ cask "vuze" do
     sudo:       true,
   }
 
-  uninstall delete: [
-              "/Applications/Vuze.app",
+  uninstall quit:   "com.azureus.vuze",
+            delete: [
               "/Applications/Uninstaller for Vuze.app",
-            ],
-            quit:   "com.azureus.vuze"
+              "/Applications/Vuze.app",
+            ]
 
   zap trash: "~/Library/Application Support/Vuze"
 end

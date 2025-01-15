@@ -1,11 +1,11 @@
 cask "stoplight-studio" do
-  arch arm: "mac-arm64", intel: "mac"
+  arch arm: "arm64", intel: "x64"
 
-  version "2.10.0,8870.git-32fa2af"
-  sha256 arm:   "b2759c56a14c82da2f4624f323208e6689cb511153eb4e1be5cc3e6ad7d60566",
-         intel: "a89a3b8c76571c19314198ede0616657d71b75db09aa690f1374bb0050273f6a"
+  version "2.10.0,9587.git-0533c10"
+  sha256 arm:   "4e2d57b4cb6471995af03e770bdec2900c8c97ebffc61beb731d47611aba24ee",
+         intel: "a9c66e62b966cdcfe7e383c68fefef71f220bd7466014a24b5a1918fd2650475"
 
-  url "https://github.com/stoplightio/studio/releases/download/v#{version.csv.first}-stable.#{version.csv.second}/stoplight-studio-#{arch}.dmg",
+  url "https://github.com/stoplightio/studio/releases/download/v#{version.csv.first}-stable.#{version.csv.second}/stoplight-studio-mac-#{arch}.dmg",
       verified: "github.com/stoplightio/studio/"
   name "Stoplight Studio"
   desc "Editor for designing and documenting APIs"
@@ -13,7 +13,7 @@ cask "stoplight-studio" do
 
   livecheck do
     url :url
-    regex(%r{/v?(\d+(?:\.\d+)+)[._-]stable[._-]([^/]+)/stoplight[._-]studio[._-]#{arch}\.dmg$}i)
+    regex(%r{/v?(\d+(?:\.\d+)+)[._-]stable[._-]([^/]+)/stoplight[._-]studio[._-]mac[._-]#{arch}\.dmg$}i)
     strategy :github_latest do |json, regex|
       json["assets"]&.map do |asset|
         match = asset["browser_download_url"]&.match(regex)
@@ -23,6 +23,8 @@ cask "stoplight-studio" do
       end
     end
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Stoplight Studio.app"
 

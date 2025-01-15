@@ -1,15 +1,28 @@
 cask "kvirc" do
-  version "5.0.0"
-  sha256 "d0793ab8a14de5388bc36f99945191120ec3349ab3f2c24f76f4dd11ab9b4874"
+  version "5.2.6,Quasar"
+  sha256 "2aeb70d17289a6921018aa696c9ecb529d6c77c3cb98e1599098d8fc62106f9f"
 
-  url "ftp://ftp.kvirc.net/pub/kvirc/#{version}/binary/macosx/KVIrc-#{version}.dmg"
+  url "https://github.com/kvirc/KVIrc/releases/download/#{version.csv.first}/KVIrc-#{version.csv.first}-#{version.csv.second}.dmg",
+      verified: "github.com/kvirc/KVIrc/"
   name "KVIrc"
   desc "IRC Client"
-  homepage "http://kvirc.net/"
+  homepage "https://www.kvirc.net/"
 
   livecheck do
-    url "http://kvirc.net/?id=releases&platform=macosx"
-    regex(/href=.*?version=(\d+(?:\.\d+)+)/i)
+    url :url
+    regex(/^KVIrc[._-]v?(\d+(?:\.\d+)+)[._-](\w+)\.dmg/i)
+    strategy :github_releases do |json, regex|
+      json.map do |release|
+        next if release["draft"] || release["prerelease"]
+
+        release["assets"]&.map do |asset|
+          match = asset["name"]&.match(regex)
+          next if match.blank?
+
+          "#{match[1]},#{match[2]}"
+        end
+      end.flatten
+    end
   end
 
   depends_on macos: ">= :high_sierra"
@@ -17,8 +30,12 @@ cask "kvirc" do
   app "KVIrc.app"
 
   zap trash: [
+    "~/.kvirc*.rc",
     "~/Library/Preferences/com.kvirc.kvirc.plist",
     "~/Library/Saved Application State/com.kvirc.kvirc.savedState",
-    "~/.kvirc*.rc",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

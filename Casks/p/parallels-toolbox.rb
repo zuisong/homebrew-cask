@@ -1,6 +1,6 @@
 cask "parallels-toolbox" do
-  version "6.6.0-4851"
-  sha256 "7898f709cee5e6bb9c63b09ae843274bc9c1b50e0b875d4ecc455c6a20bff740"
+  version "7.0.0-5272"
+  sha256 "47c5312ffb9e3092ecd41c4c3fc8713f63e44f25b7ff9077b4970b43092d09b6"
 
   url "https://download.parallels.com/toolbox/v#{version.major}/#{version}/ParallelsToolbox-#{version}.dmg"
   name "Parallels Toolbox"
@@ -17,8 +17,8 @@ cask "parallels-toolbox" do
 
   installer manual: "Install Parallels Toolbox.app"
 
-  uninstall delete: "/Applications/Parallels Toolbox.app",
-            signal: ["TERM", "com.parallels.toolbox"]
+  uninstall signal: ["TERM", "com.parallels.toolbox"],
+            delete: "/Applications/Parallels Toolbox.app"
 
   zap trash: [
     "~/Library/Application Scripts/*.com.parallels.toolbox",

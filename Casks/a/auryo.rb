@@ -8,5 +8,7 @@ cask "auryo" do
   desc "Unofficial desktop app for Soundcloud"
   homepage "https://auryo.com/"
 
+  disable! date: "2024-09-30", because: :discontinued
+
   app "Auryo.app"
 end

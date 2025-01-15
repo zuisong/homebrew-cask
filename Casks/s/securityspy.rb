@@ -1,8 +1,8 @@
 cask "securityspy" do
-  version "5.5.8"
+  version "6.7"
   sha256 :no_check
 
-  url "https://www.bensoftware.com/securityspy/SecuritySpy.dmg"
+  url "https://www.bensoftware.com/securityspy/releases/SecuritySpy.dmg"
   name "SecuritySpy"
   desc "Multi-camera CCTV software"
   homepage "https://www.bensoftware.com/securityspy/"

@@ -7,11 +7,9 @@ cask "ebibookreader" do
   desc "Ebook reader"
   homepage "https://www.ebookjapan.jp/ebj/reader/mac/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   pkg "ebibookreader.pkg"
 
   uninstall pkgutil: "jp.co.ebookjapan.ebibookreader1360.ebiBookReader.pkg"
-
-  caveats do
-    discontinued
-  end
 end

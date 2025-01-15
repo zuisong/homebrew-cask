@@ -1,12 +1,16 @@
 cask "megazeux" do
-  version "2.92f"
-  sha256 "1c4807ff44f27a41b1131a08eb42c4d07e783653380150a980f2f9e3d2a4836e"
+  version "2.93b"
+  sha256 :no_check
 
-  url "https://github.com/AliceLR/megazeux/releases/download/v#{version}/mzx#{version.no_dots}-intel-universal.dmg",
-      verified: "github.com/AliceLR/megazeux/"
+  url "https://www.digitalmzx.com/download.php?latest=osx"
   name "MegaZeux"
   desc "ASCII-based game creation system"
   homepage "https://www.digitalmzx.com/"
+
+  livecheck do
+    url "https://www.digitalmzx.com/megazeux.php"
+    regex(/href=["'][^"' >]*?download\.php\?latest=osx["' ][^>]*?>\s*v?(\d+(?:\.\d+)+[a-z]?)\s*</im)
+  end
 
   app "MegaZeux.app"
   artifact "Documentation", target: "~/Library/Application Support/MegaZeux/Documentation"
@@ -15,4 +19,8 @@ cask "megazeux" do
     "~/.megazeux-config",
     "~/Library/Application Support/MegaZeux",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

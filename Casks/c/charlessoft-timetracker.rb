@@ -6,9 +6,7 @@ cask "charlessoft-timetracker" do
   name "TimeTracker"
   homepage "https://charlessoft.com/"
 
-  app "TimeTracker.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "TimeTracker.app"
 end

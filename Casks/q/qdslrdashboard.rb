@@ -1,6 +1,6 @@
 cask "qdslrdashboard" do
-  version "3.6.7"
-  sha256 "a3360bbdc3ad98629c120f916ccb420c10ac8554ffe655866a276259c535494c"
+  version "3.6.12"
+  sha256 "dc009a297d640f548d73beac6f40c6a1b2d5d043750748e2faca74c1f716c236"
 
   url "https://files.lrtimelapse.com/dslrdashboard/V#{version}/qDslrDashboard_V#{version}_macOS_x64.dmg",
       verified: "files.lrtimelapse.com/dslrdashboard/"
@@ -10,12 +10,25 @@ cask "qdslrdashboard" do
 
   livecheck do
     url "https://dslrdashboard.info/downloads/"
-    strategy :page_match do |page|
-      page[%r{href=.*?/qdslrdashboard[._-]v?(\d+(?:-\d+)*)[._-]macos}i, 1].tr("-", ".")
+    regex(/href=.*?qdslrdashboard[._-]v?(\d+(?:[.-]\d+)+)[._-]macos/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
+      next if match.blank?
+
+      match[1].tr("-", ".")
     end
   end
 
   depends_on macos: ">= :mojave"
 
   app "qDslrDashboard.app"
+
+  zap trash: [
+    "~/Library/Application Support/DslrDashboard/qDslrDashboard",
+    "~/Library/Saved Application State/info.dslrdashboard.qDslrDashboard.savedState",
+  ]
+
+  caveats do
+    requires_rosetta
+  end
 end

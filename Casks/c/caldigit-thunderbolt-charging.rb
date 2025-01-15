@@ -16,13 +16,13 @@ cask "caldigit-thunderbolt-charging" do
 
   uninstall kext:    "com.CalDigit.ThunderboltStationChargingSupport",
             pkgutil: [
-              "com.CalDigit.CalDigitThunderboltStationChargingSupport.StationsChargingSupport." \
-              "CalDigitThunderboltStationChargingSupport.pkg",
+              "com.CalDigit.CalDigitThunderboltStationChargingSupport*.pkg",
               "com.CalDigit.ThunderboltStation3ChargingSupport.pkg",
             ],
             delete:  "/Library/Extensions/CalDigitThunderboltStationChargingSupport.kext"
 
   caveats do
+    requires_rosetta
     reboot
   end
 end

@@ -8,14 +8,12 @@ cask "sourcetrail" do
   desc "Code source explorer"
   homepage "https://www.sourcetrail.com/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Sourcetrail.app"
 
   zap trash: [
     "~/Library/Application Support/Sourcetrail",
     "~/Library/Saved Application State/com.sourcetrail.savedState",
   ]
-
-  caveats do
-    discontinued
-  end
 end

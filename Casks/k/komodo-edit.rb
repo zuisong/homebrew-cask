@@ -7,9 +7,11 @@ cask "komodo-edit" do
   desc "Text editor"
   homepage "https://www.activestate.com/komodo-edit/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Komodo Edit #{version.major}.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

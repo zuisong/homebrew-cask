@@ -1,12 +1,14 @@
 cask "qmk-toolbox" do
-  version "0.2.2"
-  sha256 "75f439a9d91630d2310968566bb703306ceba4797f9b5459b1269514be7a62d8"
+  version "0.3.3"
+  sha256 "58faded9cb06010cdabed92c2db8f72ff32b5944fa776813255abb7809a970b9"
 
   url "https://github.com/qmk/qmk_toolbox/releases/download/#{version}/QMK.Toolbox.app.zip",
       verified: "github.com/qmk/qmk_toolbox/"
   name "QMK Toolbox"
   desc "Toolbox companion for QMK Firmware"
   homepage "https://qmk.fm/"
+
+  depends_on macos: ">= :monterey"
 
   app "QMK Toolbox.app"
 

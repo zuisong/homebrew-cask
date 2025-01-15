@@ -8,16 +8,9 @@ cask "phantomjs" do
   desc "Headless web browser"
   homepage "https://phantomjs.org/"
 
-  livecheck do
-    url "https://phantomjs.org/download.html"
-    regex(/href=.*?phantomjs[._-](\d+(?:\.\d+)+)[._-]macosx\.zip/i)
-  end
+  disable! date: "2024-12-16", because: :discontinued
 
   binary "phantomjs-#{version}-macosx/bin/phantomjs"
 
   zap trash: "~/Library/Application Support/Ofi Labs/PhantomJS/"
-
-  caveats do
-    discontinued
-  end
 end

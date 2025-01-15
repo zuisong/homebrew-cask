@@ -1,9 +1,9 @@
 cask "ricochet-refresh" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "3.0.17"
-  sha256 arm:   "be6ba027f3fe64fb25e1339a7e43e5b985ba5e1b5d4be90c6cc8d4c656c6f64f",
-         intel: "502af0112772f9f98a7e3efdad2720b712924c70fb30a4b7cbac2ce32276ba61"
+  version "3.0.29"
+  sha256 arm:   "59d811eb38605a4d0267e5a5ea420dc770a0618488495f44032a56c8fadf6d12",
+         intel: "8a8f0ae09af2cf84e25d0bd0c87b3dc5b00469e3d470e60ec55612df58c1c267"
 
   url "https://github.com/blueprint-freespeech/ricochet-refresh/releases/download/v#{version}-release/ricochet-refresh-#{version}-macos-#{arch}.dmg",
       verified: "github.com/blueprint-freespeech/ricochet-refresh/"
@@ -12,8 +12,8 @@ cask "ricochet-refresh" do
   homepage "https://www.ricochetrefresh.net/"
 
   livecheck do
-    url "https://github.com/blueprint-freespeech/ricochet-refresh/releases"
-    regex(/v?(\d+(?:\.\d+)+)/i)
+    url :url
+    regex(/^v?(\d+(?:\.\d+)+[a-z]?)(?:[._-]release)?$/i)
     strategy :github_latest
   end
 

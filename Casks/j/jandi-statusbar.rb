@@ -1,15 +1,13 @@
 cask "jandi-statusbar" do
-  version "1.13"
-  sha256 "d377a105436c7f4ea116bbedf49ce55ed8e4c3038be6cc2d13413690b1d992db"
+  version "1.15"
+  sha256 "b2bf4a52247f171d19412b23e5d8a7f461b3d54c2cf3fc7b13bde5afe5457895"
 
   url "https://github.com/techinpark/Jandi/releases/download/v#{version}/jandi.dmg"
   name "jandi"
-  desc "Github Contributions in your status bar"
+  desc "GitHub contributions in your status bar"
   homepage "https://github.com/techinpark/Jandi"
 
-  livecheck do
-    skip "No reliable way to get version info"
-  end
+  depends_on macos: ">= :ventura"
 
   app "jandi.app"
 

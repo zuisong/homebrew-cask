@@ -1,17 +1,14 @@
 cask "ava" do
-  version "2023-10-04"
-  sha256 "107ed140769fa268d7f6e9629c76edd04c0c011bb4b0f20e19eee34eb7e6569e"
+  version "2024-04-21"
+  sha256 "7fdfdf409d5b99a98fb16c11d0acfdf59e02815cce0b95f480d5274b0e1532e4"
 
   url "https://s3.amazonaws.com/www.avapls.com/Ava_#{version}.dmg",
       verified: "s3.amazonaws.com/www.avapls.com/"
   name "Ava"
   desc "Run language models locally on your computer"
-  homepage "https://www.avapls.com/"
+  homepage "https://avapls.com/"
 
-  livecheck do
-    url :homepage
-    regex(/href=.*?Ava[._-]v?(\d+(?:[.-]\d+)+)\.dmg/i)
-  end
+  disable! date: "2024-12-25", because: :no_longer_available
 
   app "Ava.app"
 

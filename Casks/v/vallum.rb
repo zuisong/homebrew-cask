@@ -1,6 +1,6 @@
 cask "vallum" do
-  version "4.1.1"
-  sha256 "8658ad50b41a5a2824ddc2e81320e7c8e0f5f1db9c6ad1a043ee3cbd3014ee7d"
+  version "5.0.2"
+  sha256 "706fad5af7c2e30ec9fa4e344a6946a1d98799be38e6247f98c9f6be852eb65e"
 
   url "https://github.com/TheMurusTeam/Vallum/releases/download/v#{version}/vallum-#{version}.zip",
       verified: "github.com/TheMurusTeam/Vallum/"
@@ -17,11 +17,11 @@ cask "vallum" do
 
   app "Vallum.app"
 
-  uninstall pkgutil:   "it.murus.afw.Vallum",
-            launchctl: [
+  uninstall launchctl: [
               "it.murus.afw.core",
               "it.murus.afw.helper",
-            ]
+            ],
+            pkgutil:   "it.murus.afw.Vallum"
 
   zap trash: "~/Library/Preferences/it.murus.Vallum.plist"
 end

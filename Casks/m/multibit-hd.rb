@@ -6,11 +6,13 @@ cask "multibit-hd" do
   name "MultiBit HD"
   homepage "https://github.com/Multibit-Legacy/multibit-hd"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "MultiBit HD.app"
 
   uninstall quit: "com.install4j.6925-4794-5772-4956.24"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

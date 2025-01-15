@@ -1,9 +1,10 @@
 cask "zoho-mail" do
   arch arm: "arm64-"
+  livecheck_arch = on_arch_conditional arm: "arm64", intel: "x64"
 
-  version "1.5.8"
-  sha256 arm:   "3179dc35b324fe5397b61d88aec16dc996e1d002a10b85d001bca73395064fe4",
-         intel: "0f870c0aa28732769d9ebd5b51eed78d1b97e6391c8cec08ee07ebbd7a6671d9"
+  version "1.6.5"
+  sha256 arm:   "46ab4533ce034e4e9329a8e12187c43f7d5ca6aae7239ccfc45cd6ef3fe192d5",
+         intel: "9bff97c52d3599769ec97b0b47ce7fb82c1145bea12c2fd337a19b0daed84932"
 
   url "https://downloads.zohocdn.com/zmail-desktop/mac/zoho-mail-desktop-lite-installer-#{arch}v#{version}.dmg",
       verified: "downloads.zohocdn.com/zmail-desktop/mac/"
@@ -13,8 +14,18 @@ cask "zoho-mail" do
 
   livecheck do
     url "https://downloads.zohocdn.com/zmail-desktop/artifacts.json"
-    regex(/zoho[._-]mail[._-]desktop[._-]lite[._-]installer[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    regex(/zoho[._-]mail[._-]desktop[._-]lite[._-]installer[._-]#{arch}v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :json do |json, regex|
+      json["mac"]&.map do |_, item|
+        match = item[livecheck_arch]&.match(regex)
+        next if match.blank?
+
+        match[1]
+      end
+    end
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Zoho Mail - Desktop.app"
 

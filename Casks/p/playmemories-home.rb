@@ -12,19 +12,20 @@ cask "playmemories-home" do
     url "https://support.d-imaging.sony.co.jp/disoft_DL/PMHMAC_DL/mac?fm=ttl&fm=ja"
     regex(%r{/([^/]+)/PMHOME_(\d+)DL\.dmg}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map do |match|
-        "#{match[1].split("", 3).join(".")},#{match[0]}"
-      end
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[2].split("", 3).join(".")},#{match[1]}"
     end
   end
 
   pkg "PMH_INST.pkg"
 
-  uninstall pkgutil:   "com.sony.pkg.PMHInstaller",
-            launchctl: [
+  uninstall launchctl: [
               "com.sony.SonyAutoLauncher.agent",
               "com.sony.WirelessAutoImportLauncher.agent",
-            ]
+            ],
+            pkgutil:   "com.sony.pkg.PMHInstaller"
 
   zap trash: [
     "/Applications/PMHMac.app",

@@ -1,14 +1,14 @@
 cask "fission" do
-  version "2.8.5"
+  version "2.8.8"
   sha256 :no_check
 
-  url "https://rogueamoeba.com/fission/download/Fission.zip"
+  url "https://cdn.rogueamoeba.com/fission/download/Fission.zip"
   name "Fission"
   desc "Audio editor"
   homepage "https://rogueamoeba.com/fission/"
 
   livecheck do
-    url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=1231&bundleid=com.rogueamoeba.fission&platform=osx&version=#{version.no_dots}8000"
+    url "https://rogueamoeba.net/ping/versionCheck.cgi?format=sparkle&system=#{MacOS.full_version.to_s.delete(".")}&bundleid=com.rogueamoeba.fission&platform=osx&version=#{version.no_dots}8000"
     strategy :sparkle
   end
 
@@ -20,7 +20,7 @@ cask "fission" do
   uninstall quit: "com.rogueamoeba.Fission"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.rogueamoeba.fission.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.rogueamoeba.fission.sfl*",
     "~/Library/Application Support/Fission/",
     "~/Library/Caches/com.rogueamoeba.Fission",
     "~/Library/HTTPStorages/com.rogueamoeba.Fission",

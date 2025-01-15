@@ -1,24 +1,30 @@
 cask "hdfview" do
-  version "3.3.1"
-  sha256 "91ee9832cd8a82e6d127faf5dc1b156523ecf995a552e08a07ebe37c45bf17da"
+  version "3.3.2"
+  sha256 "40d111afc43fe9f1138692d1fb40c1330ea4f4416a2163e5dc4b4c398fb779bf"
 
-  url "https://support.hdfgroup.org/ftp/HDF5/releases/HDF-JAVA/hdfview-#{version}/bin/HDFView-#{version}-macos11_64.tar.gz"
+  url "https://github.com/HDFGroup/hdfview/releases/download/v#{version}/HDFView-#{version}-Darwin.tar.gz",
+      verified: "github.com/HDFGroup/hdfview/"
   name "HDFView"
   desc "Tool for browsing and editing HDF files"
-  homepage "https://confluence.hdfgroup.org/display/support"
+  homepage "https://www.hdfgroup.org/downloads/hdfview/"
 
   livecheck do
-    url "https://confluence.hdfgroup.org/display/support/Download+HDFView"
-    regex(/HDFView\+(\d+(?:\.\d+)+)/i)
+    url :url
+    strategy :github_latest
   end
 
+  depends_on macos: ">= :el_capitan"
   container nested: "HDFView-#{version}.dmg"
 
   app "HDFView.app"
 
   zap trash: [
-    "~/.hdfview#{version}",
+    "~/.hdfview*",
     "~/Library/Preferences/HDFView.hdfgroup.org.plist",
     "~/Library/Saved Application State/hdf.view.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

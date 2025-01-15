@@ -8,6 +8,8 @@ cask "twilioquest" do
   desc "Learn to code and lead your crew on a mission to save The Cloud in a 16bit game"
   homepage "https://www.twilio.com/quest"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "TwilioQuest.app"
 
   uninstall pkgutil: [
@@ -20,8 +22,4 @@ cask "twilioquest" do
     "~/Library/Preferences/com.electron.twilioquest.plist",
     "~/Library/Saved Application State/com.electron.twilioquest.savedState",
   ]
-
-  caveats do
-    discontinued
-  end
 end

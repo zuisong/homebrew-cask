@@ -1,6 +1,6 @@
 cask "audiobook-builder" do
-  version "2.2.7"
-  sha256 "4e12c6965dc227b1962669d1fd0997000448ab0054387871813c523aa368a41b"
+  version "2.2.9"
+  sha256 "31b4f51cbbd1ac329243207dc431eff2d455033c55cd79374af5321697f012b4"
 
   url "https://www.splasm.com/downloads/audiobookbuilder/Audiobook%20Builder%20#{version}.dmg"
   name "Audiobook Builder"
@@ -15,4 +15,13 @@ cask "audiobook-builder" do
   depends_on macos: ">= :el_capitan"
 
   app "Audiobook Builder.app"
+
+  zap trash: [
+    "~/Library/Application Scripts/KQZ94N9248.com.splasm.audiobookbuilder",
+    "~/Library/Caches/com.splasm.audiobookbuilder#{version.major}",
+    "~/Library/Group Containers/KQZ94N9248.com.splasm.audiobookbuilder",
+    "~/Library/Preferences/com.splasm.audiobookbuilder#{version.major}.plist",
+    "~/Library/Saved Application State/com.splasm.audiobookbuilder#{version.major}.savedState",
+    "~/Library/WebKit/com.splasm.audiobookbuilder#{version.major}",
+  ]
 end

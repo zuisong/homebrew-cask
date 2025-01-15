@@ -4,12 +4,12 @@ cask "mounty" do
     sha256 "5fcedfe712f59c14f39c3385dfed9aebc99d4e8d88f6e870f364cc48624590ef"
 
     livecheck do
-      skip "newer versions only available for Big Sur or higher"
+      skip "Legacy version"
     end
   end
   on_big_sur :or_newer do
-    version "2.2"
-    sha256 "8b3a067edcc744efced14e861f33b947c4f9a732dd96d91449effa8e4437638d"
+    version "2.4"
+    sha256 "b5f0867af3ee034c61582bc40e6ebeae549cb4570381ba82d012aca8d5c72888"
 
     livecheck do
       url :homepage

@@ -7,9 +7,11 @@ cask "mojibar" do
   desc "Emoji searcher as a menu bar app"
   homepage "https://github.com/muan/mojibar"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Mojibar-darwin-x64/Mojibar.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

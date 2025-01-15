@@ -25,12 +25,16 @@ cask "macdown" do
   binary "#{appdir}/MacDown.app/Contents/SharedSupport/bin/macdown"
 
   zap trash: [
-    "~/Library/Application Support/MacDown",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.uranusjr.macdown.sfl*",
+    "~/Library/Application Support/MacDown",
     "~/Library/Caches/com.uranusjr.macdown",
     "~/Library/Cookies/com.uranusjr.macdown.binarycookies",
     "~/Library/Preferences/com.uranusjr.macdown.plist",
     "~/Library/Saved Application State/com.uranusjr.macdown.savedState",
     "~/Library/WebKit/com.uranusjr.macdown",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

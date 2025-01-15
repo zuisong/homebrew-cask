@@ -9,6 +9,8 @@ cask "beaker-browser" do
   desc "Experimental peer-to-peer web browser"
   homepage "https://beakerbrowser.com/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   auto_updates true
 
   app "Beaker Browser.app"

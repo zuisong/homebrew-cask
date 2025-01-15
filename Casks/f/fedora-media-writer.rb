@@ -1,16 +1,27 @@
 cask "fedora-media-writer" do
-  version "5.0.8"
-  sha256 "21d3fbe8cdac4be64fbf1a04e508d695ac116a9b1168c28e2569da85075e248c"
+  arch arm: "-arm64"
 
-  url "https://github.com/FedoraQt/MediaWriter/releases/download/#{version}/FedoraMediaWriter-osx-#{version}.unnotarized.dmg",
+  version "5.2.3"
+  sha256 arm:   "429ae8b8707d28a6e57b8555c9bec1781815e4458818e126cdbc2c5fd5b254e8",
+         intel: "1ebef9a3b5898f9d04473313b8adfa4f21215fef255fa27e6f5029cf477c5f58"
+
+  url "https://github.com/FedoraQt/MediaWriter/releases/download/#{version}/FedoraMediaWriter-osx#{arch}-#{version}.dmg",
       verified: "github.com/FedoraQt/MediaWriter/"
   name "Fedora Media Writer"
   desc "Tool to write Fedora images to portable media files"
   homepage "https://docs.fedoraproject.org/en-US/quick-docs/creating-and-using-a-live-installation-image/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   depends_on macos: ">= :mojave"
 
-  app "Fedora Media Writer.app"
+  app "FedoraMediaWriter.app"
 
-  zap trash: "~/Library/Saved Application State/org.fedoraproject.MediaWriter.savedState"
+  zap trash: [
+    "~/Library/Caches/fedoraproject.org",
+    "~/Library/Saved Application State/org.fedoraproject.MediaWriter.savedState",
+  ]
 end

@@ -8,9 +8,11 @@ cask "ark-desktop-wallet" do
   desc "Multi Platform ARK Desktop Wallet"
   homepage "https://ark.io/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "Ark Desktop Wallet.app"
 
   caveats do
-    discontinued
+    requires_rosetta
   end
 end

@@ -1,6 +1,6 @@
 cask "marked" do
-  version "2.6.29,1051"
-  sha256 "e7c6509a3ed19b03d72c1f3e7cbe2312284bb8308d7eb96f2eda90fb4afb4924"
+  version "2.6.44,1067"
+  sha256 "92397beeb43cad70f5bb18c8c9cecc2da1d0a3b0cabfc67c488519f82d288538"
 
   url "https://updates.marked2app.com/Marked#{version.csv.first}#{version.csv.second}.dmg"
   name "Marked"
@@ -20,10 +20,10 @@ cask "marked" do
   uninstall quit: "com.brettterpstra.marked#{version.major}"
 
   zap trash: [
-    "~/Library/Application Support/Marked #{version.major}",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.brettterpstra.marked#{version.major}.sfl*",
-    "~/Library/Caches/Marked #{version.major}",
+    "~/Library/Application Support/Marked #{version.major}",
     "~/Library/Caches/com.brettterpstra.marked#{version.major}",
+    "~/Library/Caches/Marked #{version.major}",
     "~/Library/Logs/Marked #{version.major}",
     "~/Library/Preferences/com.brettterpstra.marked#{version.major}.plist",
     "~/Library/Saved Application State/com.brettterpstra.marked#{version.major}.savedState",

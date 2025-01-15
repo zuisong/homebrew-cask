@@ -1,6 +1,6 @@
 cask "scummvm" do
-  version "2.7.1"
-  sha256 "d99d468b9606cfc331ac0db18a05501676356a0aa643c7417dd6b9b42df4cf60"
+  version "2.9.0"
+  sha256 "711c0709d4df23b97479b7861732c43e1c9a853239d6ed716036d0dd5a8dcb2d"
 
   url "https://downloads.scummvm.org/frs/scummvm/#{version}/scummvm-#{version}-macosx.dmg"
   name "ScummVM"
@@ -8,9 +8,11 @@ cask "scummvm" do
   homepage "https://www.scummvm.org/"
 
   livecheck do
-    url "https://www.scummvm.org/downloads/"
-    regex(%r{href=.*?/scummvm[._-]v?(\d+(?:\.\d+)+)[._-]macosx\.dmg}i)
+    url "https://www.scummvm.org/appcasts/macosx/release.xml"
+    strategy :sparkle
   end
+
+  auto_updates true
 
   app "ScummVM.app"
 

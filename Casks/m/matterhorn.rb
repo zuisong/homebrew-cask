@@ -1,13 +1,16 @@
 cask "matterhorn" do
-  version "50200.19.0"
-  sha256 "2f674a1a9deefc54cd4522aaba6e808b0f9321432238c9c1feccebe0d474ffd7"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/matterhorn-chat/matterhorn/releases/download/#{version}/matterhorn-#{version}-Darwin-x86_64.tar.bz2"
+  version "90000.0.1"
+  sha256 arm:   "a2f84efca249e7c69290fd88b85637f40935ecc879034f0ca1497cc436d8e177",
+         intel: "caf0117a67e1db005d9920fd9743e8872561fbdab9812dfe4e295f26bdaa2bf9"
+
+  url "https://github.com/matterhorn-chat/matterhorn/releases/download/#{version}/matterhorn-#{version}-Darwin-#{arch}.tar.bz2"
   name "Matterhorn"
   desc "Unix terminal client for Mattermost"
   homepage "https://github.com/matterhorn-chat/matterhorn"
 
-  binary "matterhorn-#{version}-Darwin-x86_64/matterhorn"
+  binary "matterhorn-#{version}-Darwin-#{arch}/matterhorn"
 
   # No zap stanza required
 end

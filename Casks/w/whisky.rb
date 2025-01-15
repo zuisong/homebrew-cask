@@ -1,11 +1,12 @@
 cask "whisky" do
-  version "2.1.0"
-  sha256 "798166c1b60af23456f33096b133ea98848b904ae8ba792f7fe0d98a29ec473c"
+  version "2.3.4"
+  sha256 "0012b3dd685da12705b026d70baf6719050bc0414125b5b08aa3bc0958678ed6"
 
-  url "https://github.com/IsaacMarovitz/Whisky/releases/download/v#{version}/Whisky.zip"
+  url "https://github.com/IsaacMarovitz/Whisky/releases/download/v#{version}/Whisky.zip",
+      verified: "github.com/IsaacMarovitz/Whisky/"
   name "Whisky"
   desc "Wine wrapper built with SwiftUI"
-  homepage "https://github.com/IsaacMarovitz/Whisky"
+  homepage "https://getwhisky.app/"
 
   livecheck do
     url :url
@@ -20,8 +21,10 @@ cask "whisky" do
   binary "#{appdir}/Whisky.app/Contents/Resources/WhiskyCmd", target: "whisky"
 
   zap trash: [
+    "~/Library/Application Scripts/com.isaacmarovitz.Whisky.WhiskyThumbnail",
     "~/Library/Application Support/com.isaacmarovitz.Whisky",
     "~/Library/Containers/com.isaacmarovitz.Whisky",
+    "~/Library/Containers/com.isaacmarovitz.Whisky.WhiskyThumbnail",
     "~/Library/HTTPStorages/com.isaacmarovitz.Whisky",
     "~/Library/Logs/com.isaacmarovitz.Whisky",
     "~/Library/Preferences/com.isaacmarovitz.Whisky.plist",

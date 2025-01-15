@@ -7,10 +7,7 @@ cask "agenda" do
   desc "Note taking application focusing on dates"
   homepage "https://agenda.com/"
 
-  livecheck do
-    url "https://agenda.community/t/release-notes/34763/61"
-    regex(/version\s+(\d+(?:\.\d+)+)/i)
-  end
+  disable! date: "2024-12-16", because: :moved_to_mas
 
   depends_on macos: ">= :mojave"
 

@@ -16,8 +16,8 @@ cask "lingon-x" do
     sha256 "c1c839e8dc13bd295f2080980c5bea22299c33f3333b7c6981161b46d6f021d8"
   end
   on_monterey :or_newer do
-    version "9.4.1"
-    sha256 "bd09903ecefd9a3d9e606f3a269320c58cdd8a83dc01ec631f62e895e8062b85"
+    version "9.6.3"
+    sha256 "3d0fe3050d13ad409116ef3ad6fe408896e68df72e95ebb46ec7e59fe21c634a"
   end
 
   url "https://www.peterborgapps.com/downloads/LingonX#{version.major}.zip"
@@ -27,7 +27,9 @@ cask "lingon-x" do
 
   livecheck do
     url "https://www.peterborgapps.com/updates/lingonx#{version.major}.plist"
-    regex(%r{<key>version</key>\s*\n\s*<string>(\d+(?:\.\d+)+)</string>}i)
+    strategy :xml do |xml|
+      xml.get_elements("//key[text()='version']").map { |item| item.next_element&.text&.strip }
+    end
   end
 
   auto_updates true

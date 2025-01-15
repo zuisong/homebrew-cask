@@ -1,15 +1,15 @@
 cask "data-rescue" do
-  version "6.0.7"
-  sha256 "45ba579f20251bbe4c7d8cd52a31da210abbb15428c4d42d6c617ac40ce3fd69"
+  version "6.0.9"
+  sha256 "8968377be610cd034aab69f6fa6267fb3524dd772d9ceb0cca138b4a668ced17"
 
   url "https://downloads.prosofteng.com/dr/Data_Rescue_#{version}.dmg"
   name "Data Rescue #{version.major}"
   desc "Data recovery software"
-  homepage "https://www.prosofteng.com/data-rescue-recovery-software/"
+  homepage "https://www.prosofteng.com/mac-data-recovery"
 
   livecheck do
-    url "https://www.prosofteng.com/resources/dr#{version.major}/dr#{version.major}_updates_mac.xml"
-    strategy :sparkle, &:short_version
+    url "https://www.prosofteng.com/downloads"
+    regex(/>\s*Data\s+Rescue(?:\s+\d+)?\s+\(Mac\)\s*<.+?v?(\d+(?:\.\d+)+)/im)
   end
 
   depends_on macos: ">= :sierra"
@@ -26,4 +26,8 @@ cask "data-rescue" do
     "~/Library/Preferences/com.prosofteng.DataRescue.plist",
     "~/Library/Saved Application State/com.prosofteng.DataRescue.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -8,11 +8,9 @@ cask "mplayer-osx-extended" do
   desc "Video player that uses MPlayer as backend"
   homepage "https://mplayerosx.ch/"
 
+  disable! date: "2024-12-16", because: :discontinued
+
   app "MPlayer OSX Extended.app"
 
   zap trash: "~/.mplayer"
-
-  caveats do
-    discontinued
-  end
 end

@@ -2,15 +2,15 @@ cask "tencent-meeting" do
   arch arm: "arm64", intel: "x86_64"
 
   on_arm do
-    version "3.19.30.480,32367e74d26f7298c547151adc221c9a"
-    sha256 "3aed9e429c391b74d80ca6807f3ef3ed131e1d398469f50cccdc901f78553082"
+    version "3.30.20.430,0dddb4ebf40636224d5cb49b7245c384"
+    sha256 "b4cba1faf0d969da491fb965bdecb1afc8a5fe6f7437540dbe316ad13b947aef"
   end
   on_intel do
-    version "3.19.30.480,6a6f22910aa895d41eced0fb4a4852ca"
-    sha256 "84576f7c5fd7bf008c7ee64dd892361ca068139f415f05dfac97b59412bb0348"
+    version "3.30.20.430,dc14b6eea7a8b164b6140fed5ca4c46a"
+    sha256 "3c0e12eab69c1077d94d774b81d83357dae0a22d8a7e8b3880662e64cf3ca3c9"
   end
 
-  url "https://updatecdn.meeting.qq.com/cos/#{version.csv.second}/TencentMeeting_0300000000_#{version.csv.first}.publish.#{arch}.dmg",
+  url "https://updatecdn.meeting.qq.com/cos/#{version.csv.second}/TencentMeeting_0300000000_#{version.csv.first}.publish.#{arch}.officialwebsite.dmg",
       verified: "updatecdn.meeting.qq.com/cos/"
   name "Tencent Meeting"
   name "腾讯会议"
@@ -18,13 +18,15 @@ cask "tencent-meeting" do
   homepage "https://meeting.tencent.com/"
 
   livecheck do
-    url "https://meeting.tencent.com/web-service/query-app-update-info/?from=2&app_publish_channel=TencentInside&sdk_id=0300000000&os=mac&arch=#{arch}&appver=#{version.csv.first}"
-    regex(%r{/cos/(\h+)/TencentMeeting[._-].+?v?(\d+(?:\.\d+)+)})
-    strategy :json do |json, regex|
-      match = json.dig("target", "url")&.match(regex)
-      next version if match.blank?
+    url %Q(https://meeting.tencent.com/web-service/query-download-info?q=[{"package-type":"app","channel":"0300000000","platform":"mac","arch":"#{arch}"}]&nonce=1234567890123456)
+    strategy :json do |json|
+      json["info-list"]&.map do |item|
+        version = item["version"]
+        hash = item["md5"]
+        next if version.blank? || hash.blank?
 
-      "#{match[2]},#{match[1]}"
+        "#{version},#{hash}"
+      end
     end
   end
 
@@ -36,8 +38,8 @@ cask "tencent-meeting" do
   uninstall quit: "com.tencent.meeting"
 
   zap trash: [
-    "~/Library/Application Scripts/FN2V63AD2J.com.tencent.meeting",
     "~/Library/Application Scripts/com.tencent.meeting",
+    "~/Library/Application Scripts/FN2V63AD2J.com.tencent.meeting",
     "~/Library/Caches/com.tencent.meeting*",
     "~/Library/Containers/com.tencent.meeting*",
     "~/Library/Containers/com.tencent.wemeet.FileDelta",

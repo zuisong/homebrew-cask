@@ -1,11 +1,11 @@
 cask "bisq" do
-  version "1.9.14"
-  sha256 "cfc4ff9a9d1c2f24b6468e489e13663590c7783d0dbbb400c6b67afa87e370b5"
+  version "1.9.18"
+  sha256 "522996cf070f0eb50d4f7f4872e6b4907351616e8e92b7215fb867d4a366d284"
 
   url "https://github.com/bisq-network/bisq/releases/download/v#{version}/Bisq-#{version}.dmg",
       verified: "github.com/bisq-network/bisq/"
   name "Bisq"
-  desc "Decentralized bitcoin exchange network"
+  desc "Decentralised bitcoin exchange network"
   homepage "https://bisq.network/"
 
   livecheck do
@@ -19,4 +19,8 @@ cask "bisq" do
     "~/Library/Application Support/Bisq",
     "~/Library/Saved Application State/io.bisq.CAT.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

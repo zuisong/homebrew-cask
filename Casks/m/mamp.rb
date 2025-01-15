@@ -1,11 +1,11 @@
 cask "mamp" do
-  arch arm: "M1-arm", intel: "Intel-x86"
+  arch arm: "Apple-chip", intel: "Intel-x86"
 
-  version "6.8"
-  sha256 arm:   "4c010dfbe6bcf1472d1bd2128dac3de69cfebac41960e8dbeb7a7c963a810190",
-         intel: "c1875435e79a0b7b7c7fdc2ec46fb488598424268c08ff7780eceeaf3adb882b"
+  version "7.2"
+  sha256 arm:   "0d29199aba83315dc4008dfbe88b59c8c046a95bb88f4d9b35037906c6ccc44a",
+         intel: "ab354660acdc3f24b1ddc49302a88fce9d9f8cd85fe534408df200b122c0fd14"
 
-  url "https://downloads.mamp.info/MAMP-PRO/releases/#{version}/MAMP_MAMP_PRO_#{version}-#{arch}.pkg"
+  url "https://downloads.mamp.info/MAMP-PRO/macOS/MAMP-PRO/MAMP-MAMP-PRO-#{version}-#{arch}.pkg"
   name "MAMP"
   desc "Web development solution with Apache, Nginx, PHP & MySQL"
   homepage "https://www.mamp.info/"
@@ -18,7 +18,7 @@ cask "mamp" do
   auto_updates true
   depends_on macos: ">= :sierra"
 
-  pkg "MAMP_MAMP_PRO_#{version}-#{arch}.pkg"
+  pkg "MAMP-MAMP-PRO-#{version}-#{arch}.pkg"
 
   postflight do
     set_ownership ["/Applications/MAMP", "/Applications/MAMP PRO"]
@@ -27,7 +27,12 @@ cask "mamp" do
   uninstall pkgutil: "de.appsolute.installer.(mamp|mampacticon|mampendinstall|mamppro).pkg",
             delete:  "/Applications/MAMP"
 
-  zap trash:  [
+  zap delete: [
+        "/Library/Application Support/appsolute",
+        "/Library/LaunchDaemons/de.appsolute.mampprohelper.plist",
+        "/Library/PrivilegedHelperTools/de.appsolute.mampprohelper",
+      ],
+      trash:  [
         "~/Library/Application Support/appsolute",
         "~/Library/Application Support/de.appsolute.MAMP",
         "~/Library/Application Support/de.appsolute.mamppro",
@@ -39,10 +44,5 @@ cask "mamp" do
         "~/Library/Preferences/de.appsolute.mamppro.plist",
         "~/Library/Saved Application State/de.appsolute.MAMP.savedState",
         "~/Library/Saved Application State/de.appsolute.mamppro.savedState",
-      ],
-      delete: [
-        "/Library/LaunchDaemons/de.appsolute.mampprohelper.plist",
-        "/Library/PrivilegedHelperTools/de.appsolute.mampprohelper",
-        "/Library/Application Support/appsolute",
       ]
 end

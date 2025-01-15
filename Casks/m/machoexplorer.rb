@@ -7,9 +7,7 @@ cask "machoexplorer" do
   desc "Mach-O Executable File Explorer"
   homepage "https://github.com/everettjf/MachOExplorer"
 
-  app "MachOExplorer.app"
+  disable! date: "2024-12-16", because: :discontinued
 
-  caveats do
-    discontinued
-  end
+  app "MachOExplorer.app"
 end

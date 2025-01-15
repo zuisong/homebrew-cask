@@ -1,6 +1,6 @@
 cask "opal-composer" do
-  version "1.1.1,5"
-  sha256 "82ddfe5c8375caf3523b7409fa32fc34612b5d8e755fe9a1d4b08502112c5bda"
+  version "2.0.0,24"
+  sha256 "4eaa1225a203b057dbabaa7b17d7bbff91512cac32e942359b651dbef06928b3"
 
   url "https://updates.opal.camera/release/Opal_Composer_#{version.csv.first}_#{version.csv.second}.dmg",
       verified: "updates.opal.camera/release/"
@@ -8,12 +8,19 @@ cask "opal-composer" do
   desc "Professional webcam software for the Opal C1"
   homepage "https://opalcamera.com/opal-composer"
 
+  # The Sparkle `shortVersion` may not include the full version used in the
+  # filename (e.g. 2.0 instead of 2.0.0), so we match the version from the
+  # filename instead.
   livecheck do
-    url "https://public-opal-bucket.s3.us-east-2.amazonaws.com/release/appcast.xml"
-    strategy :sparkle
+    url "https://updates.opal.camera/release/appcast.xml"
+    regex(/v?(\d+(?:[._]\d+)+)/i)
+    strategy :sparkle do |item, regex|
+      item.url[regex, 1]&.tr("_", ",")
+    end
   end
 
-  depends_on macos: ">= :monterey"
+  auto_updates true
+  depends_on macos: ">= :ventura"
 
   app "Opal Composer.app"
 

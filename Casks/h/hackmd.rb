@@ -4,7 +4,10 @@ cask "hackmd" do
 
   url "https://github.com/hackmdio/hackmd-desktop/releases/download/v#{version}/HackMD-#{version}.dmg"
   name "HackMD"
+  desc "Desktop Software for HackMD Note-Taking and Collaboration"
   homepage "https://github.com/hackmdio/hackmd-desktop"
+
+  deprecate! date: "2024-07-17", because: :unmaintained
 
   app "HackMD.app"
 
@@ -12,4 +15,8 @@ cask "hackmd" do
     "~/Library/Application Support/HackMD",
     "~/Library/Saved Application State/com.hackmd.desktop.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

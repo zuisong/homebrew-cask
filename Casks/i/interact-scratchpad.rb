@@ -8,10 +8,7 @@ cask "interact-scratchpad" do
   desc "Menu bar utility to create contacts from snippets of text"
   homepage "https://docs.getdrafts.com/docs/misc/interact-scratchpad"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-11-15", because: :discontinued
 
   depends_on macos: ">= :monterey"
 
@@ -20,7 +17,7 @@ cask "interact-scratchpad" do
   zap trash: [
     "~/Library/Application Scripts/com.agiletortoise.Interact-Scratchpad-OSX",
     "~/Library/Application Scripts/com.agiletortoise.Interact-Scratchpad-OSX.Interact-Scratchpad-Share",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.agiletortoise.interact-scratchpad-osx.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.agiletortoise.interact-scratchpad-osx.sfl*",
     "~/Library/Containers/com.agiletortoise.Interact-Scratchpad-OSX",
     "~/Library/Containers/com.agiletortoise.Interact-Scratchpad-OSX.Interact-Scratchpad-Share",
   ]

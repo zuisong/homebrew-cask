@@ -1,5 +1,5 @@
 cask "replay" do
-  version "91.13.1,9123.9.20"
+  version "91.13.1,9124.3.18"
   sha256 :no_check
 
   url "https://static.replay.io/downloads/replay.dmg"
@@ -7,10 +7,7 @@ cask "replay" do
   desc "Time travel debugging"
   homepage "https://replay.io/"
 
-  livecheck do
-    url :url
-    strategy :extract_plist
-  end
+  deprecate! date: "2024-07-24", because: :discontinued
 
   depends_on macos: ">= :sierra"
 
@@ -23,4 +20,8 @@ cask "replay" do
     "~/Library/Preferences/org.mozilla.replay.plist",
     "~/Library/Saved Application State/org.mozilla.replay.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

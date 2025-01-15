@@ -16,18 +16,18 @@ cask "shadowsocksx-ng-r" do
     system_command "#{appdir}/ShadowsocksX-NG-R8.app/Contents/Resources/install_helper.sh"
   end
 
-  uninstall delete:    "/Library/Application Support/ShadowsocksX-NG",
-            launchctl: [
+  uninstall launchctl: [
               "com.qiuyuzhou.shadowsocksX-NG.http",
               "com.qiuyuzhou.shadowsocksX-NG.kcptun",
-              "com.qiuyuzhou.shadowsocksX-NG.local",
               "com.qiuyuzhou.ShadowsocksX-NG.LaunchHelper",
+              "com.qiuyuzhou.shadowsocksX-NG.local",
             ],
             quit:      "com.qiuyuzhou.ShadowsocksX-NG",
             script:    {
               executable: "/Library/Application Support/ShadowsocksX-NG/proxy_conf_helper",
               args:       ["--mode", "off"],
-            }
+            },
+            delete:    "/Library/Application Support/ShadowsocksX-NG"
 
   zap trash: [
     "~/.ShadowsocksX-NG",
@@ -35,4 +35,8 @@ cask "shadowsocksx-ng-r" do
     "~/Library/Caches/com.qiuyuzhou.ShadowsocksX-NG",
     "~/Library/Preferences/com.qiuyuzhou.ShadowsocksX-NG.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end
