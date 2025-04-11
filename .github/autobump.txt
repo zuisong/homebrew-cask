@@ -223,6 +223,7 @@ cherry-studio
 chia
 chipmunk
 chirp
+chordpotion
 chromedriver
 chromedriver@beta
 chromium-gost
@@ -412,6 +413,7 @@ elgato-control-center
 elgato-stream-deck
 elgato-wave-link
 eloston-chromium
+elpass
 emacs@nightly
 embyserver
 emclient
@@ -434,6 +436,7 @@ fantastical
 far2l
 fastrawviewer
 fathom
+favro
 fbreader
 fedistar
 fedora-media-writer
@@ -467,12 +470,14 @@ fishing-funds
 fixkey
 flashspace
 fleet
+flexoptix
 fliqlo
 flirc
 floorp
 flox
 flutter
 flutterflow
+fly
 flyenv
 fmail2
 focus
@@ -566,6 +571,7 @@ geogebra@5
 geotag
 geph
 get-api
+ghost-browser
 ghostty
 ghostty@tip
 gisto
@@ -614,6 +620,7 @@ gyazo
 gzdoom
 hackolade
 halloy
+hamrs-pro
 hancom-docs
 hancom-word
 handbrake
@@ -669,6 +676,7 @@ integrity
 intellij-idea
 intellij-idea-ce
 intellij-idea@eap
+internxt-drive
 intune-company-portal
 ipfs
 ipvanish-vpn
@@ -707,6 +715,7 @@ jprofiler
 julia
 julia@lts
 jump-desktop-connect
+jumpcloud-password-manager
 jumpshare
 jupyterlab
 juxtacode
@@ -737,6 +746,7 @@ kiwi-for-gmail
 kiwix
 kkbox
 knime
+kodelife
 kopiaui
 kotlin-native
 krisp
@@ -833,6 +843,7 @@ marginnote
 marked
 markedit
 marsedit
+mathpix-snipping-tool
 mattermost
 mcbopomofo
 mcreator
@@ -1031,6 +1042,7 @@ opencore-configurator
 opencore-patcher
 openlens
 openlp
+openphone
 openrct2
 openrefine
 openscad@snapshot
@@ -1232,6 +1244,7 @@ replacicon
 replaywebpage
 replicator
 replit
+repo-prompt
 reqable
 requestly
 rescuetime
@@ -1364,6 +1377,7 @@ sony-ps-remote-play
 soulver
 sound-control
 sound-siphon
+soundanchor
 soundsource
 soundsource@test
 sourcetree
@@ -1519,6 +1533,7 @@ tresorit
 trex
 trezor-suite
 tribler
+triliumnext-notes
 truhu
 trunk-io
 tuist
@@ -1556,6 +1571,7 @@ universal-media-server
 updf
 usmart-trade
 utm
+utm@beta
 utools
 uu-booster
 uvtools
@@ -1675,6 +1691,7 @@ yaak
 yaak@beta
 yandex-cloud-cli
 yandex-music
+yate
 yealink-meeting
 yes24-ebook
 yinxiangbiji
