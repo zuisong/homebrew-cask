@@ -14,7 +14,6 @@ cask "sparkle" do
   end
 
   app "Sparkle Test App.app"
-  binary "sparkle.app/Contents/MacOS/sparkle"
 
   zap trash: [
     "~/Library/Application Scripts/org.sparkle-project.Downloader",
