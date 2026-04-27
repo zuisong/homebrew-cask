@@ -7,7 +7,7 @@ cask "wox" do
 
   url "https://github.com/Wox-launcher/Wox/releases/download/v#{version}/wox-mac-#{arch}.dmg"
   name "Wox"
-  desc "Cross-platform launcher that simply works"
+  desc "Launcher tool"
   homepage "https://github.com/Wox-launcher/Wox"
 
   livecheck do
