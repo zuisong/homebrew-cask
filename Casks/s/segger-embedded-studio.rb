@@ -24,16 +24,16 @@ cask "segger-embedded-studio" do
   pkg "Install SEGGER Embedded Studio #{version}.pkg"
 
   uninstall pkgutil: [
-    "com.segger.studio.segger_studio.libcxx.source.#{version}",
-    "com.segger.studio.segger_studio.gcc.riscv.#{version}",
     "com.segger.studio.segger_studio.#{version}",
     "com.segger.studio.segger_studio.cruntime.source.#{version}",
     "com.segger.studio.segger_studio.gcc.arm.#{version}",
+    "com.segger.studio.segger_studio.gcc.riscv.#{version}",
+    "com.segger.studio.segger_studio.libcxx.source.#{version}",
     "com.segger.studio.segger_studio.segger.toolchain.#{version}",
   ]
 
-  zap trash: "/Applications/SEGGER Embedded Studio for ARM*"
-  
+  zap trash: "/Applications/SEGGER/SEGGER Embedded Studio*"
+
   caveats do
     license @cask.url.to_s
   end
