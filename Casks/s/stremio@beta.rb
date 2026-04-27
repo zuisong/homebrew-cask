@@ -1,9 +1,9 @@
 cask "stremio@beta" do
   arch arm: "arm64", intel: "x64"
 
-  version "5.1.19"
-  sha256 arm:   "846acf1fe7a05abf442a2258b63bd11ce378371fe3fe1939dff6c5a4fe3da29b",
-         intel: "4bbe942716aed5447619f6144a792bd514ee4b1ab60035d79f042badaf91ad85"
+  version "5.1.20"
+  sha256 arm:   "768316e7a5c5698cd31cf0be67c01af6f106b69c5ec042e025d87b5da2800a98",
+         intel: "75d86cecd6d40cf920f96fa7478740d08a6279923f62ab9f182ead3c48fece1c"
 
   url "https://dl.strem.io/stremio-shell-macos/v#{version}/Stremio_#{arch}.dmg"
   name "Stremio"
