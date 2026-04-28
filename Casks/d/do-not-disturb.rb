@@ -10,12 +10,8 @@ cask "do-not-disturb" do
 
   depends_on :macos
 
-  # running the configure script doesn't prompt the user to setup full disk access
-  # (and the binary doesn't prompt for it), so the installation is "broken."
-  # the alternative is to run the configure script, but have a caveat telling the user
-  # to do the full disk access dance.
-  #
-  # a manual installer seemed unfortunate but preferable.
+  # the installer is interactive, running the configure script directly doesn't produce a
+  # working install.
   installer manual: "DoNotDisturb Installer.app"
 
   uninstall script: {
