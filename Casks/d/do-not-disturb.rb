@@ -10,14 +10,16 @@ cask "do-not-disturb" do
 
   depends_on :macos
 
-  installer script: {
-    executable: "#{staged_path}/DoNotDisturb Installer.app/Contents/MacOS/DoNotDisturb Installer",
-    args:       ["-install"],
-    sudo:       true,
-  }
+  # running the configure script doesn't prompt the user to setup full disk access
+  # (and the binary doesn't prompt for it), so the installation is "broken."
+  # the alternative is to run the configure script, but have a caveat telling the user
+  # to do the full disk access dance.
+  #
+  # a manual installer seemed unfortunate but preferable.
+  installer manual: "DoNotDisturb Installer.app"
 
   uninstall script: {
-    executable: "#{staged_path}/DoNotDisturb Installer.app/Contents/MacOS/DoNotDisturb Installer",
+    executable: "#{staged_path}/DoNotDisturb Installer.app/Contents/Resources/configure.sh",
     args:       ["-uninstall"],
     sudo:       true,
   }
