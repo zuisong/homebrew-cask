@@ -2,9 +2,9 @@ cask "topaz-photo" do
   arch arm: "arm64", intel: "x86_64"
   livecheck_arch = on_arch_conditional intel: "/intel"
 
-  version "1.5.0"
-  sha256 arm:   "623eddcf1da6f87b0d8e7b86c567386f4390c2baa7fb40230130fbf0f458604b",
-         intel: "4cd821533020a10c9eac7a4411f59c6a660311fb13b5b928066363abb334b9c0"
+  version "1.5.1"
+  sha256 arm:   "f2fb8a46fe5209d321d80ea7d015a4114b73987311c2848af2283feb0116cfb1",
+         intel: "256a8421af9773be5168e77fa37b70f676eaab74a20cc078f6dc0f611690853b"
 
   url "https://downloads.topazlabs.com/deploy/TopazPhoto/#{version}/TopazPhoto-#{version}-#{arch}.pkg"
   name "Topaz Photo"
