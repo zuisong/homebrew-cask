@@ -1,6 +1,6 @@
 cask "airbuddy" do
-  version "2.7.4,650"
-  sha256 "7a7beb66a71601224df23ecb4dd6cea44f518ce7b7c9e5fc1731580b153f4254"
+  version "2.8,655"
+  sha256 "6ec14a0b9badb1ba4310e33f97ea44f0ffa1fa8e890abdfd07bf05373f92a342"
 
   url "https://su.airbuddy.app/kCRSAmcjBc/AirBuddy_v#{version.csv.first}-#{version.csv.second}.dmg"
   name "AirBuddy"
@@ -13,7 +13,7 @@ cask "airbuddy" do
   end
 
   auto_updates true
-  depends_on :macos
+  depends_on macos: ">= :sonoma"
 
   app "AirBuddy.app"
 
