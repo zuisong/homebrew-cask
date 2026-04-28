@@ -28,8 +28,5 @@ cask "1password-cli@beta" do
 
   binary "op"
 
-  generate_completions_from_executable "op", "completion",
-                                       shells: [:bash, :zsh, :fish, :pwsh]
-
   zap trash: "~/.config/op"
 end
