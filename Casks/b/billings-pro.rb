@@ -1,6 +1,6 @@
 cask "billings-pro" do
-  version "1.8.0,39009,2026-03-11-1718"
-  sha256 "1cc0f3c2ad69870bf65281309190223acb0613c4372933043463c2556c3a0046"
+  version "1.8.1,39116,2026-04-06-1244"
+  sha256 "e98801c189677736216217753a5b2355c8a613fbfa42c45b6e45aedee118a24a"
 
   url "https://www.marketcircle.com/appcasts/releases/billingspro-releases-#{version.csv.first}.b#{version.csv.second}.#{version.csv.third}.zip"
   name "Billings Pro"
