@@ -4,7 +4,7 @@ cask "ghostpepper" do
 
   url "https://github.com/matthartman/ghost-pepper/releases/download/v#{version}/GhostPepper.dmg"
   name "GhostPepper"
-  desc "100% private on-device voice models for speech-to-text and meeting transcription"
+  desc "Speech-to-text and meeting transcription tool"
   homepage "https://github.com/matthartman/ghost-pepper"
 
   livecheck do
@@ -13,7 +13,6 @@ cask "ghostpepper" do
   end
 
   auto_updates true
-
   depends_on arch: :arm64
   depends_on macos: ">= :sonoma"
 
