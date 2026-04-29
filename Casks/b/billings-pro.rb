@@ -7,14 +7,18 @@ cask "billings-pro" do
   desc "Invoices, estimates, quotes and time-tracking"
   homepage "https://www.marketcircle.com/billingspro/"
 
+  # Older versions may have a more recent `pubDate` than newer versions, so we
+  # have to check all the items in the appcast.
   livecheck do
     url "https://www.daylite.app/appcasts/billingspro.xml"
     regex(/billingspro[._-]releases[._-]v?(\d+(?:\.\d+)+)[._-]b(\d+)[._-](\d+(?:-\d+)+)\.zip/i)
-    strategy :sparkle do |item, regex|
-      match = item.url.match(regex)
-      next if match.blank?
+    strategy :sparkle do |items, regex|
+      items.map do |item|
+        match = item.url.match(regex)
+        next if match.blank?
 
-      "#{match[1]},#{match[2]},#{match[3]}"
+        "#{match[1]},#{match[2]},#{match[3]}"
+      end
     end
   end
 
