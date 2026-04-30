@@ -15,7 +15,8 @@ cask "boinc" do
 
   depends_on :macos
 
-  pkg "boinc_#{version}_macOSX_universal/BOINC Installer.app/Contents/Resources/BOINC.pkg"
+  # The pkg installer requires user interaction, so cannot be installed headlessly
+  installer manual: "boinc_#{version}_macOSX_universal/BOINC Installer.app/Contents/Resources/BOINC.pkg"
 
   uninstall launchctl: [
               "edu.berkeley.boinc-sshelper",
