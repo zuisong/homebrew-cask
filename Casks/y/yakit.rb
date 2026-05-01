@@ -21,7 +21,7 @@ cask "yakit" do
 
   zap trash: [
     "~/Library/Application Support/yakit",
-    "~/Library/Preferences/com.yaklang.yakit.plist",
-    "~/Library/Saved Application State/com.yaklang.yakit.savedState",
+    "~/Library/Preferences/io.yaklang.yakit.plist",
+    "~/Library/Saved Application State/io.yaklang.yakit.savedState",
   ]
 end
