@@ -1,9 +1,9 @@
 cask "anytype@beta" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.55.2"
-  sha256 arm:   "ac2b9873a22716fb8633a16cd240bdb57ed0c722515b179912a338bb522cd31c",
-         intel: "be2e63faee2af0a2a8dcaf50130f1bd8f8c229c75332c1da390db56c72c6562a"
+  version "0.55.3"
+  sha256 arm:   "55086a71abe1e8be0dc0d89b24f33ded97e7e205fb93b11de1871f3f10713ff9",
+         intel: "d5ff4bed1124914b2cb8e9c6039447b981c22fd872e90473b25253642b870d3f"
 
   url "https://anytype-release.fra1.cdn.digitaloceanspaces.com/Anytype-#{version}-mac-#{arch}.dmg",
       verified: "anytype-release.fra1.cdn.digitaloceanspaces.com/"
