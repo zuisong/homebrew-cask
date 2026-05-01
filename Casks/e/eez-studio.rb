@@ -12,10 +12,9 @@ cask "eez-studio" do
   homepage "https://www.envox.eu/studio/studio-introduction/"
 
   livecheck do
-    url "https://github.com/eez-open/studio/releases/latest"
-    strategy :github_latest
+    url :url
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
-
   depends_on macos: ">= :monterey"
 
   app "EEZ Studio.app"
