@@ -15,6 +15,7 @@ cask "eez-studio" do
     url :url
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
+
   depends_on macos: ">= :monterey"
 
   app "EEZ Studio.app"
