@@ -20,4 +20,8 @@ cask "geph" do
     "~/Library/Application Support/gephgui#{version.major}",
     "~/Library/Preferences/io.geph.geph-electron.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end
