@@ -1,6 +1,6 @@
 cask "kitlangton-hex" do
-  version "0.7.3"
-  sha256 "2149e81187cdda54d2a8eacf5cd3cc6e69ce727e0132254d4fda54ccedbfb8e3"
+  version "0.7.4"
+  sha256 "0af9e1214de6b0bee7957fdea9cf2a8ffc713e274611581f422637754c8c3990"
 
   url "https://github.com/kitlangton/Hex/releases/download/v#{version}/Hex-#{version}.dmg",
       verified: "github.com/kitlangton/Hex/"
