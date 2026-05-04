@@ -19,7 +19,7 @@ cask "dust3d" do
 
   depends_on :macos
 
-  app "dust3d-#{version}.app"
+  app "dust3d.app"
 
   zap trash: "~/Library/Saved Application State/com.yourcompany.dust3d.savedState"
 
