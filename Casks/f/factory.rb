@@ -1,4 +1,4 @@
-cask "droid-desktop" do
+cask "factory" do
   arch arm: "arm64", intel: "x64"
 
   version "0.74.0"
