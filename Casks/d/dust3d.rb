@@ -20,8 +20,4 @@ cask "dust3d" do
   app "dust3d.app"
 
   zap trash: "~/Library/Saved Application State/com.yourcompany.dust3d.savedState"
-
-  caveats do
-    requires_rosetta
-  end
 end
