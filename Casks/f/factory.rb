@@ -7,7 +7,7 @@ cask "factory" do
 
   url "https://downloads.factory.ai/factory-desktop/releases/#{version}/darwin/#{arch}/Factory-#{version}-#{arch}.dmg"
   name "Factory"
-  desc "AI-powered desktop app by Factory"
+  desc "Native AI agent interface to build, manage, and ship software by Factory"
   homepage "https://www.factory.ai/"
 
   livecheck do
