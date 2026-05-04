@@ -1,0 +1,32 @@
+cask "droid-desktop" do
+  arch arm: "arm64", intel: "x64"
+
+  version "0.74.0"
+  sha256 arm:   "ea7912174b2a988a6ca197e29c1674eb6898f66c67f14d7793529fb6226cf3ee",
+         intel: "87e69f054574df56e92de983decb8b7501d5c80eaa653454f3c37aff6b6c993d"
+
+  url "http://downloads.factory.ai/factory-desktop/releases/#{version}/darwin/#{arch}/Factory-#{version}-#{arch}.dmg"
+
+  name "Factory"
+  desc "AI-powered desktop app by Factory"
+  homepage "https://www.factory.ai/"
+
+  auto_updates true
+  depends_on macos: ">= :monterey"
+
+  livecheck do
+    url "https://downloads.factory.ai/factory-desktop/LATEST"
+    regex(/v?(\d+(?:\.\d+)+)/i)
+  end
+
+  app "Factory.app"
+
+  zap trash: [
+    "~/Library/Application Support/ai.factory.desktop",
+    "~/Library/Caches/ai.factory.desktop",
+    "~/Library/HTTPStorages/ai.factory.desktop",
+    "~/Library/Preferences/ai.factory.desktop.plist",
+    "~/Library/Saved Application State/ai.factory.desktop.savedState",
+    "~/Library/WebKit/ai.factory.desktop",
+  ]
+end
