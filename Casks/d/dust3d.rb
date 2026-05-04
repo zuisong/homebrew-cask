@@ -8,11 +8,9 @@ cask "dust3d" do
   desc "Open-source 3D modelling software"
   homepage "https://dust3d.org/"
 
-  # TODO: Update this regex to only match stable versions once 1.0.0 stabilizes:
-  # regex(/^v?(\d+(?:\.\d+)+)$/i)
   livecheck do
     url :url
-    regex(/^v?(\d+(?:\.\d+)+(?:-rc\.?\d*)?)$/i)
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
   disable! date: "2026-09-01", because: :fails_gatekeeper_check
