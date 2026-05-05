@@ -19,7 +19,7 @@ cask "cables" do
 
   depends_on :macos
 
-  app "cables-#{version}.app"
+  app "cables.app"
 
   zap trash: [
     "~/Library/Application Support/cables_electron",
