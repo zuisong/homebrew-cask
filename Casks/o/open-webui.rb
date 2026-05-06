@@ -1,6 +1,6 @@
 cask "open-webui" do
-  version "0.0.18"
-  sha256 "c89d3d05f0a61263b7bea6ea87e155123fd3039f851d44501eaefd190dfcd723"
+  version "0.0.19"
+  sha256 "3d0b19aca1c3a5dec2a722d32b92bbbe66396dc6ff116974f96892c0db22cb01"
 
   url "https://github.com/open-webui/desktop/releases/download/v#{version}/open-webui-arm64.dmg",
       verified: "github.com/open-webui/desktop/"
