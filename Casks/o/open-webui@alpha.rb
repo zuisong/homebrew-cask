@@ -4,7 +4,7 @@ cask "open-webui@alpha" do
 
   url "https://github.com/open-webui/desktop/releases/download/v#{version}/open-webui-arm64.dmg",
       verified: "github.com/open-webui/desktop/"
-  name "open-webui"
+  name "Open WebUI"
   desc "Desktop application for Open WebUI"
   homepage "https://openwebui.com/"
 
