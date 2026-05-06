@@ -1,4 +1,4 @@
-cask "open-webui@alpha" do
+cask "open-webui" do
   version "0.0.18"
   sha256 "c89d3d05f0a61263b7bea6ea87e155123fd3039f851d44501eaefd190dfcd723"
 
@@ -12,6 +12,8 @@ cask "open-webui@alpha" do
     url :url
     strategy :github_latest
   end
+
+  auto_updates true
 
   depends_on macos: ">= :monterey"
 
